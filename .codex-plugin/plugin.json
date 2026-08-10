@@ -1,0 +1,32 @@
+{
+  "name": "frontend-workbench",
+  "version": "0.1.0",
+  "description": "Composable frontend product-design and visual-direction workflows.",
+  "author": {
+    "name": "akenoowww",
+    "url": "https://github.com/akenoowww"
+  },
+  "homepage": "https://github.com/akenoowww/frontend-workbench#readme",
+  "repository": "https://github.com/akenoowww/frontend-workbench",
+  "license": "MIT",
+  "keywords": [
+    "agent-skill",
+    "frontend",
+    "product-design",
+    "ux-research",
+    "ui-design",
+    "image-generation"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Frontend Workbench",
+    "shortDescription": "Composable workflows for frontend product work",
+    "longDescription": "An extensible frontend plugin that currently provides research-led product design and concept-first visual art direction as separate, narrowly triggered skills.",
+    "developerName": "akenoowww",
+    "category": "Productivity",
+    "capabilities": [],
+    "defaultPrompt": [
+      "Use $frontend-product-design to research and justify this UI or UX design before implementation."
+    ]
+  }
+}

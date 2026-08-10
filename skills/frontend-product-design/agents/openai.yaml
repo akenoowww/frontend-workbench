@@ -1,0 +1,4 @@
+interface:
+  display_name: "Frontend Product Design"
+  short_description: "Research-led frontend product design"
+  default_prompt: "Use $frontend-product-design to research and justify this UI or UX design before implementation."

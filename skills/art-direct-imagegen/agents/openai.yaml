@@ -1,0 +1,4 @@
+interface:
+  display_name: "Art-Direct ImageGen"
+  short_description: "Creative planning before image generation"
+  default_prompt: "Use $art-direct-imagegen to develop and critique a distinctive visual concept before generating images."
