@@ -1,8 +1,8 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "frontend-workbench",
-  "version": "0.1.0",
-  "description": "An extensible collection of focused frontend workflows for product design, visual direction, and future engineering concerns.",
+  "version": "0.2.0",
+  "description": "Extensible frontend workflows for project-aligned implementation, product-safe UI copy, product design, and visual direction.",
   "author": {
     "name": "akenoowww",
     "url": "https://github.com/akenoowww"
@@ -13,6 +13,8 @@
   "keywords": [
     "agent-skill",
     "frontend",
+    "component-reuse",
+    "ux-writing",
     "product-design",
     "ux-research",
     "ui-design",

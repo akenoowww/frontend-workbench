@@ -63,6 +63,8 @@ Choose one or two structurally or behaviorally similar project surfaces as prima
 
 Produce a concise `PROJECT UI DNA` from repository evidence. If the repository or relevant surfaces are unavailable, state the evidence gap and use only supplied artifacts; never invent project conventions.
 
+Inventory the project's existing widgets, components, variants, styles, tokens, icons, interaction patterns, and responsive behavior before proposing a solution. When one can satisfy the designed need directly or through a coherent extension, it must be reused instead of replaced by a parallel design.
+
 ### 3. Model the feature as a product problem
 
 Describe the primary user goal, necessary information, actions, inputs, outputs, dependencies, constraints, frequency, reversibility, persistence, and edge cases. Distinguish what must remain visible from what can be progressively disclosed.
@@ -135,6 +137,8 @@ Do not translate unresolved important design questions into arbitrary code decis
 
 Reuse or extend existing components before inventing primitives. Match project conventions for file organization, naming, component APIs, state, data fetching, styling, tests, error handling, accessibility, and responsive behavior.
 
+Apply the bundled `$frontend-project-fit` to the implementation. It makes the architecture search, reuse decision, and justification for any new primitive explicit. If implementation creates, changes, or encounters user-visible text, also apply `$frontend-copy-guard`.
+
 Treat generated UI images as design references, never as proof. Implement the intended hierarchy, interactions, states, transitions, and recovery behavior.
 
 ### 12. Validate and report truthfully
@@ -176,5 +180,6 @@ Document an explicit user-requested deviation from existing project conventions.
 - Do not visualize only the default state when meaningful interaction states exist.
 - Do not invoke `$art-direct-imagegen` before UX synthesis.
 - Do not create a new UI primitive without searching for an existing one.
+- Reuse every semantically compatible existing component, widget, style, token, and project pattern; do not create a parallel solution for convenience.
 - Do not begin implementation while important design decisions remain unresolved.
 - Do not expose long private reasoning; present concise evidence, options, decisions, and consequences.

@@ -47,13 +47,17 @@ Return to the relevant design phase when an unresolved choice would change behav
 
 ### Reuse before invention
 
-Search, inspect, and compose existing components first. Extend an existing primitive when its semantics remain coherent. Add a new primitive only when reuse would create a misleading API or unsupported behavior.
+Apply the bundled `$frontend-project-fit`. Search, inspect, and compose existing components, widgets, styles, tokens, utilities, and architectural patterns first. Reuse every compatible existing solution. Extend an existing primitive when its semantics remain coherent. Add a new primitive only after an evidence-backed search shows that reuse would create a misleading API, violate ownership, or fail required behavior.
+
+Record the closest candidates and concrete mismatch before creating anything new. Convenience, unfamiliarity with the existing API, or preference for a different library is not sufficient justification.
 
 ### Match the project
 
 Follow existing conventions for file organization, naming, component APIs, hooks, state, data fetching, styling, tests, error handling, localization, permissions, accessibility, and responsive design.
 
 Do not impose unrelated architecture because it is familiar or fashionable.
+
+If implementation creates, changes, or encounters user-visible text, apply the bundled `$frontend-copy-guard` through the project's established localization, validation, notification, and error paths.
 
 ### Implement behavior, not screenshots
 

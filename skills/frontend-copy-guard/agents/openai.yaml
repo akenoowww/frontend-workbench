@@ -1,0 +1,4 @@
+interface:
+  display_name: "Frontend Copy Guard"
+  short_description: "Keep user-facing copy product-safe"
+  default_prompt: "Use $frontend-copy-guard to audit and fix user-facing UI copy without exposing technical or internal logic."
