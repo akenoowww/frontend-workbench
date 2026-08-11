@@ -1,7 +1,7 @@
 {
   "name": "frontend-workbench",
-  "version": "0.2.0",
-  "description": "Composable guards and workflows for frontend implementation, interface copy, product design, and visual direction.",
+  "version": "0.3.0",
+  "description": "Composable guards and workflows for frontend implementation, interface copy, calibrated product redesign, and visual direction.",
   "author": {
     "name": "akenoowww",
     "url": "https://github.com/akenoowww"
@@ -23,14 +23,14 @@
   "interface": {
     "displayName": "Frontend Workbench",
     "shortDescription": "Composable workflows for frontend product work",
-    "longDescription": "An extensible frontend plugin with project-architecture and user-facing-copy guards, research-led product design, and concept-first visual art direction as composable skills.",
+    "longDescription": "An extensible frontend plugin with project-architecture and user-facing-copy guards, scope- and intensity-calibrated product redesign, and concept-first visual art direction as composable skills.",
     "developerName": "akenoowww",
     "category": "Productivity",
     "capabilities": [],
     "defaultPrompt": [
       "Use $frontend-project-fit to implement this frontend change with the project's existing architecture and reusable UI.",
       "Use $frontend-copy-guard to audit and fix user-facing UI copy without exposing technical or internal logic.",
-      "Use $frontend-product-design to research and justify this UI or UX design before implementation."
+      "Use $frontend-product-design to calibrate, research, and justify this UI or UX redesign before implementation."
     ]
   }
 }

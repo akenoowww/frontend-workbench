@@ -1,8 +1,8 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "frontend-workbench",
-  "version": "0.2.0",
-  "description": "Extensible frontend workflows for project-aligned implementation, product-safe UI copy, product design, and visual direction.",
+  "version": "0.3.0",
+  "description": "Extensible frontend workflows for project-aligned implementation, product-safe UI copy, calibrated product redesign, and visual direction.",
   "author": {
     "name": "akenoowww",
     "url": "https://github.com/akenoowww"

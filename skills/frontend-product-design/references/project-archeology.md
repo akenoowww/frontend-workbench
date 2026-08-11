@@ -24,6 +24,8 @@ Determine when applicable:
 - localization, permissions, feature flags, and role handling;
 - testing conventions and accessibility helpers.
 
+For redesign work, inspect the actual definitions and usage of the current component library, themes, tokens, typography, spacing, color, radius, elevation, icons, motion, and breakpoints. Do not infer the design system from one screenshot or from generated CSS alone.
+
 Trace the feature's likely data and state path as well as its visible components. Record constraints that can change the design, such as server pagination, role limitations, persisted filters, optimistic updates, or unavailable data.
 
 ## 2. Internal reference surfaces
@@ -105,6 +107,8 @@ Technical constraints
 ```
 
 Attach file paths, component names, screenshots, or runtime observations to material claims. Do not use generic defaults where project evidence exists.
+
+For a redesign, add a concise current-state baseline: the exact target surface, its included states and breakpoints, existing component composition, visual hierarchy, and protected functional behavior. This baseline feeds [redesign-calibration.md](redesign-calibration.md).
 
 ## 5. Evidence gaps
 

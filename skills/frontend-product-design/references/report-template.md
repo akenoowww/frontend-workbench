@@ -22,47 +22,58 @@ FRONTEND FEATURE DESIGN REPORT
 - Surface 2:
 - Reusable primitives:
 
-4. Feature model
+4. Redesign contract (only for explicit redesign)
+- Target zone, included states, breakpoints, and exclusions:
+- Current baseline:
+- Overall intensity and dimension profile:
+- EVOLVE CURRENT SYSTEM / REDEFINE STRUCTURE:
+- PRESERVE AND ADJUST / SELECTIVELY DECOMPOSE / REPLACE AND REIMAGINE:
+- Must preserve:
+- Authorized removals or replacements:
+
+5. Feature model
 - Primary goal:
 - Information:
 - Actions:
 - Inputs and outputs:
 - Constraints and edge cases:
 
-5. UX decisions
+6. UX decisions
 - D01:
 - D02:
 
-6. Research findings
+7. Research findings
 - Internal evidence:
 - External evidence:
 - Extracted patterns:
 
-7. Decision records
+8. Decision records
 - Selected approaches and trade-offs:
 
-8. Interaction model
+9. Interaction model
 - Entry, paths, results, dismissal, persistence, recovery:
 
-9. State model
+10. State model
 - Default:
 - Meaningful derived states:
 - Responsive variants:
 
-10. Visual specification
+11. Visual specification
 - Hierarchy, components, affordances, responsive transformation:
+- Redesign component dispositions (KEEP / ADJUST / DECOMPOSE / REMOVE / REPLACE):
 
-11. ImageGen state plan
+12. ImageGen state plan
 - Master state:
 - Derived states:
 - Visual-system anchor:
 - Skipped with reason, if nonvisual:
 
-12. Implementation plan
+13. Implementation plan
 - Only when implementation is requested:
 
 IMPLEMENTATION GATE
 [ ] Project UI DNA is evidence-backed.
+[ ] Redesign zone, intensity, system strategy, and component mode are explicit when applicable.
 [ ] The primary user goal and feature model are clear.
 [ ] Important UX decisions have selected approaches and rationale.
 [ ] Interaction and meaningful states are modeled.

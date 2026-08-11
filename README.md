@@ -12,7 +12,7 @@ The plugin is a container of composable frontend skills rather than one universa
 | --- | --- | --- |
 | `$frontend-project-fit` | Any frontend implementation in an existing project: inspect its architecture and reuse compatible components, widgets, styles, tokens, utilities, and data/state patterns before creating anything new | Work with no frontend implementation, repository-wide migrations that were not requested, or claims of project fit when the project is unavailable |
 | `$frontend-copy-guard` | Any frontend or backend work that creates, changes, renders, or encounters user-visible interface copy, including labels, validation, errors, statuses, accessibility text, localization, and server-generated messages shown in the UI | Tasks with no user-visible text, or an unsolicited whole-repository content audit |
-| `$frontend-product-design` | Explicit UI/UX design or redesign, information architecture, interaction design, visual direction, design critique, or a substantial frontend surface whose structure must be designed | Ordinary frontend coding, implementing a complete supplied design, small CSS/copy changes, tests, refactors, performance, or backend work |
+| `$frontend-product-design` | Explicit UI/UX design or redesign, including calibration of the target zone, redesign intensity, relationship to the current design system, component-change permissions, information architecture, interaction design, visual direction, and critique | Ordinary frontend coding, implementing a complete supplied design, small CSS/copy changes, tests, refactors, performance, or backend work |
 | `$art-direct-imagegen` | Concept-first visual art direction, coherent multi-state imagery, and reviewed image-generation handoff | Fixed surgical image edits or tasks whose visual solution is already fully specified |
 
 The skills compose by scope:
@@ -47,6 +47,7 @@ The full workflow is:
 ```text
 explicit design request
 -> project archaeology and PROJECT UI DNA
+-> for redesign: target zone, baseline, intensity, system strategy, and component-change mode
 -> feature model
 -> atomic UX decisions
 -> decision-specific research
@@ -59,9 +60,35 @@ explicit design request
 -> technical, product, visual, responsive, and accessibility validation
 ```
 
+### Redesign calibration
+
+“Redesign” never defaults automatically to “replace the whole page.” After project archaeology, the design skill creates a `REDESIGN CONTRACT` before external research, image generation, or implementation.
+
+The contract defines four independent axes:
+
+- **Zone:** element, component, section, page, flow, application shell, or whole frontend/design system, including relevant states, breakpoints, adjacent effects, and exclusions.
+- **Intensity:** an overall 0–100% permission boundary plus a dimension profile for tokens, layout, component composition, interaction, information architecture, and content/state coverage.
+- **System strategy:** `EVOLVE CURRENT SYSTEM` or `REDEFINE STRUCTURE`.
+- **Component mode:** `PRESERVE AND ADJUST`, `SELECTIVELY DECOMPOSE`, or `REPLACE AND REIMAGINE`.
+
+Default intensity bands:
+
+| Intensity | Meaning |
+| --- | --- |
+| 0–20% | Token/style refresh while structure and logical components remain |
+| 21–45% | Layout refinement: reposition, resize, regroup, reorder, or change emphasis while retaining required logical components |
+| 46–70% | Selective recomposition: compact, merge, progressively disclose, or omit nonessential subparts without losing required actions, information, states, or recovery |
+| 71–100% | Full rethink inside the agreed zone; hierarchy, composition, interaction, or local IA may be replaced while required product behavior, contracts, accessibility, and explicit constraints remain |
+
+A single percentage is not treated as sufficient evidence. For example, a redesign may be 35% overall with a 90% token change and only a 10% structural change. If the target zone is not identifiable from the request, repository, selected files, screenshot, or current runtime surface, the skill asks one concise scope question before continuing. If intensity or system strategy remains materially ambiguous, it asks one combined calibration question.
+
+Even under `REDEFINE STRUCTURE`, the workflow first inspects the project's current architecture, component library, styles, tokens, and reusable foundations. Existing primitives must still be reused when compatible; a full redesign authorizes structural departure within the zone, not arbitrary replacement of application architecture or required capabilities.
+
 Examples that should activate `$frontend-product-design`:
 
 - “Redesign this onboarding flow and then implement the approved direction.”
+- “Redesign this dashboard by about 60%: keep the current design system, but compact or remove nonessential component subparts.”
+- “Refresh the product color and typography tokens by about 15% without changing layout or interaction.”
 - “How should this editor expose version history without losing context?”
 - “Design a new account-management page that belongs in this product.”
 - “Critique the UX and visual hierarchy of this panel.”
