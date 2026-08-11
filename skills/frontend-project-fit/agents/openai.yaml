@@ -1,4 +1,4 @@
 interface:
   display_name: "Frontend Project Fit"
-  short_description: "Reuse the host frontend before inventing"
-  default_prompt: "Use $frontend-project-fit to implement this frontend change with the project architecture and existing reusable UI."
+  short_description: "Reuse project patterns and choose tools"
+  default_prompt: "Use $frontend-project-fit to implement this frontend change by reusing the project and dynamically choosing the smallest justified tool or dependency."

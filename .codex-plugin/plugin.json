@@ -1,7 +1,7 @@
 {
   "name": "frontend-workbench",
-  "version": "0.3.0",
-  "description": "Composable guards and workflows for frontend implementation, interface copy, calibrated product redesign, and visual direction.",
+  "version": "0.4.0",
+  "description": "Composable guards and workflows for project-fit frontend implementation, dynamic capability and dependency choice, interface copy, calibrated redesign, and visual direction.",
   "author": {
     "name": "akenoowww",
     "url": "https://github.com/akenoowww"
@@ -13,6 +13,7 @@
     "agent-skill",
     "frontend",
     "component-reuse",
+    "dependency-selection",
     "ux-writing",
     "product-design",
     "ux-research",
@@ -23,12 +24,12 @@
   "interface": {
     "displayName": "Frontend Workbench",
     "shortDescription": "Composable workflows for frontend product work",
-    "longDescription": "An extensible frontend plugin with project-architecture and user-facing-copy guards, scope- and intensity-calibrated product redesign, and concept-first visual art direction as composable skills.",
+    "longDescription": "An extensible frontend plugin with project-architecture reuse, capability-driven tool and dependency selection, user-facing-copy guards, scope- and intensity-calibrated product redesign, and concept-first visual art direction as composable skills.",
     "developerName": "akenoowww",
     "category": "Productivity",
     "capabilities": [],
     "defaultPrompt": [
-      "Use $frontend-project-fit to implement this frontend change with the project's existing architecture and reusable UI.",
+      "Use $frontend-project-fit to implement this frontend change by reusing the project's architecture and dynamically choosing the smallest justified tool or dependency.",
       "Use $frontend-copy-guard to audit and fix user-facing UI copy without exposing technical or internal logic.",
       "Use $frontend-product-design to calibrate, research, and justify this UI or UX redesign before implementation."
     ]

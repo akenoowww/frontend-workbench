@@ -10,6 +10,7 @@ Start with the route, component, or behavior named by the user. Trace imports an
 - component composition and public APIs;
 - local, shared, server, and URL state;
 - data fetching, caching, mutations, and error adaptation;
+- installed dependencies, workspace packages, generated clients, build tools, and framework or platform capabilities;
 - styling, tokens, themes, breakpoints, motion, and icons;
 - localization and content generation;
 - accessibility helpers and focus behavior;
@@ -38,6 +39,7 @@ Search for:
 - component props and variant names;
 - distinctive CSS tokens or utility classes;
 - hooks, stores, query keys, and form schemas;
+- package imports, adapters, generated types, and capability-specific configuration;
 - state names such as loading, empty, editing, pending, and failed;
 - import paths from known shared UI modules;
 - tests describing the same user behavior.
@@ -55,6 +57,8 @@ PROJECT FIT
 - Reusable components/widgets:
 - Reusable styles/tokens/icons:
 - Reusable state/data/form/error patterns:
+- Existing libraries/framework primitives/internal abstractions:
+- Capability constraints that affect tool selection:
 - Relevant tests or stories:
 - Gaps requiring a new solution:
 ```

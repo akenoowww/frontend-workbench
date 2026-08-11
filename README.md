@@ -10,7 +10,7 @@ The plugin is a container of composable frontend skills rather than one universa
 
 | Skill | Use it for | Do not use it for |
 | --- | --- | --- |
-| `$frontend-project-fit` | Any frontend implementation in an existing project: inspect its architecture and reuse compatible components, widgets, styles, tokens, utilities, and data/state patterns before creating anything new | Work with no frontend implementation, repository-wide migrations that were not requested, or claims of project fit when the project is unavailable |
+| `$frontend-project-fit` | Any frontend implementation in an existing project: inspect its architecture, reuse compatible solutions, and dynamically choose the smallest justified implementation mechanism or dependency for each capability | Work with no frontend implementation, repository-wide migrations that were not requested, or claims of project fit when the project is unavailable |
 | `$frontend-copy-guard` | Any frontend or backend work that creates, changes, renders, or encounters user-visible interface copy, including labels, validation, errors, statuses, accessibility text, localization, and server-generated messages shown in the UI | Tasks with no user-visible text, or an unsolicited whole-repository content audit |
 | `$frontend-product-design` | Explicit UI/UX design or redesign, including calibration of the target zone, redesign intensity, relationship to the current design system, component-change permissions, information architecture, interaction design, visual direction, and critique | Ordinary frontend coding, implementing a complete supplied design, small CSS/copy changes, tests, refactors, performance, or backend work |
 | `$art-direct-imagegen` | Concept-first visual art direction, coherent multi-state imagery, and reviewed image-generation handoff | Fixed surgical image edits or tasks whose visual solution is already fully specified |
@@ -31,6 +31,14 @@ Agent Plugins 1.0 does not define a portable dependency graph or cross-skill inv
 Before frontend code or design is produced in an existing repository, the workflow traces the affected route and inspects similar surfaces, module boundaries, shared components and widgets, styling and tokens, state/data patterns, localization, accessibility helpers, and tests.
 
 If a project component, style, utility, or pattern can satisfy the requirement directly or through a coherent extension, it must be reused. A new primitive is allowed only after an evidence-backed search identifies why existing candidates do not fit semantically, behaviorally, architecturally, or accessibly. Convenience and personal framework preference are not sufficient reasons to create a parallel solution.
+
+### Dynamic capability and dependency choice
+
+The workflow does not treat “library” and “hand-written code” as ideological positions. For every material implementation choice it first defines the needed capability without naming a technology, checks how the project already solves it, and then generates only the plausible candidates from the actual stack. Those candidates may include an existing project solution, platform or framework primitives, a small internal abstraction, a mature external library, an official SDK, generated code, or a specialized tool.
+
+The selected option must minimize justified lifetime cost and risk rather than only initial code size. The comparison uses task-relevant evidence such as correctness and edge cases, realistic reuse, security and accessibility, runtime and build fit, bundle impact, maintenance and API stability, license and supply-chain surface, testability, observability, and migration cost.
+
+A mature dependency should be considered when it can remove complex standardized behavior, dangerous edge cases, or repeated manual work. A native or project-owned solution may be better when the capability is bounded, stable, and easy to test. Neither is the automatic default. If the project already has a compatible owner for the capability, that style is reused; replacing it requires a concrete limitation and explicit migration authority rather than a hidden parallel system.
 
 ### User-facing copy
 
@@ -116,7 +124,7 @@ frontend-workbench/
     ├── frontend-project-fit/
     │   ├── SKILL.md
     │   ├── agents/openai.yaml
-    │   └── references/
+    │   └── references/                 # reuse, capability choice, architecture validation
     ├── frontend-copy-guard/
     │   ├── SKILL.md
     │   ├── agents/openai.yaml

@@ -21,7 +21,7 @@ Put the new responsibility at the matching boundary. Do not move unrelated code 
 
 ## Avoid parallel systems
 
-Before adding a library or abstraction, check for an established project solution. Common accidental duplicates include:
+Before adding a library or abstraction, check for an established project solution, then apply the capability decision in [capability-and-dependency-selection.md](capability-and-dependency-selection.md). Common accidental duplicates include:
 
 - a second component library;
 - bespoke CSS beside an existing token or utility system;
@@ -33,7 +33,7 @@ Before adding a library or abstraction, check for an established project solutio
 - new error or localization mechanisms;
 - local date, number, or currency formatting.
 
-Use the established system unless a documented limitation blocks the requested behavior. A limitation should be concrete and testable, not a stylistic preference.
+Use the established system unless a documented limitation blocks the requested behavior. A limitation should be concrete and testable, not a stylistic preference. Do not interpret this as a ban on libraries: when no established solution exists, compare native, internal, external, generated, and tool-assisted candidates that are actually plausible for the capability.
 
 ## Extend without breaking consumers
 
@@ -61,10 +61,12 @@ Select checks based on the change:
 | Responsive behavior | Relevant breakpoints and overflow/content-density checks |
 | Accessibility | Semantics, accessible names, keyboard, focus, and non-color communication |
 | Localization | Affected locales, fallback behavior, variable/plural formatting |
+| Capability/tool selection | Project search, material alternatives, lifetime-cost rationale, and implemented edge cases |
+| New dependency | Current primary docs/source, manifest and lockfile, runtime/build/type compatibility, defaults, license/provenance, transitive surface, bundle impact where material, and focused tests |
 | New primitive | Search evidence, rationale, ownership, tests, and comparison with closest candidates |
 
 Run project-standard lint, type, build, and focused tests when available, but do not treat them as proof of visual or architectural fit. Reproduce the affected UI path when practical.
 
 ## Handoff proof
 
-Report the reused and extended project assets by name. If something new was necessary, state the concrete gap it fills. Separate source inspection, automated checks, runtime verification, and production proof.
+Report the reused and extended project assets by name. State the selected implementation mechanism and, if something new was necessary, the concrete capability gap it fills and the obligations it introduces. Separate source inspection, automated checks, runtime verification, and production proof.
