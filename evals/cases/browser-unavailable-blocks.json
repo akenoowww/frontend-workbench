@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "browser-unavailable-blocks",
+  "skill": "frontend-runtime-qa",
+  "prompt": "Verify the checkout flow in a real browser. No browser or rendered runtime is available; do not substitute source inspection or a build.",
+  "contractFixture": "evals/fixtures/promotable-contract.json",
+  "expected": {
+    "plannedOutputIds": ["O01"],
+    "completedOutputIds": [],
+    "missingOutputIds": ["O01"],
+    "finalStatus": "blocked",
+    "requiredSkills": ["frontend-runtime-qa"],
+    "forbiddenSkills": ["frontend-information-architecture", "frontend-product-design", "frontend-project-fit", "art-direct-imagegen"],
+    "requiredTransformations": ["truthful-rendered-blocker"],
+    "forbiddenTransformations": ["source-only-completion", "build-as-browser-proof"]
+  }
+}

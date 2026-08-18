@@ -1,214 +1,69 @@
 ---
 name: frontend-product-design
-description: "Research, calibrate, justify, visualize, and, only when requested, implement substantial frontend product-design decisions inside an existing project. Use only when the user explicitly asks for UI/UX design, redesign, information architecture, interaction design, visual direction, design critique, or asks the agent to determine the structure or behavior of a new frontend surface. For redesign requests, establish the target zone, redesign intensity, relationship to the current design system, and allowed component-change mode before external research or implementation. Do not use for ordinary frontend coding, implementing an already-complete design, small CSS or copy fixes, refactors, tests, performance work, backend work, or other tasks that do not ask for design judgment."
+description: "Use for explicit UI/UX interaction or visual design, redesign, new-surface design, or critique after structure is known. Consume an information-architecture contract for multi-page work and implement only when requested. Do not use for sitemap-only work, specified implementation, small styling or copy edits, bugs, tests, performance, or backend work."
 ---
 
 # Frontend Product Design
 
-Design from project and product evidence before writing production UI code. Treat a technically valid interface as insufficient until its structure, interaction model, important states, and visual direction are justified.
+Resolve material product-design decisions from user and project evidence, then hand off a frozen design contract. Do not activate this workflow merely because frontend code will change.
 
-## Apply the scope gate first
+## 1. Freeze scope, authority, and checkpoints
 
-Use this workflow only when the request explicitly requires design judgment. Qualifying requests ask to design or redesign UI/UX, decide information architecture or interaction behavior, establish a visual direction, critique a design, or turn a product requirement into a designed frontend surface.
+Record:
 
-Exit this skill when the task is only to:
+- requested outcome and target zone;
+- confirmed facts, constraints, exclusions, and evidence gaps;
+- `authority`: `design-only`, `critique-only`, or `design-and-implementation`;
+- `checkpointMode`: `continuous`, `review-before-artifact`, `review-each-stage`, or `review-before-implementation`.
 
-- implement a fully specified design;
-- fix a frontend bug, test, type error, or performance issue;
-- make a small CSS, color, spacing, or copy change;
-- refactor components or data flow;
-- do backend or infrastructure work;
-- perform any frontend task that does not ask for a design decision.
+Infer the checkpoint mode from the request. Use `continuous` when the user authorized the whole sequence and no material choice requires approval. Use `review-each-stage` when the user asks for step-by-step work, separate page review, or approval before continuing: checkpoint after structure, selected direction, accepted master, and each required page family or explicitly named page. Use another review mode only when requested or when proceeding would commit to a materially different direction. Ask one concise question only when scope, authority, or a consequential choice cannot be inferred safely.
 
-Do not manufacture a design phase after a false-positive activation. Continue with normal project work or another narrowly relevant skill.
+For redesigns, read [references/redesign-boundaries.md](references/redesign-boundaries.md). A redesign changes only the agreed zone and never silently removes required capabilities, states, accessibility, or data contracts.
 
-An explicit redesign of a coherent token, theme, typography, or visual-language layer qualifies even when its structural intensity is low. A prescribed one-off change such as “make this button blue” remains ordinary implementation and does not activate the design workflow.
+## 2. Inspect project evidence
 
-Preserve the user's authority boundary:
+When repository access exists, read [references/project-archeology.md](references/project-archeology.md). Inspect the affected surface, similar internal surfaces, design tokens, shared components, interaction conventions, responsive behavior, localization, accessibility, data/state constraints, and tests. Keep the resulting project evidence concise and cite paths or runtime observations for material claims.
 
-- For a design-only request, produce the requested design artifacts and do not edit production code.
-- For a design-and-implementation request, pass the design gate before editing production UI.
-- For a critique or research request, stop after the requested analysis or specification.
-- If the desired deliverable is materially ambiguous and cannot be inferred safely, ask one concise question; otherwise proceed.
+If the relevant project or surface is unavailable, use only supplied artifacts and state the limitation. Do not claim project fit from framework defaults or one screenshot.
 
-For an explicit redesign request, do not assume that “redesign” means the whole page or a complete visual reset. Calibrate the redesign contract after inspecting the available project context. If the target zone still cannot be identified, ask the user what surface and states are included before continuing.
+## 3. Consume structure and model the product decisions
 
-## Choose proportional depth
+For a new multi-page site, application structure, sitemap, navigation model, or multi-step flow, apply the bundled `$frontend-information-architecture` workflow first when available. Consume its frozen surfaces, routes, page families, navigation edges, states, viewports, required outputs, and authority block. Do not silently redesign that structure downstream.
 
-Use the **full track** for a new page, flow, panel, overlay, editor, major section, or substantial redesign.
+If the host cannot compose the structure skill, use a compact fallback before visual work: list every named page or surface, its user job, page family, navigation destination, meaningful states, and material viewports. Keep `page`, `state`, `viewport`, `scroll position`, and `output` separate. For a fully specified single surface, reuse the supplied structure without creating an unnecessary site contract.
 
-Use a **focused track** for one meaningful design decision or a bounded token/style-system redesign. Compress sections that genuinely add no evidence, but keep the sequence: project context -> redesign calibration when applicable -> user problem -> alternatives -> decision -> affected states -> validation.
+Define the necessary information, actions, constraints, feedback, and recovery inside the frozen structure. Resolve only decisions that materially change behavior or hierarchy. If visual feasibility exposes a structural contradiction, return a `STRUCTURE_CONFLICT` with affected IDs and evidence instead of changing routes or page ownership silently.
 
-Exit the skill for trivial cosmetic work. Never create a long report to justify an inconsequential change.
+## 4. Research and choose one coherent direction
 
-## Load references by phase
+Use internal evidence first. Read [references/ux-research.md](references/ux-research.md) only when current external guidance, mature product behavior, or comparison can change an important decision.
 
-- Read [references/project-archeology.md](references/project-archeology.md) before making design decisions in an existing repository.
-- Read [references/redesign-calibration.md](references/redesign-calibration.md) after project archaeology whenever the request says redesign, refresh, rethink, overhaul, modernize, or otherwise change an existing interface direction.
-- Read [references/feature-modeling.md](references/feature-modeling.md) to model the user task and decompose important UX decisions.
-- Read [references/ux-research.md](references/ux-research.md) before external research, product comparison, option selection, or decision recording.
-- Read [references/interaction-and-state-modeling.md](references/interaction-and-state-modeling.md) before finalizing behavior or state coverage.
-- Read [references/visual-synthesis-and-imagegen.md](references/visual-synthesis-and-imagegen.md) before creating a visual brief or invoking `$art-direct-imagegen`.
-- Read [references/implementation-and-validation.md](references/implementation-and-validation.md) before planning or editing production code.
-- Use [references/report-template.md](references/report-template.md) as the concise working artifact and implementation gate; do not pad inapplicable sections.
+Compare viable alternatives only for material decisions. Select one project-specific direction, resolve conflicts across decisions, and record consequences. Do not copy a product, assemble unrelated best practices, or expose private chain-of-thought; present concise evidence, alternatives when useful, and the decision.
 
-## Follow the design workflow
+## 5. Choose the lightest useful artifact
 
-### 1. Establish the request contract
+Read [references/artifact-choice-and-validation.md](references/artifact-choice-and-validation.md) before creating a visual artifact or validation plan.
 
-Record the requested outcome, user goal, supplied evidence, constraints, explicit prohibitions, and whether implementation is authorized. Separate known facts, reasonable inferences, and unresolved decisions.
+Choose among an annotated specification, existing-component composition, runnable prototype, browser screenshot, or ImageGen concept according to what can actually test the decision. ImageGen is optional. Invoke the bundled `$art-direct-imagegen` only when generated bitmap exploration or a coherent rendered page/state set materially helps. Do not block authorized implementation merely because ImageGen is unavailable; require appropriate browser, runtime, or visual verification instead.
 
-Do not infer business logic from a feature name. Do not silently broaden a design-only request into code changes.
+Before freezing a mockup or renderer brief that authors user-visible labels, claims, pricing, validation, consent, or recovery text, apply `$frontend-copy-guard` to that affected copy. Art direction consumes approved exact labels; it does not invent or validate product claims.
 
-### 2. Inspect the host project
+If `checkpointMode` is `review-before-artifact`, present the design and coverage decision before producing the selected artifact.
 
-Inspect the actual repository before designing when access exists. Identify the frontend stack, routing, component and styling systems, tokens, typography, icons, state and data patterns, forms, motion, localization, permissions, accessibility helpers, responsive conventions, and tests.
+If `checkpointMode` is `review-each-stage`, set `approvalRequired: true` on each output that closes a user-visible checkpoint. Do not start the next dependent artifact or page output until the runtime records explicit approval. Persist the exact pending output IDs so a later task resumes rather than replans.
 
-Choose one or two structurally or behaviorally similar project surfaces as primary internal references when possible. Search for reusable components before proposing new primitives.
+## 6. Use the hidden task workspace without stray artifacts
 
-Produce a concise `PROJECT UI DNA` from repository evidence. If the repository or relevant surfaces are unavailable, state the evidence gap and use only supplied artifacts; never invent project conventions.
+Create durable working artifacts only when the task needs cross-skill handoff, generated media, or a requested design file. Before the first write, require the exact root `.gitignore` entry `/.frontend-workbench/`, verify it with `git check-ignore`, and use the bundled runtime helper when available. Keep canonical `state.json`, `structure.json`, and `coverage.json` at the session root. Use `product-design/` only for design-specific decision notes and `design-handoff.md`; ImageGen prompts and reviews belong to `art-direct-imagegen/`, binary outputs to `artifacts/`, and rendered QA evidence to `qa/`. Never scatter discretionary files in the repository root or source directories.
 
-Inventory the project's existing widgets, components, variants, styles, tokens, icons, interaction patterns, and responsive behavior before proposing a solution. When one can satisfy the designed need directly or through a coherent extension, it must be reused instead of replaced by a parallel design.
+Do not create the workspace for a read-only answer that needs no file artifact. For greenfield visual work with no consumer repository, provision an allowed task-scoped temporary Git workspace with the same exact ignore rule before durable multi-output execution; never use the plugin source repository as the consumer. If neither a safe project workspace nor temporary Git workspace is available, keep a handoff-only record in the conversation and state that resumable rendering was not initialized. Project-native source changes and explicitly requested assets still belong in their normal project paths.
 
-### 3. Calibrate explicit redesign requests
+## 7. Freeze the handoff and complete truthfully
 
-When the user asks for a redesign, create a `REDESIGN CONTRACT` before external research, visualization, or implementation. Define:
+Read [references/frozen-handoff.md](references/frozen-handoff.md) before handing design to implementation or producing a durable design handoff.
 
-- the exact redesign zone, included states and breakpoints, adjacent effects, and explicit exclusions;
-- the current interface baseline and non-negotiable product behavior;
-- an overall redesign intensity from 0–100% plus a dimension profile for tokens, layout, component composition, interaction, information architecture, and content/state coverage;
-- `EVOLVE CURRENT SYSTEM` or `REDEFINE STRUCTURE` as the relationship to the current design;
-- `PRESERVE AND ADJUST`, `SELECTIVELY DECOMPOSE`, or `REPLACE AND REIMAGINE` as the allowed component-change mode;
-- implementation authority and anything that must not change.
+For `design-and-implementation`, freeze the authorized scope, coverage, selected decisions, protected behavior, accepted evidence, permitted implementation adaptations, and unresolved items. Then invoke `$frontend-project-fit`; if implementation affects user-visible text, also invoke `$frontend-copy-guard`, and use `$frontend-runtime-qa` for rendered verification after visible changes. This skill does not own ordinary implementation or QA mechanics.
 
-Treat the percentage as a permission boundary, not a measured quality score. If the user did not supply it, infer a provisional band from the wording and project evidence; ask one concise question only when different bands or strategies would materially change the deliverable and cannot be inferred safely.
+If `checkpointMode` is `review-before-implementation`, stop at the frozen handoff until approval. Reopen design only when implementation discovers a material contradiction; do not let incidental code choices silently redesign the product.
 
-Even a 100% visual or structural redesign does not authorize deleting required user capabilities, states, data contracts, accessibility, or unrelated product logic. Apply the full rules in [references/redesign-calibration.md](references/redesign-calibration.md).
-
-### 4. Model the feature as a product problem
-
-Describe the primary user goal, necessary information, actions, inputs, outputs, dependencies, constraints, frequency, reversibility, persistence, and edge cases. Distinguish what must remain visible from what can be progressively disclosed.
-
-Do not reduce the feature to a component list.
-
-### 5. Decompose independent UX decisions
-
-Create identifiers such as `D01`, `D02`, and `D03` only for questions whose answers materially change behavior or hierarchy. Phrase each as a precise question.
-
-Do not research an entire page with one vague query. Omit categories that are irrelevant to the feature.
-
-### 6. Research and decide atomically
-
-For every important decision:
-
-1. state the user need and project constraints;
-2. gather internal evidence;
-3. use external research only when it can change or support the decision;
-4. inspect multiple mature products or authoritative guidance when useful;
-5. extract the shared behavioral pattern rather than copying a product;
-6. compare viable alternatives and their trade-offs;
-7. select the project-specific approach and record consequences.
-
-For redesign work, keep every researched option inside the agreed redesign zone, intensity, system strategy, and component-change mode. Do not let an attractive external reference silently expand the redesign contract.
-
-Optimize for the user's real workflow: interaction count, discoverability, cognitive load, context preservation, safety, undoability, keyboard and mobile use, persistence, accessibility, and feedback.
-
-### 7. Synthesize one coherent experience
-
-Resolve conflicts between individually reasonable decisions. Remove competing controls, duplicated actions, inconsistent terminology, excessive overlays, incompatible state models, and desktop/mobile contradictions.
-
-Prefer the simplest coherent interaction that satisfies the user goal and fits the project. Do not assemble a collage of best practices.
-
-### 8. Build interaction and state models
-
-Specify the entry point, default state, primary and secondary paths, action results, transitions, overlays, dismissal, persistence, validation, errors, recovery, destructive actions, keyboard behavior, and responsive changes.
-
-Model only meaningful states, including relevant loading, empty, error, partial, disabled, selected, editing, saving, success, failure, permission, overlay, and mobile variants. Relate derived states to a shared parent instead of treating them as unrelated screenshots.
-
-### 9. Create and review the visual system
-
-Combine `PROJECT UI DNA`, the feature model, selected decisions, interaction model, state model, and current state into a visual specification. Reuse project tokens and components instead of inventing arbitrary colors, spacing, radii, typography, or navigation.
-
-For redesign work, annotate which baseline elements are preserved, adjusted, selectively removed or compacted, and replaced. Keep the visual output within the approved intensity and system strategy. A `REDEFINE STRUCTURE` decision can change hierarchy and composition, but it does not erase the obligation to reuse compatible project foundations and primitives.
-
-For the full track, invoke the bundled `$art-direct-imagegen` skill only after UX synthesis. Generate the master/default state first, then the minimum set of meaningful derived states while preserving one visual identity. For a focused nonvisual decision, skip image generation only when an image cannot test the decision, and record why. If the user explicitly forbids or defers image generation, prepare the complete handoff, record the deferred stage, and preserve that boundary.
-
-Review actual outputs for project fit, hierarchy, clarity, density, discoverability, state consistency, functional truthfulness, and implementability. If a visual exposes a UX flaw, revise the relevant decision rather than blindly implementing the image.
-
-If the host cannot invoke the bundled art-direction skill, finish a complete visual handoff and report that rendering is blocked by client capability. For a full-track task, stop before production implementation until the required visual stage can run. Do not silently claim that a generic image call completed the art-direction stage.
-
-### 10. Plan implementation
-
-Only when implementation is requested, map the approved design onto routes, existing files and components, new components that are truly required, state, APIs, permissions, loading and error handling, responsiveness, accessibility, and tests.
-
-Prefer the smallest architectural change that cleanly supports the designed behavior.
-
-### 11. Enforce the implementation gate
-
-Begin production UI edits only when all materially relevant items are understood:
-
-- project design language and reusable primitives;
-- redesign zone, intensity, system strategy, and component-change mode when applicable;
-- primary user goal and feature structure;
-- important interactions and selected patterns;
-- meaningful states and responsive transformations;
-- visual direction;
-- technical integration path;
-- implementation authority from the user.
-
-Do not translate unresolved important design questions into arbitrary code decisions. Return to the relevant phase when the gate fails.
-
-### 12. Implement behavior, not a screenshot
-
-Reuse or extend existing components before inventing primitives. Match project conventions for file organization, naming, component APIs, state, data fetching, styling, tests, error handling, accessibility, and responsive behavior.
-
-Apply the bundled `$frontend-project-fit` to the implementation. It makes the architecture search, reuse decision, and justification for any new primitive explicit. If implementation creates, changes, or encounters user-visible text, also apply `$frontend-copy-guard`.
-
-Treat generated UI images as design references, never as proof. Implement the intended hierarchy, interactions, states, transitions, and recovery behavior.
-
-### 13. Validate and report truthfully
-
-Validate technical correctness, product behavior, visual consistency, responsiveness, and accessibility in proportion to the change. Reproduce the exact user flow and important states when possible.
-
-Separate in the final handoff:
-
-- redesign contract and achieved intensity when applicable;
-- design decisions and evidence;
-- visual artifacts reviewed;
-- code implemented;
-- checks actually run and their results;
-- anything unverified, blocked, or pending.
-
-Never call a mockup production proof or local checks live verification.
-
-## Use this evidence order
-
-When evidence conflicts, prioritize:
-
-1. explicit user requirements;
-2. functional and product requirements;
-3. existing project conventions;
-4. existing reusable components;
-5. user-usage and UX reasoning;
-6. relevant real-world product patterns;
-7. general design conventions;
-8. pure aesthetic preference.
-
-Document an explicit user-requested deviation from existing project conventions.
-
-## Keep these guardrails
-
-- Do not design a major frontend surface before inspecting the project when repository access exists.
-- Do not begin redesign research or visualization before defining the redesign zone and baseline.
-- Do not treat a single redesign percentage as sufficient without stating which design dimensions may change.
-- Do not remove required capabilities or states merely to make a redesign cleaner or more compact.
-- Do not assume business logic from labels or feature names.
-- Do not copy one external product or choose a pattern because it is popular.
-- Do not hardcode a domain, cards, tables, filters, sidebars, tabs, modals, or any visual style as universal.
-- Do not let external references override the host product without a reason.
-- Do not visualize only the default state when meaningful interaction states exist.
-- Do not invoke `$art-direct-imagegen` before UX synthesis.
-- Do not create a new UI primitive without searching for an existing one.
-- Reuse every semantically compatible existing component, widget, style, token, and project pattern; do not create a parallel solution for convenience.
-- Do not begin implementation while important design decisions remain unresolved.
-- Do not expose long private reasoning; present concise evidence, options, decisions, and consequences.
+Complete only when the requested design decision is resolved, required coverage is accounted for, the chosen artifact or validation evidence is reviewed when applicable, authority boundaries are preserved, and blocked, deferred, or unverified items are explicit. Distinguish design evidence, implemented code, local validation, and production proof.

@@ -1,4 +1,4 @@
 interface:
   display_name: "Art-Direct ImageGen"
-  short_description: "Creative planning before image generation"
-  default_prompt: "Use $art-direct-imagegen to develop and critique a distinctive visual concept before generating images."
+  short_description: "Direct coherent ImageGen deliverables"
+  default_prompt: "Use $art-direct-imagegen to art-direct and complete the requested ImageGen deliverables as a coherent, checkpointed output set."

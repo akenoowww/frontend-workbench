@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "direct-implementation-runtime-qa",
+  "skill": "frontend-project-fit",
+  "prompt": "Implement this already approved single-page account design in the existing project, then verify the rendered flow and responsive layout. Do not redesign the product or generate mockups.",
+  "contractFixture": "evals/fixtures/promotable-contract.json",
+  "expected": {
+    "plannedOutputIds": ["O01"],
+    "completedOutputIds": ["O01"],
+    "missingOutputIds": [],
+    "finalStatus": "complete",
+    "requiredSkills": ["frontend-project-fit", "frontend-runtime-qa"],
+    "forbiddenSkills": ["frontend-information-architecture", "frontend-product-design", "art-direct-imagegen"],
+    "requiredTransformations": [],
+    "forbiddenTransformations": ["unrequested-redesign", "unrequested-imagegen"]
+  }
+}

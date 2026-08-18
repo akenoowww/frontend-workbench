@@ -16,6 +16,8 @@ Start with the route, component, or behavior named by the user. Trace imports an
 - accessibility helpers and focus behavior;
 - tests, stories, fixtures, and mocks.
 
+Exclude `.frontend-workbench/` from this discovery. It is private workflow state and may contain prompts, generated design references, screenshots, or prior run metadata; none of it proves current product architecture or content.
+
 Prefer repository search and direct source inspection over assumptions based on framework defaults.
 
 ## Find internal reference surfaces
@@ -53,6 +55,7 @@ Capture only what affects the task:
 ```text
 PROJECT FIT
 - Architecture path:
+- In-scope routes or page families:
 - Internal reference surface(s):
 - Reusable components/widgets:
 - Reusable styles/tokens/icons:

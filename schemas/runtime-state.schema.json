@@ -1,0 +1,137 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/akenoowww/frontend-workbench/schemas/runtime-state.schema.json",
+  "title": "Frontend Workbench runtime session snapshot",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "sessionId",
+    "revision",
+    "status",
+    "createdAt",
+    "updatedAt",
+    "contract",
+    "outputs",
+    "validationErrors",
+    "promotedAt"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "sessionId": {
+      "$ref": "deliverable-coverage.schema.json#/$defs/id"
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "status": {
+      "enum": ["active", "blocked", "validated", "promoted", "deferred", "cancelled"]
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "contract": {
+      "$ref": "deliverable-coverage.schema.json"
+    },
+    "outputs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "required",
+          "approvalRequired",
+          "promotionRequired",
+          "status",
+          "artifact",
+          "sha256",
+          "reason",
+          "userAuthorized",
+          "problem",
+          "promotionPath",
+          "promotionSha256"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "deliverable-coverage.schema.json#/$defs/id"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "approvalRequired": {
+            "type": "boolean"
+          },
+          "promotionRequired": {
+            "type": "boolean"
+          },
+          "status": {
+            "enum": ["pending", "generating", "reviewing", "awaiting-approval", "accepted", "blocked", "deferred", "promoted"]
+          },
+          "artifact": {
+            "type": ["string", "null"]
+          },
+          "sha256": {
+            "type": ["string", "null"],
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "reason": {
+            "type": ["string", "null"]
+          },
+          "userAuthorized": {
+            "type": "boolean"
+          },
+          "problem": {
+            "oneOf": [
+              {"type": "null"},
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["code", "retryable", "nextAction"],
+                "properties": {
+                  "code": {
+                    "type": "string",
+                    "pattern": "^[a-z0-9][a-z0-9._-]{0,63}$"
+                  },
+                  "retryable": {
+                    "type": "boolean"
+                  },
+                  "nextAction": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              }
+            ]
+          },
+          "promotionPath": {
+            "type": ["string", "null"]
+          },
+          "promotionSha256": {
+            "type": ["string", "null"],
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        }
+      }
+    },
+    "validationErrors": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "promotedAt": {
+      "type": ["string", "null"],
+      "format": "date-time"
+    }
+  }
+}

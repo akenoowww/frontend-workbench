@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "greenfield-temporary-runtime",
+  "skill": "frontend-information-architecture",
+  "prompt": "Plan and render a multi-page greenfield site before a consumer repository exists. Keep resumable state out of the plugin source and provision a safe temporary runtime root.",
+  "contractFixture": "evals/fixtures/three-route-contract.json",
+  "expected": {
+    "plannedOutputIds": ["O01", "O02", "O03"],
+    "completedOutputIds": ["O01", "O02", "O03"],
+    "missingOutputIds": [],
+    "finalStatus": "complete",
+    "requiredSkills": ["frontend-information-architecture", "frontend-product-design", "art-direct-imagegen"],
+    "forbiddenSkills": ["frontend-project-fit", "frontend-runtime-qa"],
+    "requiredTransformations": ["temporary-git-workspace"],
+    "forbiddenTransformations": ["plugin-repo-as-consumer", "uncheckpointed-chat-only"]
+  }
+}

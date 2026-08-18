@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "contractId": "standalone-density",
+  "authority": {
+    "pageStructure": "revisable",
+    "interactionModel": "revisable",
+    "contentRepartition": "authorized-across-surfaces"
+  },
+  "surfaces": [
+    {
+      "id": "S01",
+      "kind": "screen",
+      "userJob": "Read the primary record"
+    },
+    {
+      "id": "S02",
+      "kind": "overlay",
+      "userJob": "Inspect secondary evidence without losing context"
+    }
+  ],
+  "edges": [
+    {
+      "from": "S01",
+      "to": "S02",
+      "trigger": "Open evidence"
+    }
+  ],
+  "outputs": [
+    {
+      "id": "O01",
+      "surfaceId": "S01",
+      "state": "default",
+      "viewport": "desktop",
+      "required": true,
+      "approvalRequired": false,
+      "dependsOn": [],
+      "promotionRequired": false
+    },
+    {
+      "id": "O02",
+      "surfaceId": "S02",
+      "state": "open",
+      "viewport": "desktop",
+      "required": true,
+      "approvalRequired": false,
+      "dependsOn": ["O01"],
+      "promotionRequired": false
+    }
+  ]
+}

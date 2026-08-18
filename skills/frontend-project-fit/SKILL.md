@@ -1,148 +1,79 @@
 ---
 name: frontend-project-fit
-description: "Fit frontend changes to the host project's established architecture and reusable UI, then choose implementation mechanisms and dependencies from capability-specific evidence instead of defaulting either to hand-written code or to a library. Use whenever planning or implementing frontend code in an existing repository, including work performed alongside design, UX, or user-facing copy changes. Before editing, inspect module boundaries, similar surfaces, components and widgets, styles and tokens, installed dependencies, framework and platform capabilities, data and state patterns, utilities, localization, accessibility conventions, and tests; reuse or coherently extend every compatible existing solution instead of creating a parallel implementation. Permit a new component, style, pattern, tool, or dependency only after an evidence-backed search and a project-specific lifetime-cost decision. Do not use for tasks with no frontend implementation or claim project fit when the repository is unavailable."
+description: "Use for an authorized frontend code change in an existing repository. Trace the affected path, reuse compatible project patterns, and evaluate a new primitive or dependency only when required. Do not use for design-only work, backend-only work, or claims of project fit without repository evidence."
 ---
 
 # Frontend Project Fit
 
-Make each frontend change look and behave as though it belongs to the existing product and codebase. Project architecture and reusable UI are implementation constraints, not optional inspiration.
+Make an authorized frontend change through the host project's existing architecture instead of creating a parallel implementation.
 
-## Apply the guard to every frontend implementation
+## Scope and authority
 
-Use this skill for any authorized change to frontend production code in an existing project, whether the task is a bug fix, feature, refactor, design implementation, or copy-related change.
+- For review or diagnosis, inspect and report without editing.
+- For implementation, inspect the affected path before editing and preserve unrelated user changes.
+- Consume approved information-architecture and product-design handoffs when they exist; do not manufacture a design phase for fully specified work.
+- Do not turn a local change into a design-system or architecture migration unless the user authorized that migration.
+- If the repository or affected source is unavailable, state the evidence gap and do not invent project conventions.
 
-Preserve the request boundary:
+This skill owns implementation fit, reuse, capability choice, integration, and source/automated validation. It does not own product direction, ImageGen rendering, rendered QA evidence, or unrelated backend contracts.
 
-- For a read-only review, report architecture or reuse findings without editing.
-- For an implementation request, inspect before editing and reuse before creating.
-- Do not expand into a repository-wide architecture migration unless requested.
-- Preserve unrelated user changes and existing ownership boundaries.
-- If the relevant repository or source is unavailable, state the evidence gap and do not invent project conventions.
+## Load references conditionally
 
-## Load the references
-
-- Read [references/project-discovery-and-reuse.md](references/project-discovery-and-reuse.md) before planning or creating frontend code.
-- Read [references/capability-and-dependency-selection.md](references/capability-and-dependency-selection.md) before selecting how to implement a capability or whether to add a tool or dependency.
+- Read [references/project-discovery-and-reuse.md](references/project-discovery-and-reuse.md) before planning or editing frontend code.
+- Read [references/capability-and-dependency-selection.md](references/capability-and-dependency-selection.md) only when introducing or replacing a component, mechanism, tool, dependency, SDK, generated client, or other capability owner.
 - Read [references/architecture-and-validation.md](references/architecture-and-validation.md) before choosing integration boundaries and before handoff.
 
-## Follow the project-fit workflow
+## Workflow
 
-### 1. Map the affected path
+### 1. Trace the affected path
 
-Trace the requested behavior from route or entry point through layout, components, state, data fetching, API adapters, styling, localization, accessibility semantics, and tests. Inspect the actual path rather than inferring architecture from filenames.
+Follow the requested behavior from route or entry point through layout, components, state, data access, errors, localization, accessibility, styling, and tests. Inspect one or two current surfaces with the closest responsibility and interaction model.
 
-Identify one or two existing surfaces closest in responsibility, interaction, and visual hierarchy. Treat them as internal reference implementations, not merely screenshots.
+Ignore `.frontend-workbench/` when inferring product architecture, content, or assets. It contains private workflow state, prompts, renders, and QA evidence rather than product source.
 
-### 2. Build a reuse inventory
+### 2. Reuse before creating
 
-Before designing or coding, search for existing:
+Inventory compatible components, variants, tokens, icons, hooks, utilities, form and validation patterns, data clients, state owners, and testing conventions. Search by behavior and API shape as well as visual name.
 
-- pages, layouts, panels, widgets, fields, tables, lists, cards, dialogs, navigation, and feedback components;
-- primitives, variants, slots, composition APIs, hooks, utilities, and formatters;
-- tokens, typography, spacing, color, elevation, radius, breakpoints, motion, icons, and style helpers;
-- routing, state, caching, forms, validation, permissions, errors, telemetry, and data-access patterns;
-- installed libraries, framework and platform primitives, generated clients, build tooling, and internal abstractions;
-- localization, accessibility, testing, story, fixture, and mock conventions.
+Reuse directly, compose existing primitives, or extend a public API when the responsibility belongs there. Do not duplicate a component or introduce a second styling, state, fetching, form, validation, error, or localization system for convenience.
 
-Search by behavior and API shape as well as by visual name. A reusable solution may have a project-specific name.
+Reuse is the default, not a veto on an explicitly authorized redesign or migration. When replacement is authorized, record the concrete product or technical reason, affected consumers, and migration impact. Never create a silent parallel owner.
 
-### 3. Decide reuse explicitly
+### 3. Choose a new mechanism only when necessary
 
-For each needed element, compare existing candidates against:
+If no established solution owns the required capability, define the behavior and material constraints without naming a preferred technology. Compare only plausible candidates from the actual stack. Select the option with the smallest justified lifetime cost and risk, not merely the shortest initial diff.
 
-- semantic responsibility;
-- required behavior and states;
-- accessibility and keyboard behavior;
-- responsive and theming support;
-- data and ownership boundaries;
-- extension cost and regression risk.
+For a trivial bounded choice, keep the rationale to one sentence. Preserve a fuller capability decision only for a new dependency, foundational primitive, security-sensitive behavior, or deviation from project practice.
 
-If an existing candidate fits directly or through a small coherent extension, reuse it. This is mandatory. Do not create a local copy, parallel primitive, one-off style system, or second state/data pattern for convenience.
+### 4. Implement through established boundaries
 
-Extend an existing solution only when the added capability belongs to its responsibility and does not turn its API into unrelated conditional branches.
+Place code where the project owns the responsibility. Follow current conventions for component APIs, route and server/client boundaries, state, data access, permissions, errors, localization, telemetry, and tests. Prefer composition and supported variants over copies and one-off abstractions.
 
-### 4. Select the implementation mechanism dynamically
+When the task changes user-visible text, apply the bundled `frontend-copy-guard` workflow if available. This is a one-way handoff; copy work must not invoke this skill back. If the host cannot compose bundled skills, preserve the same minimum fallback: use existing localization and error paths, keep product language truthful, and do not expose raw implementation details.
 
-Define the needed capability without naming a technology. Derive its constraints from the requested behavior, the affected runtime, and project evidence. Then generate only the plausible options for this task. Depending on context, these may include:
+### 5. Keep working artifacts out of product source
 
-- reuse or coherent extension of the established project solution;
-- a platform-native or framework-native primitive;
-- a small project-owned abstraction;
-- a mature external library;
-- an official SDK, generated client, compiler, or specialized tool.
+Do not create `ANALYSIS.md`, design reports, prompts, generated mockups, screenshots, or QA folders in the project tree. When task-owned working artifacts are needed and filesystem access is available, require and verify the exact `/.frontend-workbench/` ignore rule, then use the current runtime session. Promote a final asset outside that directory only when it has an approved project-native destination and a real code, build, or test consumer.
 
-This is not a fixed checklist and not every category must appear. Search dynamically by capability, risks, and stack. Always consider a library when standardized behavior, difficult edge cases, repeated manual work, or security and correctness concerns make it a credible way to reduce lifetime cost. Never prefer hand-written code merely to avoid a dependency, and never add a dependency merely to avoid understanding a bounded problem.
+For a read-only task with no requested artifact, do not create the runtime workspace.
 
-If the project already has a compatible way to provide the capability, use that style. Do not introduce a competing mechanism for one feature. If the established solution cannot meet a concrete requirement safely or maintainably, document the limitation and keep the change compatible, or obtain authority for an explicit migration.
+### 6. Validate and hand off rendered QA
 
-### 5. Justify the selected solution
+Run checks proportional to the change:
 
-Choose the option with the smallest justified lifetime cost and risk for this project, not the smallest initial diff. Consider only criteria material to the task, including correctness, edge cases, realistic reuse, security, accessibility, runtime compatibility, bundle and performance impact, maintenance, maturity, API stability, license and supply-chain exposure, testability, observability, lock-in, and migration cost.
+- focused unit, integration, localization, and accessibility tests;
+- project-standard type, lint, and build checks when relevant;
+- integration contracts and affected consumers.
 
-Create a new component, widget, style abstraction, architectural pattern, tool, or dependency only when no compatible established solution owns the capability and the evidence shows the new solution fits better than the remaining feasible options. If an established solution exists but must be replaced, treat that as an explicit migration rather than a local implementation choice.
+A passing build is not proof of visual or interaction correctness. For a visible implementation, apply the bundled `frontend-runtime-qa` workflow when available and pass it the exact route, state, viewports, accepted design evidence, and expected behavior. That workflow owns screenshots, console evidence, interaction proof, and responsive fidelity. If the host cannot compose it, perform the smallest equivalent rendered check and report the fallback.
 
-Record:
+## Completion contract
 
-- the technology-neutral capability and relevant constraints;
-- what was searched;
-- the plausible candidates generated for this project;
-- why the selected option has the best lifetime trade-off;
-- why direct reuse or extension would not fit, when adding something new;
-- where the new solution belongs in the existing architecture;
-- how it avoids becoming a competing primitive or hidden parallel system;
-- any maintenance, security, bundle, license, or migration obligation introduced.
+Finish only when:
 
-“Faster to write,” “cleaner from scratch,” “fewer dependencies,” package popularity, or personal framework preference is not sufficient justification by itself.
-
-### 6. Keep design inside the project language
-
-When the task also includes UI/UX design, derive the visual and interaction direction from existing project evidence first. Use the project's components, variants, tokens, icons, layout rhythm, content density, responsive transformations, and motion conventions in the design specification.
-
-Do not design an unavailable bespoke widget when an existing project component can satisfy the same user need. If the user explicitly requests a design-system change, show how existing surfaces migrate and obtain the required implementation authority before broadening scope.
-
-### 7. Implement through established boundaries
-
-Place code where the project expects the responsibility to live. Follow existing conventions for component APIs, state ownership, server/client boundaries, data access, forms, errors, localization, permissions, telemetry, and tests.
-
-Prefer composition and supported variants over duplication. Implement the selected capability through the project's established boundary and dependency-management conventions. Audit important defaults instead of assuming that either a platform primitive or a library is safe merely because it is familiar.
-
-When user-visible copy is created, changed, or encountered, also apply the bundled `$frontend-copy-guard`.
-
-### 8. Validate project fit
-
-Run checks proportional to the change and compare the result with the internal reference surfaces. Verify:
-
-- no duplicate primitive or competing pattern was introduced;
-- reused components use their public API rather than private internals;
-- extensions preserve existing consumers;
-- the capability decision still holds against the implemented behavior and discovered edge cases;
-- any new dependency or tool is compatible with the runtime, build, project policy, and ownership model;
-- tokens and style utilities replace arbitrary parallel values where applicable;
-- behavior, states, accessibility, responsiveness, localization, and tests match project conventions;
-- the exact affected flow works with real integration when available.
-
-### 9. Report evidence, not assurance
-
-In the final handoff, state concisely:
-
-- existing components, styles, utilities, and architecture patterns reused;
-- existing primitives extended and how compatibility was checked;
-- the selected implementation mechanism and its capability-specific justification;
-- any new solution or dependency and the obligations it introduces;
-- validation actually performed and remaining uncertainty.
-
-Do not claim architectural consistency merely because the build passes.
-
-## Keep these non-negotiable rules
-
-- Inspect the host project before designing or implementing when access exists.
-- Reuse a compatible existing solution whenever one exists.
-- Search for behavioral and project-specific equivalents before concluding none exist.
-- Do not duplicate a component to avoid understanding its API.
-- Do not introduce a second styling, state, fetching, form, or validation system for a local task.
-- Do not reject a justified library in favor of hand-written standardized behavior merely to keep the dependency count low.
-- Do not install a library automatically when a bounded native or project-owned solution is clearer and cheaper to maintain.
-- Do not build speculative infrastructure for hypothetical future reuse; use realistic expected reuse and current requirements.
-- Do not force reuse when semantics or ownership are wrong; explain the mismatch and add the smallest coherent solution.
-- Do not replace stable project architecture as an incidental part of feature work.
-- Do not confuse visual similarity with architectural compatibility.
+- the affected architecture path and reused project assets are identified;
+- every new primitive or dependency has a proportional evidence-backed reason;
+- no competing project system or stray workflow artifact was introduced;
+- source and automated validation passed, and visible work received rendered QA or an explicit blocker;
+- source inspection, automated checks, rendered proof, and production proof are reported separately;
+- any remaining uncertainty is explicit.

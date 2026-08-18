@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "contractId": "three-route-project",
+  "authority": {
+    "pageStructure": "locked",
+    "interactionModel": "locked",
+    "contentRepartition": "within-surface-only"
+  },
+  "surfaces": [
+    {
+      "id": "P01",
+      "kind": "page",
+      "route": "/projects",
+      "userJob": "Find and select a project"
+    },
+    {
+      "id": "P02",
+      "kind": "page",
+      "route": "/projects/:id",
+      "userJob": "Understand and edit one project"
+    },
+    {
+      "id": "P03",
+      "kind": "page",
+      "route": "/projects/:id/activity",
+      "userJob": "Review and export project activity"
+    }
+  ],
+  "edges": [
+    {
+      "from": "P01",
+      "to": "P02",
+      "trigger": "Select a project"
+    },
+    {
+      "from": "P02",
+      "to": "P03",
+      "trigger": "Open activity"
+    },
+    {
+      "from": "P03",
+      "to": "P02",
+      "trigger": "Back to project"
+    }
+  ],
+  "outputs": [
+    {
+      "id": "O01",
+      "surfaceId": "P01",
+      "state": "default",
+      "viewport": "desktop",
+      "scrollPosition": "full-page",
+      "required": true,
+      "approvalRequired": false,
+      "dependsOn": [],
+      "promotionRequired": false
+    },
+    {
+      "id": "O02",
+      "surfaceId": "P02",
+      "state": "default",
+      "viewport": "desktop",
+      "scrollPosition": "full-page",
+      "required": true,
+      "approvalRequired": false,
+      "dependsOn": ["O01"],
+      "promotionRequired": false
+    },
+    {
+      "id": "O03",
+      "surfaceId": "P03",
+      "state": "default",
+      "viewport": "desktop",
+      "scrollPosition": "full-page",
+      "required": true,
+      "approvalRequired": false,
+      "dependsOn": ["O02"],
+      "promotionRequired": false
+    }
+  ]
+}

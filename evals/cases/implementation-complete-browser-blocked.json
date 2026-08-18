@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "implementation-complete-browser-blocked",
+  "skill": "frontend-project-fit",
+  "prompt": "Implement the approved account page and verify it in a real browser. Source and automated checks pass, but no browser or rendered runtime is available.",
+  "contractFixture": "evals/fixtures/promotable-contract.json",
+  "expected": {
+    "plannedOutputIds": ["O01"],
+    "completedOutputIds": ["O01"],
+    "missingOutputIds": [],
+    "finalStatus": "blocked",
+    "requiredSkills": ["frontend-project-fit", "frontend-runtime-qa"],
+    "forbiddenSkills": ["frontend-information-architecture", "frontend-product-design", "art-direct-imagegen"],
+    "requiredTransformations": ["implementation-evidence", "rendered-qa-blocked"],
+    "forbiddenTransformations": ["build-as-browser-proof", "false-completion"]
+  }
+}

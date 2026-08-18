@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "partial-renderer-failure",
+  "skill": "art-direct-imagegen",
+  "prompt": "Render the locked three-route output sequence. The renderer succeeds for O01, returns an unknown outcome for O02, and must not start dependent O03 until O02 is accepted.",
+  "contractFixture": "evals/fixtures/three-route-contract.json",
+  "expected": {
+    "plannedOutputIds": ["O01", "O02", "O03"],
+    "completedOutputIds": ["O01"],
+    "missingOutputIds": ["O02", "O03"],
+    "finalStatus": "blocked",
+    "requiredSkills": ["art-direct-imagegen"],
+    "forbiddenSkills": [],
+    "requiredTransformations": [],
+    "forbiddenTransformations": ["skip-dependency", "false-completion"]
+  }
+}

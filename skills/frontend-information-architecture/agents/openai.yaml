@@ -1,0 +1,4 @@
+interface:
+  display_name: "Frontend Information Architecture"
+  short_description: "Structure pages, routes, flows, and navigation"
+  default_prompt: "Use $frontend-information-architecture to define the sitemap, page families, routes, navigation, and required state coverage."

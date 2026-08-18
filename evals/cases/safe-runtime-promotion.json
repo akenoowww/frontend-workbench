@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "safe-runtime-promotion",
+  "skill": "frontend-project-fit",
+  "prompt": "Implement the approved account page through the runtime session, validate the accepted artifact, and promote it to the contract target without overwriting an existing file.",
+  "contractFixture": "evals/fixtures/promotable-contract.json",
+  "expected": {
+    "plannedOutputIds": ["O01"],
+    "completedOutputIds": ["O01"],
+    "missingOutputIds": [],
+    "finalStatus": "complete",
+    "requiredSkills": ["frontend-project-fit"],
+    "forbiddenSkills": [],
+    "requiredTransformations": ["atomic-promotion"],
+    "forbiddenTransformations": ["overwrite-without-confirmation"]
+  }
+}

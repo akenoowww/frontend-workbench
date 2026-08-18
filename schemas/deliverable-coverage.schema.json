@@ -1,0 +1,176 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/akenoowww/frontend-workbench/schemas/deliverable-coverage.schema.json",
+  "title": "Frontend Workbench deliverable coverage contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "contractId",
+    "authority",
+    "surfaces",
+    "edges",
+    "outputs"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "contractId": {
+      "$ref": "#/$defs/id"
+    },
+    "authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "pageStructure",
+        "interactionModel",
+        "contentRepartition"
+      ],
+      "properties": {
+        "pageStructure": {
+          "enum": ["locked", "revisable"]
+        },
+        "interactionModel": {
+          "enum": ["locked", "revisable"]
+        },
+        "contentRepartition": {
+          "enum": ["within-surface-only", "authorized-across-surfaces"]
+        }
+      }
+    },
+    "surfaces": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "kind", "userJob"],
+        "properties": {
+          "id": {
+            "$ref": "#/$defs/id"
+          },
+          "kind": {
+            "enum": ["page", "flow-step", "screen", "overlay"]
+          },
+          "route": {
+            "type": "string",
+            "minLength": 1
+          },
+          "userJob": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "edges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["from", "to", "trigger"],
+        "properties": {
+          "from": {
+            "$ref": "#/$defs/id"
+          },
+          "to": {
+            "$ref": "#/$defs/id"
+          },
+          "trigger": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "outputs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "promotionRequired": {"const": true}
+              },
+              "required": ["promotionRequired"]
+            },
+            "then": {
+              "required": ["promotionTarget"],
+              "properties": {
+                "promotionTarget": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            },
+            "else": {
+              "properties": {
+                "promotionTarget": {"type": "null"}
+              }
+            }
+          }
+        ],
+        "required": [
+          "id",
+          "surfaceId",
+          "state",
+          "viewport",
+          "required",
+          "approvalRequired",
+          "dependsOn",
+          "promotionRequired"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/$defs/id"
+          },
+          "surfaceId": {
+            "$ref": "#/$defs/id"
+          },
+          "state": {
+            "type": "string",
+            "minLength": 1
+          },
+          "viewport": {
+            "type": "string",
+            "minLength": 1
+          },
+          "scrollPosition": {
+            "type": "string",
+            "minLength": 1
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "approvalRequired": {
+            "type": "boolean"
+          },
+          "dependsOn": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "$ref": "#/$defs/id"
+            }
+          },
+          "promotionRequired": {
+            "type": "boolean"
+          },
+          "promotionTarget": {
+            "type": ["string", "null"],
+            "minLength": 1
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$"
+    }
+  }
+}

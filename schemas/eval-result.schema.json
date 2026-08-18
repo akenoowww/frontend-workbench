@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/akenoowww/frontend-workbench/schemas/eval-result.schema.json",
+  "title": "Frontend Workbench behavioral eval result",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "caseId",
+    "invokedSkills",
+    "plannedOutputIds",
+    "completedOutputIds",
+    "missingOutputIds",
+    "transformations",
+    "finalStatus",
+    "hostFilesOutsideRuntime"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "caseId": {
+      "$ref": "deliverable-coverage.schema.json#/$defs/id"
+    },
+    "invokedSkills": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "plannedOutputIds": {
+      "$ref": "eval-case.schema.json#/$defs/idArray"
+    },
+    "completedOutputIds": {
+      "$ref": "eval-case.schema.json#/$defs/idArray"
+    },
+    "missingOutputIds": {
+      "$ref": "eval-case.schema.json#/$defs/idArray"
+    },
+    "transformations": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "finalStatus": {
+      "enum": ["complete", "incomplete", "blocked"]
+    },
+    "hostFilesOutsideRuntime": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  }
+}

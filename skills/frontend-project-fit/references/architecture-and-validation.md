@@ -64,8 +64,12 @@ Select checks based on the change:
 | Capability/tool selection | Project search, material alternatives, lifetime-cost rationale, and implemented edge cases |
 | New dependency | Current primary docs/source, manifest and lockfile, runtime/build/type compatibility, defaults, license/provenance, transitive surface, bundle impact where material, and focused tests |
 | New primitive | Search evidence, rationale, ownership, tests, and comparison with closest candidates |
+| Visible UI change | Exact rendered path, relevant desktop/mobile viewports, console health, interaction result, and comparison with an approved design when present |
+| Working artifacts | All task-owned prompts, screenshots, mockups, traces, and reports remain inside the ignored `.frontend-workbench/` run |
 
 Run project-standard lint, type, build, and focused tests when available, but do not treat them as proof of visual or architectural fit. Reproduce the affected UI path when practical.
+
+Do not inspect `.frontend-workbench/` as product evidence. Before handoff, check task-created paths and the Git working tree. A generated image may leave the runtime workspace only when it has an approved project-native destination and a verified code, build, or test consumer.
 
 ## Handoff proof
 

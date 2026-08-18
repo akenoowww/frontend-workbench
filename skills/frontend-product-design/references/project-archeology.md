@@ -108,7 +108,7 @@ Technical constraints
 
 Attach file paths, component names, screenshots, or runtime observations to material claims. Do not use generic defaults where project evidence exists.
 
-For a redesign, add a concise current-state baseline: the exact target surface, its included states and breakpoints, existing component composition, visual hierarchy, and protected functional behavior. This baseline feeds [redesign-calibration.md](redesign-calibration.md).
+For a redesign, add a concise current-state baseline: the exact target surface, its included states and viewports, existing component composition, visual hierarchy, and protected functional behavior. This baseline feeds [redesign-boundaries.md](redesign-boundaries.md).
 
 ## 5. Evidence gaps
 

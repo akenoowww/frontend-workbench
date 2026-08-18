@@ -1,8 +1,8 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "frontend-workbench",
-  "version": "0.4.0",
-  "description": "Extensible frontend workflows for project-aligned implementation, dynamic capability and dependency choice, product-safe UI copy, calibrated redesign, and visual direction.",
+  "version": "0.5.0",
+  "description": "Contract-driven workflows for project-fit frontend implementation, product-safe copy, complete multi-page design, optional ImageGen, and rendered QA.",
   "author": {
     "name": "akenoowww",
     "url": "https://github.com/akenoowww"
@@ -15,6 +15,12 @@
     "frontend",
     "component-reuse",
     "dependency-selection",
+    "multi-page-design",
+    "information-architecture",
+    "sitemap",
+    "workflow-state",
+    "frontend-qa",
+    "browser-testing",
     "ux-writing",
     "product-design",
     "ux-research",

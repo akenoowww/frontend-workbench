@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "frontend-copy-backend-out-of-scope",
+  "skill": "frontend-copy-guard",
+  "prompt": "Rename one validation message in the affected account form. Backend is out of scope.",
+  "contractFixture": "evals/fixtures/promotable-contract.json",
+  "expected": {
+    "plannedOutputIds": ["O01"],
+    "completedOutputIds": ["O01"],
+    "missingOutputIds": [],
+    "finalStatus": "complete",
+    "requiredSkills": ["frontend-project-fit", "frontend-copy-guard", "frontend-runtime-qa"],
+    "forbiddenSkills": ["frontend-information-architecture", "frontend-product-design", "art-direct-imagegen"],
+    "requiredTransformations": ["affected-copy-only"],
+    "forbiddenTransformations": ["backend-contract-change", "unrequested-redesign"]
+  }
+}

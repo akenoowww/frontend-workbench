@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "standalone-density-repartition",
+  "skill": "art-direct-imagegen",
+  "prompt": "Turn this one dense standalone screenshot into a clear base screen plus a discoverable evidence overlay. No upstream route or interaction contract exists.",
+  "contractFixture": "evals/fixtures/standalone-density-contract.json",
+  "expected": {
+    "plannedOutputIds": ["O01", "O02"],
+    "completedOutputIds": ["O01", "O02"],
+    "missingOutputIds": [],
+    "finalStatus": "complete",
+    "requiredSkills": ["art-direct-imagegen"],
+    "forbiddenSkills": [],
+    "requiredTransformations": ["section-to-overlay"],
+    "forbiddenTransformations": []
+  }
+}

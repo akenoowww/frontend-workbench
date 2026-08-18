@@ -1,4 +1,4 @@
 interface:
   display_name: "Frontend Product Design"
-  short_description: "Research-led frontend product design"
-  default_prompt: "Use $frontend-product-design to calibrate, research, and justify this UI or UX redesign before implementation."
+  short_description: "Evidence-led UI and UX decisions"
+  default_prompt: "Use $frontend-product-design to resolve the requested UI or UX decisions from project evidence and the approved structure."

@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "contractId": "promotable-implementation",
+  "authority": {
+    "pageStructure": "locked",
+    "interactionModel": "locked",
+    "contentRepartition": "within-surface-only"
+  },
+  "surfaces": [
+    {
+      "id": "P01",
+      "kind": "page",
+      "route": "/account",
+      "userJob": "Manage account settings"
+    }
+  ],
+  "edges": [],
+  "outputs": [
+    {
+      "id": "O01",
+      "surfaceId": "P01",
+      "state": "implemented",
+      "viewport": "responsive",
+      "required": true,
+      "approvalRequired": false,
+      "dependsOn": [],
+      "promotionRequired": true,
+      "promotionTarget": "promoted/account-screen.txt"
+    }
+  ]
+}
