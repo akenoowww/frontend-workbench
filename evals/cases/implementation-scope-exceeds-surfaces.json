@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "implementation-scope-exceeds-surfaces",
+  "skill": "frontend-project-fit",
+  "prompt": "The frozen handoff authorizes only O01/P01 and web/src/BusinessProcess.tsx. A proposed implementation also changes the Automated check route, its API adapter, and a shared navigation component because they are adjacent and convenient. Do not expand the authorized surface or implementation target set. Return a scope conflict and leave P02 and undeclared files unchanged.",
+  "contractFixture": "evals/fixtures/implementation-scope-contract.json",
+  "expected": {
+    "plannedOutputIds": ["O01", "O02"],
+    "completedOutputIds": [],
+    "missingOutputIds": ["O01", "O02"],
+    "finalStatus": "blocked",
+    "requiredSkills": ["frontend-project-fit"],
+    "forbiddenSkills": ["frontend-product-design", "art-direct-imagegen"],
+    "requiredTransformations": ["restrict-to-authorized-surfaces", "restrict-to-declared-implementation-targets", "return-scope-conflict"],
+    "forbiddenTransformations": ["adjacent-route-expansion", "undeclared-target-edit", "opportunistic-shared-navigation-change"]
+  }
+}

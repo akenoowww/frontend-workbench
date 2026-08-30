@@ -1,0 +1,794 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/akenoowww/frontend-workbench/schemas/deliverable-coverage.schema.json",
+  "title": "Frontend Workbench deliverable coverage contract",
+  "type": "object",
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {"workflowProfile": {"const": "full"}},
+        "required": ["workflowProfile"]
+      },
+      "then": {
+        "required": [
+          "productIntent",
+          "visualArtifactPolicy",
+          "checkpointMode"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "schemaVersion": {"const": 2},
+          "workflowProfile": {"const": "full"}
+        },
+        "required": ["schemaVersion", "workflowProfile"]
+      },
+      "then": {
+        "required": ["visualDirectionPolicy"]
+      }
+    },
+    {
+      "if": {
+        "properties": {"schemaVersion": {"const": 1}},
+        "required": ["schemaVersion"]
+      },
+      "then": {
+        "not": {"required": ["visualDirectionPolicy"]}
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "schemaVersion": {"const": 3},
+          "workflowProfile": {"const": "full"}
+        },
+        "required": ["schemaVersion", "workflowProfile"]
+      },
+      "then": {
+        "required": [
+          "visualDirectionPolicy",
+          "operationalMetadataPolicy",
+          "productModel",
+          "structure",
+          "capabilityRequirements",
+          "implementationTargets"
+        ],
+        "properties": {
+          "surfaces": {
+            "items": {
+              "required": [
+                "primaryObjectId",
+                "shellIds",
+                "referenceBindingIds"
+              ]
+            }
+          },
+          "outputs": {
+            "items": {
+              "required": [
+                "designEvidenceRequired",
+                "runtimeEvidenceRequired",
+                "artifactKind",
+                "anchorOutputId"
+              ],
+              "not": {"required": ["required"]}
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {"schemaVersion": {"enum": [1, 2]}},
+        "required": ["schemaVersion"]
+      },
+      "then": {
+        "not": {
+          "anyOf": [
+            {"required": ["productModel"]},
+            {"required": ["structure"]},
+            {"required": ["capabilityRequirements"]},
+            {"required": ["renderBudget"]}
+          ]
+        },
+        "properties": {
+          "implementationTargets": {
+            "items": {"type": "string", "minLength": 1}
+          },
+          "surfaces": {
+            "items": {
+              "not": {
+                "anyOf": [
+                  {"required": ["primaryObjectId"]},
+                  {"required": ["shellIds"]},
+                  {"required": ["referenceBindingIds"]}
+                ]
+              }
+            }
+          },
+          "outputs": {
+            "items": {
+              "required": ["required"],
+              "not": {
+                "anyOf": [
+                  {"required": ["designEvidenceRequired"]},
+                  {"required": ["runtimeEvidenceRequired"]},
+                  {"required": ["artifactKind"]},
+                  {"required": ["anchorOutputId"]}
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {"schemaVersion": {"const": 3}},
+        "required": ["schemaVersion"]
+      },
+      "then": {
+        "properties": {
+          "implementationTargets": {
+            "items": {"$ref": "#/$defs/implementationTarget"}
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "schemaVersion": {"enum": [1, 2]},
+          "workflowProfile": {"const": "full"},
+          "visualArtifactPolicy": {"const": "imagegen-required"}
+        },
+        "required": ["schemaVersion", "workflowProfile", "visualArtifactPolicy"]
+      },
+      "then": {
+        "properties": {
+          "checkpointMode": {
+            "enum": ["review-each-stage", "review-before-implementation"]
+          },
+          "outputs": {
+            "items": {
+              "if": {
+                "properties": {"required": {"const": true}},
+                "required": ["required"]
+              },
+              "then": {
+                "properties": {"approvalRequired": {"const": true}}
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "schemaVersion": {"const": 3},
+          "workflowProfile": {"const": "full"},
+          "visualArtifactPolicy": {"const": "imagegen-required"}
+        },
+        "required": ["schemaVersion", "workflowProfile", "visualArtifactPolicy"]
+      },
+      "then": {
+        "required": ["renderBudget"],
+        "properties": {
+          "checkpointMode": {
+            "enum": ["review-each-stage", "review-before-implementation"]
+          },
+          "outputs": {
+            "contains": {
+              "properties": {"designEvidenceRequired": {"const": true}},
+              "required": ["designEvidenceRequired"]
+            },
+            "minContains": 1,
+            "items": {
+              "if": {
+                "properties": {"designEvidenceRequired": {"const": true}},
+                "required": ["designEvidenceRequired"]
+              },
+              "then": {
+                "properties": {
+                  "artifactKind": {"const": "imagegen"},
+                  "approvalRequired": {"const": true}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "schemaVersion": {"const": 3},
+          "outputs": {
+            "contains": {
+              "properties": {"artifactKind": {"const": "imagegen"}},
+              "required": ["artifactKind"]
+            }
+          }
+        },
+        "required": ["schemaVersion", "outputs"]
+      },
+      "then": {"required": ["renderBudget"]}
+    },
+    {
+      "if": {
+        "properties": {
+          "schemaVersion": {"const": 3},
+          "visualArtifactPolicy": {"const": "no-imagegen"}
+        },
+        "required": ["schemaVersion", "visualArtifactPolicy"]
+      },
+      "then": {
+        "not": {"required": ["renderBudget"]},
+        "properties": {
+          "outputs": {
+            "items": {
+              "properties": {"artifactKind": {"not": {"const": "imagegen"}}}
+            }
+          }
+        }
+      }
+    }
+  ],
+  "required": [
+    "schemaVersion",
+    "contractId",
+    "authority",
+    "surfaces",
+    "edges",
+    "outputs"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "enum": [1, 2, 3]
+    },
+    "contractId": {
+      "$ref": "#/$defs/id"
+    },
+    "workflowProfile": {
+      "enum": ["micro", "standard", "full"],
+      "default": "standard"
+    },
+    "implementationTargets": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "oneOf": [
+          {"type": "string", "minLength": 1},
+          {"$ref": "#/$defs/implementationTarget"}
+        ]
+      }
+    },
+    "structure": {
+      "$ref": "#/$defs/structureIdentity"
+    },
+    "productModel": {
+      "$ref": "#/$defs/productModel"
+    },
+    "capabilityRequirements": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/capabilityRequirement"}
+    },
+    "renderBudget": {
+      "$ref": "#/$defs/renderBudget"
+    },
+    "productIntent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "problem",
+        "representativeScenarios",
+        "requiredDomains",
+        "protectedCapabilities",
+        "antiGoals",
+        "successSignals"
+      ],
+      "properties": {
+        "problem": {"type": "string", "minLength": 1},
+        "representativeScenarios": {
+          "type": "array",
+          "minItems": 2,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "requiredDomains": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "protectedCapabilities": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "antiGoals": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "successSignals": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "operationalMetadataPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["defaultVisibility", "requiredClaims"],
+      "properties": {
+        "defaultVisibility": {
+          "const": "hidden-unless-required"
+        },
+        "requiredClaims": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "surfaceId",
+              "states",
+              "meaning",
+              "authority",
+              "sourceRef"
+            ],
+            "properties": {
+              "id": {
+                "$ref": "#/$defs/id"
+              },
+              "surfaceId": {
+                "$ref": "#/$defs/id"
+              },
+              "states": {
+                "type": "array",
+                "minItems": 1,
+                "uniqueItems": true,
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "meaning": {
+                "type": "string",
+                "minLength": 1
+              },
+              "authority": {
+                "enum": [
+                  "user-request",
+                  "product-requirement",
+                  "approved-design",
+                  "legal-safety"
+                ]
+              },
+              "sourceRef": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        }
+      }
+    },
+    "visualArtifactPolicy": {
+      "enum": ["runnable", "imagegen-required", "no-imagegen"]
+    },
+    "visualDirectionPolicy": {
+      "enum": ["required", "not-required"]
+    },
+    "checkpointMode": {
+      "enum": [
+        "continuous",
+        "review-before-artifact",
+        "review-each-stage",
+        "review-before-implementation"
+      ]
+    },
+    "authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "pageStructure",
+        "interactionModel",
+        "contentRepartition"
+      ],
+      "properties": {
+        "pageStructure": {
+          "enum": ["locked", "revisable"]
+        },
+        "interactionModel": {
+          "enum": ["locked", "revisable"]
+        },
+        "contentRepartition": {
+          "enum": ["within-surface-only", "authorized-across-surfaces"]
+        }
+      }
+    },
+    "surfaces": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "kind", "userJob"],
+        "properties": {
+          "id": {
+            "$ref": "#/$defs/id"
+          },
+          "kind": {
+            "enum": ["page", "flow-step", "screen", "overlay"]
+          },
+          "route": {
+            "type": "string",
+            "minLength": 1
+          },
+          "userJob": {
+            "type": "string",
+            "minLength": 1
+          },
+          "primaryObjectId": {
+            "$ref": "#/$defs/id"
+          },
+          "shellIds": {
+            "$ref": "#/$defs/idArrayAllowEmpty"
+          },
+          "referenceBindingIds": {
+            "$ref": "#/$defs/idArrayAllowEmpty"
+          }
+        }
+      }
+    },
+    "edges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "dependentRequired": {
+          "evidenceEquivalentTo": ["equivalenceJustification"],
+          "equivalenceJustification": ["evidenceEquivalentTo"]
+        },
+        "required": ["from", "to", "trigger"],
+        "properties": {
+          "from": {
+            "$ref": "#/$defs/id"
+          },
+          "to": {
+            "$ref": "#/$defs/id"
+          },
+          "trigger": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "outputs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "promotionRequired": {"const": true}
+              },
+              "required": ["promotionRequired"]
+            },
+            "then": {
+              "required": ["promotionTarget"],
+              "properties": {
+                "promotionTarget": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            },
+            "else": {
+              "properties": {
+                "promotionTarget": {"type": "null"}
+              }
+            }
+          },
+          {
+            "if": {
+              "required": ["designEvidenceRequired", "runtimeEvidenceRequired"]
+            },
+            "then": {
+              "anyOf": [
+                {
+                  "properties": {"designEvidenceRequired": {"const": true}},
+                  "required": ["designEvidenceRequired"]
+                },
+                {
+                  "properties": {"runtimeEvidenceRequired": {"const": true}},
+                  "required": ["runtimeEvidenceRequired"]
+                }
+              ]
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "designEvidenceRequired": {"const": true}
+              },
+              "required": ["designEvidenceRequired"]
+            },
+            "then": {
+              "properties": {
+                "artifactKind": {"not": {"const": "none"}}
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "artifactKind": {"const": "none"}
+              },
+              "required": ["artifactKind"]
+            },
+            "then": {
+              "properties": {
+                "designEvidenceRequired": {"const": false}
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "designEvidenceRequired": {"const": false}
+              },
+              "required": ["designEvidenceRequired"]
+            },
+            "then": {
+              "properties": {
+                "artifactKind": {"const": "none"},
+                "approvalRequired": {"const": false},
+                "promotionRequired": {"const": false}
+              }
+            }
+          }
+        ],
+        "required": [
+          "id",
+          "surfaceId",
+          "state",
+          "viewport",
+          "approvalRequired",
+          "dependsOn",
+          "promotionRequired"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/$defs/id"
+          },
+          "surfaceId": {
+            "$ref": "#/$defs/id"
+          },
+          "state": {
+            "type": "string",
+            "minLength": 1
+          },
+          "viewport": {
+            "type": "string",
+            "minLength": 1
+          },
+          "scrollPosition": {
+            "type": "string",
+            "minLength": 1
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "approvalRequired": {
+            "type": "boolean"
+          },
+          "dependsOn": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "$ref": "#/$defs/id"
+            }
+          },
+          "promotionRequired": {
+            "type": "boolean"
+          },
+          "promotionTarget": {
+            "type": ["string", "null"],
+            "minLength": 1
+          },
+          "evidenceEquivalentTo": {
+            "$ref": "#/$defs/id"
+          },
+          "equivalenceJustification": {
+            "type": "string",
+            "minLength": 1
+          },
+          "designEvidenceRequired": {
+            "type": "boolean"
+          },
+          "runtimeEvidenceRequired": {
+            "type": "boolean"
+          },
+          "artifactKind": {
+            "$ref": "#/$defs/artifactKind"
+          },
+          "anchorOutputId": {
+            "oneOf": [
+              {"type": "null"},
+              {"$ref": "#/$defs/id"}
+            ]
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "idArray": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/id"}
+    },
+    "idArrayAllowEmpty": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/id"}
+    },
+    "nonEmptyStringArray": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "structureIdentity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "path", "sha256"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"},
+        "path": {"const": "structure.json"},
+        "sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "productModel": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["rootObjectId", "objects", "relations"],
+      "properties": {
+        "rootObjectId": {"$ref": "#/$defs/id"},
+        "objects": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["id", "role", "parentId", "evidenceForObjectIds"],
+            "properties": {
+              "id": {"$ref": "#/$defs/id"},
+              "role": {
+                "enum": [
+                  "root",
+                  "primary",
+                  "supporting",
+                  "downstream-evidence",
+                  "implementation-detail"
+                ]
+              },
+              "parentId": {
+                "oneOf": [
+                  {"type": "null"},
+                  {"$ref": "#/$defs/id"}
+                ]
+              },
+              "evidenceForObjectIds": {"$ref": "#/$defs/idArrayAllowEmpty"}
+            }
+          }
+        },
+        "relations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["id", "fromObjectId", "toObjectId", "kind"],
+            "properties": {
+              "id": {"$ref": "#/$defs/id"},
+              "fromObjectId": {"$ref": "#/$defs/id"},
+              "toObjectId": {"$ref": "#/$defs/id"},
+              "kind": {
+                "enum": [
+                  "contains",
+                  "supports",
+                  "governs",
+                  "evidence-for",
+                  "implements",
+                  "depends-on",
+                  "relates-to"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "capabilityRequirement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "capability",
+        "complexity",
+        "constraints",
+        "ownerObjectId",
+        "surfaceIds",
+        "required"
+      ],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"},
+        "capability": {"type": "string", "minLength": 1},
+        "complexity": {"enum": ["bounded", "complex", "foundational"]},
+        "constraints": {"$ref": "#/$defs/nonEmptyStringArray"},
+        "ownerObjectId": {"$ref": "#/$defs/id"},
+        "surfaceIds": {"$ref": "#/$defs/idArray"},
+        "required": {"type": "boolean"}
+      }
+    },
+    "implementationTarget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "surfaceIds", "sharedOwner"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "surfaceIds": {"$ref": "#/$defs/idArray"},
+        "sharedOwner": {"type": "boolean"}
+      }
+    },
+    "artifactKind": {
+      "enum": [
+        "none",
+        "specification",
+        "runnable",
+        "browser-screenshot",
+        "imagegen"
+      ]
+    },
+    "renderBudget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "maxCallsTotal",
+        "maxAttemptsPerOutput",
+        "maxConceptResets"
+      ],
+      "properties": {
+        "maxCallsTotal": {"type": "integer", "minimum": 1, "maximum": 100},
+        "maxAttemptsPerOutput": {"type": "integer", "minimum": 1, "maximum": 10},
+        "maxConceptResets": {"type": "integer", "minimum": 0, "maximum": 20}
+      }
+    }
+  }
+}

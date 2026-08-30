@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "empty-operational-policy-visible-claims",
+  "skill": "frontend-product-design",
+  "prompt": "The exact surface/state has operationalMetadataPolicy.requiredClaims=[] and hidden-unless-required visibility. A draft artifact visibly adds Verified, Updated 10:30, Synced, and All systems operational because matching backend fields exist. Reject or revise the artifact: backend truth is not display authority, and no operational claim may be visible on this surface.",
+  "contractFixture": "evals/fixtures/empty-operational-policy-contract.json",
+  "expected": {
+    "plannedOutputIds": ["O01"],
+    "completedOutputIds": [],
+    "missingOutputIds": ["O01"],
+    "finalStatus": "incomplete",
+    "requiredSkills": ["frontend-product-design", "frontend-copy-guard"],
+    "forbiddenSkills": ["frontend-project-fit"],
+    "requiredTransformations": ["omit-undeclared-operational-metadata", "revise-visible-claims"],
+    "forbiddenTransformations": ["backend-field-as-visibility-authority", "empty-policy-visible-claim", "self-authorized-trust-copy", "accept-claiming-artifact"]
+  }
+}

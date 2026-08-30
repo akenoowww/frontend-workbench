@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "imagegen-duplicate-same-output-retry",
+  "skill": "art-direct-imagegen",
+  "prompt": "Render one Sample Operations dashboard redesign in a STANDARD standalone turn. The first saved render is truthful but too conservative and remains visually close to the original. Do not call ImageGen again in the same turn. Do not issue a second from-scratch 'Create operations-dashboard-default-wide', do not promote the supplied designer STYLE_REFERENCE to EDIT_TARGET, and do not chain a cleanup call. Review the first artifact, return REVISE_ARTIFACT with the bounded defect, and wait for a later explicit user retry that edits the saved artifact itself.",
+  "contractFixture": "evals/fixtures/empty-operational-policy-contract.json",
+  "expected": {
+    "plannedOutputIds": ["O01"],
+    "completedOutputIds": [],
+    "missingOutputIds": ["O01"],
+    "finalStatus": "incomplete",
+    "requiredSkills": ["art-direct-imagegen"],
+    "forbiddenSkills": ["frontend-project-fit", "frontend-runtime-qa"],
+    "requiredTransformations": ["single-imagegen-call-per-turn", "return-revise-artifact", "preserve-reference-roles", "retry-edits-previous-artifact"],
+    "forbiddenTransformations": ["second-create-same-output", "style-reference-as-edit-target", "autonomous-cleanup-call", "false-artifact-acceptance"]
+  }
+}

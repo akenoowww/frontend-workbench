@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 1,
+  "rubricId": "visual-quality-v1",
+  "pairwiseOnly": true,
+  "numericScoresAllowed": false,
+  "allowedVerdicts": ["A", "B", "tie", "not-judgeable"],
+  "dimensions": {
+    "specificity": {
+      "question": "Which side expresses a coherent direction derived from this product and its user jobs?",
+      "preferenceFor": "Prefer the side whose visual choices and signature move are meaningfully tied to the supplied product intent instead of interchangeable novelty.",
+      "tieWhen": "Use tie when both sides are equally product-specific or equally detached from the brief.",
+      "notJudgeableWhen": "Use not-judgeable when the supplied captures do not expose enough of the product direction.",
+      "evidenceRequirements": [
+        "Name a visible decision and connect it to a declared user job.",
+        "Distinguish product fit from novelty or decorative difference."
+      ]
+    },
+    "hierarchy": {
+      "question": "Which side makes the primary job, state, and next action easier to understand and scan?",
+      "preferenceFor": "Prefer the side with clearer ordering, grouping, emphasis, and density rhythm across every supplied state without flattening all content into equal cards.",
+      "tieWhen": "Use tie when the sides provide materially equivalent scan order and information priority.",
+      "notJudgeableWhen": "Use not-judgeable when the primary content or required state is absent from both capture sets.",
+      "evidenceRequirements": [
+        "Identify what reads first and why in at least one capture.",
+        "Cite grouping, emphasis, or density behavior rather than personal taste alone."
+      ]
+    },
+    "uxCorrectness": {
+      "question": "Which side better preserves the declared jobs, content truth, states, and protected capabilities?",
+      "preferenceFor": "Prefer the side that keeps required actions discoverable, represents state truthfully, avoids fabricated content, and does not sacrifice product behavior for visual cleanliness.",
+      "tieWhen": "Use tie when both sides preserve or violate the visible UX contract to the same degree.",
+      "notJudgeableWhen": "Use not-judgeable for behavior that cannot be inferred from the captured states; screenshots alone do not prove interaction execution.",
+      "evidenceRequirements": [
+        "Cite a protected capability, state, or content-truth requirement.",
+        "Limit conclusions to what the supplied captures actually demonstrate."
+      ]
+    },
+    "uiDnaPreservation": {
+      "question": "Which side better preserves the declared project DNA while making purposeful improvements?",
+      "preferenceFor": "Prefer the side that retains recognizable typography, color, spacing, surface, component, imagery, and motion posture or makes a clearly beneficial intentional departure.",
+      "tieWhen": "Use tie when both sides preserve the declared DNA equally well or depart from it equally without purpose.",
+      "notJudgeableWhen": "Use not-judgeable when the fixture has no relevant DNA declaration for the visible captures.",
+      "evidenceRequirements": [
+        "Reference at least one declared DNA role and one visible implementation detail.",
+        "Do not treat pixel similarity or preservation of an existing flaw as the goal."
+      ]
+    },
+    "responsiveness": {
+      "question": "Which side adapts its hierarchy and controls more successfully across the required viewports?",
+      "preferenceFor": "Prefer genuine reflow and reprioritization without clipping, shrink-only scaling, lost actions, unreadable density, or viewport-specific dead space.",
+      "tieWhen": "Use tie when both sides adapt equally well or exhibit equivalent responsive defects.",
+      "notJudgeableWhen": "Use not-judgeable when matched content is not shown at more than one required viewport.",
+      "evidenceRequirements": [
+        "Compare the same job or state across at least two viewport captures.",
+        "Cite reflow, action placement, clipping, density, or readable sizing."
+      ]
+    },
+    "genericness": {
+      "question": "Which side is less generic and less dependent on interchangeable AI-interface conventions?",
+      "preferenceFor": "Prefer the more restrained and product-specific side, with fewer unjustified card grids, pills, gradients, icon decoration, generic slogans, or dashboard cliches.",
+      "tieWhen": "Use tie when both sides are equally distinctive or equally generic after accounting for product fit.",
+      "notJudgeableWhen": "Use not-judgeable when the captures are too narrow to distinguish a system from a single isolated component.",
+      "evidenceRequirements": [
+        "Name the visible convention or distinctive move being compared.",
+        "Do not reward novelty that damages usability, hierarchy, or product fit."
+      ]
+    },
+    "productHierarchyFidelity": {
+      "question": "Which side keeps the declared primary product object central while treating supporting objects and execution mechanisms as subordinate?",
+      "preferenceFor": "Prefer the side whose navigation, page titles, visual weight, and task flow preserve the fixture's primary-object hierarchy instead of promoting a downstream tool, artifact, or execution mechanism into the product's center.",
+      "tieWhen": "Use tie when both sides preserve the hierarchy equally well or drift from it to the same material degree.",
+      "notJudgeableWhen": "Use not-judgeable when the fixture declares no productHierarchy context or the supplied captures do not show the primary and competing objects.",
+      "evidenceRequirements": [
+        "Name the declared primary object and identify where the visible hierarchy places it.",
+        "Cite one supporting object or execution mechanism and explain whether its visual weight is appropriately subordinate."
+      ]
+    },
+    "shellContinuity": {
+      "question": "Which side preserves the accepted product shell and route context across the supplied surfaces?",
+      "preferenceFor": "Prefer the side that retains the declared global navigation, project context, breadcrumbs, typography roles, and shell geometry while allowing each nested module to express its own job without looking like a separate product.",
+      "tieWhen": "Use tie when both sides preserve or break the declared shell invariants to an equivalent degree.",
+      "notJudgeableWhen": "Use not-judgeable when no shellContinuity context is declared or fewer than two captures expose the shared shell.",
+      "evidenceRequirements": [
+        "Compare the same declared shell invariant in at least two captures.",
+        "Separate shell continuity from incidental pixel matching or repeated content layout."
+      ]
+    },
+    "referenceScopeFidelity": {
+      "question": "Which side uses each supplied reference only within its declared role and scope?",
+      "preferenceFor": "Prefer the side that applies allowed functional, stylistic, anchor, or edit-target influence without importing forbidden shell, brand, copy, hierarchy, or component decisions from that reference.",
+      "tieWhen": "Use tie when both sides respect or violate the declared reference boundaries to the same extent.",
+      "notJudgeableWhen": "Use not-judgeable when no scoped reference is declared or the referenced feature is not visible in the supplied captures.",
+      "evidenceRequirements": [
+        "Name the reference role and one allowed influence visible in the result.",
+        "Check at least one declared forbidden influence instead of judging resemblance in the abstract."
+      ]
+    },
+    "capabilityFit": {
+      "question": "Which side expresses the declared complex capability with the most suitable, accessible, and product-consistent interaction primitive?",
+      "preferenceFor": "Prefer the side whose visible primitive, controls, density, selection model, and required fallback fit the declared capability and project constraints without creating an ornamental custom interaction system.",
+      "tieWhen": "Use tie when both sides provide materially equivalent capability fit and fallbacks or expose equivalent mismatches.",
+      "notJudgeableWhen": "Use not-judgeable when no capabilityFit context is declared, the relevant primitive or fallback is absent, or the conclusion would require invisible library-comparison or implementation-provenance evidence.",
+      "evidenceRequirements": [
+        "Cite a visible capability requirement and how the chosen primitive supports or obstructs it.",
+        "Verify the declared fallback or mark the dimension not-judgeable; do not infer library evaluation from pixels."
+      ]
+    }
+  }
+}

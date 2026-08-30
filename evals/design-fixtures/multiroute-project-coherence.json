@@ -1,0 +1,128 @@
+{
+  "schemaVersion": 1,
+  "fixtureId": "multiroute-project-coherence",
+  "provenance": {
+    "sourceKind": "synthetic-fictional-eval-spec",
+    "sourceId": "fixture:multiroute-projects:v1",
+    "sourceVersion": "1",
+    "evidenceBasis": [
+      "declared-product-intent",
+      "declared-project-dna",
+      "declared-interaction-contract",
+      "declared-content-truth"
+    ],
+    "referenceScreenshotsAvailable": false,
+    "limitations": [
+      "This route family is a deterministic product contract, not a supplied preferred layout.",
+      "Back navigation and export execution require behavioral evidence in addition to captures."
+    ]
+  },
+  "brief": {
+    "productIntent": "Help a delivery lead find a project, understand its current status, and review activity without losing route context.",
+    "userJobs": [
+      "Find and select a project from the list",
+      "Understand and edit one project's status",
+      "Review and export project activity",
+      "Return to the project from activity"
+    ],
+    "protectedCapabilities": [
+      "List, detail, and activity remain distinct routes",
+      "Back behavior remains visible and predictable",
+      "Activity export remains discoverable",
+      "Project status remains editable only on detail"
+    ],
+    "contentTruth": [
+      "Project North is at risk",
+      "Project Cedar is on track",
+      "Activity contains seven entries and two status changes"
+    ],
+    "projectDna": {
+      "typographyRoles": [
+        "Condensed sans-serif for project identifiers",
+        "Readable neutral sans-serif for activity and metadata"
+      ],
+      "colorRoles": [
+        "Cobalt identifies navigation and selected context",
+        "Paper gray supports working surfaces",
+        "Risk red is reserved for project status"
+      ],
+      "spacingAndShape": [
+        "Twelve-column desktop grid",
+        "Four-pixel radius on controls",
+        "Dense tables pair with generous page margins"
+      ],
+      "componentPosture": [
+        "Operational and precise rather than promotional",
+        "Route headers share a shell while page jobs remain visibly different"
+      ],
+      "imageryRole": [
+        "No decorative photography in the operational route family"
+      ],
+      "motionTone": [
+        "Direct navigation with subtle continuity and no scroll spectacle"
+      ]
+    },
+    "avoid": [
+      "Collapsing routes into tabs or drawers",
+      "Using the same card grid for list, detail, and activity",
+      "Inventing project metrics",
+      "Removing export or back affordances on mobile"
+    ]
+  },
+  "captureMatrix": [
+    {
+      "captureId": "projects-list-desktop",
+      "outputId": "projects-list",
+      "surfaceId": "projects-list",
+      "route": "/projects",
+      "state": "default",
+      "viewport": {"name": "desktop-1440x900", "width": 1440, "height": 900},
+      "scrollPosition": "top"
+    },
+    {
+      "captureId": "project-detail-desktop",
+      "outputId": "project-detail",
+      "surfaceId": "project-detail",
+      "route": "/projects/north",
+      "state": "default",
+      "viewport": {"name": "desktop-1440x900", "width": 1440, "height": 900},
+      "scrollPosition": "top"
+    },
+    {
+      "captureId": "project-activity-desktop",
+      "outputId": "project-activity",
+      "surfaceId": "project-activity",
+      "route": "/projects/north/activity",
+      "state": "default",
+      "viewport": {"name": "desktop-1440x900", "width": 1440, "height": 900},
+      "scrollPosition": "top"
+    },
+    {
+      "captureId": "projects-list-mobile",
+      "outputId": "projects-list",
+      "surfaceId": "projects-list",
+      "route": "/projects",
+      "state": "default",
+      "viewport": {"name": "mobile-390x844", "width": 390, "height": 844},
+      "scrollPosition": "top"
+    },
+    {
+      "captureId": "project-detail-mobile",
+      "outputId": "project-detail",
+      "surfaceId": "project-detail",
+      "route": "/projects/north",
+      "state": "default",
+      "viewport": {"name": "mobile-390x844", "width": 390, "height": 844},
+      "scrollPosition": "top"
+    },
+    {
+      "captureId": "project-activity-mobile",
+      "outputId": "project-activity",
+      "surfaceId": "project-activity",
+      "route": "/projects/north/activity",
+      "state": "default",
+      "viewport": {"name": "mobile-390x844", "width": 390, "height": 844},
+      "scrollPosition": "top"
+    }
+  ]
+}

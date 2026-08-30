@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "redesign-preserve-only-sidebar",
+  "skill": "frontend-product-design",
+  "prompt": "Completely redesign the Sample Operations dashboard main page while keeping only the primary sidebar. Preserve the sidebar information architecture and labels, but do not preserve the top bar, dashboard macro-layout, equal KPI cards, repeated donut rail, module grouping, typography scale, surface system, or main-content composition. Freeze this as a preserve-only redesign boundary before ImageGen and reject any polished result that still reads as the same dashboard.",
+  "contractFixture": "evals/fixtures/promotable-contract.json",
+  "expected": {
+    "plannedOutputIds": ["O01"],
+    "completedOutputIds": ["O01"],
+    "missingOutputIds": [],
+    "finalStatus": "complete",
+    "requiredSkills": ["frontend-product-design", "art-direct-imagegen"],
+    "forbiddenSkills": ["frontend-project-fit", "frontend-runtime-qa"],
+    "requiredTransformations": ["preserve-only-region-allowlist", "replace-main-content", "material-redesign-delta-ledger", "reject-forbidden-carryover"],
+    "forbiddenTransformations": ["preserve-recognizable-shell", "restyle-only", "same-main-macro-layout", "same-module-topology", "palette-only-redesign"]
+  }
+}

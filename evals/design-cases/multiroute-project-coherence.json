@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "id": "multiroute-project-coherence",
+  "targetSkill": "frontend-product-design",
+  "prompt": "Redesign the projects list, detail, and activity route family as one recognizable visual system while preserving each route's distinct job, navigation, status truth, edit boundary, and export affordance. Render every route at desktop and mobile.",
+  "fixtureManifest": "evals/design-fixtures/multiroute-project-coherence.json",
+  "fixtureSha256": "74e8558bd36e866fd07b784c4bd06c796ce585ed615c50d0faf4822cd5323f08",
+  "rubric": "evals/rubrics/visual-quality-v1.json",
+  "rubricSha256": "d7ff8aced50616b2a8778d6311b598bc874bfa8b9639dbc2c97f79e8ccaa2aac",
+  "minimumTrials": 1,
+  "minimumJudgesPerTrial": 3,
+  "expectedCaptureIds": [
+    "projects-list-desktop",
+    "project-detail-desktop",
+    "project-activity-desktop",
+    "projects-list-mobile",
+    "project-detail-mobile",
+    "project-activity-mobile"
+  ]
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Frontend Runtime QA"
+  short_description: "Verify rendered frontend behavior and layout"
+  default_prompt: "Use $frontend-runtime-qa in the lightest fitting profile to verify the requested rendered flow."

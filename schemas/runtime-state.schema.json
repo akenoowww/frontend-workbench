@@ -1,0 +1,1175 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/akenoowww/frontend-workbench/schemas/runtime-state.schema.json",
+  "title": "Frontend Workbench runtime session snapshot",
+  "type": "object",
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {"schemaVersion": {"const": 2}},
+        "required": ["schemaVersion"]
+      },
+      "then": {
+        "required": ["visualDirection"],
+        "not": {
+          "anyOf": [
+            {"required": ["contractSha256"]},
+            {"required": ["structureIdentity"]},
+            {"required": ["renderUsage"]}
+          ]
+        },
+        "properties": {
+          "contract": {
+            "allOf": [
+              {"$ref": "deliverable-coverage.schema.json"},
+              {
+                "not": {
+                  "required": ["workflowProfile"],
+                  "properties": {"workflowProfile": {"const": "micro"}}
+                }
+              }
+            ]
+          },
+          "outputs": {
+            "items": {
+              "required": ["required", "visualDirectionSha256"],
+              "not": {
+                "anyOf": [
+                  {"required": ["designEvidenceRequired"]},
+                  {"required": ["runtimeEvidenceRequired"]},
+                  {"required": ["artifactKind"]},
+                  {"required": ["anchorOutputId"]},
+                  {"required": ["anchorArtifactSha256"]},
+                  {"required": ["renderBriefPath"]},
+                  {"required": ["renderBriefSha256"]}
+                ]
+              }
+            }
+          },
+          "implementation": {
+            "not": {
+              "anyOf": [
+                {"required": ["planPath"]},
+                {"required": ["planSha256"]}
+              ]
+            },
+            "properties": {
+              "fidelityQaReceipts": {
+                "items": {
+                  "properties": {
+                    "acceptedArtifactSha256": {"type": "string"}
+                  },
+                  "not": {
+                    "anyOf": [
+                      {"required": ["comparisonMode"]},
+                      {"required": ["visualDirectionSha256"]},
+                      {"required": ["implementationPlanSha256"]}
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "intentConfirmation": {
+            "not": {
+              "anyOf": [
+                {"required": ["contractSha256"]},
+                {"required": ["structureSha256"]},
+                {"required": ["authorityReceipt"]}
+              ]
+            }
+          },
+          "lineage": {
+            "not": {"required": ["authorityReceipt"]},
+            "properties": {
+              "contractDelta": {
+                "if": {"type": "object"},
+                "then": {
+                  "not": {
+                    "anyOf": [
+                      {"required": ["materialChanges"]},
+                      {"required": ["relaxations"]}
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {"schemaVersion": {"const": 1}},
+        "required": ["schemaVersion"]
+      },
+      "then": {
+        "not": {
+          "anyOf": [
+            {"required": ["visualDirection"]},
+            {"required": ["contractSha256"]},
+            {"required": ["structureIdentity"]},
+            {"required": ["renderUsage"]}
+          ]
+        },
+        "properties": {
+          "contract": {
+            "allOf": [
+              {"$ref": "deliverable-coverage.schema.json"},
+              {
+                "properties": {"schemaVersion": {"const": 1}},
+                "required": ["schemaVersion"],
+                "not": {"required": ["visualDirectionPolicy"]}
+              }
+            ]
+          },
+          "outputs": {
+            "items": {
+              "required": ["required"],
+              "not": {
+                "anyOf": [
+                  {"required": ["visualDirectionSha256"]},
+                  {"required": ["designEvidenceRequired"]},
+                  {"required": ["runtimeEvidenceRequired"]},
+                  {"required": ["artifactKind"]},
+                  {"required": ["anchorOutputId"]},
+                  {"required": ["anchorArtifactSha256"]},
+                  {"required": ["renderBriefPath"]},
+                  {"required": ["renderBriefSha256"]}
+                ]
+              }
+            }
+          },
+          "implementation": {
+            "not": {
+              "anyOf": [
+                {"required": ["planPath"]},
+                {"required": ["planSha256"]}
+              ]
+            },
+            "properties": {
+              "fidelityQaReceipts": {
+                "items": {
+                  "properties": {
+                    "acceptedArtifactSha256": {"type": "string"}
+                  },
+                  "not": {
+                    "anyOf": [
+                      {"required": ["comparisonMode"]},
+                      {"required": ["visualDirectionSha256"]},
+                      {"required": ["implementationPlanSha256"]}
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "intentConfirmation": {
+            "not": {
+              "anyOf": [
+                {"required": ["contractSha256"]},
+                {"required": ["structureSha256"]},
+                {"required": ["authorityReceipt"]}
+              ]
+            }
+          },
+          "lineage": {
+            "not": {"required": ["authorityReceipt"]},
+            "properties": {
+              "contractDelta": {
+                "if": {"type": "object"},
+                "then": {
+                  "not": {
+                    "anyOf": [
+                      {"required": ["materialChanges"]},
+                      {"required": ["relaxations"]}
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {"schemaVersion": {"const": 3}},
+        "required": ["schemaVersion"]
+      },
+      "then": {
+        "required": [
+          "contractSha256",
+          "structureIdentity",
+          "renderUsage",
+          "visualDirection",
+          "implementation",
+          "intentConfirmation",
+          "qualityGates",
+          "deliveryReview",
+          "lineage"
+        ],
+        "properties": {
+          "contract": {
+            "allOf": [
+              {"$ref": "deliverable-coverage.schema.json"},
+              {
+                "properties": {"schemaVersion": {"const": 3}},
+                "required": ["schemaVersion"],
+                "not": {
+                  "required": ["workflowProfile"],
+                  "properties": {"workflowProfile": {"const": "micro"}}
+                }
+              }
+            ]
+          },
+          "outputs": {
+            "items": {
+              "required": [
+                "visualDirectionSha256",
+                "designEvidenceRequired",
+                "runtimeEvidenceRequired",
+                "artifactKind",
+                "anchorOutputId",
+                "anchorArtifactSha256",
+                "renderBriefPath",
+                "renderBriefSha256"
+              ],
+              "not": {"required": ["required"]}
+            }
+          },
+          "intentConfirmation": {
+            "required": [
+              "contractSha256",
+              "structureSha256",
+              "authorityReceipt"
+            ]
+          },
+          "implementation": {
+            "required": ["planPath", "planSha256"],
+            "properties": {
+              "fidelityQaReceipts": {
+                "items": {
+                  "required": [
+                    "comparisonMode",
+                    "visualDirectionSha256",
+                    "implementationPlanSha256"
+                  ]
+                }
+              }
+            }
+          },
+          "lineage": {
+            "required": ["authorityReceipt"],
+            "properties": {
+              "contractDelta": {
+                "if": {"type": "object"},
+                "then": {"required": ["materialChanges", "relaxations"]}
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "schemaVersion": {"enum": [2, 3]},
+          "contract": {
+            "properties": {"visualDirectionPolicy": {"const": "required"}},
+            "required": ["visualDirectionPolicy"]
+          }
+        },
+        "required": ["schemaVersion", "contract"]
+      },
+      "then": {
+        "properties": {
+          "visualDirection": {
+            "properties": {"status": {"enum": ["pending", "locked"]}}
+          },
+          "outputs": {
+            "items": {
+              "if": {
+                "properties": {
+                  "status": {
+                    "enum": ["reviewing", "awaiting-approval", "accepted", "promoted"]
+                  }
+                },
+                "required": ["status"]
+              },
+              "then": {
+                "properties": {
+                  "visualDirectionSha256": {
+                    "type": "string",
+                    "pattern": "^[0-9a-f]{64}$"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "schemaVersion": {"enum": [2, 3]},
+          "contract": {
+            "properties": {"visualDirectionPolicy": {"const": "not-required"}},
+            "required": ["visualDirectionPolicy"]
+          }
+        },
+        "required": ["schemaVersion", "contract"]
+      },
+      "then": {
+        "properties": {
+          "visualDirection": {
+            "properties": {"status": {"const": "not-required"}}
+          },
+          "outputs": {
+            "items": {
+              "properties": {"visualDirectionSha256": {"type": "null"}}
+            }
+          }
+        }
+      }
+    }
+  ],
+  "required": [
+    "schemaVersion",
+    "sessionId",
+    "revision",
+    "status",
+    "createdAt",
+    "updatedAt",
+    "contract",
+    "outputs",
+    "validationErrors",
+    "promotedAt"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "enum": [1, 2, 3]
+    },
+    "sessionId": {
+      "$ref": "deliverable-coverage.schema.json#/$defs/id"
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "status": {
+      "enum": ["active", "blocked", "validated", "promoted", "completed", "awaiting-user-review", "rejected", "superseded", "deferred", "cancelled"]
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "contractSha256": {
+      "$ref": "#/$defs/sha256"
+    },
+    "structureIdentity": {
+      "$ref": "deliverable-coverage.schema.json#/$defs/structureIdentity"
+    },
+    "renderUsage": {
+      "$ref": "#/$defs/renderUsage"
+    },
+    "contract": {"type": "object"},
+    "outputs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "allOf": [
+          {
+            "if": {
+              "properties": {"anchorOutputId": {"type": "null"}},
+              "required": ["anchorOutputId"]
+            },
+            "then": {
+              "properties": {"anchorArtifactSha256": {"type": "null"}}
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "anchorOutputId": {"type": "string"},
+                "status": {
+                  "enum": [
+                    "generating",
+                    "reviewing",
+                    "awaiting-approval",
+                    "accepted",
+                    "promoted"
+                  ]
+                }
+              },
+              "required": ["anchorOutputId", "status"]
+            },
+            "then": {
+              "properties": {
+                "anchorArtifactSha256": {"$ref": "#/$defs/sha256"}
+              }
+            }
+          },
+          {
+            "if": {
+              "required": ["designEvidenceRequired", "runtimeEvidenceRequired"]
+            },
+            "then": {
+              "anyOf": [
+                {
+                  "properties": {"designEvidenceRequired": {"const": true}},
+                  "required": ["designEvidenceRequired"]
+                },
+                {
+                  "properties": {"runtimeEvidenceRequired": {"const": true}},
+                  "required": ["runtimeEvidenceRequired"]
+                }
+              ]
+            }
+          },
+          {
+            "if": {
+              "properties": {"designEvidenceRequired": {"const": false}},
+              "required": ["designEvidenceRequired"]
+            },
+            "then": {
+              "properties": {
+                "artifactKind": {"const": "none"},
+                "approvalRequired": {"const": false},
+                "promotionRequired": {"const": false}
+              }
+            }
+          }
+          ,
+          {
+            "if": {
+              "properties": {
+                "artifactKind": {"const": "imagegen"},
+                "status": {
+                  "enum": [
+                    "generating",
+                    "reviewing",
+                    "awaiting-approval",
+                    "accepted",
+                    "promoted"
+                  ]
+                }
+              },
+              "required": ["artifactKind", "status"]
+            },
+            "then": {
+              "properties": {
+                "renderBriefPath": {
+                  "type": "string",
+                  "pattern": "^art-direct-imagegen/render-briefs/.+\\.json$"
+                },
+                "renderBriefSha256": {"$ref": "#/$defs/sha256"}
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "artifactKind": {"not": {"const": "imagegen"}}
+              },
+              "required": ["artifactKind"]
+            },
+            "then": {
+              "properties": {
+                "renderBriefPath": {"type": "null"},
+                "renderBriefSha256": {"type": "null"}
+              }
+            }
+          }
+        ],
+        "required": [
+          "id",
+          "approvalRequired",
+          "promotionRequired",
+          "status",
+          "artifact",
+          "sha256",
+          "reason",
+          "userAuthorized",
+          "problem",
+          "promotionPath",
+          "promotionSha256"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "deliverable-coverage.schema.json#/$defs/id"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "approvalRequired": {
+            "type": "boolean"
+          },
+          "promotionRequired": {
+            "type": "boolean"
+          },
+          "status": {
+            "enum": ["pending", "generating", "reviewing", "awaiting-approval", "accepted", "blocked", "deferred", "promoted"]
+          },
+          "artifact": {
+            "type": ["string", "null"]
+          },
+          "sha256": {
+            "type": ["string", "null"],
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "reason": {
+            "type": ["string", "null"]
+          },
+          "userAuthorized": {
+            "type": "boolean"
+          },
+          "problem": {
+            "oneOf": [
+              {"type": "null"},
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["code", "retryable", "nextAction"],
+                "properties": {
+                  "code": {
+                    "type": "string",
+                    "pattern": "^[a-z0-9][a-z0-9._-]{0,63}$"
+                  },
+                  "retryable": {
+                    "type": "boolean"
+                  },
+                  "nextAction": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              }
+            ]
+          },
+          "promotionPath": {
+            "type": ["string", "null"]
+          },
+          "promotionSha256": {
+            "type": ["string", "null"],
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "visualDirectionSha256": {
+            "type": ["string", "null"],
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "designEvidenceRequired": {
+            "type": "boolean"
+          },
+          "runtimeEvidenceRequired": {
+            "type": "boolean"
+          },
+          "artifactKind": {
+            "$ref": "deliverable-coverage.schema.json#/$defs/artifactKind"
+          },
+          "anchorOutputId": {
+            "oneOf": [
+              {"type": "null"},
+              {"$ref": "deliverable-coverage.schema.json#/$defs/id"}
+            ]
+          },
+          "anchorArtifactSha256": {
+            "type": ["string", "null"],
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "renderBriefPath": {
+            "type": ["string", "null"],
+            "pattern": "^art-direct-imagegen/render-briefs/.+\\.json$"
+          },
+          "renderBriefSha256": {
+            "type": ["string", "null"],
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "provenance": {
+            "oneOf": [
+              {"type": "null"},
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "receiptPath",
+                  "receiptSha256",
+                  "sourceKind",
+                  "sourceId",
+                  "tracePath",
+                  "traceSha256",
+                  "providerAuthenticity"
+                ],
+                "properties": {
+                  "receiptPath": {"type": "string", "pattern": "^provenance/"},
+                  "receiptSha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+                  "sourceKind": {"const": "host-imagegen"},
+                  "sourceId": {"type": "string", "minLength": 1},
+                  "tracePath": {"type": "string", "pattern": "^provenance/"},
+                  "traceSha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+                  "providerAuthenticity": {"const": "not-verified"}
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    "validationErrors": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "promotedAt": {
+      "type": ["string", "null"],
+      "format": "date-time"
+    },
+    "visualDirection": {
+      "type": "object",
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {"status": {"const": "locked"}},
+            "required": ["status"]
+          },
+          "then": {
+            "properties": {
+              "path": {"const": "product-design/visual-direction.json"},
+              "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+              "lockedAt": {"type": "string", "format": "date-time"}
+            }
+          },
+          "else": {
+            "properties": {
+              "path": {"type": "null"},
+              "sha256": {"type": "null"},
+              "lockedAt": {"type": "null"},
+              "userAuthorized": {"const": false},
+              "authorizedAt": {"type": "null"}
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {"userAuthorized": {"const": true}},
+            "required": ["userAuthorized"]
+          },
+          "then": {
+            "properties": {
+              "status": {"const": "locked"},
+              "authorizedAt": {"type": "string", "format": "date-time"}
+            }
+          },
+          "else": {
+            "properties": {"authorizedAt": {"type": "null"}}
+          }
+        }
+      ],
+      "required": [
+        "status",
+        "path",
+        "sha256",
+        "lockedAt",
+        "userAuthorized",
+        "authorizedAt"
+      ],
+      "properties": {
+        "status": {"enum": ["pending", "locked", "not-required"]},
+        "path": {
+          "oneOf": [
+            {"type": "null"},
+            {"const": "product-design/visual-direction.json"}
+          ]
+        },
+        "sha256": {
+          "type": ["string", "null"],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "lockedAt": {"type": ["string", "null"], "format": "date-time"},
+        "userAuthorized": {"type": "boolean"},
+        "authorizedAt": {"type": ["string", "null"], "format": "date-time"}
+      }
+    },
+    "implementation": {
+      "type": "object",
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {"status": {"const": "not-started"}},
+            "required": ["status", "planPath", "planSha256"]
+          },
+          "then": {
+            "properties": {
+              "planPath": {"type": "null"},
+              "planSha256": {"type": "null"}
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {"status": {"enum": ["in-progress", "completed"]}},
+            "required": ["status", "planPath", "planSha256"]
+          },
+          "then": {
+            "properties": {
+              "planPath": {"const": "implementation/plan.json"},
+              "planSha256": {"$ref": "#/$defs/sha256"}
+            }
+          }
+        }
+      ],
+      "required": ["status", "startedAt", "completedAt", "fidelityQaReceipts"],
+      "properties": {
+        "status": {
+          "enum": ["not-started", "in-progress", "completed"]
+        },
+        "startedAt": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "completedAt": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "planPath": {
+          "oneOf": [
+            {"type": "null"},
+            {"const": "implementation/plan.json"}
+          ]
+        },
+        "planSha256": {
+          "type": ["string", "null"],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "fidelityQaReceipts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "allOf": [
+              {
+                "if": {
+                  "properties": {"result": {"const": "pass"}},
+                  "required": ["result"]
+                },
+                "then": {
+                  "properties": {
+                    "screenshotPath": {"type": "string"},
+                    "screenshotSha256": {"type": "string"},
+                    "pixelWidth": {"type": "integer", "minimum": 1},
+                    "pixelHeight": {"type": "integer", "minimum": 1}
+                  }
+                }
+              },
+              {
+                "if": {
+                  "properties": {
+                    "result": {"enum": ["fail", "blocked"]},
+                    "screenshotPath": {"type": "null"}
+                  },
+                  "required": ["result", "screenshotPath"]
+                },
+                "then": {
+                  "properties": {
+                    "reason": {"type": "string", "minLength": 1}
+                  }
+                }
+              },
+              {
+                "if": {
+                  "properties": {"comparisonMode": {"const": "accepted-design"}},
+                  "required": ["comparisonMode"]
+                },
+                "then": {
+                  "properties": {
+                    "acceptedArtifactSha256": {"$ref": "#/$defs/sha256"}
+                  }
+                }
+              },
+              {
+                "if": {
+                  "properties": {"comparisonMode": {"const": "direction-only"}},
+                  "required": ["comparisonMode"]
+                },
+                "then": {
+                  "properties": {"acceptedArtifactSha256": {"type": "null"}}
+                }
+              }
+            ],
+            "required": [
+              "outputId",
+              "acceptedArtifactSha256",
+              "manifestPath",
+              "manifestSha256",
+              "screenshotPath",
+              "screenshotSha256",
+              "result",
+              "route",
+              "state",
+              "viewport",
+              "scrollPosition",
+              "pixelWidth",
+              "pixelHeight",
+              "evidenceEquivalentTo",
+              "equivalenceJustification",
+              "reason",
+              "recordedAt"
+            ],
+            "properties": {
+              "outputId": {
+                "$ref": "deliverable-coverage.schema.json#/$defs/id"
+              },
+              "acceptedArtifactSha256": {
+                "type": ["string", "null"],
+                "pattern": "^[0-9a-f]{64}$"
+              },
+              "comparisonMode": {
+                "enum": ["accepted-design", "direction-only"]
+              },
+              "visualDirectionSha256": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$"
+              },
+              "implementationPlanSha256": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$"
+              },
+              "manifestPath": {
+                "type": "string",
+                "pattern": "^qa/.+\\.json$"
+              },
+              "manifestSha256": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$"
+              },
+              "screenshotPath": {
+                "type": ["string", "null"],
+                "pattern": "^qa/"
+              },
+              "screenshotSha256": {
+                "type": ["string", "null"],
+                "pattern": "^[0-9a-f]{64}$"
+              },
+              "result": {
+                "enum": ["pass", "fail", "blocked"]
+              },
+              "route": {
+                "type": "string",
+                "minLength": 1
+              },
+              "state": {
+                "type": "string",
+                "minLength": 1
+              },
+              "viewport": {
+                "type": "string",
+                "minLength": 1
+              },
+              "scrollPosition": {
+                "type": "string",
+                "minLength": 1
+              },
+              "pixelWidth": {
+                "type": ["integer", "null"],
+                "minimum": 1
+              },
+              "pixelHeight": {
+                "type": ["integer", "null"],
+                "minimum": 1
+              },
+              "evidenceEquivalentTo": {
+                "oneOf": [
+                  {"type": "null"},
+                  {"$ref": "deliverable-coverage.schema.json#/$defs/id"}
+                ]
+              },
+              "equivalenceJustification": {
+                "type": ["string", "null"],
+                "minLength": 1
+              },
+              "reason": {
+                "type": ["string", "null"],
+                "minLength": 1
+              },
+              "recordedAt": {
+                "type": "string",
+                "format": "date-time"
+              }
+            }
+          }
+        },
+        "targetFingerprints": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["path", "baselineSha256", "completionSha256"],
+            "properties": {
+              "path": {
+                "type": "string",
+                "minLength": 1
+              },
+              "baselineSha256": {
+                "type": ["string", "null"],
+                "pattern": "^[0-9a-f]{64}$"
+              },
+              "completionSha256": {
+                "type": ["string", "null"],
+                "pattern": "^[0-9a-f]{64}$"
+              }
+            }
+          }
+        }
+      }
+    },
+    "intentConfirmation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["productIntentSha256", "lifecyclePlanSha256", "teachBack", "confirmedAt", "userAuthorized"],
+      "properties": {
+        "productIntentSha256": {
+          "type": ["string", "null"],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "lifecyclePlanSha256": {
+          "type": ["string", "null"],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "contractSha256": {
+          "type": ["string", "null"],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "structureSha256": {
+          "type": ["string", "null"],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "authorityReceipt": {
+          "$ref": "#/$defs/nullableAuthorityReceiptBinding"
+        },
+        "teachBack": {"type": ["string", "null"], "minLength": 1},
+        "confirmedAt": {"type": ["string", "null"], "format": "date-time"},
+        "userAuthorized": {"type": "boolean"}
+      }
+    },
+    "qualityGates": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["intent", "coverage", "runtime", "fidelity", "userAcceptance"],
+      "properties": {
+        "intent": {"$ref": "#/$defs/qualityGate"},
+        "coverage": {"$ref": "#/$defs/qualityGate"},
+        "runtime": {"$ref": "#/$defs/qualityGate"},
+        "fidelity": {"$ref": "#/$defs/qualityGate"},
+        "userAcceptance": {"$ref": "#/$defs/qualityGate"}
+      }
+    },
+    "deliveryReview": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "deliveryDigest", "acceptedAt", "rejectedAt", "reason", "userAuthorized"],
+      "properties": {
+        "status": {"enum": ["not-ready", "awaiting-user-review", "accepted", "rejected"]},
+        "deliveryDigest": {
+          "type": ["string", "null"],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "acceptedAt": {"type": ["string", "null"], "format": "date-time"},
+        "rejectedAt": {"type": ["string", "null"], "format": "date-time"},
+        "reason": {"type": ["string", "null"], "minLength": 1},
+        "userAuthorized": {"type": "boolean"}
+      }
+    },
+    "lineage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["parentSessionId", "supersedesSessionId", "supersededBySessionId", "contractDelta"],
+      "properties": {
+        "parentSessionId": {
+          "oneOf": [
+            {"type": "null"},
+            {"$ref": "deliverable-coverage.schema.json#/$defs/id"}
+          ]
+        },
+        "supersedesSessionId": {
+          "oneOf": [
+            {"type": "null"},
+            {"$ref": "deliverable-coverage.schema.json#/$defs/id"}
+          ]
+        },
+        "supersededBySessionId": {
+          "oneOf": [
+            {"type": "null"},
+            {"$ref": "deliverable-coverage.schema.json#/$defs/id"}
+          ]
+        },
+        "authorityReceipt": {
+          "$ref": "#/$defs/nullableAuthorityReceiptBinding"
+        },
+        "contractDelta": {
+          "oneOf": [
+            {"type": "null"},
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["fromContractSha256", "toContractSha256", "changedPaths"],
+              "properties": {
+                "fromContractSha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+                "toContractSha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+                "changedPaths": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "items": {"type": "string", "pattern": "^/"}
+                },
+                "materialChanges": {
+                  "$ref": "#/$defs/nonEmptyStringArrayAllowEmpty"
+                },
+                "relaxations": {
+                  "$ref": "#/$defs/nonEmptyStringArrayAllowEmpty"
+                }
+              }
+            }
+          ]
+        },
+        "visualDirectionDelta": {
+          "oneOf": [
+            {"type": "null"},
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["fromSha256", "toSha256"],
+              "properties": {
+                "fromSha256": {
+                  "type": ["string", "null"],
+                  "pattern": "^[0-9a-f]{64}$"
+                },
+                "toSha256": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "nonEmptyStringArrayAllowEmpty": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "authorityReceiptBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "sha256",
+        "kind",
+        "sessionId",
+        "contractSha256",
+        "structureSha256",
+        "sourceRef",
+        "messageSha256",
+        "authorizedActions"
+      ],
+      "properties": {
+        "path": {"type": "string", "pattern": "^authority/.+\\.json$"},
+        "sha256": {"$ref": "#/$defs/sha256"},
+        "kind": {"const": "user-message"},
+        "sessionId": {
+          "$ref": "deliverable-coverage.schema.json#/$defs/id"
+        },
+        "contractSha256": {"$ref": "#/$defs/sha256"},
+        "structureSha256": {"$ref": "#/$defs/sha256"},
+        "baseContractSha256": {
+          "type": ["string", "null"],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "resultContractSha256": {
+          "type": ["string", "null"],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "deltaSha256": {
+          "type": ["string", "null"],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "sourceRef": {"type": "string", "minLength": 1},
+        "messageSha256": {"$ref": "#/$defs/sha256"},
+        "authorizedActions": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": ["confirm-intent", "supersede-contract", "relax-contract", "reset-concept"]
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "authorizedActions": {
+                "contains": {"enum": ["supersede-contract", "relax-contract"]}
+              }
+            },
+            "required": ["authorizedActions"]
+          },
+          "then": {
+            "required": [
+              "baseContractSha256",
+              "resultContractSha256",
+              "deltaSha256"
+            ],
+            "properties": {
+              "baseContractSha256": {"type": "string"},
+              "resultContractSha256": {"type": "string"},
+              "deltaSha256": {"type": "string"}
+            }
+          }
+        }
+      ]
+    },
+    "nullableAuthorityReceiptBinding": {
+      "oneOf": [
+        {"type": "null"},
+        {"$ref": "#/$defs/authorityReceiptBinding"}
+      ]
+    },
+    "renderUsage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["callsTotal", "conceptResets", "attemptsByOutput"],
+      "properties": {
+        "callsTotal": {"type": "integer", "minimum": 0},
+        "conceptResets": {"type": "integer", "minimum": 0},
+        "attemptsByOutput": {
+          "type": "object",
+          "propertyNames": {
+            "$ref": "deliverable-coverage.schema.json#/$defs/id"
+          },
+          "additionalProperties": {"type": "integer", "minimum": 0}
+        }
+      }
+    },
+    "qualityGate": {
+      "enum": ["pending", "pass", "fail", "blocked", "not-required"]
+    }
+  }
+}

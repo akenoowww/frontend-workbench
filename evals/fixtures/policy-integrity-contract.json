@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 3,
+  "contractId": "policy-integrity",
+  "workflowProfile": "full",
+  "implementationTargets": [],
+  "structure": {"id": "policy-integrity-structure", "path": "structure.json", "sha256": "2222222222222222222222222222222222222222222222222222222222222222"},
+  "productModel": {
+    "rootObjectId": "account-product",
+    "objects": [
+      {"id": "account-product", "role": "root", "parentId": null, "evidenceForObjectIds": []},
+      {"id": "account-surface", "role": "primary", "parentId": "account-product", "evidenceForObjectIds": []}
+    ],
+    "relations": [
+      {"id": "account-contains-surface", "fromObjectId": "account-product", "toObjectId": "account-surface", "kind": "contains"}
+    ]
+  },
+  "capabilityRequirements": [
+    {"id": "account-layout", "capability": "Account review and editing surface", "complexity": "bounded", "constraints": ["Required ImageGen approval precedes implementation"], "ownerObjectId": "account-surface", "surfaceIds": ["P01"], "required": true}
+  ],
+  "renderBudget": {"maxCallsTotal": 2, "maxAttemptsPerOutput": 2, "maxConceptResets": 0},
+  "productIntent": {
+    "problem": "Create one approved visual direction and required bitmap before implementing a new account surface.",
+    "representativeScenarios": [
+      "Review the representative generated account surface",
+      "Implement the accepted direction after explicit approval"
+    ],
+    "requiredDomains": ["account"],
+    "protectedCapabilities": ["required ImageGen stage", "review before implementation"],
+    "antiGoals": ["Downgrade the artifact policy to save time", "Treat silence as approval"],
+    "successSignals": ["The required artifact is accepted before implementation begins"]
+  },
+  "operationalMetadataPolicy": {
+    "defaultVisibility": "hidden-unless-required",
+    "requiredClaims": []
+  },
+  "visualDirectionPolicy": "required",
+  "visualArtifactPolicy": "imagegen-required",
+  "checkpointMode": "review-before-implementation",
+  "authority": {
+    "pageStructure": "locked",
+    "interactionModel": "locked",
+    "contentRepartition": "within-surface-only"
+  },
+  "surfaces": [
+    {"id": "P01", "kind": "page", "route": "/account", "userJob": "Review and edit the account", "primaryObjectId": "account-surface", "shellIds": ["account-shell"], "referenceBindingIds": []}
+  ],
+  "edges": [],
+  "outputs": [
+    {"id": "O01", "surfaceId": "P01", "state": "default", "viewport": "desktop-1440x900", "scrollPosition": "top", "approvalRequired": true, "dependsOn": [], "promotionRequired": false, "designEvidenceRequired": true, "runtimeEvidenceRequired": false, "artifactKind": "imagegen", "anchorOutputId": null}
+  ]
+}

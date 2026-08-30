@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "locked-route-preservation",
+  "skill": "frontend-information-architecture",
+  "prompt": "Redesign the projects list, project detail, and activity routes while preserving their URLs, back behavior, and page-specific jobs. Produce a reviewed desktop output for every route.",
+  "contractFixture": "evals/fixtures/three-route-contract.json",
+  "expected": {
+    "plannedOutputIds": ["O01", "O02", "O03"],
+    "completedOutputIds": ["O01", "O02", "O03"],
+    "missingOutputIds": [],
+    "finalStatus": "complete",
+    "requiredSkills": ["frontend-information-architecture", "frontend-product-design", "art-direct-imagegen"],
+    "forbiddenSkills": [],
+    "requiredTransformations": [],
+    "forbiddenTransformations": ["route-to-drawer", "route-to-tab"]
+  }
+}

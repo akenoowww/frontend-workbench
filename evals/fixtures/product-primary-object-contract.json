@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 3,
+  "contractId": "product-primary-object",
+  "workflowProfile": "full",
+  "implementationTargets": [],
+  "structure": {
+    "id": "product-primary-structure",
+    "path": "structure.json",
+    "sha256": "1111111111111111111111111111111111111111111111111111111111111111"
+  },
+  "productModel": {
+    "rootObjectId": "project-model",
+    "objects": [
+      {"id": "project-model", "role": "root", "parentId": null, "evidenceForObjectIds": []},
+      {"id": "workflow", "role": "primary", "parentId": "project-model", "evidenceForObjectIds": []},
+      {"id": "roles-rules-entities", "role": "supporting", "parentId": "project-model", "evidenceForObjectIds": ["workflow"]},
+      {"id": "automated-check", "role": "downstream-evidence", "parentId": "workflow", "evidenceForObjectIds": ["workflow"]},
+      {"id": "runner-source", "role": "implementation-detail", "parentId": "automated-check", "evidenceForObjectIds": ["automated-check"]}
+    ],
+    "relations": [
+      {"id": "project-contains-process", "fromObjectId": "project-model", "toObjectId": "workflow", "kind": "contains"},
+      {"id": "domain-supports-process", "fromObjectId": "roles-rules-entities", "toObjectId": "workflow", "kind": "supports"},
+      {"id": "automated-check-evidence-process", "fromObjectId": "automated-check", "toObjectId": "workflow", "kind": "evidence-for"},
+      {"id": "browser-runner-implements-test", "fromObjectId": "runner-source", "toObjectId": "automated-check", "kind": "implements"}
+    ]
+  },
+  "capabilityRequirements": [
+    {"id": "workflow-modeling", "capability": "Workflow modeling and inspection", "complexity": "complex", "constraints": ["Decisions and exceptions remain workflow-first", "Automated-check coverage stays downstream"], "ownerObjectId": "workflow", "surfaceIds": ["P02"], "required": true}
+  ],
+  "renderBudget": {"maxCallsTotal": 3, "maxAttemptsPerOutput": 1, "maxConceptResets": 0},
+  "productIntent": {
+    "problem": "Help QA engineers create and maintain a project's workflow model and workflows before attaching executable Automated checks.",
+    "representativeScenarios": [
+      "Create a workflow from project roles, rules, entities, and decisions",
+      "Attach an executable Automated check to one confirmed branch of that process"
+    ],
+    "requiredDomains": ["workflow-model", "workflow", "automated-check"],
+    "protectedCapabilities": ["workflow modeling", "relationship exploration", "downstream Automated check coverage"],
+    "antiGoals": ["Make browser runner the primary product object", "Reduce workflows to test metadata"],
+    "successSignals": ["Workflows remain the central working entity", "Runner source appears only inside downstream Automated check surfaces"]
+  },
+  "operationalMetadataPolicy": {
+    "defaultVisibility": "hidden-unless-required",
+    "requiredClaims": []
+  },
+  "visualDirectionPolicy": "required",
+  "visualArtifactPolicy": "imagegen-required",
+  "checkpointMode": "review-before-implementation",
+  "authority": {
+    "pageStructure": "locked",
+    "interactionModel": "locked",
+    "contentRepartition": "within-surface-only"
+  },
+  "surfaces": [
+    {"id": "P01", "kind": "page", "route": "/projects/demo", "userJob": "Understand the project workflow model", "primaryObjectId": "project-model", "shellIds": ["global-shell", "project-shell"], "referenceBindingIds": []},
+    {"id": "P02", "kind": "page", "route": "/projects/demo/processes/approval", "userJob": "Model and inspect one workflow", "primaryObjectId": "workflow", "shellIds": ["global-shell", "project-shell"], "referenceBindingIds": []},
+    {"id": "P03", "kind": "page", "route": "/checks/approval", "userJob": "Inspect the downstream executable Automated check", "primaryObjectId": "automated-check", "shellIds": ["global-shell"], "referenceBindingIds": []}
+  ],
+  "edges": [
+    {"from": "P01", "to": "P02", "trigger": "Open workflow"},
+    {"from": "P02", "to": "P03", "trigger": "Inspect attached Automated check"}
+  ],
+  "outputs": [
+    {"id": "O01", "surfaceId": "P01", "state": "populated", "viewport": "desktop-1440x900", "scrollPosition": "top", "approvalRequired": true, "dependsOn": [], "promotionRequired": false, "designEvidenceRequired": true, "runtimeEvidenceRequired": false, "artifactKind": "imagegen", "anchorOutputId": null},
+    {"id": "O02", "surfaceId": "P02", "state": "model", "viewport": "desktop-1440x900", "scrollPosition": "top", "approvalRequired": true, "dependsOn": ["O01"], "promotionRequired": false, "designEvidenceRequired": true, "runtimeEvidenceRequired": false, "artifactKind": "imagegen", "anchorOutputId": "O01"},
+    {"id": "O03", "surfaceId": "P03", "state": "source", "viewport": "desktop-1440x900", "scrollPosition": "top", "approvalRequired": true, "dependsOn": ["O02"], "promotionRequired": false, "designEvidenceRequired": true, "runtimeEvidenceRequired": false, "artifactKind": "imagegen", "anchorOutputId": "O01"}
+  ]
+}

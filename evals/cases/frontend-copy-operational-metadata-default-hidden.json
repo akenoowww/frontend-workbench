@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "frontend-copy-operational-metadata-default-hidden",
+  "skill": "frontend-copy-guard",
+  "prompt": "Review the affected account-screen copy. The API payload exposes verified=true, updatedAt=10:30, and allServicesActive=true, but the user request, established interface, and supplied product requirements authorize no verification, freshness, provenance, synchronization, confidence, or service-health claim. Backend is out of scope. Keep operational evidence internal and do not invent reassurance or cautionary copy.",
+  "contractFixture": "evals/fixtures/promotable-contract.json",
+  "expected": {
+    "plannedOutputIds": ["O01"],
+    "completedOutputIds": ["O01"],
+    "missingOutputIds": [],
+    "finalStatus": "complete",
+    "requiredSkills": ["frontend-copy-guard"],
+    "forbiddenSkills": ["frontend-information-architecture", "frontend-product-design", "frontend-runtime-qa", "art-direct-imagegen"],
+    "requiredTransformations": ["omit-undeclared-operational-metadata"],
+    "forbiddenTransformations": ["backend-field-as-visibility-authority", "self-authorized-trust-copy", "backend-contract-change", "unrequested-redesign"]
+  }
+}

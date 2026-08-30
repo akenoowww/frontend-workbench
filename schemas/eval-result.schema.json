@@ -1,0 +1,229 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/akenoowww/frontend-workbench/schemas/eval-result.schema.json",
+  "title": "Frontend Workbench measured behavioral eval result",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "caseId",
+    "variant",
+    "invokedSkills",
+    "plannedOutputIds",
+    "completedOutputIds",
+    "missingOutputIds",
+    "transformations",
+    "finalStatus",
+    "hostFilesOutsideRuntime",
+    "usage",
+    "defects",
+    "evidence"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "evidence": {
+            "properties": {
+              "captureStatus": {
+                "const": "complete"
+              }
+            },
+            "required": ["captureStatus"]
+          }
+        },
+        "required": ["evidence"]
+      },
+      "then": {
+        "properties": {
+          "usage": {
+            "properties": {
+              "inputTokens": {
+                "minimum": 1
+              },
+              "outputTokens": {
+                "minimum": 1
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 3
+    },
+    "caseId": {
+      "$ref": "deliverable-coverage.schema.json#/$defs/id"
+    },
+    "variant": {
+      "enum": ["baseline", "workbench"]
+    },
+    "invokedSkills": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "plannedOutputIds": {
+      "$ref": "eval-case.schema.json#/$defs/idArray"
+    },
+    "completedOutputIds": {
+      "$ref": "eval-case.schema.json#/$defs/idArray"
+    },
+    "missingOutputIds": {
+      "$ref": "eval-case.schema.json#/$defs/idArray"
+    },
+    "transformations": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "finalStatus": {
+      "enum": ["complete", "incomplete", "blocked"]
+    },
+    "hostFilesOutsideRuntime": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "usage": {
+      "$ref": "#/$defs/usage"
+    },
+    "defects": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["outcome", "fidelity"],
+      "properties": {
+        "outcome": {
+          "$ref": "#/$defs/defectArray"
+        },
+        "fidelity": {
+          "$ref": "#/$defs/defectArray"
+        }
+      }
+    },
+    "evidence": {
+      "$ref": "#/$defs/evidence"
+    }
+  },
+  "$defs": {
+    "usage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "inputTokens",
+        "cachedInputTokens",
+        "outputTokens",
+        "reasoningTokens",
+        "modelCalls",
+        "toolCalls",
+        "durationMs"
+      ],
+      "properties": {
+        "inputTokens": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "cachedInputTokens": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "outputTokens": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "reasoningTokens": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "modelCalls": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "toolCalls": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "durationMs": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "description": "Binds the result to exact trace bytes for integrity checks; it does not establish that the trace content is semantically authentic.",
+      "additionalProperties": false,
+      "required": [
+        "captureStatus",
+        "sourceKind",
+        "sourceId",
+        "promptSha256",
+        "traceSha256",
+        "tracePath"
+      ],
+      "properties": {
+        "captureStatus": {
+          "enum": ["complete", "failed"]
+        },
+        "sourceKind": {
+          "enum": ["codex-rollout", "api-response", "harness-trace"]
+        },
+        "sourceId": {
+          "type": "string",
+          "minLength": 8,
+          "maxLength": 256,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]+$"
+        },
+        "promptSha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "traceSha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "tracePath": {
+          "type": "string",
+          "pattern": "^traces/[A-Za-z0-9][A-Za-z0-9._/-]*$",
+          "description": "Canonical relative path to a non-symlink trace under the variant result root."
+        }
+      }
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "defectArray": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/defect"
+      }
+    },
+    "defect": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "severity", "summary"],
+      "properties": {
+        "id": {
+          "$ref": "deliverable-coverage.schema.json#/$defs/id"
+        },
+        "severity": {
+          "enum": ["minor", "major", "critical"]
+        },
+        "summary": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

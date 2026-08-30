@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/akenoowww/frontend-workbench/schemas/eval-blind-judgment.schema.json",
+  "title": "Frontend Workbench blind pairwise visual judgment",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "packetId",
+    "packetSha256",
+    "rubricSha256",
+    "judgeReceipt",
+    "dimensions"
+  ],
+  "properties": {
+    "schemaVersion": {"const": 1},
+    "packetId": {"$ref": "deliverable-coverage.schema.json#/$defs/id"},
+    "packetSha256": {"$ref": "#/$defs/sha256"},
+    "rubricSha256": {"$ref": "#/$defs/sha256"},
+    "judgeReceipt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sourceKind", "judgeId", "sourceId", "tracePath", "traceSha256"],
+      "properties": {
+        "sourceKind": {"enum": ["human-review", "model-api", "harness-trace"]},
+        "judgeId": {
+          "type": "string",
+          "minLength": 8,
+          "maxLength": 256,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]+$"
+        },
+        "sourceId": {
+          "type": "string",
+          "minLength": 8,
+          "maxLength": 256,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]+$"
+        },
+        "tracePath": {
+          "type": "string",
+          "pattern": "^judge-traces/[A-Za-z0-9][A-Za-z0-9._/-]*$"
+        },
+        "traceSha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "dimensions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "specificity",
+        "hierarchy",
+        "uxCorrectness",
+        "uiDnaPreservation",
+        "responsiveness",
+        "genericness",
+        "productHierarchyFidelity",
+        "shellContinuity",
+        "referenceScopeFidelity",
+        "capabilityFit"
+      ],
+      "properties": {
+        "specificity": {"$ref": "#/$defs/judgment"},
+        "hierarchy": {"$ref": "#/$defs/judgment"},
+        "uxCorrectness": {"$ref": "#/$defs/judgment"},
+        "uiDnaPreservation": {"$ref": "#/$defs/judgment"},
+        "responsiveness": {"$ref": "#/$defs/judgment"},
+        "genericness": {"$ref": "#/$defs/judgment"},
+        "productHierarchyFidelity": {"$ref": "#/$defs/judgment"},
+        "shellContinuity": {"$ref": "#/$defs/judgment"},
+        "referenceScopeFidelity": {"$ref": "#/$defs/judgment"},
+        "capabilityFit": {"$ref": "#/$defs/judgment"}
+      }
+    }
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "judgment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["verdict", "rationale", "evidence"],
+      "properties": {
+        "verdict": {"enum": ["A", "B", "tie", "not-judgeable"]},
+        "rationale": {"type": "string", "minLength": 20, "maxLength": 2000},
+        "evidence": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["side", "captureId", "observation"],
+            "properties": {
+              "side": {"enum": ["A", "B", "both"]},
+              "captureId": {"$ref": "deliverable-coverage.schema.json#/$defs/id"},
+              "observation": {"type": "string", "minLength": 10, "maxLength": 1000}
+            }
+          }
+        }
+      }
+    }
+  }
+}

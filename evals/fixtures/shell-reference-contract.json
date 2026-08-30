@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 3,
+  "contractId": "shell-reference-boundary",
+  "workflowProfile": "full",
+  "implementationTargets": [],
+  "structure": {"id": "shell-reference-structure", "path": "structure.json", "sha256": "4444444444444444444444444444444444444444444444444444444444444444"},
+  "productModel": {
+    "rootObjectId": "project-model",
+    "objects": [
+      {"id": "project-model", "role": "root", "parentId": null, "evidenceForObjectIds": []},
+      {"id": "workflow", "role": "primary", "parentId": "project-model", "evidenceForObjectIds": []},
+      {"id": "relationship-graph", "role": "supporting", "parentId": "workflow", "evidenceForObjectIds": ["workflow"]}
+    ],
+    "relations": [
+      {"id": "project-contains-process", "fromObjectId": "project-model", "toObjectId": "workflow", "kind": "contains"},
+      {"id": "graph-supports-process", "fromObjectId": "relationship-graph", "toObjectId": "workflow", "kind": "supports"}
+    ]
+  },
+  "capabilityRequirements": [
+    {"id": "relationship-graph", "capability": "Typed relationship graph inside the accepted project shell", "complexity": "complex", "constraints": ["Functional reference affects graph behavior only", "Accepted shell anchor is required"], "ownerObjectId": "workflow", "surfaceIds": ["P02"], "required": true}
+  ],
+  "renderBudget": {"maxCallsTotal": 3, "maxAttemptsPerOutput": 2, "maxConceptResets": 0},
+  "productIntent": {
+    "problem": "Extend an accepted project shell with a nested process module and a functional relationship graph without creating a second product shell.",
+    "representativeScenarios": [
+      "Enter a project through the accepted global and project navigation",
+      "Inspect process relationships inside the same shell"
+    ],
+    "requiredDomains": ["project-shell", "workflow", "relationship-graph"],
+    "protectedCapabilities": ["global navigation continuity", "project context", "functional graph behavior"],
+    "antiGoals": ["Invent a separate process-site shell", "Copy a functional reference's unrelated brand and navigation"],
+    "successSignals": ["Every nested process surface remains visibly inside the accepted project shell"]
+  },
+  "operationalMetadataPolicy": {
+    "defaultVisibility": "hidden-unless-required",
+    "requiredClaims": []
+  },
+  "visualDirectionPolicy": "required",
+  "visualArtifactPolicy": "imagegen-required",
+  "checkpointMode": "review-each-stage",
+  "authority": {
+    "pageStructure": "locked",
+    "interactionModel": "locked",
+    "contentRepartition": "within-surface-only"
+  },
+  "surfaces": [
+    {"id": "P01", "kind": "page", "route": "/projects/demo/processes", "userJob": "Choose a workflow inside the project shell", "primaryObjectId": "project-model", "shellIds": ["global-shell", "project-shell"], "referenceBindingIds": []},
+    {"id": "P02", "kind": "page", "route": "/projects/demo/processes/approval/model", "userJob": "Inspect the process model and its relationships", "primaryObjectId": "workflow", "shellIds": ["global-shell", "project-shell"], "referenceBindingIds": ["force-graph-functional-ref"]}
+  ],
+  "edges": [
+    {"from": "P01", "to": "P02", "trigger": "Open process model"}
+  ],
+  "outputs": [
+    {"id": "O01", "surfaceId": "P01", "state": "catalog", "viewport": "desktop-1440x900", "scrollPosition": "top", "approvalRequired": true, "dependsOn": [], "promotionRequired": false, "designEvidenceRequired": true, "runtimeEvidenceRequired": false, "artifactKind": "imagegen", "anchorOutputId": null},
+    {"id": "O02", "surfaceId": "P02", "state": "graph", "viewport": "desktop-1440x900", "scrollPosition": "top", "approvalRequired": true, "dependsOn": ["O01"], "promotionRequired": false, "designEvidenceRequired": true, "runtimeEvidenceRequired": false, "artifactKind": "imagegen", "anchorOutputId": "O01"}
+  ]
+}

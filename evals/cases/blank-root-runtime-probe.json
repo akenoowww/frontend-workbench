@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "blank-root-runtime-probe",
+  "skill": "frontend-runtime-qa",
+  "prompt": "The project build succeeds and a screenshot file exists, but the target route leaves #root empty because the React entry module never calls createRoot(...).render(...). Run the exact declared route through the canonical runtime probe. The empty mount, missing target interaction, and screenshot-only evidence must block implementation completion in STANDARD as well as FULL.",
+  "contractFixture": "evals/fixtures/promotable-contract.json",
+  "expected": {
+    "plannedOutputIds": ["O01"],
+    "completedOutputIds": ["O01"],
+    "missingOutputIds": [],
+    "finalStatus": "blocked",
+    "requiredSkills": ["frontend-runtime-qa"],
+    "forbiddenSkills": ["frontend-information-architecture", "frontend-product-design", "art-direct-imagegen"],
+    "requiredTransformations": ["direct-target-navigation", "detect-empty-app-root", "runtime-receipt-blocks-completion"],
+    "forbiddenTransformations": ["build-as-browser-proof", "screenshot-only-pass", "false-completion", "search-engine-navigation"]
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "brownfield-settings-dna",
+  "targetSkill": "frontend-product-design",
+  "prompt": "Materially improve the account settings hierarchy and responsive composition while preserving every declared capability, content fact, and recognizable project-DNA role. Produce the complete required capture matrix from the rendered implementation.",
+  "fixtureManifest": "evals/design-fixtures/brownfield-settings-dna.json",
+  "fixtureSha256": "70a1ae5178509fbcba801103b0c28c1ebd82ffd972d852fbf8c86399472a6b8c",
+  "rubric": "evals/rubrics/visual-quality-v1.json",
+  "rubricSha256": "d7ff8aced50616b2a8778d6311b598bc874bfa8b9639dbc2c97f79e8ccaa2aac",
+  "minimumTrials": 1,
+  "minimumJudgesPerTrial": 3,
+  "expectedCaptureIds": [
+    "settings-default-desktop",
+    "settings-default-mobile",
+    "settings-error-mobile"
+  ]
+}

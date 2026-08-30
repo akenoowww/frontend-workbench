@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "review-each-stage-approval",
+  "skill": "frontend-product-design",
+  "prompt": "Design the locked three-route site one stage at a time. The first reviewed master is waiting for user approval; do not accept it or start later pages yet.",
+  "contractFixture": "evals/fixtures/review-checkpoint-contract.json",
+  "expected": {
+    "plannedOutputIds": ["O01", "O02", "O03"],
+    "completedOutputIds": [],
+    "missingOutputIds": ["O01", "O02", "O03"],
+    "finalStatus": "incomplete",
+    "requiredSkills": ["frontend-information-architecture", "frontend-product-design", "art-direct-imagegen"],
+    "forbiddenSkills": ["frontend-project-fit", "frontend-runtime-qa"],
+    "requiredTransformations": ["awaiting-approval"],
+    "forbiddenTransformations": ["advance-without-approval", "false-completion"]
+  }
+}

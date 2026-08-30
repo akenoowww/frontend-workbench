@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "fixtureId": "complex-graph-capability-fit",
+  "provenance": {
+    "sourceKind": "synthetic-fictional-eval-spec",
+    "sourceId": "fixture:graph-capability-fit:v1",
+    "sourceVersion": "1",
+    "evidenceBasis": [
+      "declared-product-intent",
+      "declared-project-dna",
+      "declared-interaction-contract",
+      "declared-content-truth"
+    ],
+    "referenceScreenshotsAvailable": false,
+    "limitations": [
+      "The fixture declares approved capability owners but does not prove that an implementation actually imported one.",
+      "Library comparison and performance require source and runtime evidence beyond screenshots."
+    ]
+  },
+  "brief": {
+    "productIntent": "Help a QA engineer explore a dense project relationship graph while preserving an accessible equivalent list for the same nodes and edges.",
+    "userJobs": [
+      "Filter graph nodes by business-object type",
+      "Focus one node and inspect its neighborhood",
+      "Reach the same relationships through a keyboard-accessible list fallback"
+    ],
+    "protectedCapabilities": [
+      "Typed node and edge filters",
+      "Focus neighborhood and inspector",
+      "Keyboard navigation and focus visibility",
+      "Equivalent list fallback"
+    ],
+    "contentTruth": [
+      "The graph contains processes, roles, rules, entities, and Automated checks",
+      "Sample approval flow connects to two roles, three rules, and one Automated check",
+      "The list fallback represents the same focused neighborhood"
+    ],
+    "projectDna": {
+      "typographyRoles": [
+        "Compact UI sans-serif for filters and inspector controls",
+        "Readable neutral labels inside graph nodes and fallback rows"
+      ],
+      "colorRoles": [
+        "Object types use a restrained categorical palette",
+        "Selection uses cobalt without glow-heavy decoration"
+      ],
+      "spacingAndShape": [
+        "Dense canvas balanced by a stable inspector rail",
+        "Compact low-radius controls and clear focus rings"
+      ],
+      "componentPosture": [
+        "Analytical and inspectable rather than ornamental",
+        "Fallback is a first-class equivalent view, not a hidden accessibility afterthought"
+      ],
+      "imageryRole": [
+        "No decorative imagery; nodes and edges carry the visual content"
+      ],
+      "motionTone": [
+        "Short focus and pan transitions with reduced-motion compatibility"
+      ]
+    },
+    "evaluationContext": {
+      "capabilityFit": {
+        "capability": "Interactive force-directed relationship exploration with an equivalent accessible list",
+        "establishedOptions": ["Approved React Flow adapter", "Approved Cytoscape adapter", "Existing accessible list primitive"],
+        "comparisonRequired": true,
+        "customPrimitiveAllowedWhen": "Only when documented project evidence shows every established owner fails a required graph behavior or constraint.",
+        "requiredFallbacks": ["Equivalent relationship list", "Keyboard focus path", "Reduced-motion behavior"]
+      },
+      "implementationScope": {
+        "authorizedSurfaceIds": ["project-graph"],
+        "forbiddenChanges": ["Global navigation redesign", "New unrelated visualization system", "Automated check route changes"]
+      }
+    },
+    "avoid": [
+      "A bespoke glowing canvas with no inspector discipline",
+      "Graph-only access to relationship content",
+      "Tiny unlabeled controls",
+      "A custom interaction vocabulary inconsistent with the product"
+    ]
+  },
+  "captureMatrix": [
+    {
+      "captureId": "project-graph-desktop",
+      "outputId": "project-graph",
+      "surfaceId": "project-graph",
+      "route": "/projects/demo/graph",
+      "state": "focused-neighborhood",
+      "viewport": {"name": "desktop-1440x900", "width": 1440, "height": 900},
+      "scrollPosition": "top"
+    },
+    {
+      "captureId": "project-graph-mobile",
+      "outputId": "project-graph",
+      "surfaceId": "project-graph",
+      "route": "/projects/demo/graph",
+      "state": "focused-neighborhood",
+      "viewport": {"name": "mobile-390x844", "width": 390, "height": 844},
+      "scrollPosition": "top"
+    },
+    {
+      "captureId": "project-graph-list-desktop",
+      "outputId": "project-graph-list",
+      "surfaceId": "project-graph",
+      "route": "/projects/demo/graph",
+      "state": "list-fallback",
+      "viewport": {"name": "desktop-1440x900", "width": 1440, "height": 900},
+      "scrollPosition": "top"
+    }
+  ]
+}

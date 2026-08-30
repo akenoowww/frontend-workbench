@@ -1,0 +1,202 @@
+{
+  "schemaVersion": 1,
+  "fixtureId": "operations-preserve-sidebar-redesign",
+  "provenance": {
+    "sourceKind": "synthetic-fictional-eval-spec",
+    "sourceId": "fixture:operations-preserve-sidebar-redesign:v1",
+    "sourceVersion": "1",
+    "evidenceBasis": [
+      "declared-product-intent",
+      "declared-project-dna",
+      "declared-content-truth"
+    ],
+    "referenceScreenshotsAvailable": false,
+    "limitations": [
+      "Every organization, value, label, and scenario in this fixture is fictional and unrelated to any user project or account.",
+      "Blind trials must supply matched source and style-reference receipts separately."
+    ]
+  },
+  "brief": {
+    "productIntent": "Let a fictional field-operations coordinator understand the current shift and its priorities through a genuinely new dashboard composition.",
+    "userJobs": [
+      "Scan the current shift overview",
+      "Notice upcoming work orders and dispatch activity",
+      "Understand completion and readiness without a repeated donut-card rail"
+    ],
+    "protectedCapabilities": [
+      "Primary sidebar information architecture and labels remain available",
+      "Current overview values and empty-dispatch state remain truthful",
+      "Upcoming work and readiness information remain visible"
+    ],
+    "contentTruth": [
+      "Open work orders 12, active sites 4, technicians 9, available vehicles 6",
+      "The dispatch queue is empty",
+      "Shift completion is 63%, safety readiness is 82%, and equipment readiness is 74%"
+    ],
+    "projectDna": {
+      "typographyRoles": [
+        "Neutral functional typography with a clear but calm title scale",
+        "Compact labels support operational scanning"
+      ],
+      "colorRoles": [
+        "Navy structures navigation and primary text",
+        "Turquoise carries the fictional product identity and action",
+        "Amber is a single restrained attention accent"
+      ],
+      "spacingAndShape": [
+        "Generous breathing room around coherent work surfaces",
+        "Soft geometry without a card around every datum"
+      ],
+      "componentPosture": [
+        "The persistent sidebar is utility-led",
+        "Main content uses varied module scale and hierarchy rather than equal tiles"
+      ],
+      "imageryRole": [
+        "Any illustration is contextual and subordinate to real operational content"
+      ],
+      "motionTone": [
+        "Quiet functional state change rather than decorative motion"
+      ]
+    },
+    "evaluationContext": {
+      "references": [
+        {
+          "id": "operations-current-functional",
+          "role": "FUNCTIONAL_REFERENCE",
+          "scope": "Fictional operations-dashboard facts and primary sidebar only",
+          "allowedInfluence": [
+            "Sidebar information architecture",
+            "Current labels, values, states, and visible capabilities"
+          ],
+          "forbiddenInfluence": [
+            "Main-content macro-layout",
+            "Equal KPI card grid",
+            "Repeated donut-card rail",
+            "Current surface styling"
+          ]
+        },
+        {
+          "id": "designer-layout-style",
+          "role": "STYLE_REFERENCE",
+          "scope": "Composition discipline, hierarchy, module scale, and spacing only",
+          "allowedInfluence": [
+            "Asymmetric main-versus-secondary composition",
+            "Contextual header rhythm",
+            "Aligned broad work surfaces"
+          ],
+          "forbiddenInfluence": [
+            "Designer-only navigation",
+            "Designer-only data, names, photos, and features",
+            "Promotion to EDIT_TARGET"
+          ]
+        }
+      ],
+      "redesignBoundary": {
+        "mode": "preserve-only",
+        "preserveRegions": [
+          {
+            "regionId": "primary-sidebar",
+            "sourceRef": "operations-current-functional",
+            "invariants": [
+              "Preserve sidebar information architecture",
+              "Preserve sidebar labels and persistent navigation role"
+            ]
+          }
+        ],
+        "replaceRegions": [
+          {
+            "regionId": "dashboard-main",
+            "sourceRef": "operations-current-functional",
+            "mustChange": [
+              "macro-layout",
+              "information-hierarchy",
+              "module-topology",
+              "typography-scale",
+              "surface-language",
+              "data-visualization-form"
+            ],
+            "minimumChangedDimensions": 5
+          }
+        ],
+        "forbiddenCarryover": [
+          "Equal KPI card grid",
+          "Repeated vertical donut-card rail",
+          "Unchanged main-content composition",
+          "Whole-shell preservation beyond the primary sidebar"
+        ]
+      },
+      "contentDistribution": {
+        "strategy": "progressive-scroll",
+        "firstViewportRule": "Prioritize current-day context, upcoming work, and the next meaningful administrative signals without showing every report at once.",
+        "bands": [
+          {
+            "id": "dashboard-top",
+            "placement": "first-viewport",
+            "responsibilities": [
+              "Current overview and urgent daily context",
+              "Upcoming work and empty-dispatch state"
+            ],
+            "contentIds": [
+              "daily-context",
+              "upcoming-events",
+              "empty-dispatch"
+            ]
+          },
+          {
+            "id": "dashboard-continuation",
+            "placement": "continuation",
+            "responsibilities": [
+              "Completion and readiness detail",
+              "Secondary supporting information chosen by product priority"
+            ],
+            "contentIds": [
+              "completion-status",
+              "readiness-reporting",
+              "supporting-records"
+            ]
+          }
+        ],
+        "sharedContentIds": [],
+        "mustRemainReachable": [
+          "All supplied values, states, and existing actions across the complete page",
+          "Completion, safety, and equipment-readiness detail"
+        ]
+      }
+    },
+    "avoid": [
+      "A palette-only refresh",
+      "The same dashboard with cleaner spacing",
+      "Invented operational data or features",
+      "Reclassifying a style reference as an edit target"
+    ]
+  },
+  "captureMatrix": [
+    {
+      "captureId": "operations-redesign-desktop",
+      "outputId": "operations-dashboard-default",
+      "surfaceId": "dashboard",
+      "route": "/dashboard",
+      "state": "default",
+      "viewport": {"name": "desktop-1440x900", "width": 1440, "height": 900},
+      "scrollPosition": "top"
+    },
+    {
+      "captureId": "operations-redesign-continuation",
+      "outputId": "operations-dashboard-default",
+      "surfaceId": "dashboard",
+      "route": "/dashboard",
+      "state": "default",
+      "viewport": {"name": "desktop-1440x900", "width": 1440, "height": 900},
+      "scrollPosition": "viewport"
+    },
+    {
+      "captureId": "operations-redesign-mobile",
+      "outputId": "operations-dashboard-default",
+      "surfaceId": "dashboard",
+      "route": "/dashboard",
+      "state": "default",
+      "viewport": {"name": "mobile-390x844", "width": 390, "height": 844},
+      "scrollPosition": "top"
+    }
+  ]
+}

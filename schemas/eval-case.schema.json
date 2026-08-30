@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/akenoowww/frontend-workbench/schemas/eval-case.schema.json",
+  "title": "Frontend Workbench behavioral eval case",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "id", "skill", "prompt", "contractFixture", "expected"],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "id": {
+      "$ref": "deliverable-coverage.schema.json#/$defs/id"
+    },
+    "skill": {
+      "type": "string",
+      "minLength": 1
+    },
+    "prompt": {
+      "type": "string",
+      "minLength": 1
+    },
+    "contractFixture": {
+      "type": "string",
+      "pattern": "^evals/fixtures/[A-Za-z0-9._/-]+\\.json$"
+    },
+    "expected": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "plannedOutputIds",
+        "completedOutputIds",
+        "missingOutputIds",
+        "finalStatus",
+        "requiredSkills",
+        "forbiddenSkills",
+        "requiredTransformations",
+        "forbiddenTransformations"
+      ],
+      "properties": {
+        "plannedOutputIds": {
+          "$ref": "#/$defs/idArray"
+        },
+        "completedOutputIds": {
+          "$ref": "#/$defs/idArray"
+        },
+        "missingOutputIds": {
+          "$ref": "#/$defs/idArray"
+        },
+        "finalStatus": {
+          "enum": ["complete", "incomplete", "blocked"]
+        },
+        "requiredSkills": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "forbiddenSkills": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "requiredTransformations": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "forbiddenTransformations": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "idArray": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "deliverable-coverage.schema.json#/$defs/id"
+      }
+    }
+  }
+}

@@ -1,0 +1,276 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/akenoowww/frontend-workbench/schemas/runtime-probe.schema.json",
+  "title": "Frontend Workbench browser runtime probe",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "producer",
+    "adapter",
+    "adapterVersion",
+    "generatedAt",
+    "specPath",
+    "specSha256",
+    "implementationSnapshotSha256",
+    "outputId",
+    "route",
+    "state",
+    "viewport",
+    "scrollPosition",
+    "directNavigation",
+    "page",
+    "stateVerification",
+    "scroll",
+    "runtimeHealth",
+    "accessibility",
+    "interactions",
+    "screenshot",
+    "verdict"
+  ],
+  "properties": {
+    "schemaVersion": {"const": 1},
+    "producer": {"const": "frontend-workbench/browser-runtime-probe"},
+    "adapter": {"const": "agent-browser"},
+    "adapterVersion": {"type": "string", "minLength": 1},
+    "generatedAt": {"type": "string", "format": "date-time"},
+    "specPath": {"type": "string", "pattern": "^qa/.+\\.json$"},
+    "specSha256": {"$ref": "#/$defs/sha256"},
+    "implementationSnapshotSha256": {"$ref": "#/$defs/sha256"},
+    "outputId": {"$ref": "deliverable-coverage.schema.json#/$defs/id"},
+    "route": {"type": "string", "minLength": 1},
+    "state": {"type": "string", "minLength": 1},
+    "viewport": {"type": "string", "minLength": 1},
+    "scrollPosition": {"type": "string", "minLength": 1},
+    "directNavigation": {"const": true},
+    "page": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "finalUrl",
+        "title",
+        "rootSelector",
+        "rootFound",
+        "rootIsDocumentShell",
+        "rootVisible",
+        "rootEffectiveOpacity",
+        "rootViewportIntersectionPixels",
+        "rootChildElementCount",
+        "visibleTextCharacters",
+        "visibleLandmarkCount",
+        "interactiveElementCount",
+        "rootWidth",
+        "rootHeight"
+      ],
+      "properties": {
+        "finalUrl": {"type": "string", "minLength": 1},
+        "title": {"type": "string"},
+        "rootSelector": {"type": "string", "minLength": 1},
+        "rootFound": {"type": "boolean"},
+        "rootIsDocumentShell": {"type": "boolean"},
+        "rootVisible": {"type": "boolean"},
+        "rootEffectiveOpacity": {"type": "number", "minimum": 0, "maximum": 1},
+        "rootViewportIntersectionPixels": {"type": "number", "minimum": 0},
+        "rootChildElementCount": {"type": "integer", "minimum": 0},
+        "visibleTextCharacters": {"type": "integer", "minimum": 0},
+        "visibleLandmarkCount": {"type": "integer", "minimum": 0},
+        "interactiveElementCount": {"type": "integer", "minimum": 0},
+        "rootWidth": {"type": "number", "minimum": 0},
+        "rootHeight": {"type": "number", "minimum": 0}
+      }
+    },
+    "stateVerification": {"$ref": "#/$defs/assertionResult"},
+    "scroll": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "x", "y", "maxY", "verified", "captureFullPage"],
+      "properties": {
+        "kind": {"enum": ["top", "bottom", "full-page", "selector"]},
+        "x": {"type": "number", "minimum": 0},
+        "y": {"type": "number", "minimum": 0},
+        "maxY": {"type": "number", "minimum": 0},
+        "verified": {"type": "boolean"},
+        "captureFullPage": {"type": "boolean"}
+      }
+    },
+    "runtimeHealth": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["consoleErrors", "pageErrors", "failedRequests"],
+      "properties": {
+        "consoleErrors": {"$ref": "#/$defs/stringArray"},
+        "pageErrors": {"$ref": "#/$defs/stringArray"},
+        "failedRequests": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["url", "status"],
+            "properties": {
+              "url": {"type": "string", "minLength": 1},
+              "status": {"type": ["integer", "null"]},
+              "method": {"type": ["string", "null"]},
+              "error": {"type": ["string", "null"]}
+            }
+          }
+        }
+      }
+    },
+    "accessibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["criticalViolations", "seriousViolations", "otherViolations"],
+      "properties": {
+        "criticalViolations": {"type": "integer", "minimum": 0},
+        "seriousViolations": {"type": "integer", "minimum": 0},
+        "otherViolations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["id", "impact", "nodeCount"],
+            "properties": {
+              "id": {"type": "string", "minLength": 1},
+              "impact": {"type": ["string", "null"]},
+              "nodeCount": {"type": "integer", "minimum": 0}
+            }
+          }
+        }
+      }
+    },
+    "interactions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "action",
+          "beforeSha256",
+          "afterSha256",
+          "stateChanged",
+          "assertions",
+          "result"
+        ],
+        "properties": {
+          "id": {"$ref": "deliverable-coverage.schema.json#/$defs/id"},
+          "action": {"type": "string", "minLength": 1},
+          "beforeSha256": {"$ref": "#/$defs/sha256"},
+          "afterSha256": {"$ref": "#/$defs/sha256"},
+          "stateChanged": {"type": "boolean"},
+          "assertions": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["id", "kind", "result", "observed"],
+              "properties": {
+                "id": {"$ref": "deliverable-coverage.schema.json#/$defs/id"},
+                "kind": {"type": "string", "minLength": 1},
+                "result": {"enum": ["pass", "fail"]},
+                "observed": {"type": "string", "minLength": 1}
+              }
+            }
+          },
+          "result": {"enum": ["pass", "fail"]}
+        }
+      }
+    },
+    "screenshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256", "pixelWidth", "pixelHeight"],
+      "properties": {
+        "path": {"type": "string", "pattern": "^qa/"},
+        "sha256": {"$ref": "#/$defs/sha256"},
+        "pixelWidth": {"type": "integer", "minimum": 1},
+        "pixelHeight": {"type": "integer", "minimum": 1}
+      }
+    },
+    "verdict": {"enum": ["pass", "fail", "blocked"]},
+    "reason": {"type": "string", "minLength": 1}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"verdict": {"const": "pass"}}, "required": ["verdict"]},
+      "then": {
+        "properties": {
+          "runtimeHealth": {
+            "properties": {
+              "consoleErrors": {"maxItems": 0},
+              "pageErrors": {"maxItems": 0},
+              "failedRequests": {"maxItems": 0}
+            }
+          },
+          "accessibility": {
+            "properties": {
+              "criticalViolations": {"const": 0},
+              "seriousViolations": {"const": 0}
+            }
+          },
+          "interactions": {
+            "minItems": 1,
+            "items": {
+              "properties": {
+                "result": {"const": "pass"},
+                "stateChanged": {"const": true},
+                "assertions": {
+                  "items": {"properties": {"result": {"const": "pass"}}}
+                }
+              }
+            }
+          },
+          "page": {
+            "properties": {
+              "title": {"minLength": 1},
+              "rootFound": {"const": true},
+              "rootIsDocumentShell": {"const": false},
+              "rootVisible": {"const": true},
+              "rootEffectiveOpacity": {"exclusiveMinimum": 0.05},
+              "rootViewportIntersectionPixels": {"exclusiveMinimum": 0},
+              "rootChildElementCount": {"minimum": 1},
+              "visibleTextCharacters": {"minimum": 8},
+              "rootWidth": {"exclusiveMinimum": 0},
+              "rootHeight": {"exclusiveMinimum": 0}
+            }
+          },
+          "screenshot": {
+            "properties": {
+              "pixelWidth": {"minimum": 320},
+              "pixelHeight": {"minimum": 200}
+            }
+          },
+          "stateVerification": {
+            "properties": {"result": {"const": "pass"}}
+          },
+          "scroll": {
+            "properties": {"verified": {"const": true}}
+          }
+        }
+      }
+    },
+    {
+      "if": {"properties": {"verdict": {"enum": ["fail", "blocked"]}}, "required": ["verdict"]},
+      "then": {"required": ["reason"]}
+    }
+  ],
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "assertionResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind", "result", "observed"],
+      "properties": {
+        "id": {"$ref": "deliverable-coverage.schema.json#/$defs/id"},
+        "kind": {"type": "string", "minLength": 1},
+        "result": {"enum": ["pass", "fail"]},
+        "observed": {"type": "string", "minLength": 1}
+      }
+    },
+    "stringArray": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1}
+    }
+  }
+}

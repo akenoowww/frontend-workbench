@@ -1,0 +1,251 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/akenoowww/frontend-workbench/schemas/eval-scorecard.schema.json",
+  "title": "Frontend Workbench paired eval scorecard",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "caseCount", "variants", "change", "cases"],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "caseCount": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "variants": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["baseline", "workbench"],
+      "properties": {
+        "baseline": {
+          "$ref": "#/$defs/variantSummary"
+        },
+        "workbench": {
+          "$ref": "#/$defs/variantSummary"
+        }
+      }
+    },
+    "change": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "behavioralPasses",
+        "behavioralPassRatePoints",
+        "assertionFailures",
+        "assertionFailuresPercent",
+        "outcomeDefects",
+        "outcomeDefectsPercent",
+        "fidelityDefects",
+        "fidelityDefectsPercent",
+        "inputTokensPercent",
+        "cachedInputTokensPercent",
+        "outputTokensPercent",
+        "reasoningTokensPercent",
+        "totalTokensPercent",
+        "modelCallsPercent",
+        "toolCallsPercent",
+        "durationMsPercent"
+      ],
+      "properties": {
+        "behavioralPasses": {
+          "type": "integer"
+        },
+        "behavioralPassRatePoints": {
+          "type": "number"
+        },
+        "assertionFailures": {
+          "type": "integer"
+        },
+        "assertionFailuresPercent": {
+          "$ref": "#/$defs/nullableNumber"
+        },
+        "outcomeDefects": {
+          "type": "integer"
+        },
+        "outcomeDefectsPercent": {
+          "$ref": "#/$defs/nullableNumber"
+        },
+        "fidelityDefects": {
+          "type": "integer"
+        },
+        "fidelityDefectsPercent": {
+          "$ref": "#/$defs/nullableNumber"
+        },
+        "inputTokensPercent": {
+          "$ref": "#/$defs/nullableNumber"
+        },
+        "cachedInputTokensPercent": {
+          "$ref": "#/$defs/nullableNumber"
+        },
+        "outputTokensPercent": {
+          "$ref": "#/$defs/nullableNumber"
+        },
+        "reasoningTokensPercent": {
+          "$ref": "#/$defs/nullableNumber"
+        },
+        "totalTokensPercent": {
+          "$ref": "#/$defs/nullableNumber"
+        },
+        "modelCallsPercent": {
+          "$ref": "#/$defs/nullableNumber"
+        },
+        "toolCallsPercent": {
+          "$ref": "#/$defs/nullableNumber"
+        },
+        "durationMsPercent": {
+          "$ref": "#/$defs/nullableNumber"
+        }
+      }
+    },
+    "cases": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["caseId", "baseline", "workbench"],
+        "properties": {
+          "caseId": {
+            "$ref": "deliverable-coverage.schema.json#/$defs/id"
+          },
+          "baseline": {
+            "$ref": "#/$defs/caseMeasurement"
+          },
+          "workbench": {
+            "$ref": "#/$defs/caseMeasurement"
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "nullableNumber": {
+      "type": ["number", "null"]
+    },
+    "usage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "inputTokens",
+        "cachedInputTokens",
+        "outputTokens",
+        "reasoningTokens",
+        "totalTokens",
+        "modelCalls",
+        "toolCalls",
+        "durationMs"
+      ],
+      "properties": {
+        "inputTokens": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "cachedInputTokens": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "outputTokens": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "reasoningTokens": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "totalTokens": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "modelCalls": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "toolCalls": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "durationMs": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "defectCounts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["outcome", "fidelity"],
+      "properties": {
+        "outcome": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "fidelity": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "caseMeasurement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "behavioralPassed",
+        "assertionFailures",
+        "defects",
+        "usage",
+        "evidence"
+      ],
+      "properties": {
+        "behavioralPassed": {
+          "type": "boolean"
+        },
+        "assertionFailures": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "defects": {
+          "$ref": "#/$defs/defectCounts"
+        },
+        "usage": {
+          "$ref": "#/$defs/usage"
+        },
+        "evidence": {
+          "$ref": "eval-result.schema.json#/$defs/evidence"
+        }
+      }
+    },
+    "variantSummary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "behavioralPasses",
+        "behavioralPassRate",
+        "assertionFailures",
+        "defects",
+        "usage"
+      ],
+      "properties": {
+        "behavioralPasses": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "behavioralPassRate": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "assertionFailures": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "defects": {
+          "$ref": "#/$defs/defectCounts"
+        },
+        "usage": {
+          "$ref": "#/$defs/usage"
+        }
+      }
+    }
+  }
+}

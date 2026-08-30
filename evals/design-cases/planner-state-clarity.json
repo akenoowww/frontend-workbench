@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "id": "planner-state-clarity",
+  "targetSkill": "frontend-product-design",
+  "prompt": "Create a coherent fictional multi-domain field planner redesign that preserves every required operational domain and cross-domain goal, and makes the offline state unmistakably truthful. Render populated and offline states at both required viewports.",
+  "fixtureManifest": "evals/design-fixtures/planner-state-clarity.json",
+  "fixtureSha256": "e63f38044da17e1633b1e15253bf1316562f744612de3412620dcd98316b7cc9",
+  "rubric": "evals/rubrics/visual-quality-v1.json",
+  "rubricSha256": "d7ff8aced50616b2a8778d6311b598bc874bfa8b9639dbc2c97f79e8ccaa2aac",
+  "minimumTrials": 1,
+  "minimumJudgesPerTrial": 3,
+  "expectedCaptureIds": [
+    "planner-populated-mobile",
+    "planner-offline-mobile",
+    "planner-populated-desktop",
+    "planner-offline-desktop"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "design-optional-runtime-required",
+  "skill": "frontend-project-fit",
+  "prompt": "Implement the supplied, fully specified projects screen without introducing Product Design or ImageGen. The visible multi-route behavior still requires rendered browser verification: open /projects, select a project, verify the resulting route and responsive reflow, and check relevant console health. A typecheck or build alone is not completion.",
+  "contractFixture": "evals/fixtures/design-optional-runtime-contract.json",
+  "expected": {
+    "plannedOutputIds": ["O01"],
+    "completedOutputIds": ["O01"],
+    "missingOutputIds": [],
+    "finalStatus": "complete",
+    "requiredSkills": ["frontend-project-fit", "frontend-runtime-qa"],
+    "forbiddenSkills": ["frontend-product-design", "art-direct-imagegen"],
+    "requiredTransformations": ["preserve-no-imagegen-policy", "rendered-runtime-qa"],
+    "forbiddenTransformations": ["force-design-stage", "force-imagegen-stage", "source-only-completion"]
+  }
+}

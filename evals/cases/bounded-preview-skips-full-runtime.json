@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "id": "bounded-preview-skips-full-runtime",
+  "skill": "art-direct-imagegen",
+  "prompt": "Create two named Sample Operations redesign preview PNGs for one scrolling dashboard. The target, preserve-only sidebar boundary, scoped reference roles, content bands, and total render budget of two calls are supplied. This is an isolated evaluation: no implementation, promotion, durable acceptance, or downstream handoff is authorized. Select the proportional preview workflow, keep the artifacts non-promotable, and do not initialize the FULL runtime merely because the redesign is material or the outputs are visually connected.",
+  "contractFixture": "evals/fixtures/empty-operational-policy-contract.json",
+  "expected": {
+    "plannedOutputIds": ["O01"],
+    "completedOutputIds": [],
+    "missingOutputIds": ["O01"],
+    "finalStatus": "incomplete",
+    "requiredSkills": ["art-direct-imagegen", "frontend-product-design"],
+    "forbiddenSkills": ["frontend-project-fit", "frontend-runtime-qa"],
+    "requiredTransformations": [
+      "select-standard-bounded-preview",
+      "preserve-redesign-boundary",
+      "enforce-content-band-whitelists",
+      "mark-preview-non-promotable"
+    ],
+    "forbiddenTransformations": [
+      "initialize-full-runtime",
+      "implementation-handoff",
+      "implicit-artifact-acceptance",
+      "promote-preview"
+    ]
+  }
+}

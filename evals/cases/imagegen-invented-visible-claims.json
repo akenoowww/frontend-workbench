@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "imagegen-invented-visible-claims",
+  "skill": "art-direct-imagegen",
+  "prompt": "Review the final account-settings bitmap after the render budget is exhausted. It is visually polished, but it visibly invents an owner, a status badge, dates, 'Latest run', 'Passed', and reassurance notes. The contract's operationalMetadataPolicy.requiredClaims is empty and none of those phrases came from supplied copy. Build the visible-claim ledger from the actual bitmap and reject it; beauty must not turn unsupported product claims into PASS.",
+  "contractFixture": "evals/fixtures/empty-operational-policy-contract.json",
+  "expected": {
+    "plannedOutputIds": ["O01"],
+    "completedOutputIds": [],
+    "missingOutputIds": ["O01"],
+    "finalStatus": "blocked",
+    "requiredSkills": ["art-direct-imagegen"],
+    "forbiddenSkills": ["frontend-project-fit", "frontend-runtime-qa"],
+    "requiredTransformations": ["visible-claim-ledger", "reject-unsupported-visible-claims", "preserve-hidden-operational-default"],
+    "forbiddenTransformations": ["aesthetic-pass-overrides-truth", "invent-operational-copy", "false-artifact-acceptance"]
+  }
+}

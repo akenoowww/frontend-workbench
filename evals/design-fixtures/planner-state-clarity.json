@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "fixtureId": "planner-state-clarity",
+  "provenance": {
+    "sourceKind": "synthetic-fictional-eval-spec",
+    "sourceId": "fixture:planner-state-clarity:v1",
+    "sourceVersion": "1",
+    "evidenceBasis": [
+      "declared-product-intent",
+      "declared-project-dna",
+      "declared-interaction-contract",
+      "declared-content-truth"
+    ],
+    "referenceScreenshotsAvailable": false,
+    "limitations": [
+      "Every domain, state, value, and scenario in this planner fixture is fictional and unrelated to any user project or account.",
+      "Connectivity behavior requires a separate runtime oracle beyond the visible offline state."
+    ]
+  },
+  "brief": {
+    "productIntent": "Help a fictional field coordinator review inspections, inventory, staffing, and logistics together while clearly distinguishing current data from unavailable offline data.",
+    "userJobs": [
+      "Review today's cross-domain plan",
+      "Open a domain-specific entry point",
+      "Understand what is unavailable while offline"
+    ],
+    "protectedCapabilities": [
+      "Inspections, inventory, staffing, and logistics remain reachable",
+      "Offline status does not masquerade as current data",
+      "A cross-domain restocking goal remains visible"
+    ],
+    "contentTruth": [
+      "Today's plan contains entries in all four domains",
+      "The cross-domain goal is restock emergency kits",
+      "Offline state cannot confirm the latest logistics entry"
+    ],
+    "projectDna": {
+      "typographyRoles": [
+        "Friendly humanist sans-serif for guidance",
+        "Compact numeric treatment for daily measures"
+      ],
+      "colorRoles": [
+        "Domain colors are muted and distinct",
+        "Deep neutral anchors overall hierarchy",
+        "Connectivity warnings use one restrained amber role"
+      ],
+      "spacingAndShape": [
+        "Soft twelve-pixel surfaces with disciplined internal spacing",
+        "Daily rhythm uses repeated alignment rather than identical cards"
+      ],
+      "componentPosture": [
+        "Recovery-first and supportive",
+        "Domain modules feel related but not interchangeable"
+      ],
+      "imageryRole": [
+        "Small symbolic illustrations may support empty guidance but never replace data"
+      ],
+      "motionTone": [
+        "Gentle state transitions with reduced-motion compatibility"
+      ]
+    },
+    "avoid": [
+      "Reducing the product to inspection scoring",
+      "Showing stale values as current offline data",
+      "Making every domain visually identical",
+      "Gamification that shames missed activity"
+    ]
+  },
+  "captureMatrix": [
+    {
+      "captureId": "planner-populated-mobile",
+      "outputId": "planner-populated",
+      "surfaceId": "today",
+      "route": "/today",
+      "state": "populated",
+      "viewport": {"name": "mobile-390x844", "width": 390, "height": 844},
+      "scrollPosition": "top"
+    },
+    {
+      "captureId": "planner-offline-mobile",
+      "outputId": "planner-offline",
+      "surfaceId": "today",
+      "route": "/today",
+      "state": "offline",
+      "viewport": {"name": "mobile-390x844", "width": 390, "height": 844},
+      "scrollPosition": "top"
+    },
+    {
+      "captureId": "planner-populated-desktop",
+      "outputId": "planner-populated",
+      "surfaceId": "today",
+      "route": "/today",
+      "state": "populated",
+      "viewport": {"name": "desktop-1280x800", "width": 1280, "height": 800},
+      "scrollPosition": "top"
+    },
+    {
+      "captureId": "planner-offline-desktop",
+      "outputId": "planner-offline",
+      "surfaceId": "today",
+      "route": "/today",
+      "state": "offline",
+      "viewport": {"name": "desktop-1280x800", "width": 1280, "height": 800},
+      "scrollPosition": "top"
+    }
+  ]
+}

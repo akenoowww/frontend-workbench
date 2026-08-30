@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "runtime-qa-read-only",
+  "skill": "frontend-runtime-qa",
+  "prompt": "QA the existing account page in the browser at desktop and mobile, exercise the save interaction, and report evidence. Do not edit source or create reports and screenshots outside the ignored runtime workspace.",
+  "contractFixture": "evals/fixtures/promotable-contract.json",
+  "expected": {
+    "plannedOutputIds": ["O01"],
+    "completedOutputIds": ["O01"],
+    "missingOutputIds": [],
+    "finalStatus": "complete",
+    "requiredSkills": ["frontend-runtime-qa"],
+    "forbiddenSkills": ["frontend-information-architecture", "frontend-product-design", "frontend-project-fit", "art-direct-imagegen"],
+    "requiredTransformations": [],
+    "forbiddenTransformations": ["source-edit", "stray-artifact"]
+  }
+}

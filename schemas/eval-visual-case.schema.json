@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/akenoowww/frontend-workbench/schemas/eval-visual-case.schema.json",
+  "title": "Frontend Workbench visual quality eval case",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "id",
+    "targetSkill",
+    "prompt",
+    "fixtureManifest",
+    "fixtureSha256",
+    "rubric",
+    "rubricSha256",
+    "minimumTrials",
+    "minimumJudgesPerTrial",
+    "expectedCaptureIds"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "id": {
+      "$ref": "deliverable-coverage.schema.json#/$defs/id"
+    },
+    "targetSkill": {
+      "type": "string",
+      "minLength": 1
+    },
+    "prompt": {
+      "type": "string",
+      "minLength": 40
+    },
+    "fixtureManifest": {
+      "type": "string",
+      "pattern": "^evals/design-fixtures/[A-Za-z0-9._/-]+\\.json$"
+    },
+    "fixtureSha256": {
+      "$ref": "#/$defs/sha256"
+    },
+    "rubric": {
+      "type": "string",
+      "pattern": "^evals/rubrics/[A-Za-z0-9._/-]+\\.json$"
+    },
+    "rubricSha256": {
+      "$ref": "#/$defs/sha256"
+    },
+    "minimumTrials": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "minimumJudgesPerTrial": {
+      "type": "integer",
+      "minimum": 3
+    },
+    "expectedCaptureIds": {
+      "type": "array",
+      "minItems": 2,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "deliverable-coverage.schema.json#/$defs/id"
+      }
+    }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  }
+}

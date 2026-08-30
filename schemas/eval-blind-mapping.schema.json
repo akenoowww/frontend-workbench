@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/akenoowww/frontend-workbench/schemas/eval-blind-mapping.schema.json",
+  "title": "Frontend Workbench private blind packet mapping",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "packetId",
+    "caseId",
+    "trialId",
+    "judgeSlot",
+    "packetSha256",
+    "assignmentNonceSha256",
+    "assignment"
+  ],
+  "properties": {
+    "schemaVersion": {"const": 1},
+    "packetId": {"$ref": "deliverable-coverage.schema.json#/$defs/id"},
+    "caseId": {"$ref": "deliverable-coverage.schema.json#/$defs/id"},
+    "trialId": {"$ref": "deliverable-coverage.schema.json#/$defs/id"},
+    "judgeSlot": {"type": "integer", "minimum": 1},
+    "packetSha256": {"$ref": "#/$defs/sha256"},
+    "assignmentNonceSha256": {"$ref": "#/$defs/sha256"},
+    "assignment": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["A", "B"],
+          "properties": {"A": {"const": "baseline"}, "B": {"const": "workbench"}}
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["A", "B"],
+          "properties": {"A": {"const": "workbench"}, "B": {"const": "baseline"}}
+        }
+      ]
+    }
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 3,
+  "contractId": "empty-operational-policy",
+  "workflowProfile": "full",
+  "implementationTargets": [],
+  "structure": {"id": "empty-policy-structure", "path": "structure.json", "sha256": "8888888888888888888888888888888888888888888888888888888888888888"},
+  "productModel": {
+    "rootObjectId": "account-product",
+    "objects": [
+      {"id": "account-product", "role": "root", "parentId": null, "evidenceForObjectIds": []},
+      {"id": "account-preferences", "role": "primary", "parentId": "account-product", "evidenceForObjectIds": []},
+      {"id": "backend-operational-data", "role": "implementation-detail", "parentId": "account-preferences", "evidenceForObjectIds": []}
+    ],
+    "relations": [
+      {"id": "account-contains-preferences", "fromObjectId": "account-product", "toObjectId": "account-preferences", "kind": "contains"},
+      {"id": "backend-implements-account", "fromObjectId": "backend-operational-data", "toObjectId": "account-preferences", "kind": "implements"}
+    ]
+  },
+  "capabilityRequirements": [
+    {"id": "account-preferences", "capability": "Account preference review and save", "complexity": "bounded", "constraints": ["Operational metadata remains hidden without an authorized claim"], "ownerObjectId": "account-preferences", "surfaceIds": ["P01"], "required": true}
+  ],
+  "renderBudget": {"maxCallsTotal": 2, "maxAttemptsPerOutput": 2, "maxConceptResets": 0},
+  "productIntent": {
+    "problem": "Design an account screen without exposing backend operational facts that lack surface-specific authority.",
+    "representativeScenarios": [
+      "Review account identity and preferences",
+      "Save an account preference without unrelated reassurance copy"
+    ],
+    "requiredDomains": ["account"],
+    "protectedCapabilities": ["account review", "preference save"],
+    "antiGoals": ["Expose verification or freshness metadata without authority", "Treat backend fields as visible copy requirements"],
+    "successSignals": ["No operational claim appears when requiredClaims is empty"]
+  },
+  "operationalMetadataPolicy": {
+    "defaultVisibility": "hidden-unless-required",
+    "requiredClaims": []
+  },
+  "visualDirectionPolicy": "required",
+  "visualArtifactPolicy": "imagegen-required",
+  "checkpointMode": "review-before-implementation",
+  "authority": {
+    "pageStructure": "locked",
+    "interactionModel": "locked",
+    "contentRepartition": "within-surface-only"
+  },
+  "surfaces": [
+    {"id": "P01", "kind": "page", "route": "/account", "userJob": "Review and edit account preferences", "primaryObjectId": "account-preferences", "shellIds": ["account-shell"], "referenceBindingIds": []}
+  ],
+  "edges": [],
+  "outputs": [
+    {"id": "O01", "surfaceId": "P01", "state": "default", "viewport": "desktop-1440x900", "scrollPosition": "top", "approvalRequired": true, "dependsOn": [], "promotionRequired": false, "designEvidenceRequired": true, "runtimeEvidenceRequired": false, "artifactKind": "imagegen", "anchorOutputId": null}
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "product-hierarchy-fidelity",
+  "targetSkill": "frontend-product-design",
+  "prompt": "Design the project workflow-model overview, the workflow model, and the downstream Automated check detail as one coherent business-first product. Preserve the declared hierarchy: workflow is the primary working object; Automated check supports process coverage; Runner source and run evidence remain execution details. Produce every required capture without promoting test execution into the global shell or primary navigation.",
+  "fixtureManifest": "evals/design-fixtures/product-hierarchy-fidelity.json",
+  "fixtureSha256": "5d2b61058ddd37326447699a6cf79d3fbbc68034bc351450aa4f72a41cca43c9",
+  "rubric": "evals/rubrics/visual-quality-v1.json",
+  "rubricSha256": "d7ff8aced50616b2a8778d6311b598bc874bfa8b9639dbc2c97f79e8ccaa2aac",
+  "minimumTrials": 1,
+  "minimumJudgesPerTrial": 3,
+  "expectedCaptureIds": [
+    "workflow-model-desktop",
+    "workflow-desktop",
+    "automated-check-detail-desktop"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "frontend-copy-declared-operational-boundary",
+  "skill": "frontend-copy-guard",
+  "prompt": "Review copy for the approved populated and offline planner states. The confirmed FULL contract authorizes exactly one operational claim: the offline freshness boundary on P01/offline. Preserve its user-facing limitation and recovery meaning only in that state. Do not add positive verification, update-time, source, synchronization, confidence, or service-health copy to either state.",
+  "contractFixture": "evals/fixtures/planner-fidelity-contract.json",
+  "expected": {
+    "plannedOutputIds": ["O01", "O02"],
+    "completedOutputIds": ["O01", "O02"],
+    "missingOutputIds": [],
+    "finalStatus": "complete",
+    "requiredSkills": ["frontend-copy-guard"],
+    "forbiddenSkills": ["frontend-information-architecture", "frontend-product-design", "frontend-runtime-qa", "art-direct-imagegen"],
+    "requiredTransformations": ["honor-declared-operational-claim", "omit-undeclared-operational-metadata"],
+    "forbiddenTransformations": ["hide-declared-operational-claim", "self-authorized-trust-copy", "unrequested-redesign"]
+  }
+}

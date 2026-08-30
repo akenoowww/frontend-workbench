@@ -1,0 +1,32 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "frontend-workbench",
+  "version": "0.9.0",
+  "description": "Task-specific frontend workflows with typed product structure, capability-first implementation plans, and SHA-bound design/runtime evidence.",
+  "author": {
+    "name": "akenoowww",
+    "url": "https://github.com/akenoowww"
+  },
+  "homepage": "https://github.com/akenoowww/frontend-workbench#readme",
+  "repository": "https://github.com/akenoowww/frontend-workbench",
+  "license": "MIT",
+  "keywords": [
+    "agent-skill",
+    "frontend",
+    "component-reuse",
+    "dependency-selection",
+    "multi-page-design",
+    "information-architecture",
+    "sitemap",
+    "workflow-state",
+    "frontend-qa",
+    "browser-testing",
+    "ux-writing",
+    "product-design",
+    "ux-research",
+    "ui-design",
+    "visual-direction",
+    "design-evaluation",
+    "image-generation"
+  ]
+}

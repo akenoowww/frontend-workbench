@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "operations-preserve-sidebar-redesign",
+  "targetSkill": "frontend-product-design",
+  "prompt": "Completely redesign the Sample Operations dashboard main page while preserving only the primary sidebar. Keep all real product data and behavior truthful, but materially replace the main-content macro-layout, information hierarchy, module topology, typography scale, surface language, and data-visualization form. Reject a polished restyle that still reads as the same dashboard.",
+  "fixtureManifest": "evals/design-fixtures/operations-preserve-sidebar-redesign.json",
+  "fixtureSha256": "016a6e685b38c9a604b928352bce673c6f4a59834a20c2cf6485f31d157c44a1",
+  "rubric": "evals/rubrics/visual-quality-v1.json",
+  "rubricSha256": "d7ff8aced50616b2a8778d6311b598bc874bfa8b9639dbc2c97f79e8ccaa2aac",
+  "minimumTrials": 1,
+  "minimumJudgesPerTrial": 3,
+  "expectedCaptureIds": [
+    "operations-redesign-desktop",
+    "operations-redesign-continuation",
+    "operations-redesign-mobile"
+  ]
+}

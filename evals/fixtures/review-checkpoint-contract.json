@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 2,
+  "contractId": "review-checkpoint-project",
+  "authority": {
+    "pageStructure": "locked",
+    "interactionModel": "locked",
+    "contentRepartition": "within-surface-only"
+  },
+  "surfaces": [
+    {"id": "P01", "kind": "page", "route": "/", "userJob": "Understand the product"},
+    {"id": "P02", "kind": "page", "route": "/product", "userJob": "Evaluate the product"},
+    {"id": "P03", "kind": "page", "route": "/pricing", "userJob": "Compare plans"}
+  ],
+  "edges": [
+    {"from": "P01", "to": "P02", "trigger": "Open product"},
+    {"from": "P02", "to": "P03", "trigger": "Compare pricing"}
+  ],
+  "outputs": [
+    {
+      "id": "O01",
+      "surfaceId": "P01",
+      "state": "default",
+      "viewport": "desktop",
+      "scrollPosition": "full-page",
+      "required": true,
+      "approvalRequired": true,
+      "dependsOn": [],
+      "promotionRequired": false
+    },
+    {
+      "id": "O02",
+      "surfaceId": "P02",
+      "state": "default",
+      "viewport": "desktop",
+      "scrollPosition": "full-page",
+      "required": true,
+      "approvalRequired": true,
+      "dependsOn": ["O01"],
+      "promotionRequired": false
+    },
+    {
+      "id": "O03",
+      "surfaceId": "P03",
+      "state": "default",
+      "viewport": "desktop",
+      "scrollPosition": "full-page",
+      "required": true,
+      "approvalRequired": true,
+      "dependsOn": ["O02"],
+      "promotionRequired": false
+    }
+  ]
+}

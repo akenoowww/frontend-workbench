@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "fixtureId": "project-shell-reference-scope",
+  "provenance": {
+    "sourceKind": "synthetic-fictional-eval-spec",
+    "sourceId": "fixture:project-shell-reference:v1",
+    "sourceVersion": "1",
+    "evidenceBasis": [
+      "declared-product-intent",
+      "declared-project-dna",
+      "declared-interaction-contract",
+      "declared-content-truth"
+    ],
+    "referenceScreenshotsAvailable": true,
+    "limitations": [
+      "The functional graph reference is a fictional scope declaration and does not redistribute external pixels.",
+      "Captures can demonstrate shell and visual scope fidelity but not graph simulation performance."
+    ]
+  },
+  "brief": {
+    "productIntent": "Let a QA engineer move from the project process catalog into a complete process module without leaving the recognizable product shell.",
+    "userJobs": [
+      "Choose a process inside the current project",
+      "Understand the process overview and its project context",
+      "Explore typed relationships inside the process model"
+    ],
+    "protectedCapabilities": [
+      "Global Workspaces and Automated checks navigation remains persistent",
+      "Project navigation and breadcrumb remain visible inside the process module",
+      "Graph clustering and focus controls remain available only in the model canvas"
+    ],
+    "contentTruth": [
+      "Example Workspace is the current project",
+      "Sample approval flow is the current process",
+      "The process model contains typed relationships among steps, roles, rules, and entities"
+    ],
+    "projectDna": {
+      "typographyRoles": [
+        "Condensed grotesk for the persistent shell",
+        "Neutral sans-serif for process descriptions and inspectors"
+      ],
+      "colorRoles": [
+        "Deep ink global rail",
+        "Warm mineral working surface",
+        "Cobalt selected context and teal relationship accents"
+      ],
+      "spacingAndShape": [
+        "Narrow persistent rail with a measured content grid",
+        "Compact square controls and low-radius workbench surfaces"
+      ],
+      "componentPosture": [
+        "One continuous installed product shell",
+        "Nested process navigation supplements rather than replaces project navigation"
+      ],
+      "imageryRole": [
+        "No decorative photography; the graph is functional content"
+      ],
+      "motionTone": [
+        "Context-preserving route transitions and restrained graph focus motion"
+      ]
+    },
+    "evaluationContext": {
+      "shellContinuity": {
+        "acceptedAnchorId": "project-shell-anchor-v1",
+        "invariants": [
+          "Global Workspaces and Automated checks rail remains unchanged",
+          "Example Workspace project context and breadcrumb remain visible",
+          "Typography, mineral surfaces, and navigation geometry remain continuous"
+        ]
+      },
+      "references": [
+        {
+          "id": "force-graph-functional-ref",
+          "role": "FUNCTIONAL_REFERENCE",
+          "scope": "Relationship graph canvas behavior only",
+          "allowedInfluence": ["Community clustering", "Typed edges", "Focus neighborhood", "Graph filters"],
+          "forbiddenInfluence": ["Global shell", "Brand palette", "Typography", "Navigation", "Product copy"]
+        },
+        {
+          "id": "project-shell-anchor-v1",
+          "role": "VISUAL_ANCHOR",
+          "scope": "Global and project shell continuity across all captures",
+          "allowedInfluence": ["Shell geometry", "Navigation", "Typography roles", "Surface and color roles"],
+          "forbiddenInfluence": ["Process-specific content hierarchy", "Graph topology"]
+        }
+      ]
+    },
+    "avoid": [
+      "A second branded Workflows website",
+      "Copying the functional reference's dark graph brand into the shell",
+      "Replacing project navigation with process tabs",
+      "Applying graph styling to overview content"
+    ]
+  },
+  "captureMatrix": [
+    {
+      "captureId": "process-catalog-shell-desktop",
+      "outputId": "process-catalog",
+      "surfaceId": "process-catalog",
+      "route": "/projects/demo/processes",
+      "state": "populated",
+      "viewport": {"name": "desktop-1440x900", "width": 1440, "height": 900},
+      "scrollPosition": "top"
+    },
+    {
+      "captureId": "process-overview-shell-desktop",
+      "outputId": "process-overview",
+      "surfaceId": "process-overview",
+      "route": "/projects/demo/processes/approval",
+      "state": "overview",
+      "viewport": {"name": "desktop-1440x900", "width": 1440, "height": 900},
+      "scrollPosition": "top"
+    },
+    {
+      "captureId": "process-graph-shell-desktop",
+      "outputId": "process-graph",
+      "surfaceId": "process-graph",
+      "route": "/projects/demo/processes/approval/model",
+      "state": "focused-neighborhood",
+      "viewport": {"name": "desktop-1440x900", "width": 1440, "height": 900},
+      "scrollPosition": "top"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "graph-known-fit-dependency-unavailable",
+  "skill": "frontend-project-fit",
+  "prompt": "Build the requested interactive relationship graph in an isolated empty project. Current primary evidence shows that React Flow fits node selection, zoom, pan, keyboard access, and the accessible fallback, so treat the mature library choice as success rather than drawing a custom SVG. The package is not installed, registry access is unavailable, and the user did not authorize dependency installation. Preserve the selected library decision and stop truthfully instead of substituting hand-written graph code.",
+  "contractFixture": "evals/fixtures/graph-capability-contract.json",
+  "expected": {
+    "plannedOutputIds": ["O01"],
+    "completedOutputIds": [],
+    "missingOutputIds": ["O01"],
+    "finalStatus": "blocked",
+    "requiredSkills": ["frontend-project-fit"],
+    "forbiddenSkills": ["art-direct-imagegen"],
+    "requiredTransformations": ["select-known-fit-library", "dependency-unavailable-blocked", "preserve-library-decision"],
+    "forbiddenTransformations": ["custom-svg-fallback", "custom-canvas-fallback", "implicit-npm-install", "fake-candidate-comparison"]
+  }
+}

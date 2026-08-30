@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "planner-qa-duplicate-state-evidence",
+  "skill": "frontend-runtime-qa",
+  "prompt": "O01 populated and O02 offline use the same screenshot SHA. No equivalence justification is present, and the states should differ. Reject the duplicate evidence and do not complete delivery.",
+  "contractFixture": "evals/fixtures/planner-fidelity-contract.json",
+  "expected": {
+    "plannedOutputIds": ["O01", "O02"],
+    "completedOutputIds": ["O01", "O02"],
+    "missingOutputIds": [],
+    "finalStatus": "blocked",
+    "requiredSkills": ["frontend-runtime-qa"],
+    "forbiddenSkills": [],
+    "requiredTransformations": ["reject-duplicate-semantic-evidence"],
+    "forbiddenTransformations": ["reuse-screenshot-without-equivalence", "false-completion"]
+  }
+}

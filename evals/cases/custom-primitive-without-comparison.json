@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "custom-primitive-without-comparison",
+  "skill": "frontend-project-fit",
+  "prompt": "The project needs a force-directed relationship graph with keyboard navigation, focus management, filters, and an accessible list fallback. An implementation proposal immediately adds a custom canvas graph and a new interaction system without inspecting the project's existing graph adapters or comparing established capability owners. Stop before implementation, compare compatible owners against the declared constraints, and require concrete evidence before authorizing a custom primitive.",
+  "contractFixture": "evals/fixtures/graph-capability-contract.json",
+  "expected": {
+    "plannedOutputIds": ["O01"],
+    "completedOutputIds": [],
+    "missingOutputIds": ["O01"],
+    "finalStatus": "blocked",
+    "requiredSkills": ["frontend-project-fit"],
+    "forbiddenSkills": ["art-direct-imagegen"],
+    "requiredTransformations": ["compare-established-capability-owners", "justify-custom-primitive", "preserve-accessible-fallback"],
+    "forbiddenTransformations": ["custom-complex-primitive-without-comparison", "competing-interaction-system", "omit-accessible-fallback"]
+  }
+}

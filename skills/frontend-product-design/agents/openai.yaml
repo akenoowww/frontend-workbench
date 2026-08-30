@@ -1,0 +1,4 @@
+interface:
+  display_name: "Frontend Product Design"
+  short_description: "UI/UX and renderer-neutral visual direction"
+  default_prompt: "Use $frontend-product-design in the lightest fitting profile to resolve UI/UX and own any required visual direction."

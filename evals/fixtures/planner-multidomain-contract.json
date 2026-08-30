@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 2,
+  "contractId": "planner-multidomain",
+  "workflowProfile": "full",
+  "implementationTargets": ["Sources/PlannerApp/PlannerApp.swift"],
+  "productIntent": {
+    "problem": "Help a fictional field coordinator act across several operational domains without reducing the product to inspection scoring.",
+    "representativeScenarios": [
+      "Log an inventory issue without starting an inspection workflow",
+      "Review staffing, logistics, and inventory trends together"
+    ],
+    "requiredDomains": ["inspections", "inventory", "staffing", "logistics"],
+    "protectedCapabilities": ["domain-specific logging", "cross-domain trends", "cross-domain goals"],
+    "antiGoals": ["Reduce the product to inspection scoring", "Remove records unrelated to inspections"],
+    "successSignals": ["Every required domain remains reachable", "A cross-domain goal can be completed end to end"]
+  },
+  "operationalMetadataPolicy": {
+    "defaultVisibility": "hidden-unless-required",
+    "requiredClaims": []
+  },
+  "visualDirectionPolicy": "required",
+  "visualArtifactPolicy": "imagegen-required",
+  "checkpointMode": "review-before-implementation",
+  "authority": {
+    "pageStructure": "locked",
+    "interactionModel": "locked",
+    "contentRepartition": "within-surface-only"
+  },
+  "surfaces": [
+    {"id": "P01", "kind": "screen", "route": "/today", "userJob": "Review a multi-domain daily plan"},
+    {"id": "P02", "kind": "screen", "route": "/inspections", "userJob": "Log and review inspections"},
+    {"id": "P03", "kind": "screen", "route": "/inventory", "userJob": "Plan and review inventory"},
+    {"id": "P04", "kind": "screen", "route": "/staffing", "userJob": "Review staffing and coverage"}
+  ],
+  "edges": [
+    {"from": "P01", "to": "P02", "trigger": "Open inspections"},
+    {"from": "P01", "to": "P03", "trigger": "Open inventory"},
+    {"from": "P01", "to": "P04", "trigger": "Open staffing"}
+  ],
+  "outputs": [
+    {
+      "id": "O01",
+      "surfaceId": "P01",
+      "state": "populated",
+      "viewport": "mobile-390x844",
+      "scrollPosition": "top",
+      "required": true,
+      "approvalRequired": true,
+      "dependsOn": [],
+      "promotionRequired": false
+    },
+    {
+      "id": "O02",
+      "surfaceId": "P02",
+      "state": "populated",
+      "viewport": "mobile-390x844",
+      "scrollPosition": "top",
+      "required": true,
+      "approvalRequired": true,
+      "dependsOn": ["O01"],
+      "promotionRequired": false
+    },
+    {
+      "id": "O03",
+      "surfaceId": "P03",
+      "state": "populated",
+      "viewport": "mobile-390x844",
+      "scrollPosition": "top",
+      "required": true,
+      "approvalRequired": true,
+      "dependsOn": ["O01"],
+      "promotionRequired": false
+    },
+    {
+      "id": "O04",
+      "surfaceId": "P04",
+      "state": "populated",
+      "viewport": "mobile-390x844",
+      "scrollPosition": "top",
+      "required": true,
+      "approvalRequired": true,
+      "dependsOn": ["O01"],
+      "promotionRequired": false
+    }
+  ]
+}

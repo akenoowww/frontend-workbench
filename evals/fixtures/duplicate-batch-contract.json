@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 3,
+  "contractId": "duplicate-batch-transition",
+  "workflowProfile": "full",
+  "implementationTargets": [],
+  "structure": {"id": "duplicate-batch-structure", "path": "structure.json", "sha256": "7777777777777777777777777777777777777777777777777777777777777777"},
+  "productModel": {
+    "rootObjectId": "visual-set",
+    "objects": [
+      {"id": "visual-set", "role": "root", "parentId": null, "evidenceForObjectIds": []},
+      {"id": "master-surface", "role": "primary", "parentId": "visual-set", "evidenceForObjectIds": []},
+      {"id": "dependent-surface", "role": "supporting", "parentId": "master-surface", "evidenceForObjectIds": ["master-surface"]}
+    ],
+    "relations": [
+      {"id": "master-contains-dependent", "fromObjectId": "master-surface", "toObjectId": "dependent-surface", "kind": "contains"}
+    ]
+  },
+  "capabilityRequirements": [
+    {"id": "atomic-batch", "capability": "Atomic lifecycle transition batch", "complexity": "bounded", "constraints": ["One transition per output ID", "Invalid batch applies no changes"], "ownerObjectId": "visual-set", "surfaceIds": ["P01", "P02"], "required": true}
+  ],
+  "renderBudget": {"maxCallsTotal": 2, "maxAttemptsPerOutput": 1, "maxConceptResets": 0},
+  "productIntent": {
+    "problem": "Advance a two-output visual set through one atomic batch transition without applying duplicate or conflicting operations.",
+    "representativeScenarios": [
+      "Review the accepted master output",
+      "Advance the dependent output only after a valid atomic transition set"
+    ],
+    "requiredDomains": ["visual-output-lifecycle"],
+    "protectedCapabilities": ["atomic batch transition", "one transition per output"],
+    "antiGoals": ["Use last-write-wins for duplicate output IDs", "Apply a partial invalid batch"],
+    "successSignals": ["An invalid duplicate batch leaves every output unchanged"]
+  },
+  "operationalMetadataPolicy": {
+    "defaultVisibility": "hidden-unless-required",
+    "requiredClaims": []
+  },
+  "visualDirectionPolicy": "required",
+  "visualArtifactPolicy": "imagegen-required",
+  "checkpointMode": "review-each-stage",
+  "authority": {
+    "pageStructure": "locked",
+    "interactionModel": "locked",
+    "contentRepartition": "within-surface-only"
+  },
+  "surfaces": [
+    {"id": "P01", "kind": "page", "route": "/one", "userJob": "Review the master surface", "primaryObjectId": "master-surface", "shellIds": ["visual-set-shell"], "referenceBindingIds": []},
+    {"id": "P02", "kind": "page", "route": "/two", "userJob": "Review the dependent surface", "primaryObjectId": "dependent-surface", "shellIds": ["visual-set-shell"], "referenceBindingIds": []}
+  ],
+  "edges": [
+    {"from": "P01", "to": "P02", "trigger": "Continue after approval"}
+  ],
+  "outputs": [
+    {"id": "O01", "surfaceId": "P01", "state": "default", "viewport": "desktop", "scrollPosition": "top", "approvalRequired": true, "dependsOn": [], "promotionRequired": false, "designEvidenceRequired": true, "runtimeEvidenceRequired": false, "artifactKind": "imagegen", "anchorOutputId": null},
+    {"id": "O02", "surfaceId": "P02", "state": "default", "viewport": "desktop", "scrollPosition": "top", "approvalRequired": true, "dependsOn": ["O01"], "promotionRequired": false, "designEvidenceRequired": true, "runtimeEvidenceRequired": false, "artifactKind": "imagegen", "anchorOutputId": "O01"}
+  ]
+}

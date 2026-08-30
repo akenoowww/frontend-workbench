@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "fixtureId": "brownfield-settings-dna",
+  "provenance": {
+    "sourceKind": "synthetic-fictional-eval-spec",
+    "sourceId": "fixture:settings-dna:v1",
+    "sourceVersion": "1",
+    "evidenceBasis": [
+      "declared-product-intent",
+      "declared-project-dna",
+      "declared-interaction-contract",
+      "declared-content-truth"
+    ],
+    "referenceScreenshotsAvailable": false,
+    "limitations": [
+      "This fictional manifest defines evaluation facts and is not evidence of a live product or a rendered screenshot.",
+      "Interaction execution must be evaluated separately from visible state correctness."
+    ]
+  },
+  "brief": {
+    "productIntent": "Help an account owner review identity, security, and notification settings without losing confidence about what will be saved.",
+    "userJobs": [
+      "Review the current account identity",
+      "Change one setting and understand whether it saved",
+      "Correct a validation error without losing entered values"
+    ],
+    "protectedCapabilities": [
+      "Save action remains reachable",
+      "Validation errors remain field-specific",
+      "Security settings remain visually distinct from notification preferences"
+    ],
+    "contentTruth": [
+      "The account email is verified",
+      "Two-factor authentication is enabled",
+      "A mobile validation error belongs only to the phone field"
+    ],
+    "projectDna": {
+      "typographyRoles": [
+        "Compact sans-serif labels with restrained weight",
+        "A calm medium-weight page title rather than an oversized marketing headline"
+      ],
+      "colorRoles": [
+        "Ink blue for primary text and actions",
+        "Warm neutral surfaces",
+        "Brick red only for errors and destructive consequences"
+      ],
+      "spacingAndShape": [
+        "Eight-point spacing rhythm",
+        "Moderate six-to-ten-pixel radii",
+        "Borders carry structure more often than shadows"
+      ],
+      "componentPosture": [
+        "Forms are direct and utility-led",
+        "Sections use headings and dividers instead of a card for every field"
+      ],
+      "imageryRole": [
+        "No decorative hero imagery on settings surfaces"
+      ],
+      "motionTone": [
+        "Brief functional feedback with no theatrical transition"
+      ]
+    },
+    "evaluationContext": {
+      "operationalMetadataPolicy": {
+        "defaultVisibility": "hidden-unless-required",
+        "requiredClaims": []
+      }
+    },
+    "avoid": [
+      "A generic SaaS card mosaic",
+      "Decorative gradients",
+      "Hiding the save action on mobile",
+      "Turning verified status into unsupported marketing copy"
+    ]
+  },
+  "captureMatrix": [
+    {
+      "captureId": "settings-default-desktop",
+      "outputId": "settings-default",
+      "surfaceId": "settings",
+      "route": "/account/settings",
+      "state": "default",
+      "viewport": {"name": "desktop-1440x900", "width": 1440, "height": 900},
+      "scrollPosition": "top"
+    },
+    {
+      "captureId": "settings-default-mobile",
+      "outputId": "settings-default",
+      "surfaceId": "settings",
+      "route": "/account/settings",
+      "state": "default",
+      "viewport": {"name": "mobile-390x844", "width": 390, "height": 844},
+      "scrollPosition": "top"
+    },
+    {
+      "captureId": "settings-error-mobile",
+      "outputId": "settings-error",
+      "surfaceId": "settings",
+      "route": "/account/settings",
+      "state": "phone-validation-error",
+      "viewport": {"name": "mobile-390x844", "width": 390, "height": 844},
+      "scrollPosition": "top"
+    }
+  ]
+}

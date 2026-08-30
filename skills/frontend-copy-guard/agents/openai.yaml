@@ -1,0 +1,4 @@
+interface:
+  display_name: "Frontend Copy Guard"
+  short_description: "Keep affected interface copy product-safe"
+  default_prompt: "Use $frontend-copy-guard in the lightest fitting profile to review or fix the affected UI text."

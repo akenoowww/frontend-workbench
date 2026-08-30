@@ -1,0 +1,151 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/akenoowww/frontend-workbench/schemas/eval-visual-scorecard.schema.json",
+  "title": "Frontend Workbench blind pairwise visual scorecard",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "statement",
+    "visualQualityScored",
+    "causalUpliftClaimed",
+    "caseCount",
+    "trialCount",
+    "judgmentCount",
+    "dimensions",
+    "cases",
+    "provenance"
+  ],
+  "properties": {
+    "schemaVersion": {"const": 1},
+    "statement": {
+      "const": "Blind pairwise visual preferences were aggregated; this scorecard does not establish causal uplift."
+    },
+    "visualQualityScored": {"const": true},
+    "causalUpliftClaimed": {"const": false},
+    "caseCount": {"type": "integer", "minimum": 1},
+    "trialCount": {"type": "integer", "minimum": 1},
+    "judgmentCount": {"type": "integer", "minimum": 3},
+    "dimensions": {"$ref": "#/$defs/suiteDimensions"},
+    "cases": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["caseId", "trials"],
+        "properties": {
+          "caseId": {"$ref": "deliverable-coverage.schema.json#/$defs/id"},
+          "trials": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["trialId", "judgeCount", "dimensions"],
+              "properties": {
+                "trialId": {"$ref": "deliverable-coverage.schema.json#/$defs/id"},
+                "judgeCount": {"type": "integer", "minimum": 3},
+                "dimensions": {"$ref": "#/$defs/trialDimensions"}
+              }
+            }
+          }
+        }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "fixtureSha256s",
+        "rubricSha256s",
+        "packetSha256s",
+        "judgeSourceIds"
+      ],
+      "properties": {
+        "fixtureSha256s": {"$ref": "#/$defs/shaArray"},
+        "rubricSha256s": {"$ref": "#/$defs/shaArray"},
+        "packetSha256s": {"$ref": "#/$defs/shaArray"},
+        "judgeSourceIds": {
+          "type": "array",
+          "minItems": 3,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 8}
+        }
+      }
+    }
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "shaArray": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/sha256"}
+    },
+    "suiteCount": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "baselineWins",
+        "workbenchWins",
+        "ties",
+        "notJudgeable",
+        "disagreementTrials"
+      ],
+      "properties": {
+        "baselineWins": {"type": "integer", "minimum": 0},
+        "workbenchWins": {"type": "integer", "minimum": 0},
+        "ties": {"type": "integer", "minimum": 0},
+        "notJudgeable": {"type": "integer", "minimum": 0},
+        "disagreementTrials": {"type": "integer", "minimum": 0}
+      }
+    },
+    "trialCount": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["baselineWins", "workbenchWins", "ties", "notJudgeable", "disagreement"],
+      "properties": {
+        "baselineWins": {"type": "integer", "minimum": 0},
+        "workbenchWins": {"type": "integer", "minimum": 0},
+        "ties": {"type": "integer", "minimum": 0},
+        "notJudgeable": {"type": "integer", "minimum": 0},
+        "disagreement": {"type": "boolean"}
+      }
+    },
+    "suiteDimensions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["specificity", "hierarchy", "uxCorrectness", "uiDnaPreservation", "responsiveness", "genericness", "productHierarchyFidelity", "shellContinuity", "referenceScopeFidelity", "capabilityFit"],
+      "properties": {
+        "specificity": {"$ref": "#/$defs/suiteCount"},
+        "hierarchy": {"$ref": "#/$defs/suiteCount"},
+        "uxCorrectness": {"$ref": "#/$defs/suiteCount"},
+        "uiDnaPreservation": {"$ref": "#/$defs/suiteCount"},
+        "responsiveness": {"$ref": "#/$defs/suiteCount"},
+        "genericness": {"$ref": "#/$defs/suiteCount"},
+        "productHierarchyFidelity": {"$ref": "#/$defs/suiteCount"},
+        "shellContinuity": {"$ref": "#/$defs/suiteCount"},
+        "referenceScopeFidelity": {"$ref": "#/$defs/suiteCount"},
+        "capabilityFit": {"$ref": "#/$defs/suiteCount"}
+      }
+    },
+    "trialDimensions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["specificity", "hierarchy", "uxCorrectness", "uiDnaPreservation", "responsiveness", "genericness", "productHierarchyFidelity", "shellContinuity", "referenceScopeFidelity", "capabilityFit"],
+      "properties": {
+        "specificity": {"$ref": "#/$defs/trialCount"},
+        "hierarchy": {"$ref": "#/$defs/trialCount"},
+        "uxCorrectness": {"$ref": "#/$defs/trialCount"},
+        "uiDnaPreservation": {"$ref": "#/$defs/trialCount"},
+        "responsiveness": {"$ref": "#/$defs/trialCount"},
+        "genericness": {"$ref": "#/$defs/trialCount"},
+        "productHierarchyFidelity": {"$ref": "#/$defs/trialCount"},
+        "shellContinuity": {"$ref": "#/$defs/trialCount"},
+        "referenceScopeFidelity": {"$ref": "#/$defs/trialCount"},
+        "capabilityFit": {"$ref": "#/$defs/trialCount"}
+      }
+    }
+  }
+}

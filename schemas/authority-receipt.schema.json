@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/akenoowww/frontend-workbench/schemas/authority-receipt.schema.json",
+  "title": "Frontend Workbench user authority receipt",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "kind",
+    "sessionId",
+    "contractSha256",
+    "structureSha256",
+    "sourceRef",
+    "messageSha256",
+    "authorizedActions",
+    "statement"
+  ],
+  "properties": {
+    "schemaVersion": {"const": 1},
+    "kind": {"const": "user-message"},
+    "sessionId": {"$ref": "deliverable-coverage.schema.json#/$defs/id"},
+    "contractSha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "structureSha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "baseContractSha256": {
+      "type": ["string", "null"],
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "resultContractSha256": {
+      "type": ["string", "null"],
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "deltaSha256": {
+      "type": ["string", "null"],
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "sourceRef": {"type": "string", "minLength": 1},
+    "messageSha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "authorizedActions": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "enum": ["confirm-intent", "supersede-contract", "relax-contract", "reset-concept"]
+      }
+    },
+    "statement": {"type": "string", "minLength": 1}
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "authorizedActions": {
+            "contains": {"enum": ["supersede-contract", "relax-contract"]}
+          }
+        },
+        "required": ["authorizedActions"]
+      },
+      "then": {
+        "required": [
+          "baseContractSha256",
+          "resultContractSha256",
+          "deltaSha256"
+        ],
+        "properties": {
+          "baseContractSha256": {"type": "string"},
+          "resultContractSha256": {"type": "string"},
+          "deltaSha256": {"type": "string"}
+        }
+      }
+    }
+  ]
+}

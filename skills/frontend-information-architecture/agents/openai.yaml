@@ -1,0 +1,4 @@
+interface:
+  display_name: "Frontend Information Architecture"
+  short_description: "Structure pages, routes, flows, and navigation"
+  default_prompt: "Use $frontend-information-architecture in the lightest fitting profile to define the requested routes and coverage."

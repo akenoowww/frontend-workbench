@@ -1,0 +1,45 @@
+{
+  "name": "frontend-workbench",
+  "version": "0.9.0",
+  "description": "Task-specific frontend workflows with typed product structure, capability-first implementation plans, and SHA-bound design/runtime evidence.",
+  "author": {
+    "name": "akenoowww",
+    "url": "https://github.com/akenoowww"
+  },
+  "homepage": "https://github.com/akenoowww/frontend-workbench#readme",
+  "repository": "https://github.com/akenoowww/frontend-workbench",
+  "license": "MIT",
+  "keywords": [
+    "agent-skill",
+    "frontend",
+    "component-reuse",
+    "dependency-selection",
+    "multi-page-design",
+    "information-architecture",
+    "sitemap",
+    "workflow-state",
+    "frontend-qa",
+    "browser-testing",
+    "ux-writing",
+    "product-design",
+    "ux-research",
+    "ui-design",
+    "visual-direction",
+    "design-evaluation",
+    "image-generation"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Frontend Workbench",
+    "shortDescription": "Task-specific frontend lifecycle and QA",
+    "longDescription": "Model the task's product objects, scenarios, shells, references, and capability needs; choose proven project or library owners before custom code; then bind design anchors, implementation, runtime QA, and user acceptance to exact identities.",
+    "developerName": "akenoowww",
+    "category": "Productivity",
+    "capabilities": [],
+    "defaultPrompt": [
+      "Freeze task-specific objects, scenarios, shells, and runtime coverage.",
+      "Choose proven project or library capabilities before custom UI code.",
+      "Bind design anchors and runtime evidence separately through delivery."
+    ]
+  }
+}

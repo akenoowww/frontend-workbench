@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/akenoowww/frontend-workbench/schemas/eval-visual-rubric.schema.json",
+  "title": "Frontend Workbench pairwise visual quality rubric",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "rubricId",
+    "pairwiseOnly",
+    "numericScoresAllowed",
+    "allowedVerdicts",
+    "dimensions"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "rubricId": {
+      "$ref": "deliverable-coverage.schema.json#/$defs/id"
+    },
+    "pairwiseOnly": {
+      "const": true
+    },
+    "numericScoresAllowed": {
+      "const": false
+    },
+    "allowedVerdicts": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "prefixItems": [
+        {"const": "A"},
+        {"const": "B"},
+        {"const": "tie"},
+        {"const": "not-judgeable"}
+      ],
+      "items": false
+    },
+    "dimensions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "specificity",
+        "hierarchy",
+        "uxCorrectness",
+        "uiDnaPreservation",
+        "responsiveness",
+        "genericness",
+        "productHierarchyFidelity",
+        "shellContinuity",
+        "referenceScopeFidelity",
+        "capabilityFit"
+      ],
+      "properties": {
+        "specificity": {"$ref": "#/$defs/dimension"},
+        "hierarchy": {"$ref": "#/$defs/dimension"},
+        "uxCorrectness": {"$ref": "#/$defs/dimension"},
+        "uiDnaPreservation": {"$ref": "#/$defs/dimension"},
+        "responsiveness": {"$ref": "#/$defs/dimension"},
+        "genericness": {"$ref": "#/$defs/dimension"},
+        "productHierarchyFidelity": {"$ref": "#/$defs/dimension"},
+        "shellContinuity": {"$ref": "#/$defs/dimension"},
+        "referenceScopeFidelity": {"$ref": "#/$defs/dimension"},
+        "capabilityFit": {"$ref": "#/$defs/dimension"}
+      }
+    }
+  },
+  "$defs": {
+    "dimension": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "question",
+        "preferenceFor",
+        "tieWhen",
+        "notJudgeableWhen",
+        "evidenceRequirements"
+      ],
+      "properties": {
+        "question": {"type": "string", "minLength": 20},
+        "preferenceFor": {"type": "string", "minLength": 30},
+        "tieWhen": {"type": "string", "minLength": 20},
+        "notJudgeableWhen": {"type": "string", "minLength": 20},
+        "evidenceRequirements": {
+          "type": "array",
+          "minItems": 2,
+          "items": {"type": "string", "minLength": 10}
+        }
+      }
+    }
+  }
+}

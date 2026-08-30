@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "planner-imagegen-stage-required",
+  "skill": "art-direct-imagegen",
+  "prompt": "The FULL planner contract says imagegen-required and review-before-implementation. No ImageGen master exists yet, but implementation is about to start from an agent-authored wireframe. Enforce the visual stage and wait for its review.",
+  "contractFixture": "evals/fixtures/planner-multidomain-contract.json",
+  "expected": {
+    "plannedOutputIds": ["O01", "O02", "O03", "O04"],
+    "completedOutputIds": [],
+    "missingOutputIds": ["O01", "O02", "O03", "O04"],
+    "finalStatus": "incomplete",
+    "requiredSkills": ["frontend-product-design", "art-direct-imagegen"],
+    "forbiddenSkills": ["frontend-project-fit", "frontend-runtime-qa"],
+    "requiredTransformations": ["visual-direction-lock", "imagegen-stage-gate", "awaiting-visual-review"],
+    "forbiddenTransformations": ["wireframe-as-approved-master", "implementation-before-required-artifact"]
+  }
+}

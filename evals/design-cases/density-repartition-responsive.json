@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "id": "density-repartition-responsive",
+  "targetSkill": "frontend-product-design",
+  "prompt": "Redesign the dense record so the primary job is clear and supporting evidence remains discoverable in a context-preserving overlay. Preserve all declared content truth and actions, and render every base and overlay state at both required viewports.",
+  "fixtureManifest": "evals/design-fixtures/density-repartition-responsive.json",
+  "fixtureSha256": "dfdaec2133d3c042dd9e65b1b6fcc14ddfb075220b83d2f9a2a065b71b1797c5",
+  "rubric": "evals/rubrics/visual-quality-v1.json",
+  "rubricSha256": "d7ff8aced50616b2a8778d6311b598bc874bfa8b9639dbc2c97f79e8ccaa2aac",
+  "minimumTrials": 1,
+  "minimumJudgesPerTrial": 3,
+  "expectedCaptureIds": [
+    "record-base-desktop",
+    "record-overlay-desktop",
+    "record-base-mobile",
+    "record-overlay-mobile"
+  ]
+}

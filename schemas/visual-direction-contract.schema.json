@@ -1,0 +1,207 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/akenoowww/frontend-workbench/schemas/visual-direction-contract.schema.json",
+  "title": "Frontend Workbench visual direction contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "conceptThesis",
+    "brandPosture",
+    "visualTension",
+    "signatureMove",
+    "hierarchyPrinciples",
+    "densityRhythm",
+    "typographyRoles",
+    "colorRoles",
+    "surfaceLanguage",
+    "motionTone",
+    "imageryRole",
+    "preserveFromProjectDNA",
+    "intentionalDepartures",
+    "avoid",
+    "evidence"
+  ],
+  "properties": {
+    "schemaVersion": {"const": 1},
+    "conceptThesis": {"type": "string", "minLength": 1},
+    "brandPosture": {"type": "string", "minLength": 1},
+    "visualTension": {"type": "string", "minLength": 1},
+    "signatureMove": {"type": "string", "minLength": 1},
+    "hierarchyPrinciples": {"$ref": "#/$defs/nonEmptyUniqueStrings"},
+    "densityRhythm": {"type": "string", "minLength": 1},
+    "typographyRoles": {"$ref": "#/$defs/nonEmptyUniqueStrings"},
+    "colorRoles": {"$ref": "#/$defs/nonEmptyUniqueStrings"},
+    "surfaceLanguage": {"type": "string", "minLength": 1},
+    "motionTone": {"type": "string", "minLength": 1},
+    "imageryRole": {"type": "string", "minLength": 1},
+    "preserveFromProjectDNA": {"$ref": "#/$defs/uniqueStrings"},
+    "intentionalDepartures": {"$ref": "#/$defs/uniqueStrings"},
+    "redesignBoundary": {"$ref": "#/$defs/redesignBoundary"},
+    "contentDistribution": {"$ref": "#/$defs/contentDistribution"},
+    "avoid": {"$ref": "#/$defs/nonEmptyUniqueStrings"},
+    "evidence": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["sourceType", "sourceRef", "observation"],
+        "properties": {
+          "sourceType": {
+            "enum": [
+              "project-file",
+              "screenshot",
+              "brand-guide",
+              "website",
+              "user-input"
+            ]
+          },
+          "sourceRef": {"type": "string", "minLength": 1},
+          "observation": {"type": "string", "minLength": 1},
+          "sourceSha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "contentDistribution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "strategy",
+        "firstViewportRule",
+        "bands",
+        "sharedContentIds",
+        "mustRemainReachable"
+      ],
+      "properties": {
+        "strategy": {
+          "enum": ["single-viewport", "progressive-scroll", "multi-surface", "on-demand"]
+        },
+        "firstViewportRule": {"type": "string", "minLength": 1},
+        "bands": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["id", "placement", "responsibilities", "contentIds"],
+            "properties": {
+              "id": {"$ref": "deliverable-coverage.schema.json#/$defs/id"},
+              "placement": {
+                "enum": ["first-viewport", "continuation", "on-demand"]
+              },
+              "responsibilities": {"$ref": "#/$defs/nonEmptyUniqueStrings"},
+              "contentIds": {
+                "$ref": "deliverable-coverage.schema.json#/$defs/idArray"
+              }
+            }
+          }
+        },
+        "sharedContentIds": {
+          "$ref": "deliverable-coverage.schema.json#/$defs/idArrayAllowEmpty"
+        },
+        "mustRemainReachable": {"$ref": "#/$defs/nonEmptyUniqueStrings"}
+      }
+    },
+    "redesignBoundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode",
+        "preserveRegions",
+        "replaceRegions",
+        "forbiddenCarryover"
+      ],
+      "properties": {
+        "mode": {
+          "enum": ["preserve-only", "restyle-within-structure", "greenfield"]
+        },
+        "preserveRegions": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["regionId", "sourceRef", "invariants"],
+            "properties": {
+              "regionId": {"$ref": "deliverable-coverage.schema.json#/$defs/id"},
+              "sourceRef": {"type": "string", "minLength": 1},
+              "invariants": {"$ref": "#/$defs/nonEmptyUniqueStrings"}
+            }
+          }
+        },
+        "replaceRegions": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "regionId",
+              "sourceRef",
+              "mustChange",
+              "minimumChangedDimensions"
+            ],
+            "properties": {
+              "regionId": {"$ref": "deliverable-coverage.schema.json#/$defs/id"},
+              "sourceRef": {"type": "string", "minLength": 1},
+              "mustChange": {
+                "type": "array",
+                "minItems": 2,
+                "uniqueItems": true,
+                "items": {"$ref": "#/$defs/materialChangeDimension"}
+              },
+              "minimumChangedDimensions": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 9
+              }
+            }
+          }
+        },
+        "forbiddenCarryover": {"$ref": "#/$defs/nonEmptyUniqueStrings"}
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {"mode": {"const": "preserve-only"}},
+            "required": ["mode"]
+          },
+          "then": {
+            "properties": {"preserveRegions": {"minItems": 1}}
+          }
+        }
+      ]
+    },
+    "materialChangeDimension": {
+      "enum": [
+        "macro-layout",
+        "information-hierarchy",
+        "module-topology",
+        "typography-scale",
+        "surface-language",
+        "color-role-expression",
+        "data-visualization-form",
+        "spacing-density",
+        "imagery-role"
+      ]
+    },
+    "uniqueStrings": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "nonEmptyUniqueStrings": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    }
+  }
+}

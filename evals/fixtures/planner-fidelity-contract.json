@@ -1,0 +1,66 @@
+{
+  "schemaVersion": 2,
+  "contractId": "planner-fidelity",
+  "workflowProfile": "full",
+  "implementationTargets": ["Sources/PlannerApp/TodayView.swift"],
+  "productIntent": {
+    "problem": "Keep the daily planner useful and truthful across normal and disconnected states.",
+    "representativeScenarios": [
+      "Review a populated daily plan online",
+      "Understand which daily data is unavailable while offline"
+    ],
+    "requiredDomains": ["daily-plan", "connectivity"],
+    "protectedCapabilities": ["daily review", "offline status"],
+    "antiGoals": ["Present offline data as current", "Collapse distinct runtime states into one proof"],
+    "successSignals": ["Each state has state-specific evidence", "Runtime evidence matches the approved design context"]
+  },
+  "operationalMetadataPolicy": {
+    "defaultVisibility": "hidden-unless-required",
+    "requiredClaims": [
+      {
+        "id": "offline-freshness-boundary",
+        "surfaceId": "P01",
+        "states": ["offline"],
+        "meaning": "The latest daily data cannot be confirmed while offline.",
+        "authority": "product-requirement",
+        "sourceRef": "productIntent.representativeScenarios[1]"
+      }
+    ]
+  },
+  "visualDirectionPolicy": "required",
+  "visualArtifactPolicy": "imagegen-required",
+  "checkpointMode": "review-before-implementation",
+  "authority": {
+    "pageStructure": "locked",
+    "interactionModel": "locked",
+    "contentRepartition": "within-surface-only"
+  },
+  "surfaces": [
+    {"id": "P01", "kind": "screen", "route": "/today", "userJob": "Review today's plan"}
+  ],
+  "edges": [],
+  "outputs": [
+    {
+      "id": "O01",
+      "surfaceId": "P01",
+      "state": "populated",
+      "viewport": "mobile-390x844",
+      "scrollPosition": "top",
+      "required": true,
+      "approvalRequired": true,
+      "dependsOn": [],
+      "promotionRequired": false
+    },
+    {
+      "id": "O02",
+      "surfaceId": "P01",
+      "state": "offline",
+      "viewport": "mobile-390x844",
+      "scrollPosition": "top",
+      "required": true,
+      "approvalRequired": true,
+      "dependsOn": ["O01"],
+      "promotionRequired": false
+    }
+  ]
+}

@@ -1,0 +1,151 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/akenoowww/frontend-workbench/schemas/eval-visual-run.schema.json",
+  "title": "Frontend Workbench measured visual eval run",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "caseId",
+    "trialId",
+    "variant",
+    "pairing",
+    "evidence",
+    "captures"
+  ],
+  "allOf": [
+    {
+      "if": {"properties": {"variant": {"const": "baseline"}}, "required": ["variant"]},
+      "then": {"properties": {"pairing": {"properties": {"treatment": {"const": "frontend-workbench-disabled"}}}}}
+    },
+    {
+      "if": {"properties": {"variant": {"const": "workbench"}}, "required": ["variant"]},
+      "then": {"properties": {"pairing": {"properties": {"treatment": {"const": "frontend-workbench-enabled"}}}}}
+    }
+  ],
+  "properties": {
+    "schemaVersion": {"const": 1},
+    "caseId": {"$ref": "deliverable-coverage.schema.json#/$defs/id"},
+    "trialId": {"$ref": "deliverable-coverage.schema.json#/$defs/id"},
+    "variant": {"enum": ["baseline", "workbench"]},
+    "pairing": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["pairId", "treatment", "matchedDigests", "receipts"],
+      "properties": {
+        "pairId": {"$ref": "deliverable-coverage.schema.json#/$defs/id"},
+        "treatment": {
+          "enum": ["frontend-workbench-disabled", "frontend-workbench-enabled"]
+        },
+        "matchedDigests": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "promptSha256",
+            "modelConfigSha256",
+            "environmentSha256",
+            "fixtureSha256",
+            "captureHarnessSha256",
+            "taskBudgetSha256"
+          ],
+          "properties": {
+            "promptSha256": {"$ref": "#/$defs/sha256"},
+            "modelConfigSha256": {"$ref": "#/$defs/sha256"},
+            "environmentSha256": {"$ref": "#/$defs/sha256"},
+            "fixtureSha256": {"$ref": "#/$defs/sha256"},
+            "captureHarnessSha256": {"$ref": "#/$defs/sha256"},
+            "taskBudgetSha256": {"$ref": "#/$defs/sha256"}
+          }
+        },
+        "receipts": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["modelConfig", "environment", "captureHarness", "taskBudget"],
+          "properties": {
+            "modelConfig": {"$ref": "#/$defs/pairingReceipt"},
+            "environment": {"$ref": "#/$defs/pairingReceipt"},
+            "captureHarness": {"$ref": "#/$defs/pairingReceipt"},
+            "taskBudget": {"$ref": "#/$defs/pairingReceipt"}
+          }
+        }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sourceKind", "sourceId", "tracePath", "traceSha256"],
+      "properties": {
+        "sourceKind": {"enum": ["codex-rollout", "api-response", "harness-trace"]},
+        "sourceId": {
+          "type": "string",
+          "minLength": 8,
+          "maxLength": 256,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]+$"
+        },
+        "tracePath": {
+          "type": "string",
+          "pattern": "^traces/[A-Za-z0-9][A-Za-z0-9._/-]*$"
+        },
+        "traceSha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "captures": {
+      "type": "array",
+      "minItems": 2,
+      "items": {"$ref": "#/$defs/capture"}
+    }
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "pairingReceipt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": {
+          "type": "string",
+          "pattern": "^pairing/[A-Za-z0-9][A-Za-z0-9._/-]*$"
+        },
+        "sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "capture": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "captureId",
+        "outputId",
+        "surfaceId",
+        "route",
+        "state",
+        "viewport",
+        "scrollPosition",
+        "path",
+        "sha256"
+      ],
+      "properties": {
+        "captureId": {"$ref": "deliverable-coverage.schema.json#/$defs/id"},
+        "outputId": {"$ref": "deliverable-coverage.schema.json#/$defs/id"},
+        "surfaceId": {"$ref": "deliverable-coverage.schema.json#/$defs/id"},
+        "route": {"type": "string", "pattern": "^/"},
+        "state": {"type": "string", "minLength": 1},
+        "viewport": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["name", "width", "height"],
+          "properties": {
+            "name": {"type": "string", "minLength": 1},
+            "width": {"type": "integer", "minimum": 240, "maximum": 7680},
+            "height": {"type": "integer", "minimum": 240, "maximum": 7680}
+          }
+        },
+        "scrollPosition": {"enum": ["top", "viewport", "full-page"]},
+        "path": {
+          "type": "string",
+          "pattern": "^screenshots/[A-Za-z0-9][A-Za-z0-9._/-]*\\.png$"
+        },
+        "sha256": {"$ref": "#/$defs/sha256"}
+      }
+    }
+  }
+}

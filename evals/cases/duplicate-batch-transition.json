@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "duplicate-batch-transition",
+  "skill": "art-direct-imagegen",
+  "prompt": "A batch transition request contains O01 twice: first mark O01 accepted, then mark O01 deferred, alongside an O02 transition. Reject the duplicate output ID before applying any transition. The batch must remain atomic; do not use last-write-wins and do not partially advance O02.",
+  "contractFixture": "evals/fixtures/duplicate-batch-contract.json",
+  "expected": {
+    "plannedOutputIds": ["O01", "O02"],
+    "completedOutputIds": [],
+    "missingOutputIds": ["O01", "O02"],
+    "finalStatus": "blocked",
+    "requiredSkills": ["art-direct-imagegen"],
+    "forbiddenSkills": ["frontend-project-fit"],
+    "requiredTransformations": ["reject-duplicate-batch-output", "atomic-noop-on-invalid-batch"],
+    "forbiddenTransformations": ["last-write-wins-transition", "partial-batch-apply", "duplicate-output-transition"]
+  }
+}

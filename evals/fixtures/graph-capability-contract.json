@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 3,
+  "contractId": "graph-capability-fit",
+  "workflowProfile": "full",
+  "implementationTargets": [
+    {"path": "web/src/ProjectGraph.tsx", "surfaceIds": ["P01"], "sharedOwner": false}
+  ],
+  "structure": {"id": "graph-capability-structure", "path": "structure.json", "sha256": "5555555555555555555555555555555555555555555555555555555555555555"},
+  "productModel": {
+    "rootObjectId": "project-model",
+    "objects": [
+      {"id": "project-model", "role": "root", "parentId": null, "evidenceForObjectIds": []},
+      {"id": "relationship-graph", "role": "primary", "parentId": "project-model", "evidenceForObjectIds": []},
+      {"id": "graph-list-fallback", "role": "supporting", "parentId": "relationship-graph", "evidenceForObjectIds": ["relationship-graph"]}
+    ],
+    "relations": [
+      {"id": "project-contains-graph", "fromObjectId": "project-model", "toObjectId": "relationship-graph", "kind": "contains"},
+      {"id": "list-supports-graph", "fromObjectId": "graph-list-fallback", "toObjectId": "relationship-graph", "kind": "supports"}
+    ]
+  },
+  "capabilityRequirements": [
+    {"id": "force-graph-capability", "capability": "Interactive force-directed relationship graph", "complexity": "complex", "constraints": ["Compare approved graph adapters before custom code", "Keyboard navigation and focus management", "Equivalent list fallback"], "ownerObjectId": "relationship-graph", "surfaceIds": ["P01"], "required": true}
+  ],
+  "productIntent": {
+    "problem": "Implement an accessible relationship graph using an established project capability owner unless evidence justifies a custom primitive.",
+    "representativeScenarios": [
+      "Explore a focused neighborhood in the relationship graph",
+      "Use a list fallback to inspect the same relationships"
+    ],
+    "requiredDomains": ["relationship-graph"],
+    "protectedCapabilities": ["keyboard navigation", "focus management", "list fallback"],
+    "antiGoals": ["Build a custom graph before comparing approved libraries", "Create a competing interaction system"],
+    "successSignals": ["The selected capability owner satisfies graph and accessibility constraints"]
+  },
+  "operationalMetadataPolicy": {
+    "defaultVisibility": "hidden-unless-required",
+    "requiredClaims": []
+  },
+  "visualDirectionPolicy": "required",
+  "visualArtifactPolicy": "runnable",
+  "checkpointMode": "review-before-implementation",
+  "authority": {
+    "pageStructure": "locked",
+    "interactionModel": "locked",
+    "contentRepartition": "within-surface-only"
+  },
+  "surfaces": [
+    {"id": "P01", "kind": "page", "route": "/projects/demo/graph", "userJob": "Explore project relationships", "primaryObjectId": "relationship-graph", "shellIds": ["global-shell", "project-shell"], "referenceBindingIds": []}
+  ],
+  "edges": [],
+  "outputs": [
+    {"id": "O01", "surfaceId": "P01", "state": "focused-neighborhood", "viewport": "responsive", "scrollPosition": "top", "approvalRequired": false, "dependsOn": [], "promotionRequired": false, "designEvidenceRequired": true, "runtimeEvidenceRequired": true, "artifactKind": "runnable", "anchorOutputId": null}
+  ]
+}

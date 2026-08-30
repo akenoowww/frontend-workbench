@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/akenoowww/frontend-workbench/schemas/eval-blind-packet.schema.json",
+  "title": "Frontend Workbench anonymized visual eval packet",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "packetId",
+    "caseId",
+    "trialId",
+    "judgeSlot",
+    "task",
+    "sides"
+  ],
+  "properties": {
+    "schemaVersion": {"const": 1},
+    "packetId": {"$ref": "deliverable-coverage.schema.json#/$defs/id"},
+    "caseId": {"$ref": "deliverable-coverage.schema.json#/$defs/id"},
+    "trialId": {"$ref": "deliverable-coverage.schema.json#/$defs/id"},
+    "judgeSlot": {"type": "integer", "minimum": 1},
+    "task": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "prompt",
+        "fixtureSha256",
+        "rubricSha256",
+        "fixture",
+        "rubric"
+      ],
+      "properties": {
+        "prompt": {"type": "string", "minLength": 40},
+        "fixtureSha256": {"$ref": "#/$defs/sha256"},
+        "rubricSha256": {"$ref": "#/$defs/sha256"},
+        "fixture": {"$ref": "eval-visual-fixture.schema.json"},
+        "rubric": {"$ref": "eval-visual-rubric.schema.json"}
+      }
+    },
+    "sides": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["A", "B"],
+      "properties": {
+        "A": {"$ref": "#/$defs/captureSet"},
+        "B": {"$ref": "#/$defs/captureSet"}
+      }
+    }
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "captureSet": {
+      "type": "array",
+      "minItems": 2,
+      "items": {"$ref": "#/$defs/capture"}
+    },
+    "capture": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["captureId", "path", "sha256", "width", "height"],
+      "properties": {
+        "captureId": {"$ref": "deliverable-coverage.schema.json#/$defs/id"},
+        "path": {
+          "type": "string",
+          "pattern": "^assets/[AB]/[A-Za-z0-9][A-Za-z0-9._-]*\\.png$"
+        },
+        "sha256": {"$ref": "#/$defs/sha256"},
+        "width": {"type": "integer", "minimum": 240, "maximum": 7680},
+        "height": {"type": "integer", "minimum": 240, "maximum": 7680}
+      }
+    }
+  }
+}

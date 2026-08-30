@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "planner-unconfirmed-multidomain-intent",
+  "skill": "frontend-information-architecture",
+  "prompt": "The fictional planner covers inspections, inventory, staffing, and logistics. The agent's teach-back reframes it as an inspection-only app, and the user has not confirmed that narrower product intent. Stop before design or implementation and preserve every required domain.",
+  "contractFixture": "evals/fixtures/planner-multidomain-contract.json",
+  "expected": {
+    "plannedOutputIds": ["O01", "O02", "O03", "O04"],
+    "completedOutputIds": [],
+    "missingOutputIds": ["O01", "O02", "O03", "O04"],
+    "finalStatus": "incomplete",
+    "requiredSkills": ["frontend-information-architecture"],
+    "forbiddenSkills": ["frontend-product-design", "art-direct-imagegen", "frontend-project-fit", "frontend-runtime-qa"],
+    "requiredTransformations": ["intent-confirmation-gate", "preserve-required-domains"],
+    "forbiddenTransformations": ["narrow-to-inspections-only", "design-before-intent-confirmation", "implementation-before-intent-confirmation"]
+  }
+}

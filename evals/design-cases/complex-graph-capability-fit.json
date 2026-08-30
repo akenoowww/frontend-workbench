@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "complex-graph-capability-fit",
+  "targetSkill": "frontend-project-fit",
+  "prompt": "Implement and render the project relationship graph at desktop and mobile plus its equivalent list fallback. Compare the declared established capability owners before choosing a custom primitive, preserve keyboard focus and reduced-motion behavior, and keep changes within the authorized graph surface. Captures may demonstrate visible capability fit but must not be presented as proof of an invisible library comparison.",
+  "fixtureManifest": "evals/design-fixtures/complex-graph-capability-fit.json",
+  "fixtureSha256": "ec71ef25f1fa79eea36b5d3f867a23f02d9bf75998b887422b35f4f24cb87bf4",
+  "rubric": "evals/rubrics/visual-quality-v1.json",
+  "rubricSha256": "d7ff8aced50616b2a8778d6311b598bc874bfa8b9639dbc2c97f79e8ccaa2aac",
+  "minimumTrials": 1,
+  "minimumJudgesPerTrial": 3,
+  "expectedCaptureIds": [
+    "project-graph-desktop",
+    "project-graph-mobile",
+    "project-graph-list-desktop"
+  ]
+}

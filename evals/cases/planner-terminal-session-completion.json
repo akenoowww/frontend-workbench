@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "planner-terminal-session-completion",
+  "skill": "frontend-product-design",
+  "prompt": "Two old planner redesign sessions are terminal: the user rejected one with a reason, and a replacement session superseded the other with an explicit contract delta. The agent tries to mark both old sessions complete. Honor rejection and lineage; work may continue only in a new or replacement lifecycle.",
+  "contractFixture": "evals/fixtures/planner-fidelity-contract.json",
+  "expected": {
+    "plannedOutputIds": ["O01", "O02"],
+    "completedOutputIds": [],
+    "missingOutputIds": ["O01", "O02"],
+    "finalStatus": "blocked",
+    "requiredSkills": ["frontend-product-design"],
+    "forbiddenSkills": [],
+    "requiredTransformations": ["honor-user-rejection", "honor-session-lineage", "terminal-session-gate"],
+    "forbiddenTransformations": ["reopen-rejected-session", "complete-superseded-session", "false-completion"]
+  }
+}

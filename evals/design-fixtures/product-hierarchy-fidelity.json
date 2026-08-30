@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "fixtureId": "product-hierarchy-fidelity",
+  "provenance": {
+    "sourceKind": "synthetic-fictional-eval-spec",
+    "sourceId": "fixture:business-first-hierarchy:v1",
+    "sourceVersion": "1",
+    "evidenceBasis": [
+      "declared-product-intent",
+      "declared-project-dna",
+      "declared-interaction-contract",
+      "declared-content-truth"
+    ],
+    "referenceScreenshotsAvailable": false,
+    "limitations": [
+      "The hierarchy is a deterministic product contract, not a preferred screen composition.",
+      "Captured pages can show visual hierarchy but cannot prove persisted workflow-model behavior."
+    ]
+  },
+  "brief": {
+    "productIntent": "Help a QA engineer create and maintain a living workflow model whose processes later receive executable Automated check coverage.",
+    "userJobs": [
+      "Understand the project's roles, rules, entities, and processes",
+      "Model one workflow with decisions and exceptions",
+      "Inspect an Automated check attached to one confirmed process branch"
+    ],
+    "protectedCapabilities": [
+      "Project workflow model remains the source context",
+      "Workflow remains the central working object",
+      "Automated check and Runner source remain downstream evidence"
+    ],
+    "contentTruth": [
+      "Sample approval flow contains six business steps and one declined-payment exception",
+      "The Approval smoke Automated check covers four of the six steps",
+      "browser runner is the Automated check execution mechanism, not a workflow-model entity"
+    ],
+    "projectDna": {
+      "typographyRoles": [
+        "Compact grotesk for navigation and controls",
+        "Readable humanist sans-serif for business descriptions"
+      ],
+      "colorRoles": [
+        "Deep ink identifies the persistent shell",
+        "Cobalt marks selected business context",
+        "Coral is reserved for exceptions and failed coverage"
+      ],
+      "spacingAndShape": [
+        "Dense navigation paired with generous business-content margins",
+        "Small radii and restrained borders rather than floating card mosaics"
+      ],
+      "componentPosture": [
+        "Business workbench rather than test-run dashboard",
+        "Process model and inspector carry more weight than coverage metadata"
+      ],
+      "imageryRole": [
+        "No decorative imagery in the operational workbench"
+      ],
+      "motionTone": [
+        "Direct context-preserving navigation with restrained graph transitions"
+      ]
+    },
+    "evaluationContext": {
+      "productHierarchy": {
+        "primaryObject": "Workflow",
+        "supportingObjects": ["Project workflow model", "Roles", "Rules", "Entities", "Automated checks"],
+        "executionMechanisms": ["Runner source", "Browser run evidence"],
+        "invariant": "Workflow meaning and structure must dominate the UI; automated-check source and run evidence may explain coverage but must not redefine the product hierarchy."
+      },
+      "operationalMetadataPolicy": {
+        "defaultVisibility": "hidden-unless-required",
+        "requiredClaims": []
+      }
+    },
+    "avoid": [
+      "Making Runner source the global hero",
+      "Reducing the workflow to a compact metadata card",
+      "Using run status as the primary project navigation",
+      "Inventing verification, freshness, or service-health claims"
+    ]
+  },
+  "captureMatrix": [
+    {
+      "captureId": "workflow-model-desktop",
+      "outputId": "workflow-model",
+      "surfaceId": "workflow-model",
+      "route": "/projects/demo",
+      "state": "populated",
+      "viewport": {"name": "desktop-1440x900", "width": 1440, "height": 900},
+      "scrollPosition": "top"
+    },
+    {
+      "captureId": "workflow-desktop",
+      "outputId": "workflow",
+      "surfaceId": "workflow",
+      "route": "/projects/demo/processes/approval/model",
+      "state": "payment-decision-selected",
+      "viewport": {"name": "desktop-1440x900", "width": 1440, "height": 900},
+      "scrollPosition": "top"
+    },
+    {
+      "captureId": "automated-check-detail-desktop",
+      "outputId": "automated-check-detail",
+      "surfaceId": "automated-check-detail",
+      "route": "/checks/approval-smoke",
+      "state": "source",
+      "viewport": {"name": "desktop-1440x900", "width": 1440, "height": 900},
+      "scrollPosition": "top"
+    }
+  ]
+}

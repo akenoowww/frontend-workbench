@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "project-shell-reference-scope",
+  "targetSkill": "frontend-product-design",
+  "prompt": "Extend the accepted project shell across the process catalog, process overview, and process graph. Keep every declared shell invariant. Use the supplied force-graph reference only for its FUNCTIONAL_REFERENCE scope—clustering, typed edges, focus neighborhood, and filters—and do not import its brand, navigation, typography, copy, or global layout.",
+  "fixtureManifest": "evals/design-fixtures/project-shell-reference-scope.json",
+  "fixtureSha256": "1b1fe01701c7adc9f1ff0c832bc25edd6e4cfe1d0a5fa01d7cf5b06203e39938",
+  "rubric": "evals/rubrics/visual-quality-v1.json",
+  "rubricSha256": "d7ff8aced50616b2a8778d6311b598bc874bfa8b9639dbc2c97f79e8ccaa2aac",
+  "minimumTrials": 1,
+  "minimumJudgesPerTrial": 3,
+  "expectedCaptureIds": [
+    "process-catalog-shell-desktop",
+    "process-overview-shell-desktop",
+    "process-graph-shell-desktop"
+  ]
+}

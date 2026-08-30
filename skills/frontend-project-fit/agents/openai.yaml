@@ -1,0 +1,4 @@
+interface:
+  display_name: "Frontend Project Fit"
+  short_description: "Fit frontend changes to the host project"
+  default_prompt: "Use $frontend-project-fit in the lightest fitting profile to implement this change through the existing architecture."

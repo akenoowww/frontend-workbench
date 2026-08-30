@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "product-primary-object-drift",
+  "skill": "frontend-product-design",
+  "prompt": "The frozen product contract makes the project workflow model and workflow the primary working objects; Automated checks are downstream evidence and browser runner is only their execution mechanism. A supplied renderer prompt instead makes Runner source and run evidence the global hero, demotes the workflow to one metadata card, and renames the process route around test execution. Reject that product-axis drift before creating any artifact and return the conflict to the frozen structure owner.",
+  "contractFixture": "evals/fixtures/product-primary-object-contract.json",
+  "expected": {
+    "plannedOutputIds": ["O01", "O02", "O03"],
+    "completedOutputIds": [],
+    "missingOutputIds": ["O01", "O02", "O03"],
+    "finalStatus": "blocked",
+    "requiredSkills": ["frontend-product-design"],
+    "forbiddenSkills": ["art-direct-imagegen", "frontend-project-fit"],
+    "requiredTransformations": ["preserve-primary-product-object", "return-structure-conflict"],
+    "forbiddenTransformations": ["execution-mechanism-as-primary-object", "downstream-artifact-redefines-product", "render-before-hierarchy-resolution"]
+  }
+}

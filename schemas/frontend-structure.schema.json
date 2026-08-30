@@ -1,0 +1,172 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/akenoowww/frontend-workbench/schemas/frontend-structure.schema.json",
+  "title": "Frontend Workbench rich frontend structure contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "contractId",
+    "surfaces",
+    "scenarios",
+    "shells",
+    "objectBindings",
+    "referenceBindings"
+  ],
+  "properties": {
+    "schemaVersion": {"const": 3},
+    "contractId": {"$ref": "deliverable-coverage.schema.json#/$defs/id"},
+    "surfaces": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "scenarioIds", "domainIds"],
+        "properties": {
+          "id": {"$ref": "deliverable-coverage.schema.json#/$defs/id"},
+          "route": {"type": ["string", "null"], "minLength": 1},
+          "scenarioIds": {"$ref": "#/$defs/idArrayAllowEmpty"},
+          "domainIds": {"$ref": "#/$defs/nonEmptyStringArrayAllowEmpty"}
+        }
+      }
+    },
+    "scenarios": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "job",
+          "objectIds",
+          "entrySurfaceId",
+          "completionSurfaceId",
+          "recoverySurfaceIds"
+        ],
+        "properties": {
+          "id": {"$ref": "deliverable-coverage.schema.json#/$defs/id"},
+          "job": {"type": "string", "minLength": 1},
+          "objectIds": {"$ref": "#/$defs/idArray"},
+          "entrySurfaceId": {"$ref": "deliverable-coverage.schema.json#/$defs/id"},
+          "completionSurfaceId": {"$ref": "deliverable-coverage.schema.json#/$defs/id"},
+          "recoverySurfaceIds": {"$ref": "#/$defs/idArrayAllowEmpty"}
+        }
+      }
+    },
+    "shells": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "parentShellId", "slots", "invariants"],
+        "properties": {
+          "id": {"$ref": "deliverable-coverage.schema.json#/$defs/id"},
+          "parentShellId": {
+            "oneOf": [
+              {"type": "null"},
+              {"$ref": "deliverable-coverage.schema.json#/$defs/id"}
+            ]
+          },
+          "slots": {"$ref": "#/$defs/nonEmptyStringArray"},
+          "invariants": {"$ref": "#/$defs/nonEmptyStringArray"}
+        }
+      }
+    },
+    "objectBindings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "surfaceId",
+          "primaryObjectId",
+          "supportingObjectIds",
+          "forbiddenDominantObjectIds"
+        ],
+        "properties": {
+          "id": {"$ref": "deliverable-coverage.schema.json#/$defs/id"},
+          "surfaceId": {"$ref": "deliverable-coverage.schema.json#/$defs/id"},
+          "primaryObjectId": {"$ref": "deliverable-coverage.schema.json#/$defs/id"},
+          "supportingObjectIds": {"$ref": "#/$defs/idArrayAllowEmpty"},
+          "forbiddenDominantObjectIds": {"$ref": "#/$defs/idArrayAllowEmpty"}
+        }
+      }
+    },
+    "referenceBindings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "sourceRef",
+          "sourceSha256",
+          "roles",
+          "surfaceIds",
+          "aspects",
+          "constraints",
+          "mustNotInfluence"
+        ],
+        "properties": {
+          "id": {"$ref": "deliverable-coverage.schema.json#/$defs/id"},
+          "sourceRef": {"type": "string", "minLength": 1},
+          "sourceSha256": {
+            "oneOf": [
+              {"type": "null"},
+              {"$ref": "#/$defs/sha256"}
+            ]
+          },
+          "roles": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "enum": [
+                "functional-reference",
+                "style-reference",
+                "visual-anchor",
+                "edit-target",
+                "constraint"
+              ]
+            }
+          },
+          "surfaceIds": {"$ref": "#/$defs/idArray"},
+          "aspects": {"$ref": "#/$defs/nonEmptyStringArray"},
+          "constraints": {"$ref": "#/$defs/nonEmptyStringArrayAllowEmpty"},
+          "mustNotInfluence": {"$ref": "#/$defs/nonEmptyStringArrayAllowEmpty"}
+        }
+      }
+    }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "idArray": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"$ref": "deliverable-coverage.schema.json#/$defs/id"}
+    },
+    "idArrayAllowEmpty": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"$ref": "deliverable-coverage.schema.json#/$defs/id"}
+    },
+    "nonEmptyStringArray": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "nonEmptyStringArrayAllowEmpty": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    }
+  }
+}

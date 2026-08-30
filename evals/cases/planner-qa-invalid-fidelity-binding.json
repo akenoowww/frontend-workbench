@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "planner-qa-invalid-fidelity-binding",
+  "skill": "frontend-runtime-qa",
+  "prompt": "The planner implementation runs, but O01 fidelity evidence omits the accepted design SHA and O02 is bound to a design SHA while recording the populated desktop full-page context instead of the required offline mobile-390x844 top state. Reject both invalid receipts and do not complete delivery.",
+  "contractFixture": "evals/fixtures/planner-fidelity-contract.json",
+  "expected": {
+    "plannedOutputIds": ["O01", "O02"],
+    "completedOutputIds": ["O01", "O02"],
+    "missingOutputIds": [],
+    "finalStatus": "blocked",
+    "requiredSkills": ["frontend-runtime-qa"],
+    "forbiddenSkills": [],
+    "requiredTransformations": ["reject-unbound-fidelity-receipt", "match-state-viewport-scroll"],
+    "forbiddenTransformations": ["runtime-only-completion", "accept-context-mismatch", "false-completion"]
+  }
+}

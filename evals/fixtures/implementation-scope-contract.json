@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 3,
+  "contractId": "implementation-surface-boundary",
+  "workflowProfile": "full",
+  "implementationTargets": [
+    {"path": "web/src/BusinessProcess.tsx", "surfaceIds": ["P01"], "sharedOwner": false}
+  ],
+  "structure": {"id": "implementation-scope-structure", "path": "structure.json", "sha256": "6666666666666666666666666666666666666666666666666666666666666666"},
+  "productModel": {
+    "rootObjectId": "project-model",
+    "objects": [
+      {"id": "project-model", "role": "root", "parentId": null, "evidenceForObjectIds": []},
+      {"id": "workflow", "role": "primary", "parentId": "project-model", "evidenceForObjectIds": []},
+      {"id": "automated-check", "role": "downstream-evidence", "parentId": "workflow", "evidenceForObjectIds": ["workflow"]}
+    ],
+    "relations": [
+      {"id": "project-contains-process", "fromObjectId": "project-model", "toObjectId": "workflow", "kind": "contains"},
+      {"id": "automated-check-evidence-process", "fromObjectId": "automated-check", "toObjectId": "workflow", "kind": "evidence-for"}
+    ]
+  },
+  "capabilityRequirements": [
+    {"id": "process-overview", "capability": "Workflow overview implementation", "complexity": "bounded", "constraints": ["Only P01 is authorized", "P02 and undeclared files remain unchanged"], "ownerObjectId": "workflow", "surfaceIds": ["P01"], "required": true}
+  ],
+  "productIntent": {
+    "problem": "Implement the authorized workflow surface without changing the adjacent Automated check route.",
+    "representativeScenarios": [
+      "Review the workflow overview",
+      "Keep the existing Automated check route unchanged"
+    ],
+    "requiredDomains": ["workflow", "automated-check"],
+    "protectedCapabilities": ["workflow overview", "unchanged Automated check route"],
+    "antiGoals": ["Expand implementation into adjacent routes", "Modify undeclared source targets"],
+    "successSignals": ["Only the authorized surface and target bytes change"]
+  },
+  "operationalMetadataPolicy": {
+    "defaultVisibility": "hidden-unless-required",
+    "requiredClaims": []
+  },
+  "visualDirectionPolicy": "not-required",
+  "visualArtifactPolicy": "no-imagegen",
+  "checkpointMode": "continuous",
+  "authority": {
+    "pageStructure": "locked",
+    "interactionModel": "locked",
+    "contentRepartition": "within-surface-only"
+  },
+  "surfaces": [
+    {"id": "P01", "kind": "page", "route": "/projects/demo/processes/approval", "userJob": "Review the workflow", "primaryObjectId": "workflow", "shellIds": ["global-shell", "project-shell"], "referenceBindingIds": []},
+    {"id": "P02", "kind": "page", "route": "/checks/approval", "userJob": "Inspect the existing Automated check", "primaryObjectId": "automated-check", "shellIds": ["global-shell"], "referenceBindingIds": []}
+  ],
+  "edges": [
+    {"from": "P01", "to": "P02", "trigger": "Open attached Automated check"}
+  ],
+  "outputs": [
+    {"id": "O01", "surfaceId": "P01", "state": "implemented", "viewport": "responsive", "scrollPosition": "top", "approvalRequired": false, "dependsOn": [], "promotionRequired": false, "designEvidenceRequired": false, "runtimeEvidenceRequired": true, "artifactKind": "none", "anchorOutputId": null},
+    {"id": "O02", "surfaceId": "P02", "state": "unchanged", "viewport": "responsive", "scrollPosition": "top", "approvalRequired": false, "dependsOn": [], "promotionRequired": false, "designEvidenceRequired": false, "runtimeEvidenceRequired": true, "artifactKind": "none", "anchorOutputId": null}
+  ]
+}

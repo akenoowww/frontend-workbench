@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "missing-project-shell-anchor",
+  "skill": "art-direct-imagegen",
+  "prompt": "Render O02, the dependent workflow module. O01 defines the accepted project shell, but no accepted O01 file or same-lineage VISUAL_ANCHOR was supplied. The only image is a third-party force-graph screenshot labeled FUNCTIONAL_REFERENCE. Do not infer a second shell or treat that functional screenshot as a visual anchor; block O02 and return upstream for the accepted shell evidence.",
+  "contractFixture": "evals/fixtures/shell-reference-contract.json",
+  "expected": {
+    "plannedOutputIds": ["O01", "O02"],
+    "completedOutputIds": [],
+    "missingOutputIds": ["O01", "O02"],
+    "finalStatus": "blocked",
+    "requiredSkills": ["art-direct-imagegen"],
+    "forbiddenSkills": ["frontend-project-fit"],
+    "requiredTransformations": ["require-accepted-shell-anchor", "return-upstream-for-anchor"],
+    "forbiddenTransformations": ["invent-second-product-shell", "functional-reference-as-visual-anchor", "render-unanchored-dependent-output"]
+  }
+}

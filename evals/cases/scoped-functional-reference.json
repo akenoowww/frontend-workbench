@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "scoped-functional-reference",
+  "skill": "art-direct-imagegen",
+  "prompt": "Render the accepted project shell and its dependent process graph. The accepted O01 shell is the VISUAL_ANCHOR. A separate screenshot is a FUNCTIONAL_REFERENCE scoped only to graph clustering, typed edges, focus-neighborhood behavior, and filters. Preserve the accepted shell and do not import the reference's brand, navigation, typography, copy, or unrelated layout.",
+  "contractFixture": "evals/fixtures/shell-reference-contract.json",
+  "expected": {
+    "plannedOutputIds": ["O01", "O02"],
+    "completedOutputIds": ["O01", "O02"],
+    "missingOutputIds": [],
+    "finalStatus": "complete",
+    "requiredSkills": ["frontend-product-design", "art-direct-imagegen"],
+    "forbiddenSkills": ["frontend-project-fit"],
+    "requiredTransformations": ["scope-functional-reference", "preserve-accepted-shell-anchor"],
+    "forbiddenTransformations": ["functional-reference-as-edit-target", "functional-reference-as-global-style", "reference-brand-copy"]
+  }
+}

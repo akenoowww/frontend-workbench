@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "fixtureId": "density-repartition-responsive",
+  "provenance": {
+    "sourceKind": "synthetic-fictional-eval-spec",
+    "sourceId": "fixture:density-repartition:v1",
+    "sourceVersion": "1",
+    "evidenceBasis": [
+      "declared-product-intent",
+      "declared-project-dna",
+      "declared-interaction-contract",
+      "declared-content-truth"
+    ],
+    "referenceScreenshotsAvailable": false,
+    "limitations": [
+      "The fixture describes a stable information architecture and DNA rather than supplying a preferred visual answer.",
+      "The overlay capture proves visible composition only, not keyboard or focus behavior."
+    ]
+  },
+  "brief": {
+    "productIntent": "Let an analyst read a primary record quickly and inspect dense supporting evidence without losing the record context.",
+    "userJobs": [
+      "Identify the record status and next action",
+      "Scan the primary evidence summary",
+      "Open and close detailed evidence while retaining context"
+    ],
+    "protectedCapabilities": [
+      "Evidence remains discoverable",
+      "The primary action remains visible in base and overlay states",
+      "The overlay preserves record identity and close affordance"
+    ],
+    "contentTruth": [
+      "The record is pending review",
+      "Three evidence sources are available",
+      "One source has an unresolved discrepancy"
+    ],
+    "projectDna": {
+      "typographyRoles": [
+        "Editorial serif only for record identity",
+        "Tabular sans-serif for facts and metadata"
+      ],
+      "colorRoles": [
+        "Near-black ink for content",
+        "Paper white surfaces",
+        "Muted amber for unresolved evidence"
+      ],
+      "spacingAndShape": [
+        "Tight evidence rows within generous section spacing",
+        "Small radii and crisp dividers"
+      ],
+      "componentPosture": [
+        "Document-like base surface",
+        "Evidence overlay behaves as a focused inspection layer rather than a second dashboard"
+      ],
+      "imageryRole": [
+        "Source thumbnails are evidentiary and never decorative"
+      ],
+      "motionTone": [
+        "Fast spatial transition that preserves the relationship between record and evidence"
+      ]
+    },
+    "avoid": [
+      "Compressing all evidence into unreadable base-screen columns",
+      "A full-screen overlay that erases record context",
+      "Decorative charts unsupported by evidence",
+      "Changing pending status to a resolved state"
+    ]
+  },
+  "captureMatrix": [
+    {
+      "captureId": "record-base-desktop",
+      "outputId": "record-base",
+      "surfaceId": "record",
+      "route": "/records/alpha",
+      "state": "base",
+      "viewport": {"name": "desktop-1440x900", "width": 1440, "height": 900},
+      "scrollPosition": "top"
+    },
+    {
+      "captureId": "record-overlay-desktop",
+      "outputId": "record-overlay",
+      "surfaceId": "evidence-overlay",
+      "route": "/records/alpha",
+      "state": "evidence-open",
+      "viewport": {"name": "desktop-1440x900", "width": 1440, "height": 900},
+      "scrollPosition": "viewport"
+    },
+    {
+      "captureId": "record-base-mobile",
+      "outputId": "record-base",
+      "surfaceId": "record",
+      "route": "/records/alpha",
+      "state": "base",
+      "viewport": {"name": "mobile-390x844", "width": 390, "height": 844},
+      "scrollPosition": "top"
+    },
+    {
+      "captureId": "record-overlay-mobile",
+      "outputId": "record-overlay",
+      "surfaceId": "evidence-overlay",
+      "route": "/records/alpha",
+      "state": "evidence-open",
+      "viewport": {"name": "mobile-390x844", "width": 390, "height": 844},
+      "scrollPosition": "viewport"
+    }
+  ]
+}
