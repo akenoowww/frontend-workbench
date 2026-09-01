@@ -226,7 +226,7 @@ The plugin contains no MCP server, hook, credential, bundled remote service, or 
 
 ## Install in Codex
 
-The latest published stable tag is `v0.9.0`.
+The latest published stable tag is `v0.10.0`.
 
 For the current development branch:
 
@@ -238,10 +238,10 @@ codex plugin list
 
 For a first install after an immutable release tag exists, prefer the pinned form:
 
-The latest published stable tag is `v0.9.0`.
+The latest published stable tag is `v0.10.0`.
 
 ```bash
-codex plugin marketplace add akenoowww/frontend-workbench --ref v0.9.0
+codex plugin marketplace add akenoowww/frontend-workbench --ref v0.10.0
 codex plugin add frontend-workbench@frontend-workbench
 codex plugin list
 ```
