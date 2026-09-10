@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 2,
+  "contractId": "scroll-assembly-preview",
+  "authority": {
+    "pageStructure": "locked",
+    "interactionModel": "locked",
+    "contentRepartition": "within-surface-only"
+  },
+  "surfaces": [
+    {
+      "id": "S01",
+      "kind": "page",
+      "userJob": "Understand the planner and start using it"
+    }
+  ],
+  "edges": [],
+  "outputs": [
+    {
+      "id": "O01",
+      "surfaceId": "S01",
+      "state": "default",
+      "viewport": "desktop",
+      "scrollPosition": "top",
+      "required": true,
+      "approvalRequired": false,
+      "dependsOn": [],
+      "promotionRequired": false
+    },
+    {
+      "id": "O02",
+      "surfaceId": "S01",
+      "state": "default",
+      "viewport": "desktop",
+      "scrollPosition": "continuation",
+      "required": true,
+      "approvalRequired": false,
+      "dependsOn": [
+        "O01"
+      ],
+      "promotionRequired": false
+    },
+    {
+      "id": "O03",
+      "surfaceId": "S01",
+      "state": "default",
+      "viewport": "authored-full-page",
+      "scrollPosition": "full-page",
+      "required": true,
+      "approvalRequired": false,
+      "dependsOn": [
+        "O01",
+        "O02"
+      ],
+      "promotionRequired": false
+    }
+  ]
+}

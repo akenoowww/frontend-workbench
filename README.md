@@ -144,6 +144,8 @@ The first representative runnable or ImageGen artifact passes the same conceptua
 
 An accepted homepage never completes a multi-page request. Dependent UI renders remain sequential to preserve one visual system; independent research can still run in parallel.
 
+Landing pages, storefronts, and other multi-section pages are rendered serially as full-width, normal viewport-height content bands. A request for one final page image does not collapse those stages into one tall render. Art-Direct ImageGen passes the reviewed source images to a final ImageGen call that assembles the complete page while preserving content and resolving the declared joins. Plan N band calls plus one assembly call; review the final image separately and retain every source. Local stitching is available when explicitly requested, while local contact sheets may index unrelated pages. A one-call tall overview is an exception only when the user explicitly requests that generation method.
+
 When the user asks to review every stage or page separately, the reviewed output enters `awaiting-approval`. The runtime blocks all later outputs until explicit approval changes it to `accepted`; conversational intent alone cannot bypass the checkpoint.
 
 For a `full` design-to-implementation handoff, accepted artifacts are not merely advisory. `begin-implementation` refuses to start until intent, required direction lock/authorization, coverage, checkpoint approval, verified provenance when required, and at least one safe product target pass. Runtime QA records each comparison through a structured manifest matching route, state, viewport, scroll position, accepted design-instance SHA-256, and actual image dimensions. Duplicate screenshot bytes are rejected unless the lifecycle-confirmed contract explicitly declares the exact equivalent output pair and justification; a QA manifest cannot invent equivalence later.
@@ -226,7 +228,7 @@ The plugin contains no MCP server, hook, credential, bundled remote service, or 
 
 ## Install in Codex
 
-The latest published stable tag is `v0.10.0`.
+The latest published stable tag is `v0.11.0`.
 
 For the current development branch:
 
@@ -238,10 +240,10 @@ codex plugin list
 
 For a first install after an immutable release tag exists, prefer the pinned form:
 
-The latest published stable tag is `v0.10.0`.
+The latest published stable tag is `v0.11.0`.
 
 ```bash
-codex plugin marketplace add akenoowww/frontend-workbench --ref v0.10.0
+codex plugin marketplace add akenoowww/frontend-workbench --ref v0.11.0
 codex plugin add frontend-workbench@frontend-workbench
 codex plugin list
 ```

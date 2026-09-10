@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "imagegen-scroll-assembly-plan",
+  "skill": "art-direct-imagegen",
+  "prompt": "Prepare a renderer-free execution plan for a preview-only fictional planner landing page: top O01, continuation O02, and one complete page. The direction, content and two 1536x1024 bands are locked. No intermediate approvals, implementation or promotion. The complete page should be assembled by ImageGen. No renderer has run yet. State the output sequence, input roles, calls and completion requirements.",
+  "contractFixture": "evals/fixtures/scroll-assembly-preview-contract.json",
+  "expected": {
+    "plannedOutputIds": [
+      "O01",
+      "O02",
+      "O03"
+    ],
+    "completedOutputIds": [],
+    "missingOutputIds": [
+      "O01",
+      "O02",
+      "O03"
+    ],
+    "finalStatus": "incomplete",
+    "requiredSkills": [
+      "art-direct-imagegen"
+    ],
+    "forbiddenSkills": [
+      "frontend-project-fit",
+      "frontend-runtime-qa"
+    ],
+    "requiredTransformations": [
+      "select-standard-bounded-preview",
+      "plan-source-bands-plus-assembly",
+      "budget-three-initial-calls",
+      "assembly-preserves-ordered-source-union"
+    ],
+    "forbiddenTransformations": [
+      "initialize-full-runtime",
+      "local-stitch-as-imagegen-result",
+      "false-artifact-acceptance"
+    ]
+  }
+}

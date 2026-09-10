@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "id": "local-scroll-explicit-method",
+  "skill": "art-direct-imagegen",
+  "prompt": "Prepare a renderer-free preview plan for two locked fictional planner page bands O01 and O02, each 1536x1024. Generate both bands, then join them only locally with all source pixels preserved and no crop. The user explicitly requests no third ImageGen call, no stage confirmations and no implementation. No images have been generated yet.",
+  "contractFixture": "evals/fixtures/local-scroll-preview-contract.json",
+  "expected": {
+    "plannedOutputIds": [
+      "O01",
+      "O02"
+    ],
+    "completedOutputIds": [],
+    "missingOutputIds": [
+      "O01",
+      "O02"
+    ],
+    "finalStatus": "incomplete",
+    "requiredSkills": [
+      "art-direct-imagegen"
+    ],
+    "forbiddenSkills": [
+      "frontend-project-fit",
+      "frontend-runtime-qa"
+    ],
+    "requiredTransformations": [
+      "select-standard-bounded-preview",
+      "budget-two-source-calls",
+      "plan-explicit-local-composite",
+      "local-completion-without-imagegen-assembly"
+    ],
+    "forbiddenTransformations": [
+      "require-imagegen-assembly",
+      "third-imagegen-call",
+      "initialize-full-runtime",
+      "false-artifact-acceptance"
+    ]
+  }
+}

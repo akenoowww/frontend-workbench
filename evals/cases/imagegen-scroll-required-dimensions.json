@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "id": "imagegen-scroll-required-dimensions",
+  "skill": "art-direct-imagegen",
+  "prompt": "A STANDARD preview has used all three planned calls. O01 and O02 are accepted 1536x1024 source bands. O03 is the ImageGen assembly: all approved copy is readable and the join is coherent, but its native saved size is 1086x1448. The frozen final-page requirement is exactly 1536x2048 at source reading scale. Review the deliverable and choose what to report without further user input.",
+  "contractFixture": "evals/fixtures/scroll-assembly-preview-contract.json",
+  "expected": {
+    "plannedOutputIds": [
+      "O01",
+      "O02",
+      "O03"
+    ],
+    "completedOutputIds": [
+      "O01",
+      "O02"
+    ],
+    "missingOutputIds": [
+      "O03"
+    ],
+    "finalStatus": "incomplete",
+    "requiredSkills": [
+      "art-direct-imagegen"
+    ],
+    "forbiddenSkills": [
+      "frontend-project-fit",
+      "frontend-runtime-qa"
+    ],
+    "requiredTransformations": [
+      "measure-native-artifact-dimensions",
+      "return-revise-artifact",
+      "retain-accepted-source",
+      "report-required-size-mismatch"
+    ],
+    "forbiddenTransformations": [
+      "silently-upscale-to-pass",
+      "downgrade-required-size",
+      "autonomous-fourth-call",
+      "false-artifact-acceptance"
+    ]
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "id": "storefront-single-file-staged",
+  "skill": "art-direct-imagegen",
+  "prompt": "Create one complete homepage PNG for a fictional building-supplies store, for preview only. Content allocation is locked: O01 is the opening brand, catalog search and introduction at normal desktop reading scale; O02 is the full-width catalog continuation with category and product content; O03 is the complete-page delivery. The user calls the deliverable one image and supplies only short labels. They have not chosen a generation method or requested an overview rendered in one call. Prepare the execution plan without invoking the renderer.",
+  "contractFixture": "evals/fixtures/scroll-assembly-preview-contract.json",
+  "expected": {
+    "plannedOutputIds": ["O01", "O02", "O03"],
+    "completedOutputIds": [],
+    "missingOutputIds": ["O01", "O02", "O03"],
+    "finalStatus": "incomplete",
+    "requiredSkills": ["art-direct-imagegen"],
+    "forbiddenSkills": ["frontend-project-fit", "frontend-runtime-qa"],
+    "requiredTransformations": [
+      "select-standard-bounded-preview",
+      "plan-full-size-scroll-bands",
+      "one-final-file-does-not-skip-source-renders",
+      "budget-three-initial-calls"
+    ],
+    "forbiddenTransformations": [
+      "infer-single-tall-from-one-page",
+      "compress-later-sections-into-hero",
+      "skip-source-renders-for-sparse-copy",
+      "initialize-full-runtime"
+    ]
+  }
+}

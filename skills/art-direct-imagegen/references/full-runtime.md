@@ -56,6 +56,8 @@ Validate `renderBudget.maxCallsTotal`, `maxAttemptsPerOutput`, and `maxConceptRe
 
 The helper atomically reserves the total call, per-output attempt, and any concept-reset increment before the external call; concurrent independent work cannot race past the budget. Block before a reservation that would exceed a limit. A negative/invalid budget or a budget changed after confirmation is a contract failure. Raising or relaxing the budget requires fresh material-change authority; reducing it must not erase calls already consumed.
 
+A continuous page whose selected final method is ImageGen includes a final assembly output in the confirmed contract. Budget one initial call for each band plus one for that page's assembly; it consumes a normal per-output attempt and total call through the helper. It is not post-processing outside `renderUsage`. Only an explicitly requested one-call overview needs no extra assembly call; a normal full-page delivery is rendered as source bands plus assembly. When local-only delivery is explicitly requested before confirmation, do not add an ImageGen assembly output or budget; preserve the normal source-band obligations.
+
 A renderer defect may use one targeted retry only when the output and total budgets permit. A product-model, structure, shell, reference, direction, or impossible-density failure returns upstream and does not justify a concept reset inside ImageGen.
 
 ## Validate visual anchors independently of dependencies
@@ -78,7 +80,10 @@ Use the active consumer repository's ignored session:
   artifacts/<output-id>/attempt-<n>.<ext>
   provenance/
   art-direct-imagegen/
-    render-briefs.json
+    render-briefs/
+      <output-id>.json
+    assembly-plans/
+      <assembly-id>.json
     prompts/<output-id>.md
     reviews/<output-id>-attempt-<n>.json
     handoff.md
@@ -106,6 +111,14 @@ Use only the installed helper's documented interface. Do not hand-edit runtime s
 Persist lean prompts, reviews, hashes, consumed budget, and next action in stage files. The helper owns central status, revisions, identities, blockers, and promotion. Never store base64, secrets, or hidden reasoning.
 
 Batch only independent results already known. A v3 batch must not repeat one output ID, parallelize connected renders, consume authority, or bypass budget/anchor/review gates.
+
+## Final assembly output
+
+When the final delivery method is ImageGen, before confirmation declare the final page as its own `artifactKind: imagegen`, `designEvidenceRequired: true` output, with `dependsOn` listing all source bands. Reuse the existing product, surface, and state identities; name its canvas as an authored full page rather than inventing a route, state, or viewport capture. Assembly itself does not require new runtime coverage, and all existing runtime obligations remain intact.
+
+Save the ordered source IDs/paths/SHAs, union content allowlist, permitted join/overlap edits, and target dimensions in `art-direct-imagegen/assembly-plans/<assembly-id>.json` as a stage file. The helper-bound JSON at `art-direct-imagegen/render-briefs/<output-id>.json` has a closed schema: only `schemaVersion`, `outputId`, `visualDirectionSha256`, `shellIds`, `referenceBindingIds`, `anchorOutputId`, `anchorArtifactSha256`, `preserve`, and `changeOnly` are allowed. Put preservation, source identity, and permitted-edit instructions in its existing `preserve`/`changeOnly` string arrays; do not add assembly metadata keys to that bound file or to central state. Compile the renderer prompt from both files while keeping IDs and hashes out of visible copy. This does not add a content-distribution band. Verify every source is accepted/promoted and unchanged before attaching its full saved bytes. The one optional `anchorOutputId` binds only that source; validate the rest explicitly from the dependency artifacts.
+
+Transition this output through the existing generating, provenance, review, and acceptance flow. The helper reserves its render call exactly as for a band. The assembly is a new artifact: it neither overwrites nor retries any accepted source output, and acceptance of those sources does not accept it. Under `imagegen-required`, it also requires user-authorized acceptance before implementation. If an older confirmed session lacks the assembly output/budget, resolve it through existing change control before rendering; do not hand-edit state or call outside the budget. Assembly failure or an unknown external-call outcome follows the same bounded failure/reconciliation rules as any other render.
 
 ## Implementation and runtime evidence
 

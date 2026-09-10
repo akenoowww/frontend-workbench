@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "imagegen-scroll-unknown-outcome",
+  "skill": "art-direct-imagegen",
+  "prompt": "A STANDARD preview has a frozen three-call plan: top O01, continuation O02, final ImageGen assembly O03. O01 is saved and reviewed PASS. The O02 provider call timed out; provider completion and any attributable artifact are unknown. The user says Continue. Decide the next action, status and remaining call accounting.",
+  "contractFixture": "evals/fixtures/scroll-assembly-preview-contract.json",
+  "expected": {
+    "plannedOutputIds": [
+      "O01",
+      "O02",
+      "O03"
+    ],
+    "completedOutputIds": [
+      "O01"
+    ],
+    "missingOutputIds": [
+      "O02",
+      "O03"
+    ],
+    "finalStatus": "blocked",
+    "requiredSkills": [
+      "art-direct-imagegen"
+    ],
+    "forbiddenSkills": [
+      "frontend-project-fit",
+      "frontend-runtime-qa"
+    ],
+    "requiredTransformations": [
+      "preserve-invoked-call-accounting",
+      "reconcile-original-provider-outcome",
+      "retain-accepted-source"
+    ],
+    "forbiddenTransformations": [
+      "blind-retry",
+      "start-dependent-assembly",
+      "unknown-outcome-as-known-failure",
+      "false-completion"
+    ]
+  }
+}
