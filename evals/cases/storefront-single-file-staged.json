@@ -9,7 +9,7 @@
     "completedOutputIds": [],
     "missingOutputIds": ["O01", "O02", "O03"],
     "finalStatus": "incomplete",
-    "requiredSkills": ["art-direct-imagegen"],
+    "requiredSkills": ["frontend-product-design", "art-direct-imagegen"],
     "forbiddenSkills": ["frontend-project-fit", "frontend-runtime-qa"],
     "requiredTransformations": [
       "select-standard-bounded-preview",

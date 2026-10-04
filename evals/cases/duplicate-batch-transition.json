@@ -9,7 +9,7 @@
     "completedOutputIds": [],
     "missingOutputIds": ["O01", "O02"],
     "finalStatus": "blocked",
-    "requiredSkills": ["art-direct-imagegen"],
+    "requiredSkills": ["frontend-product-design", "art-direct-imagegen"],
     "forbiddenSkills": ["frontend-project-fit"],
     "requiredTransformations": ["reject-duplicate-batch-output", "atomic-noop-on-invalid-batch"],
     "forbiddenTransformations": ["last-write-wins-transition", "partial-batch-apply", "duplicate-output-transition"]

@@ -1,4 +1,4 @@
 interface:
   display_name: "Art-Direct ImageGen"
   short_description: "Render locked frontend directions"
-  default_prompt: "Use $art-direct-imagegen in the lightest fitting profile to render and review bitmap instances of the supplied direction."
+  default_prompt: "Use $art-direct-imagegen with $frontend-product-design owning the direction, then render and review the frontend UI bitmap."

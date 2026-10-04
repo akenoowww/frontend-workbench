@@ -9,7 +9,7 @@
     "completedOutputIds": [],
     "missingOutputIds": ["O01"],
     "finalStatus": "blocked",
-    "requiredSkills": ["art-direct-imagegen"],
+    "requiredSkills": ["frontend-product-design", "art-direct-imagegen"],
     "forbiddenSkills": ["frontend-project-fit", "frontend-runtime-qa"],
     "requiredTransformations": ["visible-claim-ledger", "reject-unsupported-visible-claims", "preserve-hidden-operational-default"],
     "forbiddenTransformations": ["aesthetic-pass-overrides-truth", "invent-operational-copy", "false-artifact-acceptance"]

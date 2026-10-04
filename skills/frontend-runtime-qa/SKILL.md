@@ -78,9 +78,15 @@ After all required receipts exist, use complete-implementation. The helper, not 
 
 ## Evidence and handoff
 
-For each failure, report route, viewport, reproduction, expected/observed result, evidence, likely source boundary, and whether a fix is authorized. Keep pre-existing failures separate.
+For each failure, record route, viewport, reproduction, expected/observed result, evidence, likely source boundary, and whether a fix is authorized. Present the affected flow, concrete mismatch, and user consequence concisely; include reproduction details when needed to understand or act on the finding. Keep pre-existing failures separate. Full evidence manifests and technical identities belong in an authorized handoff or checkpoint rather than every ordinary answer.
 
 For read-only or MICRO work, do not edit repository metadata or create a persistent workspace; keep evidence in conversation or task-scoped temporary storage. STANDARD/FULL durable QA evidence belongs only in the active ignored /.frontend-workbench/ session, never product source.
+
+## Communicate the result
+
+Lead ordinary answers with whether the requested behavior worked, the material findings, and what remains unverified. Do not narrate skill/plugin internals, investigation locations, commands, runtime directories, hashes, or private deliberation unless requested or needed to act on a finding. Keep complete receipts in the authorized evidence handoff; present any required approval gallery or checkpoint with enough context for an informed decision. Never hide a failed check, evidence gap, environment boundary, or permission requirement.
+
+Use independent judgment. Respectfully challenge a proposal or success claim that contradicts observed behavior, explain the consequence, and recommend a feasible next step. Distinguish a defect from a legitimate preference or intentional adaptation, revise when new evidence warrants it, and honor the user's final authorized choice. Do not imply that untested behavior, hidden states, a likely cause, or a local result was verified elsewhere.
 
 ## Completion
 

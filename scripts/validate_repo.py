@@ -94,13 +94,36 @@ def validate_manifests(root: Path, errors: list[str], release: bool) -> None:
     marketplace = load_json(root / ".agents" / "plugins" / "marketplace.json", errors)
     if portable is None or codex is None:
         return
-    for field in ("name", "version"):
+    for field in ("name", "version", "description", "author", "homepage", "repository", "license", "keywords"):
         if portable.get(field) != codex.get(field):
             errors.append(f"plugin manifests disagree on {field}")
+    extensions = portable.get("extensions")
+    openai = extensions.get("com.openai") if isinstance(extensions, dict) else None
+    if not isinstance(openai, dict):
+        errors.append("portable plugin extensions.com.openai must be an object")
+    else:
+        # An inline OpenAI object replaces the compatibility overlay wholesale;
+        # portable skills/ and mcp.json are discovered independently of it.
+        compatibility_extensions = codex.get("extensions", {})
+        compatibility_openai = (
+            compatibility_extensions.get("com.openai", {})
+            if isinstance(compatibility_extensions, dict)
+            else {}
+        )
+        if not isinstance(compatibility_openai, dict):
+            errors.append("compatibility extensions.com.openai must be an object")
+            compatibility_openai = {}
+        expected_openai = dict(compatibility_openai)
+        for field in ("interface", "id", "apps", "hooks"):
+            if field in codex:
+                expected_openai[field] = codex[field]
+        if openai != expected_openai:
+            errors.append("plugin manifests disagree on OpenAI metadata (the inline extension replaces the fallback)")
     version = codex.get("version")
     if not isinstance(version, str) or SEMVER_RE.fullmatch(version) is None:
         errors.append("plugin version must be strict semver")
-    prompts = codex.get("interface", {}).get("defaultPrompt")
+    interface = openai.get("interface", {}) if isinstance(openai, dict) else codex.get("interface", {})
+    prompts = interface.get("defaultPrompt") if isinstance(interface, dict) else None
     if not isinstance(prompts, list) or not 1 <= len(prompts) <= 3:
         errors.append("Codex interface.defaultPrompt must contain one to three prompts")
     else:

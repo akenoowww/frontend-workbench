@@ -9,7 +9,7 @@
     "completedOutputIds": [],
     "missingOutputIds": ["O01", "O02"],
     "finalStatus": "blocked",
-    "requiredSkills": ["art-direct-imagegen"],
+    "requiredSkills": ["frontend-product-design", "art-direct-imagegen"],
     "forbiddenSkills": ["frontend-project-fit"],
     "requiredTransformations": ["require-accepted-shell-anchor", "return-upstream-for-anchor"],
     "forbiddenTransformations": ["invent-second-product-shell", "functional-reference-as-visual-anchor", "render-unanchored-dependent-output"]

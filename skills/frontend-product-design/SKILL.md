@@ -1,15 +1,17 @@
 ---
 name: frontend-product-design
-description: "Design or critique UI/UX and own renderer-neutral visual direction after structure is known. Not for specified implementation, small styling/copy fixes, tests, performance, or backend work."
+description: "Design or critique UI/UX using current working product comparisons, and own renderer-neutral visual direction after structure is known. Not for specified implementation, small styling/copy fixes, tests, performance, or backend work."
 ---
 
 # Frontend Product Design
 
 Resolve material UI/UX decisions and the renderer-neutral visual direction from user and project evidence, then hand off only what the authorized next stage needs.
 
+When Art-Direct ImageGen enters this skill for a frontend UI bitmap, own its pre-render design work in a direction-only entry. Perform the applicable current-product research, scope/authority, hierarchy/behavior, visual-direction, boundary, coverage, and handoff duties, then return to the existing renderer caller. Do not recursively invoke Art-Direct, generate a second image, add implementation authority, or initialize FULL solely because the caller requires this skill. Reuse an existing verified scoped direction instead of redesigning it. The bitmap's shared conceptual critique follows after the original caller renders it; a pre-render handoff does not claim the final artifact was already reviewed.
+
 ## Choose the workflow profile
 
-- **MICRO** — a critique or one bounded interaction/visual decision on a structurally locked surface. Inspect the supplied evidence and answer directly; do not invoke IA, ImageGen, implementation, or Runtime QA automatically.
+- **MICRO** — a critique or one bounded interaction/visual decision on a structurally locked surface. Inspect the supplied evidence and perform the scoped current-product research below, then answer directly; do not invoke IA, ImageGen, implementation, or Runtime QA automatically.
 - **STANDARD** — design one surface or a scoped flow whose structure is known. Resolve material behavior and hierarchy, and create only the lightest artifact that tests those decisions. An explicitly preview-only, non-promotable redesign evaluation may remain STANDARD when the target, preserve/replace boundary, scoped references, named outputs, and fixed artifact budget are supplied and no implementation or durable acceptance follows.
 - **FULL** — a multi-page product/redesign, a complete/material rethink intended for implementation or durable acceptance, a staged approval process, a coherent rendered set with dependent acceptance, or a design-and-implementation handoff. Consume typed structure/coverage, persist checkpoints, and require accepted-design fidelity receipts.
 
@@ -35,11 +37,21 @@ For each separate-band boundary, choose the least contaminating reference exposu
 
 ## Inspect evidence and structure
 
-For STANDARD/FULL repository work, read [references/project-archeology.md](references/project-archeology.md). Inspect the affected surface, closest internal examples, tokens, shared components, responsive behavior, localization, accessibility, state/data constraints, and tests. When supplied websites, screenshots, brand guidance, or visual anchors can materially affect the direction, also read [references/visual-reference-extraction.md](references/visual-reference-extraction.md). MICRO may inspect only the supplied or bounded source. If the project is unavailable, use supplied evidence and state the limitation.
+For STANDARD/FULL repository work, read [references/project-archeology.md](references/project-archeology.md). Inspect the affected surface, closest internal examples, tokens, shared components, responsive behavior, localization, accessibility, state/data constraints, and tests. When supplied websites, screenshots, brand guidance, or visual anchors can materially affect the direction, also read [references/visual-reference-extraction.md](references/visual-reference-extraction.md). MICRO may bound project inspection to the supplied or affected source, but still requires current-product research. If the project is unavailable, use supplied evidence and state the limitation.
 
 Use frontend-information-architecture first only when a multi-page structure, navigation model, page ownership, or multi-step flow is genuinely unresolved and the user authorized that design scope. A locked single surface does not need an IA contract.
 
 Consume frozen product objects, shells, surfaces, routes, families, scenarios, states, viewports, outputs, scoped reference bindings, and authority without silently changing them. Preserve protected capabilities monotonically. If feasibility exposes a contradiction, return STRUCTURE_CONFLICT with affected IDs and evidence.
+
+## Research current working products
+
+Before recommending, critiquing, or locking a UI/UX or visual direction in **every profile**, read [references/ux-research.md](references/ux-research.md) and run a fresh web search for functionally comparable, established products. Open the sources and inspect their actual implemented interfaces or current official interface evidence. Compare at least two eligible products when available; justify relevance, operating status, and evidence freshness. Search ranking, famous brand names, trend articles, and generic design-system rules do not establish a current product pattern.
+
+Base the recommendation on observed hierarchy, density, navigation, controls, states, and task flow, then adapt it to the user's requirements and project DNA. Check current official accessibility/platform requirements where they constrain that choice. A mature implemented pattern may be the best answer; do not force novelty merely to differ from familiar products.
+
+Record source links, the research date, source/capture dates or `undated`, operating-status evidence, inspected surface/state, direct versus documented/inferred observations, and the decision each example supports. Reuse a verified research record within the same task while its product version, scope, and relevant evidence remain current; a changed surface or stale record requires refresh. Research does not expand frozen reference bindings or authorize copying external branding, assets, or product capabilities.
+
+If search, interface access, or freshness checks fail, try another relevant product or current official demo/help source. A homepage, HTTP success, archived screenshot, or search snippet alone is insufficient. If adequate evidence remains unavailable, report the exact research gap and keep the affected recommendation provisional; do not mark it researched, lock it as a validated direction, or declare the design complete. An explicit user instruction forbidding external research governs, and its narrower evidence limit must be stated.
 
 ## Resolve the design
 
@@ -51,7 +63,15 @@ For a new or materially changed visual direction, read [references/visual-direct
 
 Own semantic priority, hierarchy, perceptual relationships, and the signature system—not implementation novelty. A product-specific direction must permit Project Fit to realize it with mature project primitives, framework/platform facilities, or well-fitted libraries. Never require hand-written controls merely to make the design feel unique.
 
-Read [references/ux-research.md](references/ux-research.md) only when current external guidance or comparison can change a material decision.
+Carry the verified current-product observations into the selected decisions and visual-direction evidence. Keep research citations in the rationale or handoff; do not turn them into product UI copy or renderer instructions.
+
+## Own the recommendation
+
+Present the selected design as your considered recommendation: what should change, why it serves the user task, and its meaningful trade-offs. Do not narrate skill loading, plugin internals, filesystem paths, research locations, search queries, workflow machinery, private deliberation, or source-by-source investigation in ordinary design answers. Keep the evidence trace in the authorized decision record; expose relevant sources concisely when requested or when attribution is needed to substantiate a factual claim. Never conceal a material evidence/access gap or imply that an unobserved interface was checked.
+
+For an ordinary recommendation, do not volunteer competitor names, a benchmark report, or sentences such as “Product X does this” merely to validate your opinion. State the functional recommendation and its concrete reasons as your own judgment. Show named comparisons and their sources when the user asks for examples, research, evidence, or a comparison, or when a specific external fact is necessary to the answer; attribute those facts accurately. This is a presentation rule, not permission to omit the mandatory research or fabricate an unsupported opinion.
+
+Use independent judgment rather than automatic agreement. When a user proposal would materially harm comprehension, task completion, accessibility, consistency, or a protected requirement, state the disagreement plainly and respectfully, explain the concrete consequence, and offer the strongest feasible alternative. Defend an evidence-supported choice when the objection does not address its reasons; do not abandon it merely to flatter the user. A count of compared products, their popularity, or personal taste is not sufficient proof. Distinguish a usability defect from a legitimate aesthetic preference, revisit the recommendation when new evidence or constraints change it, and honor the user's final authorized choice. Do not claim experience, consensus, certainty, or testing that the evidence does not establish.
 
 Before creating a visual artifact, read [references/artifact-choice-and-validation.md](references/artifact-choice-and-validation.md). Choose the lightest evidence that can test the decision: annotated specification, existing-component composition, runnable prototype, browser screenshot, or ImageGen-rendered bitmap. In FULL v3, render only representative outputs with required design evidence and within the confirmed budget; all outputs with required runtime evidence remain separate QA obligations. The first representative visual artifact must pass the shared direction critique regardless of renderer. For a redesign, PASS additionally requires a region-by-region delta check against `redesignBoundary`: count only named material dimensions, never palette swaps or minor spacing as a complete redesign. If the replace region still has the source macro-layout/module topology or another forbidden carryover, return `REVISE_ARTIFACT` or `REVISE_DIRECTION` and do not show it as the requested redesign.
 
@@ -74,4 +94,4 @@ MICRO/read-only work writes nothing. Create durable artifacts only for an author
 
 ## Completion
 
-Finish when the requested decision is resolved, required coverage is accounted for, any required visual direction is locked and referenced, chosen evidence is reviewed when applicable, authority is preserved, and blocked/deferred/unverified items are explicit. Keep direction evidence, artifact acceptance, implemented code, local validation, and production proof distinct.
+Finish when the requested decision is resolved, current-product research supports it with checked operating status and freshness, required coverage is accounted for, any required visual direction is locked and referenced, chosen evidence is reviewed when applicable, authority is preserved, and blocked/deferred/unverified items are explicit. Missing required research leaves the affected design provisional. When the user explicitly forbids research, complete only the authorized bounded assessment, stating that current external verification was excluded; do not claim to meet the normal research gate. Keep direction evidence, artifact acceptance, implemented code, local validation, and production proof distinct.

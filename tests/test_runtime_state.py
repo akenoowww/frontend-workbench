@@ -3278,6 +3278,70 @@ class RuntimeStateTests(unittest.TestCase):
         )
         self.assertEqual(len(state["implementation"]["fidelityQaReceipts"]), 3)
 
+    def test_imagegen_handoff_includes_product_design_owner_without_reopening_direction(self) -> None:
+        session_id = "imagegen-owner-handoff"
+        contract_path, structure_path = self.write_v3_contract(
+            session_suffix="imagegen-owner",
+            artifact_kind="imagegen",
+        )
+        state = runtime_state.start_session(
+            self.root,
+            session_id,
+            contract_path,
+            structure_file=structure_path,
+        )
+        state = self.confirm_v3(session_id, state)
+        direction_envelope = runtime_state.compact_handoff(self.root, session_id)[
+            "executionEnvelope"
+        ]
+        self.assertEqual(direction_envelope["stageOwner"], "frontend-product-design")
+        self.assertIn(
+            "skills/frontend-product-design/references/ux-research.md",
+            direction_envelope["selectedReferenceSlices"],
+        )
+        self.assertTrue(
+            {"web-search", "web-read", "agent-browser", "image-read"}.issubset(
+                direction_envelope["allowedTools"]
+            )
+        )
+        self.assertNotIn("image_gen", direction_envelope["allowedTools"])
+        self.assertNotIn(
+            "skills/frontend-product-design/SKILL.md",
+            direction_envelope["selectedReferenceSlices"],
+        )
+
+        state = runtime_state.lock_visual_direction(
+            self.root,
+            session_id,
+            state["revision"],
+            self.write_visual_direction(),
+        )
+        handoff = runtime_state.compact_handoff(self.root, session_id)
+        envelope = handoff["executionEnvelope"]
+        self.assertEqual(envelope["stage"], "design-evidence")
+        self.assertEqual(envelope["stageOwner"], "art-direct-imagegen")
+        self.assertNotIn("web-search", envelope["allowedTools"])
+        self.assertIn("image_gen", envelope["allowedTools"])
+        self.assertEqual(
+            envelope["selectedReferenceSlices"],
+            [
+                "skills/frontend-product-design/SKILL.md",
+                "skills/art-direct-imagegen/references/output-contract.md",
+                "skills/art-direct-imagegen/references/prompt-and-review.md",
+                "skills/frontend-product-design/references/full-lifecycle.md",
+            ],
+        )
+        self.assertIn("stage owner and selectedReferenceSlices", envelope["tokenPolicy"])
+        self.assertEqual(handoff["visualDirection"], state["visualDirection"])
+        _, unchanged = runtime_state.load_state(self.root, session_id)
+        self.assertEqual(unchanged, state)
+        envelope_without_digest = dict(envelope)
+        envelope_digest = envelope_without_digest.pop("sha256")
+        self.assertEqual(
+            envelope_digest,
+            runtime_state._canonical_sha256(envelope_without_digest),
+        )
+
     def test_batch_mark_is_atomic_bounded_and_handoff_is_read_only(self) -> None:
         session_id = "batch-handoff"
         state = runtime_state.start_session(

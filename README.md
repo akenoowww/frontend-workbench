@@ -18,7 +18,7 @@ Bundled evaluation cases are synthetic and fictional. Repository validation reje
 | `frontend-product-design` | UI/UX decisions, renderer-neutral visual direction, redesign, new-surface design, or critique after structure is known | Sitemap-only work, fully specified implementation, small CSS/copy fixes, bugs, tests, performance, or backend work |
 | `frontend-project-fit` | Authorized frontend implementation through the host project's architecture, reusable UI, and justified capability choices | Design-only work, backend-only work, or claims of project fit without source access |
 | `frontend-copy-guard` | Affected user-visible copy, localization, accessibility wording, validation, errors, and safe cross-layer mappings | Unrelated repository-wide copy audits or unauthorized backend changes |
-| `art-direct-imagegen` | Bitmap instances of a locked upstream direction, or a standalone bitmap-only direction when no product-design contract exists | Generic UI planning, code implementation, fixed surgical edits, or tasks that do not require generated bitmap output |
+| `art-direct-imagegen` | Frontend UI bitmaps rendered from a direction owned by the actual Product Design skill, including standalone entry requests | Generic UI planning, non-UI imagery, code implementation, fixed surgical edits, or tasks that do not require generated bitmap output |
 | `frontend-runtime-qa` | Rendered page identity, console health, interactions, responsive layout, accessibility, and design fidelity | Design-only planning, source-only review, backend-only testing, implementation, or image generation |
 
 Codex may display plugin skills with names such as `frontend-workbench:frontend-product-design`. Use the skill picker or the exact name shown by the host for explicit invocation. Ordinary prompts can rely on the narrow skill descriptions.
@@ -112,7 +112,7 @@ micro request
 -> no automatic cross-skill cascade
 ```
 
-The graph is one-way. No skill invokes an earlier skill back. Agent Plugins do not provide a portable cross-skill dependency graph, so each skill includes a small truthful fallback when a host cannot compose another bundled workflow.
+Art-Direct always uses the actual Product Design skill as its direction owner. A standalone UI bitmap enters Product Design for the required research and pre-render direction handoff, then returns to the same renderer once. That direction-only entry does not recursively dispatch another renderer, add implementation authority, or force a FULL session for a bounded preview. An existing verified scoped direction is reused instead of redesigned. Agent Plugins do not provide a portable cross-skill dependency graph, so the renderer explicitly reads the bundled Product Design entrypoint; it blocks if that dependency or required evidence is unavailable rather than inventing a fallback direction. Other narrow requests retain their proportional owning skill without an unrelated cascade.
 
 ## Multi-page and multi-state coverage
 
@@ -138,7 +138,7 @@ Product Design separately records whether the FULL flow uses a runnable artifact
 - browser screenshot;
 - ImageGen-rendered instance.
 
-When `imagegen-required` is selected, `art-direct-imagegen` receives the confirmed intent, frozen authority, coverage contract, and locked direction ref/SHA. It compiles renderer prompts and renders one dependency-ready output at a time without reopening the concept. Only a standalone bitmap request with no upstream product-design contract may create its own direction, and that fallback cannot authorize later product implementation. Implementation cannot substitute a wireframe or runnable screen for the required visual stage.
+When `imagegen-required` is selected, `art-direct-imagegen` receives the confirmed intent, frozen authority, coverage contract, and locked direction ref/SHA. It compiles renderer prompts and renders one dependency-ready output at a time without reopening the concept. A standalone frontend UI bitmap request obtains its direction from Product Design too; the renderer never creates its own replacement concept. A preview-only handoff cannot authorize later product implementation. Implementation cannot substitute a wireframe or runnable screen for the required visual stage.
 
 The first representative runnable or ImageGen artifact passes the same conceptual critique: concept specificity, hierarchy, execution, project-DNA preservation, restraint, usability, and feasibility. The verdict is `PASS`, `REVISE_ARTIFACT`, `REVISE_DIRECTION`, or `BLOCKED`; fake precision such as an unexplained `3/5` is not evidence.
 
@@ -222,13 +222,17 @@ frontend-workbench/
     └── frontend-runtime-qa/
 ```
 
-`.codex-plugin/plugin.json` is the required OpenAI plugin manifest. Root `plugin.json` preserves Agent Plugins 1.0 portability for compatible non-OpenAI hosts. Validation keeps their shared metadata synchronized.
+Root `plugin.json` is the portable Agent Plugins 1.0 manifest. Its `extensions.com.openai` object carries OpenAI presentation settings; `.codex-plugin/plugin.json` remains the compatibility fallback for older clients. OpenAI reads the inline object as a whole instead of merging the fallback. Validation keeps shared identity and OpenAI settings synchronized. See [OpenAI packaging documentation](https://developers.openai.com/plugins/build/plugins).
+
+Product Design researches current comparable working products before recommendations in MICRO, STANDARD, and FULL. It opens and inspects relevant implemented interfaces or current official UI evidence, checks operating status and exact interface freshness, and records the reasons to adopt, adapt, or reject each pattern. Generic standards, search ranking, brand names, and unverified old screenshots cannot substitute. The same rule covers standalone frontend UI direction in Art-Direct ImageGen; specified implementation and non-UI image edits do not acquire an extra design stage.
+
+Ordinary answers present a considered recommendation and concrete consequences without narrating plugin internals or the search process. Evidence remains traceable for requested review. The agent challenges material usability failures respectfully, distinguishes aesthetic preferences, and revises when new evidence or user constraints warrant it.
 
 The plugin contains no MCP server, hook, credential, bundled remote service, or automatic external action.
 
 ## Install in Codex
 
-The latest published stable tag is `v0.11.0`.
+The latest published stable tag is `v0.12.1`.
 
 For the current development branch:
 
@@ -240,10 +244,10 @@ codex plugin list
 
 For a first install after an immutable release tag exists, prefer the pinned form:
 
-The latest published stable tag is `v0.11.0`.
+The latest published stable tag is `v0.12.1`.
 
 ```bash
-codex plugin marketplace add akenoowww/frontend-workbench --ref v0.11.0
+codex plugin marketplace add akenoowww/frontend-workbench --ref v0.12.1
 codex plugin add frontend-workbench@frontend-workbench
 codex plugin list
 ```

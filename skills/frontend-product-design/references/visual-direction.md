@@ -6,13 +6,15 @@ Use this reference when a product-design task must establish, preserve, or criti
 
 - **Product-design flow** — frontend-product-design derives and locks the direction. Runnable prototypes, browser renders, and ImageGen outputs are instances of that direction.
 - **Fixed upstream direction** — consume its reference and SHA without reinterpreting it. Reopen Product Design only when evidence shows a material contradiction.
-- **Standalone ImageGen** — when the request is bitmap-only and no upstream product-design contract exists, art-direct-imagegen may synthesize the same compact contract as a local fallback. That does not authorize new product behavior, IA, copy, code, or implementation.
+- **Standalone frontend UI bitmap** — Art-Direct ImageGen invokes the actual frontend-product-design skill in a direction-only entry. Product Design researches and establishes the bitmap-scoped direction, then returns to the existing renderer without invoking a second renderer. Art-Direct cannot synthesize a local replacement direction. This entry does not authorize new product behavior, IA, copy, code, or implementation beyond the user's scope.
 
-If a standalone bitmap later becomes an implementation brief, route it through Product Design to validate the direction against project evidence and produce a frozen handoff.
+If a standalone bitmap later becomes an implementation brief, return to Product Design to validate its new downstream scope against project evidence and produce a frozen handoff.
 
 ## Start from evidence and tension
 
 Use the user brief, confirmed product-object hierarchy, nested shells, Product UI DNA, supplied references, protected behavior, and redesign authority. When a site, screenshot set, or brand guide is supplied, first read [visual-reference-extraction.md](visual-reference-extraction.md). In FULL v3, consume only reference bindings applicable to the current surfaces and aspects; do not turn an available source into whole-product authority.
+
+Before selecting or locking a new direction, complete the current working-product comparison in [ux-research.md](ux-research.md), including for a standalone frontend UI bitmap. Ground hierarchy, density, navigation, and interaction choices in the inspected implementations, with explicit adopt/adapt/reject reasons. Familiar mature patterns are eligible when they fit; reject unsupported generic defaults rather than requiring interaction novelty. Upstream renderers consume the verified research and locked direction instead of reopening concept selection.
 
 For redesign language such as “keep only the sidebar and completely redo the main page,” freeze a region-level boundary before choosing a direction. “Preserve X” means preserve only the named region and listed invariants; it does not authorize preserving the rest of the shell, top bar, module layout, card topology, or hierarchy. Everything named for replacement must carry measurable material-change dimensions. If the boundary is ambiguous, resolve it before rendering rather than drifting into a restyle.
 
@@ -119,6 +121,8 @@ interface VisualDirectionContract {
 ~~~
 
 Every core field is present. `hierarchyPrinciples`, `typographyRoles`, `colorRoles`, `avoid`, and `evidence` contain at least one supported entry; preservation and departure arrays may be empty when evidence supports no honest value. `redesignBoundary` is conditional as defined below. Do not invent a departure, source, font, token, or motion rule to fill the shape. Keep exact coordinates, component trees, renderer prompts, and implementation mechanisms out of this contract.
+
+Represent researched product sources as `website` or `screenshot` evidence. Include the research date, source date or `undated`, exact inspected surface/state, current-implementation corroboration, access limits, and direct/documented/inferred status in `observation`, or link its compact decision record there. Do not add undeclared schema fields. In FULL, newly researched examples remain decision evidence only until their applicable surface/aspect bindings are incorporated through authorized structure change control; research does not silently create renderer authority.
 
 `redesignBoundary` is mandatory whenever the request preserves only part of an existing screen, asks for a complete/material redesign, or rejects a prior result as too similar. Use region IDs that describe semantic ownership, not pixel rectangles. In `preserve-only`, list only user-authorized invariants for the retained regions. For every replaced region, require at least two change dimensions and set `minimumChangedDimensions` high enough to distinguish a redesign from recoloring or card reshuffling. Put recognizable source structures that must disappear into `forbiddenCarryover`.
 

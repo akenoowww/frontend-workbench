@@ -6279,10 +6279,16 @@ def _execution_envelope(
 
     references: list[str] = []
     if stage_owner == "frontend-product-design":
-        references.append("skills/frontend-product-design/references/visual-direction.md")
+        references.extend(
+            [
+                "skills/frontend-product-design/references/visual-direction.md",
+                "skills/frontend-product-design/references/ux-research.md",
+            ]
+        )
     elif stage_owner == "art-direct-imagegen":
         references.extend(
             [
+                "skills/frontend-product-design/SKILL.md",
                 "skills/art-direct-imagegen/references/output-contract.md",
                 "skills/art-direct-imagegen/references/prompt-and-review.md",
             ]
@@ -6382,6 +6388,10 @@ def _execution_envelope(
         )
 
     allowed_tools = ["repository-read", "project-native-checks"]
+    if stage_owner == "frontend-product-design":
+        # Current-product research uses public references read-only; it does not
+        # grant authenticated product mutations or renderer ownership.
+        allowed_tools.extend(["web-search", "web-read", "agent-browser", "image-read"])
     if stage_owner == "frontend-project-fit":
         allowed_tools.append("project-dependency-inspection")
     if runtime_probes and stage_owner == "frontend-runtime-qa":

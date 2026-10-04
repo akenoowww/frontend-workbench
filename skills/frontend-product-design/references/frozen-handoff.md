@@ -108,6 +108,8 @@ interface FrozenDesignHandoff {
 
 Reference workspace-relative structure, coverage, implementation-plan when authorized, and visual-direction files instead of pasting large records into the handoff. Consume product-model, shell, reference-binding, evidence, and operational-metadata identities from the validated compact runtime handoff; do not reconstruct them from chat. When direction is required, use the canonical `product-design/visual-direction.json` reference and helper-verified SHA. Keep exact copy, scoped source links, and visual artifacts close to the decision they support.
 
+Carry current-product research in the selected-decision rationale or a linked authorized decision record: comparable products, inspected surfaces/states, source links and dates, operating-status and implementation-freshness checks, observed versus documented/inferred behavior, and reasons to adopt/adapt/reject. Missing evidence keeps the affected design provisional and blocks a validated design handoff; do not hide it in a generic completion caveat. Keep these research facts outside product UI copy and preserve existing reference-binding scope.
+
 ## Separate fixed decisions from implementation freedom
 
 Freeze:

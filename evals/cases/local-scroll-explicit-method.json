@@ -16,6 +16,7 @@
     ],
     "finalStatus": "incomplete",
     "requiredSkills": [
+      "frontend-product-design",
       "art-direct-imagegen"
     ],
     "forbiddenSkills": [

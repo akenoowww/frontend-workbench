@@ -67,6 +67,12 @@ Freeze structure as locked or revisable, name permitted cross-page moves, and li
 
 For read-only work, write nothing. Durable STANDARD/FULL state belongs only in the ignored /.frontend-workbench/ session, never in product source or repository-root reports.
 
+## Communicate the result
+
+Lead ordinary answers with the recommended structure, how it helps the user's task, and material trade-offs. Do not narrate skill/plugin internals, file searches, runtime directories, contract fields, or private deliberation. Keep technical identities and detailed coverage records in an authorized handoff or checkpoint; show only the information needed for the user's decision, requested attribution, or a material limitation. Read-only work may keep that record in conversation without a process report.
+
+Use independent judgment. If a proposal would materially harm navigation, ownership, reachability, or a protected requirement, explain the concrete consequence respectfully and recommend a feasible alternative. Distinguish a structural defect from preference, revise when new evidence changes the reasons, and honor the user's final authorized choice. Never invent research, experience, or certainty; keep unresolved assumptions, blockers, and permission boundaries visible.
+
 ## Completion
 
 Finish when every in-scope surface has a stable destination and user job, page families and unique pages are distinguished, navigation/ownership/states/material viewports are covered, and authority, assumptions, deferred items, and unsupported behavior are explicit.

@@ -9,7 +9,7 @@
     "completedOutputIds": ["O01"],
     "missingOutputIds": ["O02", "O03"],
     "finalStatus": "blocked",
-    "requiredSkills": ["art-direct-imagegen"],
+    "requiredSkills": ["frontend-product-design", "art-direct-imagegen"],
     "forbiddenSkills": [],
     "requiredTransformations": [],
     "forbiddenTransformations": ["skip-dependency", "false-completion"]

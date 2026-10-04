@@ -4,7 +4,7 @@ Read this for every render. It defines one truthful bitmap output without loadin
 
 ## Normalize one output
 
-Treat upstream product objects, protected capabilities, nested shell, page/state/viewport, content, interaction, scoped references, visual direction, and evidence policy as authoritative. For a standalone request, derive only what the user explicitly named and synthesize a bitmap-only direction through the shared Product Design reference.
+Treat upstream product objects, protected capabilities, nested shell, page/state/viewport, content, interaction, scoped references, visual direction, and evidence policy as authoritative. For a standalone frontend UI request, derive only what the user authorized and obtain a bitmap-scoped direction by applying the actual [Product Design skill](../../frontend-product-design/SKILL.md) in its direction-only entry. Do not synthesize a renderer-owned direction from a shared reference. Both entry modes consume the Product Design handoff before compiling a prompt.
 
 A source used to understand behavior is not automatically an ImageGen input. Keep `FUNCTIONAL_REFERENCE` bytes analysis-only when its scoped content, states, relationships, and interaction facts can be expressed completely in the current-output brief. Attach source bytes only when a declared binding depends on an exact visible invariant or relationship that semantic facts cannot preserve; expose the narrowest applicable region and name the source's style, brand, shell, layout, and unrelated content as non-authoritative. Visual preservation requires an applicable `VISUAL_ANCHOR` or `EDIT_TARGET`, not silent promotion of a functional source.
 

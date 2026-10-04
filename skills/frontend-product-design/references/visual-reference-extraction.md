@@ -2,6 +2,8 @@
 
 Use this reference when supplied websites, screenshots, brand guidance, visual anchors, or external examples can materially change the project-specific visual direction. It complements project archaeology; it does not replace source or runtime inspection.
 
+For researched comparable products, qualify working status and exact interface freshness through [ux-research.md](ux-research.md) before extracting a current pattern. Supplied older references may still express the user's requested aesthetic, but their authority as a style input does not establish current industry implementation. Keep source/capture date separate from access date, and distinguish live observation, current official UI material, documented behavior, and inference.
+
 ## Assign source roles and provenance
 
 Label every source as `functional-reference`, `style-reference`, `visual-anchor`, `edit-target`, or `constraint`. One source may support multiple observations, but a functional reference is never silently treated as a layout template or edit target.
@@ -85,7 +87,7 @@ For nested shells, prefer one accepted parent-shell anchor bound to the shell/hi
 
 - A screenshot can prove visible composition, not hidden interaction behavior or implementation tokens.
 - Generated CSS can reveal emitted values, not necessarily the authoritative design system.
-- A public site may have changed; record when it was observed.
+- A public site may have changed; record when it was observed, what exact surface/state was inspected, and why that implementation is current. A reachable marketing page or recent unrelated release cannot refresh an old application screenshot.
 - A brand guide may be authoritative for identity but silent about product usability or responsive behavior.
 - Missing runtime, fonts, representative data, or source access remains an explicit evidence gap.
 

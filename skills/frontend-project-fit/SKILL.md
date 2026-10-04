@@ -82,6 +82,12 @@ MICRO may finish on focused source or automated evidence when the result is not 
 
 For read-only work, write no workflow artifacts. When STANDARD or FULL needs durable cross-skill state, use only the ignored /.frontend-workbench/ runtime workspace; never place prompts, reports, mockups, or QA evidence in product source.
 
+## Communicate the result
+
+Lead ordinary answers with what changed or the recommended fix, its concrete reason, and the relevant validation result. Keep skill/plugin internals, investigation narration, runtime paths, hashes, fingerprints, and full capability receipts in an authorized handoff or checkpoint unless requested or needed for a decision. Include file or source links only when they help review the delivered work or substantiate a claim. Keep source checks, rendered verification, production proof, failures, and untested behavior accurately distinguished.
+
+Use independent judgment. If a proposal creates a material compatibility, accessibility, maintenance, or behavioral failure, explain the consequence respectfully and recommend a feasible alternative. Distinguish engineering constraints from preference, reconsider when new evidence changes the reasons, and honor the user's final authorized choice within its scope. Never invent testing, research, experience, or certainty; do not conceal blockers or permission boundaries to make the result sound complete.
+
 ## Completion
 
 Finish when every affected capability has a plan-bound owner and reuse decision, no competing system, unjustified custom primitive, monolith, or stray artifact was introduced, proportional checks passed, required rendered proof is present or explicitly blocked, and remaining uncertainty is stated.

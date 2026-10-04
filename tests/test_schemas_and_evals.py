@@ -55,6 +55,55 @@ class SchemaAndEvalTests(unittest.TestCase):
             cls.schemas,
         )
 
+    @staticmethod
+    def manifest_errors(
+        portable: dict[str, Any], codex: dict[str, Any]
+    ) -> list[str]:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            (root / ".codex-plugin").mkdir()
+            (root / ".agents" / "plugins").mkdir(parents=True)
+            (root / "plugin.json").write_text(json.dumps(portable), encoding="utf-8")
+            (root / ".codex-plugin" / "plugin.json").write_text(json.dumps(codex), encoding="utf-8")
+            (root / ".agents" / "plugins" / "marketplace.json").write_text(
+                (ROOT / ".agents" / "plugins" / "marketplace.json").read_text(encoding="utf-8"),
+                encoding="utf-8",
+            )
+            errors: list[str] = []
+            validate_repo.validate_manifests(root, errors, release=False)
+            return errors
+
+    def test_portable_and_compatibility_manifests_have_identical_metadata(self) -> None:
+        errors: list[str] = []
+        validate_repo.validate_manifests(ROOT, errors, release=False)
+        self.assertEqual(errors, [])
+
+    def test_inline_openai_metadata_does_not_merge_missing_fallback_fields(self) -> None:
+        portable = json.loads((ROOT / "plugin.json").read_text(encoding="utf-8"))
+        codex = json.loads((ROOT / ".codex-plugin" / "plugin.json").read_text(encoding="utf-8"))
+        portable["extensions"]["com.openai"] = {}
+        errors = self.manifest_errors(portable, codex)
+        self.assertTrue(any("inline extension replaces the fallback" in error for error in errors), errors)
+        self.assertTrue(any("defaultPrompt" in error for error in errors), errors)
+
+    def test_manifest_validator_rejects_stale_fallback_and_shared_metadata(self) -> None:
+        portable = json.loads((ROOT / "plugin.json").read_text(encoding="utf-8"))
+        codex = json.loads((ROOT / ".codex-plugin" / "plugin.json").read_text(encoding="utf-8"))
+        codex["interface"]["shortDescription"] = "Stale fallback copy"
+        codex["description"] = "Stale package copy"
+        errors = self.manifest_errors(portable, codex)
+        self.assertTrue(any("OpenAI metadata" in error for error in errors), errors)
+        self.assertIn("plugin manifests disagree on description", errors)
+
+    def test_manifest_validator_rejects_unmirrored_future_hook_settings(self) -> None:
+        portable = json.loads((ROOT / "plugin.json").read_text(encoding="utf-8"))
+        codex = json.loads((ROOT / ".codex-plugin" / "plugin.json").read_text(encoding="utf-8"))
+        codex["hooks"] = "./hooks/hooks.json"
+        errors = self.manifest_errors(portable, codex)
+        self.assertTrue(any("OpenAI metadata" in error for error in errors), errors)
+        portable["extensions"]["com.openai"]["hooks"] = codex["hooks"]
+        self.assertEqual(self.manifest_errors(portable, codex), [])
+
     def test_repository_privacy_gate_accepts_only_synthetic_portable_content(self) -> None:
         errors: list[str] = []
         validate_repo.validate_privacy(ROOT, errors)

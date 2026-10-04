@@ -9,7 +9,7 @@
     "completedOutputIds": [],
     "missingOutputIds": ["O01"],
     "finalStatus": "incomplete",
-    "requiredSkills": ["art-direct-imagegen"],
+    "requiredSkills": ["frontend-product-design", "art-direct-imagegen"],
     "forbiddenSkills": ["frontend-project-fit", "frontend-runtime-qa"],
     "requiredTransformations": ["single-imagegen-call-per-turn", "return-revise-artifact", "preserve-reference-roles", "retry-edits-previous-artifact"],
     "forbiddenTransformations": ["second-create-same-output", "style-reference-as-edit-target", "autonomous-cleanup-call", "false-artifact-acceptance"]

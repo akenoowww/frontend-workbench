@@ -147,8 +147,8 @@ Do not call ImageGen when:
 - required information cannot fit legibly in the supplied viewport;
 - a relational dataset is too dense for exact legible rendering and no representative current-output subgraph/content band or authorized non-semantic ambient policy is declared;
 - the concept fixes the whole wireframe before declaring freedom;
-- a material structural/relational STANDALONE direction leaves representation grammar unspecified or merely restates the forecast mode with new style words;
-- the private selection receipt does not evidence at least two representation-grammar field differences from every forecast mode and surviving candidate;
+- the actual Product Design skill has not supplied or validated the applicable pre-render direction and evidence;
+- a material structural/relational direction leaves its required representation grammar unspecified, contradicts supplied semantics, or relies on an unsupported default; a current mature implemented pattern is valid when Product Design's evidence and task fit justify it;
 - a representative content band removes enough relational/context structure that the primary product object collapses into another artifact type;
 - an upstream material render lacks a validated direction reference/SHA;
 - an applicable reference binding is missing, stale, or broader than this surface/aspect;
@@ -246,6 +246,6 @@ For a generic template, unclear concept, impossible density, contract drift, or 
 5. return `BLOCKED` when product or coverage truth is contradictory;
 6. compile a fresh short prompt only after the owning layer resolves the fault.
 
-After one generic result, do not immediately create the same output again from the original references. Return `REVISE_DIRECTION` when the direction is at fault or `REVISE_ARTIFACT` for a bounded renderer defect. In STANDALONE only, a later user turn may revise the bitmap-only direction through the shared method. Never convert `signatureMove` into a renderer wireframe or a requirement for hand-written controls.
+After one generic result, do not immediately create the same output again from the original references. Return `REVISE_DIRECTION` when the direction is at fault or `REVISE_ARTIFACT` for a bounded renderer defect. A later user-authorized direction revision returns to the actual Product Design skill in either entry mode; Art-Direct never changes the concept independently. An artifact-only edit preserves the direction and existing attempt/budget rules. Never convert `signatureMove` into a renderer wireframe or a requirement for hand-written controls.
 
 Accept only when the bitmap gate passes, the shared gate is `PASS` when required, and no safe, relevant budget-compliant correction remains. Record the verdict, direction ref/SHA, artifact path/SHA, bound anchor identity when present, prompt SHA, and budget use before moving to the next design anchor. Runtime-only outputs remain for Runtime QA.

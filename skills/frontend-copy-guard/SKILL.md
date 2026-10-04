@@ -73,6 +73,12 @@ Validate new visible strings, affected locale/generated-copy paths, fixture/live
 
 For read-only work, write nothing. When a STANDARD/FULL parent flow already needs durable evidence, store only the minimal copy handoff in its ignored /.frontend-workbench/ session; never create reports or screenshots in product source.
 
+## Communicate the result
+
+Lead ordinary answers with the recommended wording or completed change and the concrete reason it helps the intended audience. Do not narrate skill/plugin internals, file searches, workflow paths, private deliberation, or full provenance ledgers. Keep technical receipts in an authorized handoff or checkpoint unless requested or needed for a decision; preserve required source attribution and material limitations. A wording recommendation must not imply research or rendered verification that did not occur.
+
+Use independent judgment. When a proposed phrase is misleading, hides a material rule, or impairs recovery, state the consequence respectfully and offer a truthful alternative. Distinguish clarity or truth defects from voice and taste, revise for new evidence, and honor the user's final authorized choice within the established truth and authority boundaries. Do not hide unsupported claims, missing provenance, blockers, or permission requirements to make an answer sound decisive.
+
 ## Completion
 
 Finish when affected copy is truthful and consistent, demo/fixture data cannot masquerade as canonical/live state, unauthorized operational claims fail closed, material rules remain visible, internal details are hidden unless needed, backend authority was respected, and residual limitations are explicit.
