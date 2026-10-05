@@ -1,4 +1,4 @@
 interface:
   display_name: "Frontend Product Design"
   short_description: "UI/UX and renderer-neutral visual direction"
-  default_prompt: "Use $frontend-product-design to research current working comparable products, resolve UI/UX, and own the visual direction."
+  default_prompt: "Use $frontend-product-design to preserve current capabilities, compare relevant working products, and own visual direction."

@@ -29,6 +29,12 @@ For redesign work, inspect the actual definitions and usage of the current compo
 
 Trace the feature's likely data and state path as well as its visible components. Record constraints that can change the design, such as server pagination, role limitations, persisted filters, optimistic updates, or unavailable data.
 
+Establish the affected functional baseline before external product comparison. Include actions that are not present in the default screenshot: secondary menus, export/bulk actions, role-specific controls, retained filters/drafts, field semantics and validation, loading/empty/error/recovery states, and mutation outcomes when source evidence supports them. Trace only relevant adjacent effects. Do not execute production business actions merely to inventory them, and distinguish source-confirmed behavior from rendered observation or assumption.
+
+Inspect the current visual design at actual scale too: rendered page/screenshots when available, hierarchy, grouping, density, tokens, shared component grammar and the states being changed. It is the initial frame for comparison; placement and grouping may evolve inside scope. Map relocations to clear destinations and entry/context models, then derive which separate design images make the new allocation understandable. Missing visual access bounds the claim that a redesign evolves the current interface; do not silently substitute a comparator screen.
+
+For each affected capability record its current user job, inputs, permissions/state/outcome, evidence owner, and equivalent proposed control/state or explicitly authorized change. Omission from the earlier model or an external example is not permission to remove it. Missing source/runtime access limits functional claims; supplied screenshots may support a visual concept but cannot establish unseen behavior or justify replacing it with a competitor's assumptions. Preserve existing behavior until the gap is resolved. Copy/operational-metadata policy still governs visible claims; preserving functionality does not require repeating every current badge or phrase.
+
 For FULL v3, compare the confirmed `productModel` and nested shells with repository truth. A technical model, analytics view, or evidence surface must not become the primary product object merely because it is easiest to inspect. Return a structure conflict when the confirmed hierarchy cannot be supported honestly.
 
 ## 2. Internal reference surfaces

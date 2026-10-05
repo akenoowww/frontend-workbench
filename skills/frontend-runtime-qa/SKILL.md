@@ -48,6 +48,8 @@ For FULL, also read [the lifecycle contract](../frontend-product-design/referenc
 
 State the exact entry route, action/state, expected result, viewport, and data boundary. Name the implementation-plan vertical slice and capability owner when the target uses a complex/foundational control. For smoke testing: meaningful screen renders, primary visible controls respond, and no relevant runtime error occurs.
 
+For an existing surface, consume the in-scope pre-change behavior baseline and its authorized before-to-after mapping alongside the frozen contract. Include less-visible actions, role/permission variants, validation, persistence, deep links, and failure/recovery paths affected by the change. If the baseline is incomplete, inspect the affected source owners and available pre-change evidence read-only; do not require an unrelated whole-product audit or reconstruct the old behavior solely from the new implementation. Omission from a contract, screenshot, representative bitmap, or comparator is not permission to drop existing functionality. A material unknown remains a verification gap rather than an assumed authorized removal.
+
 When fidelity is in scope, identify the locked visual-direction reference/SHA, accepted design artifact/SHA, implementation-plan identity, and frozen handoff. If no accepted artifact exists, verify coherence and project fit without inventing pixel requirements. If direction is required but its lock is missing or stale, block the fidelity claim.
 
 ### Establish and exercise
@@ -55,6 +57,8 @@ When fidelity is in scope, identify the locked visual-direction reference/SHA, a
 Confirm URL, title, viewport, relevant build, data/mock boundary, and browser path. Reuse an existing server when safe; start one only through the project's documented command.
 
 Collect the cheapest evidence that proves each transition: meaningful DOM/accessibility state, visible control and resulting change, focus/overlay/navigation/persistence state, relevant console/network health, and a screenshot for visual claims. Test the requested interaction rather than only loading the page.
+
+Respect the current environment's action authority. Read-only QA does not authorize creating, updating, or deleting business records, submitting business operations, or changing task status. Exercise safe non-mutating paths and use already-authorized isolated checks when available; label their environment and limits. If proving an outcome requires an unauthorized business mutation, leave that outcome unverified or blocked rather than performing it or claiming source evidence proves the live transition.
 
 For durable STANDARD/FULL evidence, create one declarative probe spec under `qa/`, then use `scripts/runtime_state.py run-runtime-qa`. It invokes the canonical browser probe, writes the manifest, and records the receipt atomically; manual `record-fidelity-qa --result pass` is rejected. The helper rejects document-shell roots, tiny screenshots, wrong state/scroll, stale implementation snapshots, unchanged or constant interactions, indirect/remote navigation by default, screenshot-only claims, runtime errors, failed requests, and critical/serious accessibility violations.
 
@@ -64,7 +68,11 @@ MICRO covers its one target and only additional evidence required by the claim. 
 
 ### Compare and classify
 
-Check functional truth before visual fidelity. Then compare the implementation with both the renderer-neutral direction and the accepted artifact: hierarchy, grouping, density, typography/color roles, surface language, imagery, motion tone, component language, navigation, responsive transformation, and accepted visual invariants. Project-compatible adaptation may differ in incidental bitmap detail when it preserves the direction contract. Product truth, accessibility, and project architecture outrank decorative bitmap details.
+Check functional truth against both the existing behavior baseline and the frozen contract before visual fidelity. Trace each affected baseline capability to its preserved, recomposed, or explicitly authorized changed outcome and verify the mapped reachability, relevant role, state, and recovery semantics. An unexplained lost capability is a regression even when the new contract or bitmap omitted it. A deliberate change within the user's authorized scope is judged against its declared new behavior, not forced back to the old interaction topology.
+
+Moving a control into a menu, overlay, continuation, or another authorized surface may pass when the function remains discoverable and reachable with its required permissions, data, validation, and recovery. Do not require every control in the first viewport or preserve the old visual component solely to protect its capability. Existing unsupported operational copy does not become authorized through baseline preservation; apply the declared visibility and truth requirements separately.
+
+Then compare the implementation with both the renderer-neutral direction and the accepted artifact: hierarchy, grouping, density, typography/color roles, surface language, imagery, motion tone, component language, navigation, responsive transformation, and accepted visual invariants. Project-compatible adaptation may differ in incidental bitmap detail when it preserves the direction contract. Product truth, accessibility, and project architecture outrank decorative bitmap details.
 
 Some accepted outputs communicate direction only and intentionally do not specify complete content, data, or interaction. For a direction-only runtime output, first verify the actual product state, typed contract, and planned capability behavior; then compare only the visual invariants the direction owns. Do not copy fake controls or sample data from a direction artifact, infer unsupported behavior, or waive runtime verification because the image was accepted. Record which assertions came from product/implementation contracts and which came from visual direction.
 
@@ -90,6 +98,6 @@ Use independent judgment. Respectfully challenge a proposal or success claim tha
 
 ## Completion
 
-Finish when page identity and meaningful rendering are confirmed, target and library-backed interactions were exercised, direction-only outputs were judged at the correct authority boundary, relevant runtime health was checked, required responsive/accessibility/fidelity claims have evidence, environments are labeled accurately, and failures or untested states are explicit.
+Finish when page identity and meaningful rendering are confirmed, target and library-backed interactions were exercised, affected existing capabilities have verified preserved or authorized changed outcomes, direction-only outputs were judged at the correct authority boundary, relevant runtime health was checked, required responsive/accessibility/fidelity claims have evidence, environments are labeled accurately, and failures or untested states are explicit. Missing baseline or role/recovery evidence cannot be presented as verified functional preservation.
 
 If rendered verification was explicitly requested and no rendered path exists, completion is BLOCKED; a build cannot substitute.

@@ -23,6 +23,7 @@ Escalate a profile only when repository evidence reveals a criterion above. If a
 - For implementation, inspect the affected path before editing and preserve unrelated user changes.
 - Consume approved structure and design handoffs when they exist, including the implementation plan, operational metadata policy, and locked visual-direction reference/SHA when required; do not manufacture a design phase for specified work.
 - Do not turn a local change into a design-system or architecture migration without authorization.
+- A visual redesign does not authorize rewriting feature behavior, state/data flows, API contracts, business rules, permissions, validation, persistence, or recovery. Consume the affected current-behavior baseline and capability mapping as well as the design; use existing owners and equivalent presentation adapters. A comparator, accepted bitmap, or omission from the frozen list cannot justify dropping an existing capability. Return a scope conflict when the design/handoff missed it; implement a functional change only when the user's functional scope or specific authorized UX change covers it.
 - If the affected source is unavailable, state the evidence gap instead of inventing conventions.
 
 This skill owns implementation fit, reuse, capability choice, integration, and source validation. It does not own product direction, ImageGen, rendered QA evidence, or unrelated backend contracts.

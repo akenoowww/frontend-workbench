@@ -109,9 +109,9 @@ Set `visualArtifactPolicy` explicitly:
 - `imagegen-required` — generated evidence is required for the declared design anchors before code;
 - `no-imagegen` — use specifications, project-native composition, or runnable evidence.
 
-In v3, `imagegen-required` applies to outputs with `designEvidenceRequired`, not to every runtime-covered route. Every required ImageGen design anchor remains approval-required and user-authorized before implementation. Runtime-only outputs remain required for QA but do not consume design renders.
+In v3, `imagegen-required` applies to outputs with `designEvidenceRequired`, not to every runtime-covered route. Every required ImageGen design anchor remains user-authorized before implementation or durable promotion. In v3 review-before-implementation, outputs may use approvalRequired: false for serial internal review and continuation, then receive exact user authorization as a complete required design set at the final design checkpoint. Explicit per-output approval and review-each-stage remain blocking; existing frozen flags are never silently relaxed. Runtime-only outputs remain required for QA but do not consume design renders.
 
-Record `checkpointMode` explicitly. A material redesign defaults to `review-before-implementation`; use `review-each-stage` only when requested or when a later design output truly depends on an accepted anchor. Do not infer a checkpoint decision from a request to proceed quickly.
+Record `checkpointMode` explicitly. A material redesign defaults to `review-before-implementation`; use `review-each-stage` when the user requests stepwise acceptance or an explicit per-output checkpoint requires it. An internally reviewed anchor dependency alone does not require a user stop after every image. Do not infer a checkpoint decision from a request to proceed quickly.
 
 Whenever an output uses `artifactKind: imagegen`, the confirmed `renderBudget` limits total paid/expensive calls, attempts per output, and concept resets. It is absent under `no-imagegen`. Count actual render calls, not status transitions. Review, batch operations, retries, carry-forward, or changing policy must not bypass it. Block before exceeding the budget; a product, structure, direction, or reference contradiction returns to its owner instead of consuming retries as prompt experiments.
 

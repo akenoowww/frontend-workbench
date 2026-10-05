@@ -6,6 +6,8 @@ Use this reference after project inspection when the user asks to redesign, refr
 
 Capture the current target surface, its primary/supporting/downstream product objects, included states and viewports, nested shell ancestry, component composition, visual hierarchy, interaction behavior, scoped reference bindings, and protected product capabilities. Use source and rendered evidence when available; either alone can miss important constraints.
 
+The baseline precedes external comparison. Inventory existing in-scope actions, data/field meanings, business rules, roles/permissions, validation, persistent state, side effects, and recovery, including controls hidden in other states. Existing functionality is preserved by default, not only functionality already listed as protected. Map affected capabilities to their proposed equivalent control/state or an explicitly authorized change. An incomplete contract, screenshot, or comparator cannot supply removal authority. When a frozen contract omits an existing required capability, correct that conflict before using it as an implementation target.
+
 ## Define a typed redesign contract
 
 ~~~ts
@@ -47,19 +49,21 @@ replaceRegions:
 forbiddenCarryover: [equal KPI card grid, repeated donut-card rail, unchanged main-content composition]
 ```
 
-The preserve list is exhaustive. Do not add top bars, cards, widgets, shell regions, or layout relationships merely because preserving them feels safer. Product data/behavior can remain truthful while its presentation is fully recomposed.
+The preserve list is exhaustive for visual carryover. Do not add top bars, cards, widgets, shell regions, or layout relationships merely because preserving them feels safer. It is not a functional preserve allowlist: product data, business behavior, actions, permissions, validation, persistence, and recovery still survive throughout the replaced area unless their change is authorized. “Keep only the sidebar” may fully recompose the main page while retaining its current capabilities through equivalent reachable controls.
 
 Infer the smallest depth that satisfies the request:
 
 - **refresh**: change tokens, typography, spacing character, icon treatment, or motion without changing the product structure;
 - **evolve**: refine hierarchy, layout, grouping, density, composition, or progressive disclosure while preserving the current system as authoritative;
-- **rethink**: permit a new hierarchy, composition, interaction pattern, or local information architecture inside the target zone.
+- **rethink**: permit a new hierarchy, composition, equivalent interaction pattern, or authorized local information architecture inside the target zone; visual depth alone does not authorize changing business semantics or deleting functionality.
 
 Use a numeric intensity only when the user supplies one. Treat it as a boundary, not a quality score; do not invent dimension percentages.
 
 Choose **redefine-within-zone** or **replace-within-zone** only when the request or a confirmed design decision authorizes structural departure. Even then, preserve required capabilities, data contracts, accessibility, localization, recovery, and unrelated architecture.
 
 Distinguish product invariants from visual carryover. “Keep the same values, actions, and permissions” does not mean keep their cards, order, chart form, grouping, or visual weight. Conversely, “keep the sidebar” preserves only its declared semantics/region; it does not preserve the complete surrounding shell.
+
+Use current design as the starting evidence, then permit logical rearrangement or modification inside the authorized scope. A capability may move to another region, in-scope page or on-demand state when its entry point, destination, context, permissions and outcome remain clear. Map that allocation before visual generation, and plan enough readable images to show its materially distinct areas and necessary states. Several states on one route may need separate images; equivalent states may share representative evidence. Derive quantity from actual content and user jobs, not a fixed example. Do not keep an illogical location merely to preserve function, or invent a destination outside scope.
 
 Also distinguish availability from first-screen density. If the current surface contains more truthful information than one viewport can carry well, select one strategy explicitly:
 
@@ -68,7 +72,7 @@ Also distinguish availability from first-screen density. If the current surface 
 - `multi-surface`: use only when confirmed structure authorizes another route/page;
 - `single-viewport`: use only when hierarchy remains readable without compression.
 
-Record the chosen bands in `contentDistribution`. Give each visible fact, metric, action, or module one stable `contentId`; assign it once unless intentional repetition is declared in `sharedContentIds`. Do not invent “summary” and “detail” aliases for the same value. Do not invent a second route to solve density, but do use separate top/continuation outputs for one long page when scroll is part of the confirmed surface. Protected content must remain reachable in the implemented product; representative design PNGs need not exhaustively display it, and it need not all be visible above the fold.
+Record the chosen bands in `contentDistribution`. Give each visible fact, metric, action, or module one stable `contentId`; assign it once unless intentional repetition is declared in `sharedContentIds`. Do not invent “summary” and “detail” aliases for the same value. The renderer must not invent a route outside the frozen scope to solve density. Before freeze, Product Design/IA may logically reallocate to an authorized in-scope page or state with a clear entry/context mapping; a long page may use separate top/continuation outputs when scroll is part of the confirmed surface. Protected content must remain reachable in the implemented product; representative design PNGs need not exhaustively display it, and it need not all be visible above the fold.
 
 In FULL v3, protected capabilities are monotonic within the confirmed lifecycle. A redesign may add detail or capability, but demotion/removal, changed product-object ownership, changed parent shell, broader reference scope, or reduced evidence is a material contract change requiring a fresh receipt plus base/delta/result change-control record. Do not hide the change as a component disposition or visual simplification.
 
@@ -88,7 +92,7 @@ For each materially affected baseline component, record one disposition:
 - **REMOVE**;
 - **REPLACE**.
 
-Attach a product reason to **REMOVE** and **REPLACE**. Visual novelty is not sufficient. Prefer composition or a supported variant when it expresses the selected direction cleanly. Component disposition describes design semantics, not implementation ownership; Project Fit may use mature internal, framework/platform, or library capabilities, and uniqueness never requires a hand-written control.
+Attach a product reason and capability mapping to **REMOVE** and **REPLACE**. Removing a visual component is valid when its function survives through an equivalent reachable control/state; removing or materially changing its capability requires the user's functional scope or specific authorized UX change. A comparator's omission, visual novelty, or approval of a screenshot is not sufficient. Prefer composition or a supported variant when it expresses the selected direction cleanly. Component disposition describes design semantics, not implementation ownership; Project Fit may use mature internal, framework/platform, or library capabilities, and uniqueness never requires a hand-written control.
 
 ## Resolve ambiguity proportionally
 

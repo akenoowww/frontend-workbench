@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "frontend-workbench",
-  "version": "0.12.1",
+  "version": "0.12.2",
   "description": "Task-specific frontend workflows with typed product structure, capability-first implementation plans, and SHA-bound design/runtime evidence.",
   "author": {
     "name": "akenoowww",

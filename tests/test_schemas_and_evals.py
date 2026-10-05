@@ -1354,6 +1354,33 @@ class SchemaAndEvalTests(unittest.TestCase):
         )
         self.assertEqual(errors, [])
 
+    def test_v3_imagegen_coverage_budget_is_derived_and_stage_approval_is_explicit(self) -> None:
+        contract = self.v3_contract()
+        contract["renderBudget"]["maxCallsTotal"] = 147
+        for output in contract["outputs"]:
+            if output["designEvidenceRequired"]:
+                output["approvalRequired"] = False
+        self.assertEqual(
+            run_evals.validate_instance(
+                contract, self.schemas["deliverable-coverage.schema.json"], self.registry, "derived-render-set",
+            ),
+            [],
+        )
+        contract["checkpointMode"] = "review-each-stage"
+        errors = run_evals.validate_instance(
+            contract, self.schemas["deliverable-coverage.schema.json"], self.registry, "explicit-stage-review",
+        )
+        self.assertTrue(any("approvalRequired" in error for error in errors), errors)
+        for output in contract["outputs"]:
+            if output["designEvidenceRequired"]:
+                output["approvalRequired"] = True
+        self.assertEqual(
+            run_evals.validate_instance(
+                contract, self.schemas["deliverable-coverage.schema.json"], self.registry, "explicit-stage-review",
+            ),
+            [],
+        )
+
     def test_v3_runtime_snapshot_requires_contract_structure_and_output_bindings(self) -> None:
         contract = self.v3_contract()
         state = self.v3_runtime_state(contract)

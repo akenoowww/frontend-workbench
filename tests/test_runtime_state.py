@@ -3278,6 +3278,47 @@ class RuntimeStateTests(unittest.TestCase):
         )
         self.assertEqual(len(state["implementation"]["fidelityQaReceipts"]), 3)
 
+    def test_product_design_handoff_limits_baseline_reading_to_affected_scope(self) -> None:
+        session_id = "product-baseline-handoff"
+        contract_path, structure_path = self.write_v3_contract(
+            session_suffix="product-baseline",
+        )
+        state = runtime_state.start_session(
+            self.root,
+            session_id,
+            contract_path,
+            structure_file=structure_path,
+        )
+        for expected_stage in ("intent-confirmation", "visual-direction"):
+            with self.subTest(stage=expected_stage):
+                handoff = runtime_state.compact_handoff(self.root, session_id)
+                envelope = handoff["executionEnvelope"]
+                self.assertEqual(envelope["stage"], expected_stage)
+                self.assertEqual(envelope["stageOwner"], "frontend-product-design")
+                self.assertEqual(
+                    envelope["selectedReferenceSlices"],
+                    [
+                        "skills/frontend-product-design/references/project-archeology.md",
+                        "skills/frontend-product-design/references/redesign-boundaries.md",
+                        "skills/frontend-product-design/references/visual-direction.md",
+                        "skills/frontend-product-design/references/ux-research.md",
+                        "skills/frontend-product-design/references/full-lifecycle.md",
+                    ],
+                )
+                self.assertIn("affected existing behavior", envelope["tokenPolicy"])
+                self.assertIn("not an unrelated whole-repository audit", envelope["tokenPolicy"])
+                self.assertNotIn("image_gen", envelope["allowedTools"])
+                _, unchanged = runtime_state.load_state(self.root, session_id)
+                self.assertEqual(unchanged, state)
+                envelope_without_digest = dict(envelope)
+                envelope_digest = envelope_without_digest.pop("sha256")
+                self.assertEqual(
+                    envelope_digest,
+                    runtime_state._canonical_sha256(envelope_without_digest),
+                )
+            if expected_stage == "intent-confirmation":
+                state = self.confirm_v3(session_id, state)
+
     def test_imagegen_handoff_includes_product_design_owner_without_reopening_direction(self) -> None:
         session_id = "imagegen-owner-handoff"
         contract_path, structure_path = self.write_v3_contract(
@@ -3386,7 +3427,7 @@ class RuntimeStateTests(unittest.TestCase):
         self.assertEqual(envelope["runtimeProbes"][0]["route"], "/test")
         self.assertEqual(envelope["runtimeProbes"][0]["adapter"], "agent-browser")
         self.assertIn("complete-implementation", envelope["completionAuthority"])
-        self.assertEqual(envelope["renderAttemptPolicy"]["maxCallsPerUserTurn"], 1)
+        self.assertEqual(envelope["renderAttemptPolicy"]["maxCallsPerUserTurn"], 0)
         self.assertFalse(envelope["renderAttemptPolicy"]["autonomousRetryAllowed"])
         self.assertTrue(envelope["renderAttemptPolicy"]["inputRolesImmutable"])
         self.assertTrue(
@@ -4020,6 +4061,231 @@ class RuntimeStateTests(unittest.TestCase):
         with self.assertRaisesRegex(runtime_state.StateError, "canonical predecessor delta"):
             runtime_state.load_state(self.root, "v3-relaxed")
         runtime_state.atomic_write_json(replacement_state_path, canonical_replacement)
+
+    def test_standard_render_envelope_tracks_complete_planned_set(self) -> None:
+        path = self.write_contract(
+            promotion_required=False,
+            workflow_profile="standard",
+            visual_artifact_policy="imagegen-required",
+            visual_direction_policy="required",
+            checkpoint_mode="continuous",
+        )
+        contract = json.loads(path.read_text(encoding="utf-8"))
+        for index in range(2, 5):
+            output = json.loads(json.dumps(contract["outputs"][0]))
+            output.update(id=f"O0{index}", state=f"section-{index}", dependsOn=[f"O0{index - 1}"])
+            contract["outputs"].append(output)
+        path.write_text(json.dumps(contract), encoding="utf-8")
+        session_id = "standard-complete-set"
+        state = runtime_state.start_session(self.root, session_id, path)
+        state = runtime_state.lock_visual_direction(
+            self.root, session_id, state["revision"], self.write_visual_direction()
+        )
+        handoff = runtime_state.compact_handoff(self.root, session_id)
+        self.assertEqual(handoff["executionEnvelope"]["renderAttemptPolicy"]["maxCallsPerUserTurn"], 4)
+        self.assertEqual(handoff["executionEnvelope"]["stageOwner"], "art-direct-imagegen")
+        self.assertIn("image_gen", handoff["executionEnvelope"]["allowedTools"])
+        artifact = self.artifact_bytes(session_id, "first.png", self.png_bytes(3, 2))
+        state = runtime_state.mark_output(self.root, session_id, "O01", "generating", state["revision"])
+        state = runtime_state.mark_output(
+            self.root, session_id, "O01", "reviewing", state["revision"],
+            artifact=artifact,
+        )
+        state = runtime_state.mark_output(
+            self.root, session_id, "O01", "accepted", state["revision"], artifact=artifact,
+        )
+        handoff = runtime_state.compact_handoff(self.root, session_id)
+        self.assertEqual(handoff["executionEnvelope"]["renderAttemptPolicy"]["maxCallsPerUserTurn"], 3)
+        self.assertFalse(handoff["executionEnvelope"]["renderAttemptPolicy"]["autonomousRetryAllowed"])
+        micro = json.loads(json.dumps(state))
+        micro["contract"]["workflowProfile"] = "micro"
+        session_dir = self.root / ".frontend-workbench" / "sessions" / session_id
+        self.assertEqual(runtime_state._execution_envelope(self.root, session_dir, micro)["renderAttemptPolicy"]["maxCallsPerUserTurn"], 1)
+        state = runtime_state.mark_output(self.root, session_id, "O02", "generating", state["revision"])
+        state = runtime_state.resume_session(self.root, session_id, state["revision"])
+        self.assertEqual(state["outputs"][1]["problem"]["code"], "unknown_outcome")
+        handoff = runtime_state.compact_handoff(self.root, session_id)
+        self.assertEqual(handoff["executionEnvelope"]["renderAttemptPolicy"]["maxCallsPerUserTurn"], 0)
+
+    def test_v3_internal_imagegen_chain_requires_complete_set_approval_before_promotion_and_code(self) -> None:
+        contract_path, structure_path = self.write_v3_contract(
+            session_suffix="internal-chain", artifact_kind="imagegen",
+            visual_artifact_policy="imagegen-required", checkpoint_mode="review-before-implementation",
+            two_outputs=True, anchor_second=True,
+            render_budget={"maxCallsTotal": 2, "maxAttemptsPerOutput": 1, "maxConceptResets": 0},
+        )
+        contract = json.loads(contract_path.read_text(encoding="utf-8"))
+        contract["outputs"][0].update(promotionRequired=True, promotionTarget="promoted/first.png")
+        contract_path.write_text(json.dumps(contract), encoding="utf-8")
+        session_id = "internal-imagegen-chain"
+        state = runtime_state.start_session(self.root, session_id, contract_path, structure_file=structure_path)
+        state = self.confirm_v3(session_id, state)
+        direction = self.write_visual_direction()
+        state = runtime_state.lock_visual_direction(self.root, session_id, state["revision"], direction)
+        artifacts: dict[str, str] = {}
+        for index, output_id in enumerate(("O01", "O02"), 3):
+            artifact = self.artifact_bytes(session_id, f"{output_id}.png", self.png_bytes(index, 2))
+            artifacts[output_id] = artifact
+            state = runtime_state.mark_output(
+                self.root, session_id, output_id, "generating", state["revision"],
+                render_brief=self.render_brief(session_id, state, output_id),
+            )
+            provenance, _, _ = self.imagegen_provenance(session_id, output_id, artifact)
+            state = runtime_state.mark_output(
+                self.root, session_id, output_id, "reviewing", state["revision"],
+                artifact=artifact, provenance_receipt=provenance,
+            )
+            state = runtime_state.mark_output(
+                self.root, session_id, output_id, "accepted", state["revision"], artifact=artifact,
+            )
+            self.assertFalse(state["outputs"][index - 3]["userAuthorized"])
+        self.assertEqual(state["renderUsage"]["callsTotal"], 2)
+        self.assertEqual(state["outputs"][1]["anchorArtifactSha256"], state["outputs"][0]["sha256"])
+        state, errors = runtime_state.validate_session(self.root, session_id, state["revision"])
+        self.assertEqual(errors, [])
+        self.write_product_target("Existing product owner")
+        plan = self.write_implementation_plan(session_id, state)
+        with self.assertRaisesRegex(runtime_state.StateError, "user-authorized"):
+            runtime_state.begin_implementation(self.root, session_id, state["revision"], implementation_plan_file=plan)
+        with self.assertRaisesRegex(runtime_state.StateError, "separate user authorization"):
+            runtime_state.promote_output(self.root, session_id, "O01", state["revision"])
+        state = runtime_state.lock_visual_direction(self.root, session_id, state["revision"], direction, user_authorized=True)
+        state = runtime_state.mark_output(
+            self.root, session_id, "O01", "accepted", state["revision"],
+            artifact=artifacts["O01"], user_authorized=True,
+        )
+        state, errors = runtime_state.validate_session(self.root, session_id, state["revision"])
+        self.assertEqual(errors, [])
+        with self.assertRaisesRegex(runtime_state.StateError, "complete required imagegen design set"):
+            runtime_state.promote_output(self.root, session_id, "O01", state["revision"])
+        session_dir = self.root / ".frontend-workbench" / "sessions" / session_id
+        destination = self.root / "promoted" / "first.png"
+        destination.write_bytes((session_dir / artifacts["O01"]).read_bytes())
+        state = runtime_state.resume_session(self.root, session_id, state["revision"])
+        self.assertEqual(state["outputs"][0]["status"], "accepted")
+        destination.unlink()
+        with self.assertRaisesRegex(runtime_state.StateError, "same accepted artifact"):
+            runtime_state.mark_output(
+                self.root, session_id, "O02", "accepted", state["revision"],
+                artifact=artifacts["O01"], user_authorized=True,
+            )
+        receipt_path = session_dir / state["outputs"][1]["provenance"]["receiptPath"]
+        receipt_bytes = receipt_path.read_bytes()
+        changed_receipt = json.loads(receipt_bytes)
+        changed_receipt["sourceId"] = "changed-before-approval"
+        receipt_path.write_text(json.dumps(changed_receipt), encoding="utf-8")
+        with self.assertRaisesRegex(runtime_state.StateError, "provenance differs"):
+            runtime_state.mark_output(
+                self.root, session_id, "O02", "accepted", state["revision"],
+                artifact=artifacts["O02"], user_authorized=True,
+            )
+        receipt_path.write_bytes(receipt_bytes)
+        state = runtime_state.mark_output(
+            self.root, session_id, "O02", "accepted", state["revision"],
+            artifact=artifacts["O02"], user_authorized=True,
+        )
+        state, errors = runtime_state.validate_session(self.root, session_id, state["revision"])
+        self.assertEqual(errors, [])
+        changed_receipt = json.loads(receipt_bytes)
+        changed_receipt["sourceId"] = "changed-after-approval"
+        receipt_path.write_text(json.dumps(changed_receipt), encoding="utf-8")
+        with self.assertRaisesRegex(runtime_state.StateError, "provenance differs"):
+            runtime_state.promote_output(self.root, session_id, "O01", state["revision"])
+        receipt_path.write_bytes(receipt_bytes)
+        state = runtime_state.promote_output(self.root, session_id, "O01", state["revision"])
+        self.assertEqual(state["outputs"][0]["status"], "promoted")
+        state = runtime_state.begin_implementation(self.root, session_id, state["revision"], implementation_plan_file=plan)
+        self.assertEqual(state["implementation"]["status"], "in-progress")
+
+    def test_v3_explicit_imagegen_checkpoint_still_blocks_continuation(self) -> None:
+        legacy_path = self.write_contract(
+            workflow_profile="full", promotion_required=False, approval_required=False,
+            visual_artifact_policy="imagegen-required", checkpoint_mode="review-before-implementation",
+        )
+        legacy_errors = runtime_state.validate_contract(json.loads(legacy_path.read_text(encoding="utf-8")))
+        self.assertTrue(any("approvalRequired must be true" in error for error in legacy_errors), legacy_errors)
+        contract_path, structure_path = self.write_v3_contract(
+            session_suffix="explicit-checkpoint", artifact_kind="imagegen",
+            visual_artifact_policy="imagegen-required", checkpoint_mode="review-each-stage",
+            two_outputs=True, anchor_second=True,
+        )
+        contract = json.loads(contract_path.read_text(encoding="utf-8"))
+        for output in contract["outputs"]:
+            output["approvalRequired"] = True
+        contract_path.write_text(json.dumps(contract), encoding="utf-8")
+        session_id = "explicit-imagegen-checkpoint"
+        state = runtime_state.start_session(self.root, session_id, contract_path, structure_file=structure_path)
+        state = self.confirm_v3(session_id, state)
+        state = runtime_state.lock_visual_direction(
+            self.root, session_id, state["revision"], self.write_visual_direction(), user_authorized=True,
+        )
+        artifact = self.artifact_bytes(session_id, "checkpoint.png", self.png_bytes(3, 2))
+        state = runtime_state.mark_output(
+            self.root, session_id, "O01", "generating", state["revision"],
+            render_brief=self.render_brief(session_id, state, "O01"),
+        )
+        provenance, _, _ = self.imagegen_provenance(session_id, "O01", artifact)
+        state = runtime_state.mark_output(
+            self.root, session_id, "O01", "reviewing", state["revision"], artifact=artifact, provenance_receipt=provenance,
+        )
+        with self.assertRaisesRegex(runtime_state.StateError, "must enter awaiting-approval"):
+            runtime_state.mark_output(self.root, session_id, "O01", "accepted", state["revision"], artifact=artifact)
+        state = runtime_state.mark_output(
+            self.root, session_id, "O01", "awaiting-approval", state["revision"], artifact=artifact,
+        )
+        with self.assertRaisesRegex(runtime_state.StateError, "await approval"):
+            runtime_state.mark_output(self.root, session_id, "O02", "generating", state["revision"])
+        with self.assertRaisesRegex(runtime_state.StateError, "user-authorized"):
+            runtime_state.mark_output(self.root, session_id, "O01", "accepted", state["revision"], artifact=artifact)
+
+    def test_v3_unknown_imagegen_outcome_keeps_budget_and_blocks_envelope_expansion(self) -> None:
+        contract_path, structure_path = self.write_v3_contract(
+            session_suffix="unknown-budget", artifact_kind="imagegen", two_outputs=True,
+            render_budget={"maxCallsTotal": 2, "maxAttemptsPerOutput": 1, "maxConceptResets": 0},
+        )
+        session_id = "unknown-imagegen-budget"
+        state = runtime_state.start_session(self.root, session_id, contract_path, structure_file=structure_path)
+        state = self.confirm_v3(session_id, state)
+        state = runtime_state.lock_visual_direction(self.root, session_id, state["revision"], self.write_visual_direction())
+        self.assertEqual(runtime_state._remaining_planned_imagegen_calls(state), 2)
+        brief = self.render_brief(session_id, state, "O01")
+        state = runtime_state.mark_output(self.root, session_id, "O01", "generating", state["revision"], render_brief=brief)
+        self.assertEqual(runtime_state._remaining_planned_imagegen_calls(state), 1)
+        state = runtime_state.resume_session(self.root, session_id, state["revision"])
+        self.assertEqual(state["outputs"][0]["problem"]["code"], "unknown_outcome")
+        self.assertEqual(runtime_state._remaining_planned_imagegen_calls(state), 0)
+        self.assertEqual(state["renderUsage"], {"callsTotal": 1, "attemptsByOutput": {"O01": 1}, "conceptResets": 0})
+        with self.assertRaisesRegex(runtime_state.StateError, "render budget"):
+            runtime_state.mark_output(self.root, session_id, "O01", "generating", state["revision"], render_brief=brief)
+        _, unchanged = runtime_state.load_state(self.root, session_id)
+        self.assertEqual(unchanged["renderUsage"], state["renderUsage"])
+
+    def test_v3_large_frozen_budget_remains_enforced_by_actual_calls(self) -> None:
+        contract_path, structure_path = self.write_v3_contract(
+            session_suffix="large-budget", artifact_kind="imagegen", two_outputs=True,
+            render_budget={"maxCallsTotal": 147, "maxAttemptsPerOutput": 2, "maxConceptResets": 0},
+        )
+        contract = json.loads(contract_path.read_text(encoding="utf-8"))
+        self.assertEqual(runtime_state.validate_contract(contract), [])
+        contract["renderBudget"]["maxCallsTotal"] = 2
+        contract_path.write_text(json.dumps(contract), encoding="utf-8")
+        session_id = "exact-total-budget"
+        state = runtime_state.start_session(self.root, session_id, contract_path, structure_file=structure_path)
+        state = self.confirm_v3(session_id, state)
+        state = runtime_state.lock_visual_direction(self.root, session_id, state["revision"], self.write_visual_direction())
+        brief = self.render_brief(session_id, state, "O01")
+        for _ in range(2):
+            state = runtime_state.mark_output(self.root, session_id, "O01", "generating", state["revision"], render_brief=brief)
+            state = runtime_state.mark_output(self.root, session_id, "O01", "pending", state["revision"])
+        self.assertEqual(state["renderUsage"]["callsTotal"], 2)
+        self.assertEqual(runtime_state._remaining_planned_imagegen_calls(state), 0)
+        with self.assertRaisesRegex(runtime_state.StateError, "total render budget"):
+            runtime_state.mark_output(
+                self.root, session_id, "O02", "generating", state["revision"],
+                render_brief=self.render_brief(session_id, state, "O02"),
+            )
+        _, unchanged = runtime_state.load_state(self.root, session_id)
+        self.assertEqual(unchanged["renderUsage"], state["renderUsage"])
 
     def test_v3_batch_rejects_duplicate_outputs_and_render_budget_is_enforced(self) -> None:
         contract_path, structure_path = self.write_v3_contract(

@@ -1563,7 +1563,7 @@ def validate_v3_contract(contract: dict[str, Any]) -> list[str]:
         else item
         for item in contract.get("outputs", [])
     ]
-    errors.extend(validate_contract(projection))
+    errors.extend(validate_contract(projection, _v3_projection=True))
     if contract.get("workflowProfile", "standard") == "full":
         for field in (
             "operationalMetadataPolicy",
@@ -1977,8 +1977,6 @@ def validate_v3_contract(contract: dict[str, Any]) -> list[str]:
                 errors.append(
                     "contract.renderBudget.maxCallsTotal cannot cover every imagegen output"
                 )
-            if isinstance(calls, int) and calls > 100:
-                errors.append("contract.renderBudget.maxCallsTotal must be at most 100")
             attempts = render_budget.get("maxAttemptsPerOutput")
             if isinstance(attempts, int) and attempts > 10:
                 errors.append(
@@ -2002,9 +2000,12 @@ def validate_v3_contract(contract: dict[str, Any]) -> list[str]:
                 errors.append(
                     f"output {output_id!r} artifactKind must be imagegen when imagegen is required"
                 )
-            if output.get("approvalRequired") is not True:
+            if (
+                contract.get("checkpointMode") == "review-each-stage"
+                and output.get("approvalRequired") is not True
+            ):
                 errors.append(
-                    f"output {output_id!r} approvalRequired must be true when imagegen is required"
+                    f"output {output_id!r} approvalRequired must be true for review-each-stage"
                 )
     return errors
 
@@ -2561,6 +2562,7 @@ def validate_contract(
     *,
     allow_legacy_schema_version: bool = False,
     allow_legacy_missing_visual_direction_policy: bool = False,
+    _v3_projection: bool = False,
 ) -> list[str]:
     if contract.get("schemaVersion") == SCHEMA_VERSION:
         return validate_v3_contract(contract)
@@ -2853,6 +2855,8 @@ def validate_contract(
                 ):
                     errors.append(f"{label}.equivalenceJustification must be non-empty")
             if (
+                not _v3_projection
+                and
                 workflow_profile == "full"
                 and visual_artifact_policy == "imagegen-required"
                 and output.get("required") is True
@@ -5880,7 +5884,7 @@ def _apply_output_transition(
             accepted_path = artifact_path(session_dir, artifact)
             validate_declared_artifact_kind(state, accepted_path, output_id)
             existing_provenance = output.get("provenance")
-            validate_imagegen_provenance(
+            verified_provenance = validate_imagegen_provenance(
                 session_dir,
                 state,
                 output_id,
@@ -5891,6 +5895,8 @@ def _apply_output_transition(
                     else None
                 ),
             )
+            if verified_provenance != existing_provenance:
+                raise StateError("Accepted output provenance differs from its reviewed receipt")
             if sha256_file(accepted_path) != output.get("sha256"):
                 raise StateError(
                     "accepted artifact changed before user authorization"
@@ -6221,6 +6227,46 @@ def batch_mark(
     return _commit_state(session_dir, state)
 
 
+def _is_planned_imagegen_output(state: dict[str, Any], output: dict[str, Any]) -> bool:
+    return _design_evidence_required(output) and (
+        output.get("artifactKind") == "imagegen"
+        or (
+            not _is_v3_state(state)
+            and state["contract"].get("visualArtifactPolicy") == "imagegen-required"
+        )
+    )
+
+
+def _remaining_planned_imagegen_calls(state: dict[str, Any]) -> int:
+    """Pending coverage bounded by the budget; retry authority remains separate.
+
+    V2 has no persisted attempt counters, so pending status alone cannot prove
+    whether an earlier attempt was cleared. The envelope never authorizes an
+    autonomous retry, and an unresolved renderer outcome stops coverage calls.
+    """
+    outputs = _state_output_map(state)
+    if any(
+        output.get("status") == "blocked"
+        and isinstance(output.get("problem"), dict)
+        and output["problem"].get("code") in {"unknown_outcome", "unknown-outcome"}
+        for output in outputs.values()
+    ):
+        return 0
+    usage = state.get("renderUsage") or {}
+    attempts = usage.get("attemptsByOutput", {})
+    remaining = sum(
+        1
+        for output_id, contract_output in _contract_output_map(state["contract"]).items()
+        if _is_planned_imagegen_output(state, contract_output)
+        and outputs[output_id]["status"] == "pending"
+        and attempts.get(output_id, 0) == 0
+    )
+    budget = state["contract"].get("renderBudget")
+    if isinstance(budget, dict):
+        remaining = min(remaining, max(0, budget["maxCallsTotal"] - usage.get("callsTotal", 0)))
+    return remaining
+
+
 def _execution_envelope(
     root: Path,
     session_dir: Path,
@@ -6253,7 +6299,7 @@ def _execution_envelope(
         stage_owner = (
             "art-direct-imagegen"
             if any(
-                output.get("artifactKind") == "imagegen"
+                _is_planned_imagegen_output(state, output)
                 and output["status"] not in SETTLED_OUTPUT_STATUSES
                 for output in state["outputs"]
             )
@@ -6281,6 +6327,8 @@ def _execution_envelope(
     if stage_owner == "frontend-product-design":
         references.extend(
             [
+                "skills/frontend-product-design/references/project-archeology.md",
+                "skills/frontend-product-design/references/redesign-boundaries.md",
                 "skills/frontend-product-design/references/visual-direction.md",
                 "skills/frontend-product-design/references/ux-research.md",
             ]
@@ -6433,7 +6481,11 @@ def _execution_envelope(
             "maxCallsPerUserTurn": (
                 None
                 if state["contract"].get("workflowProfile", "standard") == "full"
-                else 1
+                else (
+                    1
+                    if state["contract"].get("workflowProfile") == "micro"
+                    else _remaining_planned_imagegen_calls(state)
+                )
             ),
             "fullRetryAuthority": (
                 "helper-reservation-only"
@@ -6455,7 +6507,10 @@ def _execution_envelope(
             "Do not issue a second from-scratch ImageGen call for the same output or reclassify a supplied style/functional reference as an edit target.",
         ],
         "completionAuthority": "scripts/runtime_state.py complete-implementation",
-        "tokenPolicy": "Load only the stage owner and selectedReferenceSlices; do not preload every bundled skill or reference.",
+        "tokenPolicy": (
+            "Load only the stage owner and selectedReferenceSlices; do not preload every bundled skill or reference. "
+            "Baseline references permit inspection of affected existing behavior, not an unrelated whole-repository audit."
+        ),
     }
     envelope["sha256"] = _canonical_sha256(envelope)
     return envelope
@@ -6597,6 +6652,57 @@ def _verify_promoted_destination(
     return None
 
 
+def _require_imagegen_design_set_authorization(
+    session_dir: Path,
+    state: dict[str, Any],
+) -> None:
+    if not (
+        _is_v3_state(state)
+        and state["contract"].get("workflowProfile") == "full"
+        and state["contract"].get("visualArtifactPolicy") == "imagegen-required"
+    ):
+        return
+    _require_confirmed_intent(state, session_dir)
+    _verify_visual_direction(session_dir, state, require_authorized=True)
+    outputs = _state_output_map(state)
+    unapproved = [
+        output_id
+        for output_id, contract_output in _contract_output_map(state["contract"]).items()
+        if _design_evidence_required(contract_output)
+        and (
+            outputs[output_id]["status"] not in {"accepted", "promoted"}
+            or not outputs[output_id].get("userAuthorized")
+        )
+    ]
+    if unapproved:
+        raise StateError(
+            "The complete required imagegen design set must be accepted and user-authorized: "
+            + ", ".join(unapproved)
+        )
+    direction_sha = state["visualDirection"]["sha256"]
+    for output_id, contract_output in _contract_output_map(state["contract"]).items():
+        if not _design_evidence_required(contract_output):
+            continue
+        output = outputs[output_id]
+        if output.get("visualDirectionSha256") != direction_sha:
+            raise StateError(f"Design output {output_id} is not bound to the approved direction")
+        artifact_error = _verify_output_artifact(session_dir, output)
+        if artifact_error:
+            raise StateError(artifact_error)
+        _verify_output_anchor(session_dir, state, contract_output, output)
+        _verify_output_render_brief(session_dir, state, output)
+        provenance = output.get("provenance")
+        verified_provenance = validate_imagegen_provenance(
+            session_dir,
+            state,
+            output_id,
+            artifact_path(session_dir, output["artifact"]),
+            provenance.get("receiptPath") if isinstance(provenance, dict) else None,
+        )
+        if verified_provenance != provenance:
+            raise StateError(f"Design output {output_id} provenance differs from its accepted receipt")
+
+
 def _full_design_gate_errors(
     root: Path,
     session_dir: Path,
@@ -6614,6 +6720,7 @@ def _full_design_gate_errors(
             state,
             require_authorized=(
                 state["contract"].get("checkpointMode") != "continuous"
+                or state["contract"].get("visualArtifactPolicy") == "imagegen-required"
             ),
         )
     except StateError as exc:
@@ -8246,6 +8353,8 @@ def _review_delivery(
         raise StateError("Delivery review requires awaiting-user-review status")
     if not user_authorized:
         raise StateError("Delivery review requires --user-authorized")
+    if accepted:
+        _require_imagegen_design_set_authorization(session_dir, state)
     if not isinstance(delivery_digest, str) or HASH_RE.fullmatch(delivery_digest) is None:
         raise StateError("--delivery-digest must be a lowercase SHA-256 digest")
     expected = state["deliveryReview"].get("deliveryDigest")
@@ -8423,9 +8532,17 @@ def _promotion_destination(root: Path, target: str) -> Path:
     return candidate
 
 
-def _reconcile_promotions(root: Path, state: dict[str, Any]) -> bool:
+def _reconcile_promotions(root: Path, session_dir: Path, state: dict[str, Any]) -> bool:
     contract_outputs = {item["id"]: item for item in state["contract"]["outputs"]}
     changed = False
+    if any(
+        output["status"] == "accepted" and output["promotionRequired"]
+        for output in state["outputs"]
+    ):
+        try:
+            _require_imagegen_design_set_authorization(session_dir, state)
+        except StateError:
+            return False
     for output in state["outputs"]:
         contract_output = contract_outputs[output["id"]]
         if output["status"] != "accepted" or not output["promotionRequired"]:
@@ -8465,7 +8582,7 @@ def resume_session(
     require_revision(state, expected_revision)
     if state["status"] in TERMINAL_SESSION_STATUSES:
         raise StateError(f"Cannot resume terminal session status {state['status']!r}")
-    changed = _reconcile_promotions(root, state)
+    changed = _reconcile_promotions(root, session_dir, state)
     contract_outputs = _contract_output_map(state["contract"])
     for output in state["outputs"]:
         if output["status"] == "generating":
@@ -8625,6 +8742,7 @@ def promote_output(
         raise StateError(f"Unknown output ID: {output_id}")
     if output["status"] != "accepted" or not output["promotionRequired"]:
         raise StateError("Promotion requires an accepted output with promotionRequired=true")
+    _require_imagegen_design_set_authorization(session_dir, state)
     direction_sha = _verify_visual_direction(session_dir, state)
     if output.get("visualDirectionSha256") != direction_sha:
         raise StateError(

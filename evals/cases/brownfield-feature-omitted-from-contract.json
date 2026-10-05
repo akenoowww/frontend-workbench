@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "id": "brownfield-feature-omitted-from-contract",
+  "skill": "frontend-product-design",
+  "prompt": "Refresh the existing account screen visually using current comparable products. Current source also supports account data export from a secondary menu and an administrator-only recovery action, but the frozen contract lists only account review and preference save. A comparator screenshot shows neither extra action. Establish the current in-scope behavior before comparison, treat the omitted capabilities as a scope conflict requiring correction, and do not render or implement a reduced account screen. No functional removals or changes were authorized.",
+  "contractFixture": "evals/fixtures/empty-operational-policy-contract.json",
+  "expected": {
+    "plannedOutputIds": [
+      "O01"
+    ],
+    "completedOutputIds": [],
+    "missingOutputIds": [
+      "O01"
+    ],
+    "finalStatus": "blocked",
+    "requiredSkills": [
+      "frontend-product-design"
+    ],
+    "forbiddenSkills": [
+      "art-direct-imagegen",
+      "frontend-project-fit",
+      "frontend-runtime-qa"
+    ],
+    "requiredTransformations": [
+      "baseline-before-comparator-research",
+      "inventory-hidden-and-role-capabilities",
+      "omission-is-not-removal-authority",
+      "return-structure-conflict"
+    ],
+    "forbiddenTransformations": [
+      "competitor-defines-feature-set",
+      "drop-undeclared-existing-capability",
+      "visual-approval-authorizes-functional-rewrite"
+    ]
+  }
+}

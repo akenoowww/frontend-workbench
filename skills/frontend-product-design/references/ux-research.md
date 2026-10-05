@@ -28,11 +28,11 @@ QUESTION
 -> PROJECT-SPECIFIC DECISION
 ```
 
-Phrase a behavioral question whose answer can change the interface. Keep appearance subordinate to the user task.
+Phrase a question from the current product's user task, functional baseline, and authorized design scope. Inspect that baseline before searching. Keep appearance subordinate to the user task; research evaluates bounded alternatives rather than replacing this project's requirements with another product's model.
 
 ## 2. External evidence
 
-Always search the web before settling a design recommendation. Use Google when an available search tool supports it; otherwise use the available web search. Search by the actual user job, product category, and interface pattern, then refine by candidate product and relevant screen. Do not stop at the first result, a remembered brand shortlist, or a query for fashionable design standards. Date filters can aid discovery but do not establish freshness.
+Always search the web before settling a design recommendation, after the existing product and relevant design questions are understood. Use Google when an available search tool supports it; otherwise use the available web search. Search by the actual user job, product category, and interface pattern, then refine by candidate product and relevant screen. Do not stop at the first result, a remembered brand shortlist, or a query for fashionable design standards. Date filters can aid discovery but do not establish freshness.
 
 Compare at least two relevant operating products when available. Prefer established products with evidence of real use in the relevant category: current customer deployments, maintained public applications, or credible recent adoption evidence. Popularity must not override functional fit; do not fabricate rankings or usage figures. If fewer qualify after a reasonable targeted search, record the rejected candidates and exact gap, and bound the recommendation instead of substituting unrelated famous products.
 
@@ -64,6 +64,8 @@ Study the surfaces and states relevant to the user job:
 - desktop and mobile differences.
 
 Do not copy one product directly.
+
+External examples are advisory evidence, never product authority. A comparator's missing action, field, status, role, or recovery path does not make the target's equivalent unnecessary; an extra competitor capability does not become a new target requirement. Evaluate each pattern against the current affected capabilities and their semantics first. Retain, adapt, or reject it for a concrete task benefit within scope, not because the whole foreign screen looks more polished. Keep an optional functional recommendation distinct from the authorized presentation change.
 
 For each accepted example keep a compact evidence record:
 
@@ -109,7 +111,7 @@ Fails when
 - ...
 
 Fit for this project
-- ...
+- current capabilities/semantics retained, authorized changes, and concrete task benefit
 ```
 
 Avoid reasoning that a project should use a modal, drawer, tab, or other pattern merely because a mature product does.
@@ -191,6 +193,7 @@ Resolve conflicts into one coherent experience. Do not combine every isolated be
 ## 7. Research guardrails
 
 - Prioritize explicit user and functional requirements over research examples.
+- Preserve affected existing functionality by default, including capabilities omitted from a protected list or default screenshot; missing external equivalents are not removal authority.
 - Prefer project conventions and reusable components over fashionable external patterns.
 - Require fresh comparison for the decision, not an external redesign of unrelated surfaces.
 - Permit a familiar implemented pattern when current evidence and project fit support it; novelty is not a quality gate.

@@ -15,6 +15,7 @@ If a current scoped Product Design handoff already exists, consume and validate 
 Check that it includes:
 
 - the requested primary product object and truthful supporting content, actions, states, and relationships;
+- for an existing product, the affected functional baseline and mapping to equivalent reachable controls/states or explicitly authorized changes, including capabilities absent from the default screenshot or comparable products;
 - target surface, applicable viewport and output responsibilities, plus the allowed reference roles;
 - a Product Design-owned perceptual relationship, attention hierarchy, coherent aesthetic roles, and current comparable-product rationale;
 - the representation grammar when relational meaning requires it: context model, relation carrier, focus transition, and entity embodiment;

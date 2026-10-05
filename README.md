@@ -55,7 +55,7 @@ Before a v3 design output can generate, review, or accept, the user-facing teach
 
 Before `begin-implementation`, the v3 implementation plan resolves every required capability through `reuse`, `extend`, `compose`, platform/framework support, a mature external dependency, or a justified project-owned primitive. `decisionTier` keeps the cost proportional: `direct` for bounded work, `known-fit` for a complex non-project-owned owner whose exact fit is already proven, and `comparative` for foundational work, uncertain dependencies, or complex project-owned primitives. A proven React Flow-style library may therefore win directly; an unavailable dependency blocks implementation instead of triggering a custom SVG/canvas fallback.
 
-ImageGen attempts also have explicit identity. MICRO/STANDARD permit one call for one output in one user turn; a failed render returns `REVISE_ARTIFACT` instead of silently creating the same output again. A later user retry edits that saved artifact, not the original references, and supplied `STYLE_REFERENCE`, `FUNCTIONAL_REFERENCE`, and `VISUAL_ANCHOR` roles cannot be promoted to `EDIT_TARGET`. FULL retries remain serial and require a render-budget reservation.
+ImageGen attempts also have explicit identity. MICRO permits one call when one output covers the complete request. STANDARD completes its derived required set serially, one call per output; a failed render returns `REVISE_ARTIFACT` instead of silently creating the same output again. A later user retry edits that saved artifact, not the original references, and supplied `STYLE_REFERENCE`, `FUNCTIONAL_REFERENCE`, and `VISUAL_ANCHOR` roles cannot be promoted to `EDIT_TARGET`. FULL retries remain serial and require a render-budget reservation.
 
 Material redesigns carry a region-level `redesignBoundary`. In `preserve-only` mode, the named regions and invariants are the complete preservation allowlist. Every replace region declares material change dimensions and a minimum coverage threshold, plus source structures that must not survive. Thus “keep only the primary sidebar” cannot silently become “keep the whole recognizable shell”; an unchanged main-content macro-layout/card topology fails even when colors and spacing look cleaner.
 
@@ -144,9 +144,9 @@ The first representative runnable or ImageGen artifact passes the same conceptua
 
 An accepted homepage never completes a multi-page request. Dependent UI renders remain sequential to preserve one visual system; independent research can still run in parallel.
 
-Landing pages, storefronts, and other multi-section pages are rendered serially as full-width, normal viewport-height content bands. A request for one final page image does not collapse those stages into one tall render. Art-Direct ImageGen passes the reviewed source images to a final ImageGen call that assembles the complete page while preserving content and resolving the declared joins. Plan N band calls plus one assembly call; review the final image separately and retain every source. Local stitching is available when explicitly requested, while local contact sheets may index unrelated pages. A one-call tall overview is an exception only when the user explicitly requests that generation method.
+Landing pages, storefronts, and other multi-section pages are rendered serially as full-width, normal viewport-height content bands. A request for one final page image does not collapse those stages into one tall render. When a continuous complete-page image is required, Art-Direct ImageGen assembles its necessary reviewed source bands through a planned final ImageGen call, preserving content and resolving declared joins. Review that image separately and retain sources. A set of separate page/state designs needs no extra assembly unless a continuous composite is also required. Local stitching is available when explicitly requested, while local contact sheets may index unrelated pages. A one-call tall overview is an exception only when the user explicitly requests that generation method.
 
-When the user asks to review every stage or page separately, the reviewed output enters `awaiting-approval`. The runtime blocks all later outputs until explicit approval changes it to `accepted`; conversational intent alone cannot bypass the checkpoint.
+In v3 review-before-implementation, internally reviewed anchors may continue serially without a user stop after every image; exact user authorization of the complete required design set and direction still precedes implementation or durable promotion. When the user asks to review each stage/page separately or a frozen output requires approval, the reviewed output enters `awaiting-approval`. The runtime blocks all later outputs until explicit approval changes it to `accepted`; conversational intent alone cannot bypass the checkpoint.
 
 For a `full` design-to-implementation handoff, accepted artifacts are not merely advisory. `begin-implementation` refuses to start until intent, required direction lock/authorization, coverage, checkpoint approval, verified provenance when required, and at least one safe product target pass. Runtime QA records each comparison through a structured manifest matching route, state, viewport, scroll position, accepted design-instance SHA-256, and actual image dimensions. Duplicate screenshot bytes are rejected unless the lifecycle-confirmed contract explicitly declares the exact equivalent output pair and justification; a QA manifest cannot invent equivalence later.
 
@@ -226,13 +226,17 @@ Root `plugin.json` is the portable Agent Plugins 1.0 manifest. Its `extensions.c
 
 Product Design researches current comparable working products before recommendations in MICRO, STANDARD, and FULL. It opens and inspects relevant implemented interfaces or current official UI evidence, checks operating status and exact interface freshness, and records the reasons to adopt, adapt, or reject each pattern. Generic standards, search ranking, brand names, and unverified old screenshots cannot substitute. The same rule covers standalone frontend UI direction in Art-Direct ImageGen; specified implementation and non-UI image edits do not acquire an extra design stage.
 
+For an existing product, its current affected functionality defines the design first. Product Design inventories the in-scope behavior before external comparison and maps every affected capability to an equivalent reachable control/state or an explicitly authorized change. A comparator, missing contract entry, default screenshot, or visual approval cannot authorize a functional rewrite. `preserve-only` governs visual carryover: the replaced area still retains its actions, data meanings, permissions, state and outcomes. Implementation and QA check this baseline alongside the accepted visual design, while composition and authorized UX changes remain possible.
+
+The current visual design is the starting point too. Content and controls may be rearranged, modified or moved to logical in-scope destinations and states, with clear entry points and retained context. Product Design derives the readable page/state/viewport/scroll images needed for the complete requested design; Art-Direct renders that set serially instead of imposing a fixed image count or squeezing every state into one bitmap. Current and external UI images may be scoped references with separate authority. Examples are evaluation scenarios, not a fixed page/control/count recipe.
+
 Ordinary answers present a considered recommendation and concrete consequences without narrating plugin internals or the search process. Evidence remains traceable for requested review. The agent challenges material usability failures respectfully, distinguishes aesthetic preferences, and revises when new evidence or user constraints warrant it.
 
 The plugin contains no MCP server, hook, credential, bundled remote service, or automatic external action.
 
 ## Install in Codex
 
-The latest published stable tag is `v0.12.1`.
+The latest published stable tag is `v0.12.2`.
 
 For the current development branch:
 
@@ -244,10 +248,10 @@ codex plugin list
 
 For a first install after an immutable release tag exists, prefer the pinned form:
 
-The latest published stable tag is `v0.12.1`.
+The latest published stable tag is `v0.12.2`.
 
 ```bash
-codex plugin marketplace add akenoowww/frontend-workbench --ref v0.12.1
+codex plugin marketplace add akenoowww/frontend-workbench --ref v0.12.2
 codex plugin add frontend-workbench@frontend-workbench
 codex plugin list
 ```

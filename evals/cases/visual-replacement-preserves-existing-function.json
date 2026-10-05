@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "visual-replacement-preserves-existing-function",
+  "skill": "art-direct-imagegen",
+  "prompt": "Create a bounded preview-only redesign of the existing record-review screen: retain only its sidebar visually and replace the rest of the main composition. Current behavior reads the same primary record and exposes the same secondary evidence in an on-demand overlay; keep its data meanings, input/state/outcome semantics and accessible reachability. The current overlay presentation may be restyled or recomposed. Comparable products omit this evidence view. Use Product Design, preserve the existing capabilities through mapped controls/states, and produce the declared base and overlay previews without code or runtime authority. A full visual replacement must not become a different product, and the base bitmap need not display the overlay content.",
+  "contractFixture": "evals/fixtures/standalone-density-contract.json",
+  "expected": {
+    "plannedOutputIds": [
+      "O01",
+      "O02"
+    ],
+    "completedOutputIds": [
+      "O01",
+      "O02"
+    ],
+    "missingOutputIds": [],
+    "finalStatus": "complete",
+    "requiredSkills": [
+      "frontend-product-design",
+      "art-direct-imagegen"
+    ],
+    "forbiddenSkills": [
+      "frontend-project-fit",
+      "frontend-runtime-qa"
+    ],
+    "requiredTransformations": [
+      "separate-visual-boundary-from-functional-baseline",
+      "map-existing-capabilities-to-equivalent-controls",
+      "preserve-record-data-and-state-semantics",
+      "secondary-evidence-remains-reachable"
+    ],
+    "forbiddenTransformations": [
+      "preserve-only-as-functional-allowlist",
+      "drop-secondary-evidence-to-match-comparator",
+      "force-all-features-into-first-viewport",
+      "unrequested-functional-rewrite"
+    ]
+  }
+}

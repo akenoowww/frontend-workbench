@@ -8,6 +8,8 @@ For researched comparable products, qualify working status and exact interface f
 
 Label every source as `functional-reference`, `style-reference`, `visual-anchor`, `edit-target`, or `constraint`. One source may support multiple observations, but a functional reference is never silently treated as a layout template or edit target.
 
+The target product baseline owns existing jobs, capabilities, data meanings, business rules, roles, persistence, and outcomes. External sources illustrate only the authorized aspects being compared. Unless the user's functional scope says otherwise, their `mustNotInfluence` excludes changes to that target baseline, feature removals/additions, permissions, data contracts, and side effects. A foreign screen's absence of a current target action is not evidence that the action can disappear.
+
 For FULL v3, record one or more scoped `referenceBindings` rather than giving the source ambient authority:
 
 ```text

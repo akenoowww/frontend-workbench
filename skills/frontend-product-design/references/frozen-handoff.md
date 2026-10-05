@@ -110,6 +110,8 @@ Reference workspace-relative structure, coverage, implementation-plan when autho
 
 Carry current-product research in the selected-decision rationale or a linked authorized decision record: comparable products, inspected surfaces/states, source links and dates, operating-status and implementation-freshness checks, observed versus documented/inferred behavior, and reasons to adopt/adapt/reject. Missing evidence keeps the affected design provisional and blocks a validated design handoff; do not hide it in a generic completion caveat. Keep these research facts outside product UI copy and preserve existing reference-binding scope.
 
+Also carry the in-scope existing-behavior baseline and before/after capability mapping in the selected-decision rationale or linked handoff record, using existing schema fields rather than adding undeclared JSON keys. Every affected current capability maps to an equivalent reachable control/state or a specifically authorized functional change/removal. Include role/hidden/error/recovery behavior and data/state/outcome semantics where relevant. Omission from a prior contract or accepted bitmap is not authorization; resolve missing capabilities in the frozen scope before implementation. A design approval accepts the declared presentation and named behavior changes only, not an undeclared rewrite of functionality or backend contracts.
+
 ## Separate fixed decisions from implementation freedom
 
 Freeze:
@@ -140,7 +142,7 @@ Under **review-each-stage**, preserve every accepted checkpoint and pending outp
 
 Under **review-before-implementation**, present the locked direction, coverage, reviewed artifact evidence, and unresolved risks, then wait for explicit approval. Do not represent direction lock or a prepared handoff as authorized implementation.
 
-For a material redesign, use **review-before-implementation** unless the user chose a stricter staged review. When `visualArtifactPolicy` is `imagegen-required`, use **review-each-stage** or **review-before-implementation**, mark every output with required design evidence approval-required, and preserve its user-authorized acceptance in the active FULL session. Runtime-only outputs remain separate QA obligations.
+For a material redesign, use **review-before-implementation** unless the user chose a stricter staged review. When `visualArtifactPolicy` is `imagegen-required`, use **review-each-stage** or **review-before-implementation**, mark outputs approval-required only for explicit per-output checkpoints or review-each-stage. Under v3 review-before-implementation, internally review and accept the required set serially, then preserve exact user authorization of every required artifact and direction before implementation or durable promotion. Do not relax existing frozen output flags. Runtime-only outputs remain separate QA obligations.
 
 Design-only and critique-only work ends with the requested artifact or recommendation. It never grants production-code authority.
 
