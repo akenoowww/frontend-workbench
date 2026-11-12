@@ -59,6 +59,8 @@ If the selected dependency is not already available and installation is not expl
 
 If no established owner fits, define the required behavior and constraints before comparing plausible options from the actual stack. Keep a trivial rationale to one sentence; preserve fuller evidence for a dependency, complex/foundational primitive, security-sensitive behavior, or deviation from project practice. A mature external dependency is a credible candidate, not an automatic choice; inspect current primary evidence and its fit before selection.
 
+Use [web platform guidance](references/modern-web-guidance.md) when browser behavior or compatibility can change the mechanism or fallback, or when the user requests a broad legacy-pattern audit. Reuse applicable evidence from the design handoff. Carry the chosen behavior and any compatibility obligations into the existing capability decision and its runtime checks.
+
 Implement at the project's existing route, component, state, data, permission, localization, telemetry, and test boundaries. Prefer composition and supported variants over copies.
 
 Implement the plan as vertical slices that connect one user job through its route, typed data/state/error contracts, capability owner, visible states, and focused tests. Prefer explicit adapters and discriminated state at boundaries over a page-scale monolith, duplicated fixture/live models, or custom controls that mix rendering, persistence, orchestration, and interaction logic. Shared extraction follows demonstrated responsibility and reuse; it is not a prerequisite for the first slice.

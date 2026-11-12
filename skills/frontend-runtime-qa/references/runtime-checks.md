@@ -45,6 +45,8 @@ Select the smallest meaningful checks for the capability:
 
 Do not run irrelevant generic gestures to inflate coverage. Each check should prove a selected capability or a documented difficult edge case.
 
+When a capability decision used browser guidance, exercise the specific user outcomes it called for. Where the implementation includes a compatibility fallback, exercise the same action and postcondition through both paths in a representative environment. A forced fallback in a controlled fixture proves that branch's behavior. Record the browser versions actually exercised.
+
 ## Responsive checks
 
 Use the project's breakpoints or the viewports required by the frozen design handoff. Check:

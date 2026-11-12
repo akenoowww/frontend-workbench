@@ -269,6 +269,10 @@ Start a new Codex task after installation or reinstall so skill discovery uses t
 
 Plugins are supported in ChatGPT and Codex surfaces documented by OpenAI, including the ChatGPT desktop app and Codex CLI. The Codex IDE extension supports standalone skills but not plugin browsing or installation.
 
+## Web platform guidance
+
+Product Design and Project Fit use [Modern Web Guidance](https://developer.chrome.com/docs/modern-web-guidance) for browser decisions that affect a user's interaction, accessibility, or supported environments. The lookup uses an available CLI or primary platform documentation. The visual handoff carries the state the user needs to see. The implementation plan carries the selected behavior, compatibility needs, and focused runtime checks. The same reference supports requested legacy-pattern audits.
+
 ## Validate
 
 Install the pinned development requirements, then run the repository checks:

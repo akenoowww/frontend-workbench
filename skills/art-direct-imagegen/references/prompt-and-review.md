@@ -19,6 +19,7 @@ Send only:
 - validated anchor continuity only when `anchorOutputId` is non-null;
 - for a coherent set, the current output's frozen perceptual job, representation signature, visual signature, and imagery-slot IDs/reuse policies; compile its entry/exit states, handoff carrier, edge treatment, and transition mode into one non-geometric perceptual relationship, while keeping the raw transition fields and edge mechanism outside the renderer prompt; include validated renderer-image exposure with explicit `mayInfluence` and `mustNotInfluence` scope;
 - truthfulness and state invariants;
+- when the state limits what the user can do, the exact visible actions and the surrounding information that stays visible as read-only context. For a standalone surface with no supplied shell, explicitly describe a task-only viewport in the renderer prompt, with the task's own content, context, and actions filling the canvas. For a supplied shell, name its in-scope chrome and give temporarily unavailable controls a visibly inactive treatment. Check visible chrome against this scope during review. Use source-grounded wording for actor, recipient, and owner when those roles change the meaning of the state;
 - explicit creative latitude;
 - for redesigns, the exact preserve-only scope plus one positive product/perceptual departure for each replace region; keep material-change thresholds and `forbiddenCarryover` outside the renderer prompt for review;
 - up to three causal avoid items.
