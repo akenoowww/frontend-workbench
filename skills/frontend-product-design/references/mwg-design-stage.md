@@ -1,6 +1,6 @@
 # Modern Web Guidance in Product Design
 
-Run this required stage after identifying the user jobs and before selecting or critiquing a design. Use the official [Google Chrome Modern Web Guidance](https://developer.chrome.com/docs/modern-web-guidance) corpus. The shared [CLI instructions](../../frontend-project-fit/references/modern-web-guidance.md) cover installation-free invocation, version selection and recovery.
+Run this required stage after identifying the user jobs and before selecting or critiquing a design. Use the official [Google Chrome Modern Web Guidance](https://developer.chrome.com/docs/modern-web-guidance) corpus. Use the shared [Workbench launcher instructions](../../frontend-project-fit/references/modern-web-guidance.md) for every CLI call so telemetry stays off.
 
 ## Ask about the user job
 

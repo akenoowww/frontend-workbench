@@ -59,7 +59,7 @@ If the selected dependency is not already available and installation is not expl
 
 If no established owner fits, define the required behavior and constraints before comparing plausible options from the actual stack. Keep a trivial rationale to one sentence; preserve fuller evidence for a dependency, complex/foundational primitive, security-sensitive behavior, or deviation from project practice. A mature external dependency is a credible candidate, not an automatic choice; inspect current primary evidence and its fit before selection.
 
-Use [web platform guidance](references/modern-web-guidance.md) when browser behavior or compatibility can change the mechanism or fallback, or when the user requests a broad legacy-pattern audit. Reuse applicable evidence from the design handoff. Carry the chosen behavior and any compatibility obligations into the existing capability decision and its runtime checks.
+Use [web platform guidance](references/modern-web-guidance.md) when browser behavior or compatibility can change the mechanism or fallback, or when the user requests a broad legacy-pattern audit. Use the Workbench launcher for every Modern Web Guidance CLI call. Reuse applicable evidence from the design handoff. Carry the chosen behavior and any compatibility obligations into the existing capability decision and its runtime checks.
 
 Implement at the project's existing route, component, state, data, permission, localization, telemetry, and test boundaries. Prefer composition and supported variants over copies.
 

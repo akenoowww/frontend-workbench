@@ -3311,7 +3311,7 @@ class RuntimeStateTests(unittest.TestCase):
                 )
                 self.assertIn("affected existing behavior", envelope["tokenPolicy"])
                 self.assertIn("not an unrelated whole-repository audit", envelope["tokenPolicy"])
-                self.assertIn("modern-web-guidance", envelope["allowedTools"])
+                self.assertIn("scripts/run_mwg.py", envelope["allowedTools"])
                 self.assertIn("palette-subagent", envelope["allowedTools"])
                 self.assertNotIn("image_gen", envelope["allowedTools"])
                 _, unchanged = runtime_state.load_state(self.root, session_id)

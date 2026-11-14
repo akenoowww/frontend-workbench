@@ -6346,8 +6346,11 @@ def _execution_envelope(
             ]
         )
     elif stage_owner == "frontend-project-fit":
-        references.append(
-            "skills/frontend-project-fit/references/project-discovery-and-reuse.md"
+        references.extend(
+            [
+                "skills/frontend-project-fit/references/project-discovery-and-reuse.md",
+                "skills/frontend-project-fit/references/modern-web-guidance.md",
+            ]
         )
         if any(
             requirement.get("complexity") in {"complex", "foundational"}
@@ -6445,7 +6448,7 @@ def _execution_envelope(
         # grant authenticated product mutations or renderer ownership.
         allowed_tools.extend(
             [
-                "modern-web-guidance",
+                "scripts/run_mwg.py",
                 "web-search",
                 "web-read",
                 "agent-browser",
@@ -6454,7 +6457,7 @@ def _execution_envelope(
             ]
         )
     if stage_owner == "frontend-project-fit":
-        allowed_tools.append("project-dependency-inspection")
+        allowed_tools.extend(["project-dependency-inspection", "scripts/run_mwg.py"])
     if runtime_probes and stage_owner == "frontend-runtime-qa":
         allowed_tools.append("agent-browser")
     if stage_owner == "art-direct-imagegen":
