@@ -236,9 +236,17 @@ The plugin contains no MCP server, hook, credential, bundled remote service, or 
 
 ## Install in Codex
 
-The latest published stable tag is `v0.12.2`.
+Install stable version `v0.13.0` from its version tag:
 
-For the current development branch:
+```bash
+codex plugin marketplace add akenoowww/frontend-workbench --ref v0.13.0
+codex plugin add frontend-workbench@frontend-workbench
+codex plugin list
+```
+
+If the marketplace is registered for an older tag, run `codex plugin marketplace remove frontend-workbench` before adding the new tag.
+
+To follow stable releases through the marketplace on `main`:
 
 ```bash
 codex plugin marketplace add akenoowww/frontend-workbench --ref main
@@ -246,18 +254,7 @@ codex plugin add frontend-workbench@frontend-workbench
 codex plugin list
 ```
 
-For a first install after an immutable release tag exists, prefer the pinned form:
-
-The latest published stable tag is `v0.12.2`.
-
-```bash
-codex plugin marketplace add akenoowww/frontend-workbench --ref v0.12.2
-codex plugin add frontend-workbench@frontend-workbench
-codex plugin list
-```
-
-To upgrade an existing installation whose `frontend-workbench` marketplace is already configured,
-refresh that marketplace instead of adding the same name again:
+If your marketplace follows `main`, refresh it and reinstall the plugin to upgrade:
 
 ```bash
 codex plugin marketplace upgrade frontend-workbench
@@ -266,6 +263,8 @@ codex plugin list
 ```
 
 Start a new Codex task after installation or reinstall so skill discovery uses the updated package.
+
+To roll back to `v0.12.2`, remove the marketplace registration and repeat the pinned install above with `--ref v0.12.2`.
 
 Plugins are supported in ChatGPT and Codex surfaces documented by OpenAI, including the ChatGPT desktop app and Codex CLI. The Codex IDE extension supports standalone skills but not plugin browsing or installation.
 
