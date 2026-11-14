@@ -3300,6 +3300,10 @@ class RuntimeStateTests(unittest.TestCase):
                     [
                         "skills/frontend-product-design/references/project-archeology.md",
                         "skills/frontend-product-design/references/redesign-boundaries.md",
+                        "skills/frontend-product-design/references/mwg-design-stage.md",
+                        "skills/frontend-project-fit/references/modern-web-guidance.md",
+                        "skills/frontend-product-design/references/design-foundations.md",
+                        "skills/frontend-product-design/references/palette-selection.md",
                         "skills/frontend-product-design/references/visual-direction.md",
                         "skills/frontend-product-design/references/ux-research.md",
                         "skills/frontend-product-design/references/full-lifecycle.md",
@@ -3307,6 +3311,8 @@ class RuntimeStateTests(unittest.TestCase):
                 )
                 self.assertIn("affected existing behavior", envelope["tokenPolicy"])
                 self.assertIn("not an unrelated whole-repository audit", envelope["tokenPolicy"])
+                self.assertIn("modern-web-guidance", envelope["allowedTools"])
+                self.assertIn("palette-subagent", envelope["allowedTools"])
                 self.assertNotIn("image_gen", envelope["allowedTools"])
                 _, unchanged = runtime_state.load_state(self.root, session_id)
                 self.assertEqual(unchanged, state)

@@ -1,0 +1,547 @@
+{
+  "schemaVersion": 1,
+  "id": "refactoring-ui-color-palettes-public-previews",
+  "sourceWebsite": "https://refactoringui.com/",
+  "sourceSection": "Color Palettes",
+  "accessDate": "2026-11-06",
+  "scope": "Verified printed-HEX subset from nine publicly linked previews. Not the complete paid collection.",
+  "verificationStatus": "independently-reviewed-printed-hex",
+  "canonicalColorDefinition": "Printed HEX labels in publisher previews, not sampled raster RGB.",
+  "publisher": "Refactoring UI",
+  "sourceAssets": [
+    {
+      "url": "https://refactoringui.com/build/assets/color-palettes-1-CT1ThrSw.png",
+      "sha256": "cb8830bd0e122c9cc3bdff12686f831a0473a808b8bac39b924899779b0b9179",
+      "bytes": 10013
+    },
+    {
+      "url": "https://refactoringui.com/build/assets/color-palettes-2-CiNKyOBB.png",
+      "sha256": "b3869fd73f9c2ba53591d0977770cd89b84a4d986c9885e75a1214175fb253e1",
+      "bytes": 17855
+    },
+    {
+      "url": "https://refactoringui.com/build/assets/color-palettes-3-B6dSkmxx.png",
+      "sha256": "b734fc9d59c366c3875ba9298da24a19d08ea62b800a46d7068775baca13f3d9",
+      "bytes": 10355
+    },
+    {
+      "url": "https://refactoringui.com/build/assets/color-palettes-4-DRYj6_Hr.png",
+      "sha256": "fe8b8896749510ccad082379725de6481497699a8fa3114c9ddd405914f2941a",
+      "bytes": 16920
+    },
+    {
+      "url": "https://refactoringui.com/build/assets/color-palettes-5-C_F9P-Js.png",
+      "sha256": "18f0e4da2f6a7dbc3fec3e5022e65bf2690042d6dfffa584e3a54f8ca9092b0f",
+      "bytes": 26177
+    },
+    {
+      "url": "https://refactoringui.com/build/assets/color-palettes-6-DGwQ2jdv.png",
+      "sha256": "f4039cb1cb60166c794acdbceb2003c763722184d47d72e8765637197a9407e1",
+      "bytes": 10037
+    },
+    {
+      "url": "https://refactoringui.com/build/assets/color-palettes-7-EJxeQBri.png",
+      "sha256": "db325e6204bd4e3c5acf6ba4f1db4881a7bf85dcdbf4c422b0541edb207e74e9",
+      "bytes": 17499
+    },
+    {
+      "url": "https://refactoringui.com/build/assets/color-palettes-8-V-QoXEqy.png",
+      "sha256": "5e67b40edec2a0ce928a1c79acdfec9e218ac650dde6b768bb7723348f55bc24",
+      "bytes": 17298
+    },
+    {
+      "url": "https://refactoringui.com/build/assets/color-palettes-9-CAF0GGP4.png",
+      "sha256": "b7e3928f61ebfe6153952d4d6843231bc0e28e3e4942342e2e1d120f996a5875",
+      "bytes": 26260
+    }
+  ],
+  "scales": [
+    {
+      "id": "refactoring-ui.blue-grey",
+      "name": "Blue Grey",
+      "observedSourceRoles": [
+        "Neutrals"
+      ],
+      "sourceUrls": [
+        "https://refactoringui.com/build/assets/color-palettes-4-DRYj6_Hr.png",
+        "https://refactoringui.com/build/assets/color-palettes-8-V-QoXEqy.png"
+      ],
+      "order": "darkest-to-lightest",
+      "steps": [
+        {
+          "id": "refactoring-ui.blue-grey.01",
+          "ordinal": 1,
+          "hex": "#102A43"
+        },
+        {
+          "id": "refactoring-ui.blue-grey.02",
+          "ordinal": 2,
+          "hex": "#243B53"
+        },
+        {
+          "id": "refactoring-ui.blue-grey.03",
+          "ordinal": 3,
+          "hex": "#334E68"
+        },
+        {
+          "id": "refactoring-ui.blue-grey.04",
+          "ordinal": 4,
+          "hex": "#486581"
+        },
+        {
+          "id": "refactoring-ui.blue-grey.05",
+          "ordinal": 5,
+          "hex": "#627D98"
+        },
+        {
+          "id": "refactoring-ui.blue-grey.06",
+          "ordinal": 6,
+          "hex": "#829AB1"
+        },
+        {
+          "id": "refactoring-ui.blue-grey.07",
+          "ordinal": 7,
+          "hex": "#9FB3C8"
+        },
+        {
+          "id": "refactoring-ui.blue-grey.08",
+          "ordinal": 8,
+          "hex": "#BCCCDC"
+        },
+        {
+          "id": "refactoring-ui.blue-grey.09",
+          "ordinal": 9,
+          "hex": "#D9E2EC"
+        },
+        {
+          "id": "refactoring-ui.blue-grey.10",
+          "ordinal": 10,
+          "hex": "#F0F4F8"
+        }
+      ],
+      "ordinalMeaning": "Local position IDs, not publisher token names or invented official numeric shade labels."
+    },
+    {
+      "id": "refactoring-ui.blue",
+      "name": "Blue",
+      "observedSourceRoles": [
+        "Primary",
+        "Supporting"
+      ],
+      "sourceUrls": [
+        "https://refactoringui.com/build/assets/color-palettes-2-CiNKyOBB.png",
+        "https://refactoringui.com/build/assets/color-palettes-9-CAF0GGP4.png"
+      ],
+      "order": "darkest-to-lightest",
+      "steps": [
+        {
+          "id": "refactoring-ui.blue.01",
+          "ordinal": 1,
+          "hex": "#003E6B"
+        },
+        {
+          "id": "refactoring-ui.blue.02",
+          "ordinal": 2,
+          "hex": "#0A558C"
+        },
+        {
+          "id": "refactoring-ui.blue.03",
+          "ordinal": 3,
+          "hex": "#0F609B"
+        },
+        {
+          "id": "refactoring-ui.blue.04",
+          "ordinal": 4,
+          "hex": "#186FAF"
+        },
+        {
+          "id": "refactoring-ui.blue.05",
+          "ordinal": 5,
+          "hex": "#2680C2"
+        },
+        {
+          "id": "refactoring-ui.blue.06",
+          "ordinal": 6,
+          "hex": "#4098D7"
+        },
+        {
+          "id": "refactoring-ui.blue.07",
+          "ordinal": 7,
+          "hex": "#62B0E8"
+        },
+        {
+          "id": "refactoring-ui.blue.08",
+          "ordinal": 8,
+          "hex": "#84C5F4"
+        },
+        {
+          "id": "refactoring-ui.blue.09",
+          "ordinal": 9,
+          "hex": "#B6E0FE"
+        },
+        {
+          "id": "refactoring-ui.blue.10",
+          "ordinal": 10,
+          "hex": "#DCEEFB"
+        }
+      ],
+      "ordinalMeaning": "Local position IDs, not publisher token names or invented official numeric shade labels."
+    },
+    {
+      "id": "refactoring-ui.yellow-vivid",
+      "name": "Yellow (Vivid)",
+      "observedSourceRoles": [],
+      "sourceUrls": [
+        "https://refactoringui.com/build/assets/color-palettes-3-B6dSkmxx.png"
+      ],
+      "order": "darkest-to-lightest",
+      "steps": [
+        {
+          "id": "refactoring-ui.yellow-vivid.01",
+          "ordinal": 1,
+          "hex": "#8D2B0B"
+        },
+        {
+          "id": "refactoring-ui.yellow-vivid.02",
+          "ordinal": 2,
+          "hex": "#B44D12"
+        },
+        {
+          "id": "refactoring-ui.yellow-vivid.03",
+          "ordinal": 3,
+          "hex": "#CB6E17"
+        },
+        {
+          "id": "refactoring-ui.yellow-vivid.04",
+          "ordinal": 4,
+          "hex": "#DE911D"
+        },
+        {
+          "id": "refactoring-ui.yellow-vivid.05",
+          "ordinal": 5,
+          "hex": "#F0B429"
+        },
+        {
+          "id": "refactoring-ui.yellow-vivid.06",
+          "ordinal": 6,
+          "hex": "#F7C948"
+        },
+        {
+          "id": "refactoring-ui.yellow-vivid.07",
+          "ordinal": 7,
+          "hex": "#FADB5F"
+        },
+        {
+          "id": "refactoring-ui.yellow-vivid.08",
+          "ordinal": 8,
+          "hex": "#FCE588"
+        },
+        {
+          "id": "refactoring-ui.yellow-vivid.09",
+          "ordinal": 9,
+          "hex": "#FFF3C4"
+        },
+        {
+          "id": "refactoring-ui.yellow-vivid.10",
+          "ordinal": 10,
+          "hex": "#FFFBEA"
+        }
+      ],
+      "ordinalMeaning": "Local position IDs, not publisher token names or invented official numeric shade labels."
+    },
+    {
+      "id": "refactoring-ui.cyan",
+      "name": "Cyan",
+      "observedSourceRoles": [
+        "Supporting"
+      ],
+      "sourceUrls": [
+        "https://refactoringui.com/build/assets/color-palettes-5-C_F9P-Js.png"
+      ],
+      "order": "darkest-to-lightest",
+      "steps": [
+        {
+          "id": "refactoring-ui.cyan.01",
+          "ordinal": 1,
+          "hex": "#044E54"
+        },
+        {
+          "id": "refactoring-ui.cyan.02",
+          "ordinal": 2,
+          "hex": "#0A6C74"
+        },
+        {
+          "id": "refactoring-ui.cyan.03",
+          "ordinal": 3,
+          "hex": "#0E7C86"
+        },
+        {
+          "id": "refactoring-ui.cyan.04",
+          "ordinal": 4,
+          "hex": "#14919B"
+        },
+        {
+          "id": "refactoring-ui.cyan.05",
+          "ordinal": 5,
+          "hex": "#2CB1BC"
+        },
+        {
+          "id": "refactoring-ui.cyan.06",
+          "ordinal": 6,
+          "hex": "#38BEC9"
+        },
+        {
+          "id": "refactoring-ui.cyan.07",
+          "ordinal": 7,
+          "hex": "#54D1DB"
+        },
+        {
+          "id": "refactoring-ui.cyan.08",
+          "ordinal": 8,
+          "hex": "#87EAF2"
+        },
+        {
+          "id": "refactoring-ui.cyan.09",
+          "ordinal": 9,
+          "hex": "#BEF8FD"
+        },
+        {
+          "id": "refactoring-ui.cyan.10",
+          "ordinal": 10,
+          "hex": "#E0FCFF"
+        }
+      ],
+      "ordinalMeaning": "Local position IDs, not publisher token names or invented official numeric shade labels."
+    },
+    {
+      "id": "refactoring-ui.red",
+      "name": "Red",
+      "observedSourceRoles": [
+        "Supporting"
+      ],
+      "sourceUrls": [
+        "https://refactoringui.com/build/assets/color-palettes-5-C_F9P-Js.png"
+      ],
+      "order": "darkest-to-lightest",
+      "steps": [
+        {
+          "id": "refactoring-ui.red.01",
+          "ordinal": 1,
+          "hex": "#610404"
+        },
+        {
+          "id": "refactoring-ui.red.02",
+          "ordinal": 2,
+          "hex": "#780A0A"
+        },
+        {
+          "id": "refactoring-ui.red.03",
+          "ordinal": 3,
+          "hex": "#911111"
+        },
+        {
+          "id": "refactoring-ui.red.04",
+          "ordinal": 4,
+          "hex": "#A61B1B"
+        },
+        {
+          "id": "refactoring-ui.red.05",
+          "ordinal": 5,
+          "hex": "#BA2525"
+        },
+        {
+          "id": "refactoring-ui.red.06",
+          "ordinal": 6,
+          "hex": "#D64545"
+        },
+        {
+          "id": "refactoring-ui.red.07",
+          "ordinal": 7,
+          "hex": "#E66A6A"
+        },
+        {
+          "id": "refactoring-ui.red.08",
+          "ordinal": 8,
+          "hex": "#F29B9B"
+        },
+        {
+          "id": "refactoring-ui.red.09",
+          "ordinal": 9,
+          "hex": "#FACDCD"
+        },
+        {
+          "id": "refactoring-ui.red.10",
+          "ordinal": 10,
+          "hex": "#FFEEEE"
+        }
+      ],
+      "ordinalMeaning": "Local position IDs, not publisher token names or invented official numeric shade labels."
+    },
+    {
+      "id": "refactoring-ui.teal",
+      "name": "Teal",
+      "observedSourceRoles": [
+        "Primary"
+      ],
+      "sourceUrls": [
+        "https://refactoringui.com/build/assets/color-palettes-7-EJxeQBri.png"
+      ],
+      "order": "darkest-to-lightest",
+      "steps": [
+        {
+          "id": "refactoring-ui.teal.01",
+          "ordinal": 1,
+          "hex": "#014D40"
+        },
+        {
+          "id": "refactoring-ui.teal.02",
+          "ordinal": 2,
+          "hex": "#0C6B58"
+        },
+        {
+          "id": "refactoring-ui.teal.03",
+          "ordinal": 3,
+          "hex": "#147D64"
+        },
+        {
+          "id": "refactoring-ui.teal.04",
+          "ordinal": 4,
+          "hex": "#199473"
+        },
+        {
+          "id": "refactoring-ui.teal.05",
+          "ordinal": 5,
+          "hex": "#27AB83"
+        },
+        {
+          "id": "refactoring-ui.teal.06",
+          "ordinal": 6,
+          "hex": "#3EBD93"
+        },
+        {
+          "id": "refactoring-ui.teal.07",
+          "ordinal": 7,
+          "hex": "#65D6AD"
+        },
+        {
+          "id": "refactoring-ui.teal.08",
+          "ordinal": 8,
+          "hex": "#8EEDC7"
+        },
+        {
+          "id": "refactoring-ui.teal.09",
+          "ordinal": 9,
+          "hex": "#C6F7E2"
+        },
+        {
+          "id": "refactoring-ui.teal.10",
+          "ordinal": 10,
+          "hex": "#EFFCF6"
+        }
+      ],
+      "ordinalMeaning": "Local position IDs, not publisher token names or invented official numeric shade labels."
+    },
+    {
+      "id": "refactoring-ui.purple",
+      "name": "Purple",
+      "observedSourceRoles": [
+        "Supporting"
+      ],
+      "sourceUrls": [
+        "https://refactoringui.com/build/assets/color-palettes-9-CAF0GGP4.png"
+      ],
+      "order": "darkest-to-lightest",
+      "steps": [
+        {
+          "id": "refactoring-ui.purple.01",
+          "ordinal": 1,
+          "hex": "#240754"
+        },
+        {
+          "id": "refactoring-ui.purple.02",
+          "ordinal": 2,
+          "hex": "#34126F"
+        },
+        {
+          "id": "refactoring-ui.purple.03",
+          "ordinal": 3,
+          "hex": "#421987"
+        },
+        {
+          "id": "refactoring-ui.purple.04",
+          "ordinal": 4,
+          "hex": "#51279B"
+        },
+        {
+          "id": "refactoring-ui.purple.05",
+          "ordinal": 5,
+          "hex": "#653CAD"
+        },
+        {
+          "id": "refactoring-ui.purple.06",
+          "ordinal": 6,
+          "hex": "#724BB7"
+        },
+        {
+          "id": "refactoring-ui.purple.07",
+          "ordinal": 7,
+          "hex": "#8662C7"
+        },
+        {
+          "id": "refactoring-ui.purple.08",
+          "ordinal": 8,
+          "hex": "#A081D9"
+        },
+        {
+          "id": "refactoring-ui.purple.09",
+          "ordinal": 9,
+          "hex": "#CFBCF2"
+        },
+        {
+          "id": "refactoring-ui.purple.10",
+          "ordinal": 10,
+          "hex": "#EAE2F8"
+        }
+      ],
+      "ordinalMeaning": "Local position IDs, not publisher token names or invented official numeric shade labels."
+    }
+  ],
+  "publishedUiExamples": [
+    {
+      "id": "refactoring-ui.preview.palette-2",
+      "publisherTitle": "Palette 2",
+      "sourceUrl": "https://refactoringui.com/build/assets/color-palettes-1-CT1ThrSw.png",
+      "scope": "Published UI example; complete preset membership is not reconstructed from this raster."
+    },
+    {
+      "id": "refactoring-ui.preview.palette-4",
+      "publisherTitle": "Palette 4",
+      "sourceUrl": "https://refactoringui.com/build/assets/color-palettes-6-DGwQ2jdv.png",
+      "scope": "Published UI example; complete preset membership is not reconstructed from this raster."
+    }
+  ],
+  "fullySpecifiedPublisherPresets": [],
+  "knownLimits": [
+    "Only seven printed color scales are available in these public preview files.",
+    "Do not invent the unshown members, shade values or compositions of complete publisher presets.",
+    "Yellow (Vivid) is named in the cropped preview; its parent role heading is not visible.",
+    "Individual scale roles can vary by context: Blue is shown under Primary and Supporting in different preview files.",
+    "Pure white/black and any other values absent from this verified subset are not automatically added to this catalogue.",
+    "The publisher preview PNGs are not bundled; source URLs and source-byte hashes retain attribution and identity.",
+    "Local ordinal step IDs are not official publisher 900/500 token names.",
+    "Photo/video pixels, captions inside demonstration media and technical anti-aliasing intermediates do not define UI palette tokens."
+  ],
+  "selectionPolicy": {
+    "mode": "approved-source-scales-only",
+    "allowedColorValueCount": 70,
+    "requireTokenToEntryMapping": true,
+    "allowInventedHex": false,
+    "allowUnlistedDerivedShades": false,
+    "completePresetClaimsRequireAdditionalEvidence": true,
+    "mediaPixelsOutsideUiPaletteScope": true,
+    "antiAliasingDoesNotDefineNewDesignTokens": true,
+    "demonstrationMediaCaptionsOutsideUiPaletteScope": true
+  },
+  "verificationMethod": "Manual transcription from the visible printed HEX labels; OCR is retained as a non-authoritative draft because it confuses 0/O, 1/I, 5/S and 8/B.",
+  "verificationScope": "All 70 unique printed HEX values, seven scale names and visible source-role headings independently checked against the saved public previews; all nine recorded source-asset hashes matched. No full preset membership, task contrast or generated UI validation is implied."
+}

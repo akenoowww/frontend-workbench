@@ -8,7 +8,7 @@ Read and apply [Frontend Product Design](../../frontend-product-design/SKILL.md)
 
 Use its direction-only entry: establish the authorized UI hierarchy, behavior, visual direction, preservation/replacement boundary, output scope, and applicable pre-render evidence, then return to the same Art-Direct caller. Do not recursively dispatch another renderer. A bounded independent bitmap normally uses Product Design STANDARD without code, runtime QA, or durable FULL authority; existing FULL criteria still apply when that scope is actually requested.
 
-If a current scoped Product Design handoff already exists, consume and validate it instead of selecting again. Missing owner skill, inadequate required research, unresolved product decisions, or a contradictory direction is BLOCKED; do not substitute a local direction.
+If a current scoped Product Design handoff already exists, consume and validate it instead of selecting again. For a new direction under this workflow, confirm that Product Design completed its [Modern Web Guidance stage](../../frontend-product-design/references/mwg-design-stage.md). Missing owner skill, inadequate required research or guidance, unresolved product decisions, or a contradictory direction is BLOCKED; return the gap to Product Design.
 
 ## Validate the returned handoff
 

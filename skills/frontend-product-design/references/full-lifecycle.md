@@ -105,8 +105,8 @@ A material direction revision uses explicit invalidation or supersession. Never 
 
 Set `visualArtifactPolicy` explicitly:
 
-- `runnable` — use project-compatible runnable evidence; ImageGen is optional;
-- `imagegen-required` — generated evidence is required for the declared design anchors before code;
+- `runnable` — use project-compatible runnable evidence;
+- `imagegen-required` — choose when the authorized work calls for generated evidence on the declared design anchors before code;
 - `no-imagegen` — use specifications, project-native composition, or runnable evidence.
 
 In v3, `imagegen-required` applies to outputs with `designEvidenceRequired`, not to every runtime-covered route. Every required ImageGen design anchor remains user-authorized before implementation or durable promotion. In v3 review-before-implementation, outputs may use approvalRequired: false for serial internal review and continuation, then receive exact user authorization as a complete required design set at the final design checkpoint. Explicit per-output approval and review-each-stage remain blocking; existing frozen flags are never silently relaxed. Runtime-only outputs remain required for QA but do not consume design renders.

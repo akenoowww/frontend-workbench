@@ -271,7 +271,13 @@ Plugins are supported in ChatGPT and Codex surfaces documented by OpenAI, includ
 
 ## Web platform guidance
 
-Product Design and Project Fit use [Modern Web Guidance](https://developer.chrome.com/docs/modern-web-guidance) for browser decisions that affect a user's interaction, accessibility, or supported environments. The lookup uses an available CLI or primary platform documentation. The visual handoff carries the state the user needs to see. The implementation plan carries the selected behavior, compatibility needs, and focused runtime checks. The same reference supports requested legacy-pattern audits.
+Product Design requires [Modern Web Guidance](https://developer.chrome.com/docs/modern-web-guidance) before settling a web design or critique, including standalone ImageGen direction. It searches by user capability, reads the relevant official guides and compares viable options against the product's needs. Use the available CLI or read the official corpus directly. Record uncovered questions and any unavailable guidance. The same workflow compares open composition, palette and type choices against the task and existing design system, using established palette families as starting points when appropriate.
+
+The design handoff carries the selected visual roles and behavior. Project Fit reuses matching guidance and carries compatibility requirements into implementation and focused runtime checks. The [shared reference](skills/frontend-project-fit/references/modern-web-guidance.md) also supports requested legacy-pattern audits.
+
+## Site palettes
+
+The plugin bundles 70 static HEX values from seven Refactoring UI scales visible in the publisher's public previews. When a site design leaves color roles open, Product Design delegates selection to a palette subagent, checks the chosen values and contrast pairs, and records the verified roles in the design. A direct Product Design workflow can deliver a specification or scoped prototype. ImageGen is available for explicitly requested generated UI or an authorized output that selects it. [Palette workflow](skills/frontend-product-design/references/palette-selection.md) · [Bundled catalog](skills/frontend-product-design/references/refactoring-ui-palettes.json)
 
 ## Validate
 

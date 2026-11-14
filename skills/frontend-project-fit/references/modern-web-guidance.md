@@ -1,6 +1,6 @@
 # Web platform guidance
 
-Use Modern Web Guidance for a concrete platform decision that can change a user outcome. Start with the product's required behavior, its existing component or framework owner, and its supported browsers. Read the relevant support policy or Browserslist when present. In the absence of a project target, use the guides' Baseline Widely available default. Check explicit WebView or older-browser targets individually.
+Product Design runs its [required MWG stage](../../frontend-product-design/references/mwg-design-stage.md) before settling a web design. Project Fit reuses that evidence and consults MWG for new platform decisions that can change a user outcome. Start with required behavior, the existing component or framework owner, and the supported browsers. Check the project's support policy or Browserslist where present, including explicit WebView or older-browser targets. Otherwise use Baseline Widely available.
 
 ## Find guidance
 
@@ -11,7 +11,7 @@ DISABLE_TELEMETRY=1 modern-web-guidance search "modal dialog focus restoration"
 DISABLE_TELEMETRY=1 modern-web-guidance retrieve "$guide_id" > "$guide_path"
 ```
 
-When the command is absent and registry access is available, use the published CLI with `DISABLE_TELEMETRY=1 npx --yes modern-web-guidance@1.0.0` followed by the same subcommand. This version requires Node.js 22 or newer. Keep queries to generic web capabilities. If results are weak, rephrase once with a concrete UI or platform term. If a lookup is unavailable or still misses the case, check the corresponding primary platform documentation and carry on with the evidence available.
+When the command is absent and registry access is available, use the published CLI with `DISABLE_TELEMETRY=1 npx --yes modern-web-guidance@1.0.0` followed by the same subcommand. This version requires Node.js 22 or newer. If results are weak, rephrase once with a concrete UI or platform term. If the CLI cannot run, look up full guides in the installed official plugin or the [official v1.0.0 catalog](https://github.com/GoogleChrome/modern-web-guidance/tree/v1.0.0/skills/modern-web-guidance/guides). Record the actual CLI version or the official source ref consulted. Use primary platform documentation for an uncovered platform question and label it separately. It does not establish that MWG was used when its corpus was unavailable.
 
 ## Apply the relevant part
 

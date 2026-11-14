@@ -13,10 +13,9 @@ Select the lightest artifact that can provide meaningful evidence:
 | Interaction, focus, persistence, or responsive behavior | Runnable prototype or implementation |
 | Visual correctness of implemented UI | Browser inspection and screenshots |
 | Genuinely open visual direction | `VisualDirectionContract` through [visual-direction.md](visual-direction.md) |
-| Original bitmap asset or rendered test of a locked direction | ImageGen output |
-| Coherent generated page or state set | **$art-direct-imagegen** with direction SHA, complete representative design-evidence handoff, and separate runtime coverage identities |
+| Explicitly requested generated UI bitmap or set | **$art-direct-imagegen** with the applicable direction, coverage, and evidence identities |
 
-Do not create an image merely because the task is visual. A bitmap cannot prove interaction, responsive behavior, exact long-form text, accessibility, data integration, or implementation feasibility.
+A direct Product Design request can be fulfilled through the selected specification, composition, or prototype. Generated images require explicit user scope or an authorized output that specifies ImageGen.
 
 ## Lock direction before choosing its renderer
 
@@ -26,13 +25,13 @@ Direction lock is not artifact approval. Preserve the direction SHA and bind eac
 
 ## Follow the visual artifact policy
 
-With `runnable`, prefer project-compatible runnable evidence and invoke **$art-direct-imagegen** only when generated imagery can test a material visual question or is itself a requested deliverable. With `no-imagegen`, do not invoke it. With `imagegen-required`, generated outputs are part of the FULL contract: pass the locked direction reference/SHA, protected product semantics, applicable reference bindings, nested-shell identity, and the declared design-anchor coverage. Require user-authorized acceptance of every output with `designEvidenceRequired` before implementation.
+Use project-compatible runnable evidence for `runnable`. Use specifications, project-native composition, or runnable evidence for `no-imagegen`. Route a declared `artifactKind: imagegen` output through its authorized workflow. With `imagegen-required`, pass the locked direction reference/SHA, protected product semantics, applicable reference bindings, nested-shell identity, and declared design-anchor coverage. Require user-authorized acceptance of every output with `designEvidenceRequired` before implementation.
 
 The art-direction skill owns prompt compilation, render sequencing, continuity against the locked direction, and bitmap-specific critique. Product Design owns the direction and the shared conceptual critique.
 
 For FULL v3, derive representative design anchors from outputs with `designEvidenceRequired: true` and exhaustive runtime coverage from outputs with `runtimeEvidenceRequired: true`. A design anchor may represent a page family only when hierarchy, shell, interaction shape, and responsive behavior are genuinely shared. Unique visual mechanisms and user-requested separate page designs remain separate anchors; other required routes stay runtime obligations without consuming ImageGen calls. Never use a small design set to waive runtime coverage, and never make every runtime route a raster merely because it must be tested.
 
-For landing/storefront/multi-section pages, plan full-width, normal viewport-height source bands and render them in order. Do not reinterpret one requested complete-page file or preview-only scope as a single generation of the whole page. Choose the final delivery method before freezing coverage. For a continuous page delivered from separate scroll bands, default to ImageGen and include its final assembly output in the handoff and confirmed budget: N band calls plus one assembly call per page. It depends on every source band, preserves their ordered content, and needs its own fidelity/provenance review and any required acceptance. An explicit local-only request selects a local composite instead, without an ImageGen assembly output, checkpoint, or extra call. Do not silently substitute this method after an ImageGen failure or duplicate source content into an invented extra band. Only a user-explicit one-call overview needs no assembly; unrelated routes remain separate page artifacts.
+For a landing, storefront, or other scrolling page, plan evidence for the complete content and responsive hierarchy. A specification can describe the section sequence, and a runnable page can expose its natural scroll and browser evidence. When generated scroll-band images are explicitly in scope, use [scroll and output planning](scroll-and-output-planning.md) to freeze their coverage, continuity and delivery method.
 
 Honor the confirmed `renderBudget`: total calls, attempts per output, and concept resets are hard preflight limits, not targets. A structural, product-model, direction, reference-scope, or density contradiction returns to its owner before another render. Do not use retries to discover information the upstream contract should already contain.
 

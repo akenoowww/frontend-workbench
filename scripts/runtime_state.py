@@ -6329,6 +6329,10 @@ def _execution_envelope(
             [
                 "skills/frontend-product-design/references/project-archeology.md",
                 "skills/frontend-product-design/references/redesign-boundaries.md",
+                "skills/frontend-product-design/references/mwg-design-stage.md",
+                "skills/frontend-project-fit/references/modern-web-guidance.md",
+                "skills/frontend-product-design/references/design-foundations.md",
+                "skills/frontend-product-design/references/palette-selection.md",
                 "skills/frontend-product-design/references/visual-direction.md",
                 "skills/frontend-product-design/references/ux-research.md",
             ]
@@ -6439,7 +6443,16 @@ def _execution_envelope(
     if stage_owner == "frontend-product-design":
         # Current-product research uses public references read-only; it does not
         # grant authenticated product mutations or renderer ownership.
-        allowed_tools.extend(["web-search", "web-read", "agent-browser", "image-read"])
+        allowed_tools.extend(
+            [
+                "modern-web-guidance",
+                "web-search",
+                "web-read",
+                "agent-browser",
+                "image-read",
+                "palette-subagent",
+            ]
+        )
     if stage_owner == "frontend-project-fit":
         allowed_tools.append("project-dependency-inspection")
     if runtime_probes and stage_owner == "frontend-runtime-qa":
